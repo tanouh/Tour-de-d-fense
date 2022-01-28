@@ -1,9 +1,21 @@
 package up.TowerDefense.cli;
 
+import javax.swing.*;
+
 public class CLILauncher {
 
     public static void main(String[] args) {
-	System.out.println("Test !");
+
+        JFrame gameWindow = new JFrame();
+        gameWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        gameWindow.setLocationRelativeTo(null);
+
+        /*
+        GamePanel gamePanel = new GamePanel();
+        gameWindow.add(gamePanel);
+        */
+
+        gameWindow.setVisible(true);
     }
 
 }
