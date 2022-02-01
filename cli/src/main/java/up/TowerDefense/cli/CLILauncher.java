@@ -1,5 +1,6 @@
 package up.TowerDefense.cli;
 
+import up.TowerDefense.view.*;
 import javax.swing.*;
 
 public class CLILauncher {
@@ -10,10 +11,8 @@ public class CLILauncher {
         gameWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         gameWindow.setLocationRelativeTo(null);
 
-        /*
         GamePanel gamePanel = new GamePanel();
         gameWindow.add(gamePanel);
-        */
 
         gameWindow.setVisible(true);
     }

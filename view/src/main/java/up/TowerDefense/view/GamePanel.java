@@ -1,4 +1,4 @@
-package GamePanel;
+package up.TowerDefense.view;
 
 import javax.swing.*;
 import java.awt.*;
