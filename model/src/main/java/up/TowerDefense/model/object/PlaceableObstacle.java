@@ -1,6 +1,5 @@
 package up.TowerDefense.model.object;
 
-
 import up.TowerDefense.model.game.Player;
 
 public class PlaceableObstacle extends DestructibleObstacle{
