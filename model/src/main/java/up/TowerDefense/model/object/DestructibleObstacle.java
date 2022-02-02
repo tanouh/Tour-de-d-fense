@@ -5,6 +5,7 @@ public class DestructibleObstacle extends Obstacle{
     protected int currentHealth;
     protected ObsType obstacleType;
 
+
     public enum ObsType {
         WALL, TARGET, TOWER
     }
