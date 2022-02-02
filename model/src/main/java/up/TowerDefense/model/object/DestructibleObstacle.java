@@ -1,9 +1,11 @@
 package up.TowerDefense.model.object;
 
 public class DestructibleObstacle extends Obstacle{
+
     protected final int maxHealth;
     protected int currentHealth;
     protected ObsType obstacleType;
+
 
     public enum ObsType {
         WALL, TARGET, TOWER
