@@ -1,5 +1,7 @@
 package up.TowerDefense.model.object;
 
+import up.TowerDefense.model.game.Player;
+
 public class Tower extends PlaceableObstacle{
 
 
@@ -13,16 +15,16 @@ public class Tower extends PlaceableObstacle{
     protected double range;
     protected double power;
     protected int level = 1;
-    private double modifierIncrease = 1.2; // le coefficient d'augmentation de portée et de puissance par upgrade
-    protected static int maxLevel = 5 ; //à déterminer
+    private double modifierIncrease = 1.5; // le coefficient d'augmentation de portée et de puissance par upgrade
+    protected final static int MAX_LEVEL = 5 ; //à déterminer
     protected double upgradeCost;
-    protected static int maxHealth = 5 ; //à voir
+    protected final static int STARTING_HEALTH = 5 ; //à voir
     protected double reloadTime; // temps de charge avant de pouvoir attaquer de nouveau
     protected long lastAttackTime;
     protected Type towerType;
 
     public Tower(double x, double y, int[] size, double buyingCost, double range, double power, int upgradeCost, double reloadTime, long lastAttackTime, Type twType) {
-        super(x, y, size, maxHealth, maxHealth, ObsType.TOWER, buyingCost);
+        super(x, y, size, STARTING_HEALTH, STARTING_HEALTH, ObsType.TOWER, buyingCost);
         this.range=range;
         this.power=power;
         this.upgradeCost=upgradeCost;
@@ -34,7 +36,9 @@ public class Tower extends PlaceableObstacle{
     public boolean canAttack(){
         return (System.currentTimeMillis()-lastAttackTime>=reloadTime);
     }
-
+    public void setLastAttackTime() {
+        this.lastAttackTime = System.currentTimeMillis();
+    }
     public double getModifier(){
         return (modifierIncrease*(level -1));
     }
@@ -43,25 +47,18 @@ public class Tower extends PlaceableObstacle{
      * @return true if the tower upgraded successfully
      */
     public boolean upgrade(){
-        if (level < maxLevel){
-
+        if (level < MAX_LEVEL){
             //augmentation de la taille ?
             level++;
             power*=getModifier();
             range*=getModifier();
             upgradeCost*=getModifier();
             setRefundValue(upgradeCost);
-            //todo modifier la caisse du joueur
+            Player.getPlayer().setCredits(-1*upgradeCost);
+
             return true;
         }
         return false;
     }
-
-
-
-
-
-
-
 
 }

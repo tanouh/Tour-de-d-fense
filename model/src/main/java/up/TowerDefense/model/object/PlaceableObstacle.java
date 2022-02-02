@@ -1,6 +1,8 @@
 package up.TowerDefense.model.object;
 
 
+import up.TowerDefense.model.game.Player;
+
 public class PlaceableObstacle extends DestructibleObstacle{
     protected double buyingCost;
     protected double refundValue;
@@ -11,7 +13,7 @@ public class PlaceableObstacle extends DestructibleObstacle{
         this.refundValue = buyingCost; // augmente à chaque fois que l'obstacle augmente en niveau
     }
     public void refundTower(){
-        //restituer les fonds aux joueurs todo: créer la classe modélisant le joueur
+        Player.getPlayer().setCredits(refundValue);
     }
 
     public double getBuyingCost() {
