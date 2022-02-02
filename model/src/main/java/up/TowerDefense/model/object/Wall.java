@@ -2,9 +2,11 @@ package up.TowerDefense.model.object;
 
 public class Wall extends PlaceableObstacle{
 
-    //Peut ne pas exister non plus
+    private static int newHealthScale = 5;
+    private static int newBuyingCost = 100;
+    private static int[] newSize = new int []{64,64};
 
-    public Wall(double x, double y, int size, int maxHealth, int currentHealth) {
-        super(x, y, size, maxHealth, currentHealth, obsType.WALL);
+    public Wall(double x, double y) {
+        super(x, y, newSize, newHealthScale, newHealthScale, ObsType.WALL, newBuyingCost);
     }
 }
