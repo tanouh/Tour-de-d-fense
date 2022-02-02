@@ -1,4 +1,5 @@
 package up.TowerDefense.model.object;
 
-public class Wall {
+public class Wall extends PlaceableObstacle{
+
 }
