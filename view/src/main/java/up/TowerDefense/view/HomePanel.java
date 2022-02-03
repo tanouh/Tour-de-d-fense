@@ -73,6 +73,11 @@ public class HomePanel extends JPanel implements Runnable {
 
     @Override
     public void run() {
+        while (homeThread != null){
+            update();
+        }
+    }
 
+    private void update() {
     }
 }
