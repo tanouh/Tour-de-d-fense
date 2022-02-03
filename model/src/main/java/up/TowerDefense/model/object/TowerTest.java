@@ -1,5 +1,7 @@
 package up.TowerDefense.model.object;
 
+import java.awt.image.BufferedImage;
+
 public class TowerTest extends Tower{
 
     private static final int [] newSize = new int []{64,64};
@@ -11,10 +13,12 @@ public class TowerTest extends Tower{
     private static double startingReloadTime = 1000;
     private static long newLastAttackTime = 0;
     private static Type towerType = Tower.Type.TOWERTEST;
+    private static String image;
 
     public TowerTest(double x, double y) {
-        super(x, y, newSize, newBuyingCost,startingRange, startingPower, startingUpgradeCost, startingReloadTime, newLastAttackTime, towerType);
+        super(x, y, newSize, newBuyingCost,startingRange, startingPower, startingUpgradeCost, startingReloadTime, newLastAttackTime, towerType,image);
     }
+
 
 
 }
