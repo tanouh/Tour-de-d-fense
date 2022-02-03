@@ -1,6 +1,6 @@
 package up.TowerDefense.model.map;
 
-public class Map {
+public class Map  {
     private Tile [][]  tiles;
     //private Charater [];
 
