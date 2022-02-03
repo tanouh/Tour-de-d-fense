@@ -7,9 +7,10 @@ public class GameWindow extends JFrame {
 
     public GameWindow(){
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setLocationRelativeTo(null);
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        this.setPreferredSize(new Dimension(screenSize.width/2, screenSize.height/2));
+        this.setSize(new Dimension(screenSize.width*2/3, screenSize.height*2/3));
+        this.setPreferredSize(new Dimension(screenSize.width*2/3, screenSize.height*2/3));
+        this.setLocationRelativeTo(null);
 
         HomePanel homePanel = new HomePanel(this);
         this.getContentPane().add(homePanel);
