@@ -11,7 +11,7 @@ public class PlaceableObstacle extends DestructibleObstacle{
         this.buyingCost = buyingCost;
         this.refundValue = buyingCost; // augmente à chaque fois que l'obstacle augmente en niveau
     }
-    public void refundTower(){
+    public void refundObstacle(){
         Player.getPlayer().setCredits(refundValue);
     }
 

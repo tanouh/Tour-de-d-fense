@@ -17,4 +17,8 @@ public class DestructibleObstacle extends Obstacle{
         this.currentHealth = currentHealth;
         this.obstacleType = obstacleType;
     }
+
+    public void reset(){
+        currentHealth = maxHealth;
+    }
 }
