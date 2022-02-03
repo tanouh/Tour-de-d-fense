@@ -1,10 +1,10 @@
 package up.TowerDefense.model.object;
 
-public class Location {
+public class Position {
     private double posX;
     private double posY;
 
-    public Location(double x, double y){
+    public Position(double x, double y){
         this.posX = x ;
         this.posY = y ;
     }
