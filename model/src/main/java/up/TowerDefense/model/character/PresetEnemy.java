@@ -5,7 +5,7 @@ public class PresetEnemy {
 	private int coins_value;
 	
 	/**
-	 * Correspond a l'agressivite de l'enemy (va t'il plutot attaquer les tours ou être plus agressif et attaquer les allies)
+	 * Correspond a l'agressivite de l'enemy (va t'il plutot attaquer les tours ou Ãªtre plus agressif et attaquer les allies)
 	 */
 	private float agressiveness_degree;
 	
@@ -31,7 +31,7 @@ public class PresetEnemy {
 	private float speed;
 	
 	/**
-	 * taille du personnage par rapport à une case
+	 * taille du personnage par rapport a une case
 	 */
 	private float size;
 	

@@ -1,18 +1,18 @@
 package up.TowerDefense.model.object;
 
 public class Position {
-    private double posX;
-    private double posY;
+    private float posX;
+    private float posY;
 
-    public Position(double x, double y){
+    public Position(float x, float y){
         this.posX = x ;
         this.posY = y ;
     }
 
-    public double getX(){
+    public float getX(){
         return this.posX;
     }
-    public double getY(){
+    public float getY(){
         return this.posY;
     }
 

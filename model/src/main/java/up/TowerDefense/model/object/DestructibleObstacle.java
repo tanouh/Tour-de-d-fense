@@ -11,8 +11,8 @@ public class DestructibleObstacle extends Obstacle{
         WALL, TARGET, TOWER
     }
 
-    public DestructibleObstacle(double x, double y, int [] size, int maxHealth, int currentHealth, ObsType obstacleType) {
-        super(x, y, size);
+    public DestructibleObstacle(float x, float y, float size, int maxHealth, int currentHealth, ObsType obstacleType, String image) {
+        super(x, y, size,image);
         this.maxHealth = maxHealth;
         this.currentHealth = currentHealth;
         this.obstacleType = obstacleType;
