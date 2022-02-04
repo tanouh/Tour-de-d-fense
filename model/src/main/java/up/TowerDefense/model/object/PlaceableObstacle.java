@@ -4,10 +4,10 @@ import up.TowerDefense.model.game.Player;
 
 
 public class PlaceableObstacle extends DestructibleObstacle{
-    protected double buyingCost;
-    protected double refundValue;
+    protected int buyingCost;
+    protected int refundValue;
 
-    public PlaceableObstacle(float x, float y, float size, int maxHealth, int currentHealth, ObsType obstacleType, double buyingCost, String image) {
+    public PlaceableObstacle(float x, float y, float size, int maxHealth, int currentHealth, ObsType obstacleType, int buyingCost, String image) {
         super(x, y, size, maxHealth, currentHealth,obstacleType, image);
         this.buyingCost = buyingCost;
         this.refundValue = buyingCost; // augmente à chaque fois que l'obstacle augmente en niveau
@@ -19,7 +19,7 @@ public class PlaceableObstacle extends DestructibleObstacle{
     public double getBuyingCost() {
         return  buyingCost;
     }
-    public void setRefundValue(double refundValue) {
+    public void setRefundValue(int refundValue) {
         this.refundValue = refundValue;
     }
 }

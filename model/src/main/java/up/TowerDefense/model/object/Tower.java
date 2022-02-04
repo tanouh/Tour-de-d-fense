@@ -2,8 +2,6 @@ package up.TowerDefense.model.object;
 
 import up.TowerDefense.model.game.Player;
 
-import java.awt.image.BufferedImage;
-
 public class Tower extends PlaceableObstacle{
 
 
@@ -19,13 +17,13 @@ public class Tower extends PlaceableObstacle{
     protected int level = 1;
     private double modifierIncrease = 1.5; // le coefficient d'augmentation de portée et de puissance par upgrade
     protected final static int MAX_LEVEL = 5 ; //à déterminer
-    protected double upgradeCost;
+    protected int upgradeCost;
     protected final static int STARTING_HEALTH = 5 ; //à voir
     protected double reloadTime; // temps de charge avant de pouvoir attaquer de nouveau
     protected long lastAttackTime;
     protected Type towerType;
 
-    public Tower(float x, float y, float size, double buyingCost, double range, double power, int upgradeCost, double reloadTime, long lastAttackTime, Type twType, String image) {
+    public Tower(float x, float y, float size, int buyingCost, double range, double power, int upgradeCost, double reloadTime, long lastAttackTime, Type twType, String image) {
         super(x, y, size, STARTING_HEALTH, STARTING_HEALTH, ObsType.TOWER, buyingCost,image);
         this.range=range;
         this.power=power;

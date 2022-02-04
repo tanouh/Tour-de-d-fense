@@ -6,7 +6,7 @@ public class TowerTest extends Tower{
 
     private static final float newSize = 1.5f;
     // variables à déterminer
-    private static double newBuyingCost=100;
+    private static int newBuyingCost=100;
     private static double startingRange = 5.0;
     private static double startingPower = 2.0;
     private static int startingUpgradeCost = 200;
