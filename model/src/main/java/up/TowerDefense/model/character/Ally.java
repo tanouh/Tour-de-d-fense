@@ -22,7 +22,7 @@ public class Ally extends Character implements Movable{
 	}
 	
 	/**
-	 * Construit un allie de la taille definit par la constante SIZE à la position "position"
+	 * Construit un allie de la taille definit par la constante SIZE Ã  la position "position"
 	 * 
 	 * @param position definit la position de l'allie sur la carte
 	 */

@@ -55,14 +55,14 @@ public abstract class Character implements Movable{
 	 * @param size definit la taille du personnage
 	 */
 	public Character(float size) {
-		this(new Position(0.00,0.00), size, 1.00f, 100, 1.00f);
+		this(new Position(0.00f, 0.00f), size, 1.00f, 100, 1.00f);
 	}
 	
 	/**
 	 * Construit un personnage de taille 0.50 (par rapport à 1 case) à la position par defaut 0.00
 	 */
 	public Character() {
-		this(new Position(0.00,0.00), 0.50f, 1.00f, 100, 1.00f);
+		this(new Position(0.00f, 0.00f), 0.50f, 1.00f, 100, 1.00f);
 	}
 	
 	public Position getPosition() {
@@ -81,11 +81,11 @@ public abstract class Character implements Movable{
 		return this.size;
 	}
 	
-	public int getlifePoint_max() {
+	public int getMaxHealth() {
 		return this.maxHealth;
 	}
 	
-	public int getlifePoint_current() {
+	public int getCurrentHealth() {
 		return this.currentHealth;
 	}
 	
@@ -93,8 +93,8 @@ public abstract class Character implements Movable{
 		this.size = newSize;
 	}
 	
-	public void setlifePoint_current(int newlifePoint) {
-		this.currentHealth = newlifePoint;
+	public void setCurrentHealth(int currentHealth) {
+		this.currentHealth = currentHealth;
 	}
 	
 	public void setSpeed(float newSpeed) {

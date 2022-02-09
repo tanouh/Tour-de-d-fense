@@ -16,7 +16,7 @@ public class PlaceableObstacle extends DestructibleObstacle{
         Player.getPlayer().setCredits(refundValue);
     }
 
-    public double getBuyingCost() {
+    public int getBuyingCost() {
         return  buyingCost;
     }
     public void setRefundValue(int refundValue) {
