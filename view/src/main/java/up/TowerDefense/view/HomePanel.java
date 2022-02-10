@@ -17,6 +17,7 @@ public class HomePanel extends JPanel {
             gameWindow.getContentPane().add(gamePanel);
             gameWindow.getContentPane().revalidate();
             gameWindow.getContentPane().repaint();
+
         });
     }
 }
