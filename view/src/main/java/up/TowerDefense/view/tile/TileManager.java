@@ -4,6 +4,7 @@ import up.TowerDefense.view.GamePanel;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -33,7 +34,6 @@ public class TileManager {
             tile[1]=new Tile();
             tile[1].image= ImageIO.read(getClass().getResourceAsStream("/wall.png"));
 
-
             tile[2]=new Tile();
             tile[2].image= ImageIO.read(getClass().getResourceAsStream("/tree.png"));
 
@@ -50,6 +50,8 @@ public class TileManager {
             e.printStackTrace();
         }
     }
+
+
 
     public void loadMap(){
         try {
@@ -79,6 +81,8 @@ public class TileManager {
             e.printStackTrace();
         }
     }
+
+
     public void draw(Graphics2D g){
 
         int worldCol = 0;
