@@ -1,6 +1,7 @@
 package up.TowerDefense.model.character;
 
 import up.TowerDefense.model.object.Position;
+import up.TowerDefense.model.object.DestructibleObstacle;
 
 public abstract class Enemy extends Character{
 	
@@ -14,10 +15,19 @@ public abstract class Enemy extends Character{
 	 */
 	private float agressiveness_degree;
 	
+	/**
+	 * Correspond a la vitesse d'attaque de l'enemy
+	 */
 	private float attackspeed;
 	
+	/**
+	 * Correspond aux degats de l'enemy
+	 */
 	private float damage;
 	
+	/**
+	 * Determine si l'enemy est suicidaire ou non (s'il meurt des sa premiere attaque ou pas).
+	 */
 	private boolean suicid;
 	
 	/**
@@ -34,10 +44,40 @@ public abstract class Enemy extends Character{
 		this.agressiveness_degree = agressiv_degree;
 	}*/
 	
+	/**
+	 * Construit un enemy à la position "position" a partir des informations d'un PresetEnemy
+	 * 
+	 * @param presetEnemy Contient toute les informations concernant l'enemy notament son degre d'agressivite ou sa vitesse.
+	 * @param position Definit la position de l'enemy
+	 */
 	public Enemy(PresetEnemy presetEnemy, Position position) {
-		super(position, presetEnemy.getSize(), presetEnemy.getSize(), presetEnemy.getMaxHealth(), presetEnemy.getSpeed());
+		super(position, presetEnemy.getSize(), presetEnemy.getResistance(), presetEnemy.getMaxHealth(), presetEnemy.getSpeed());
 		this.coins_value = presetEnemy.getCoins();
 		this.agressiveness_degree = presetEnemy.getAgressiv_Degree();
+		this.attackspeed = presetEnemy.getAgressiv_Degree();
+		this.damage = presetEnemy.getDammage();
+		this.suicid = presetEnemy.isSuicidal();
+	}
+	
+	/**
+	 * L'enemy attaque un obstacle destructible "target"
+	 *
+	 * @param target Represente l'obstacle cible de l'enemy (tour ou autre)
+	 */
+	public void attack(DestructibleObstacle target) {
+//		target.setCurrentHealth(target.getCurrentHealth-(int)this.damage);
+	}
+	
+	private void heal(Enemy target) {
+		target.setlifePoint_current(target.getlifePoint_current()+2);
+	}
+	
+	public void attack(Ally target) {
+		target.setlifePoint_current(target.getlifePoint_current()-(int)this.damage);
+	}
+	
+	public void moove() {
+		
 	}
 	
 	public int getCoins_value() {
