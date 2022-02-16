@@ -15,7 +15,7 @@ public class HomeButton extends JButton {
         this.setBackground(new Color(30,35,71));
         this.setPreferredSize(new Dimension(200, gameWindow.getHeight()/10));
         this.addActionListener(event -> {
-            GamePanel gamePanel = new GamePanel();
+            GamePanel gamePanel = new GamePanel("/map2.png");
             gameWindow.getContentPane().removeAll();
             gameWindow.getContentPane().add(gamePanel);
             gameWindow.getContentPane().revalidate();

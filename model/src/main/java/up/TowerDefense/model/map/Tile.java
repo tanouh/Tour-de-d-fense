@@ -12,6 +12,7 @@ public class Tile {
     protected BufferedImage imageTile;
 
 
+
     public void setOccupier(Obstacle occupier) {
         this.occupier = occupier;
     }

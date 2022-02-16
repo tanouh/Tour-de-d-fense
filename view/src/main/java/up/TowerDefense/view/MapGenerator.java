@@ -1,6 +1,7 @@
 package up.TowerDefense.view;
 
 import up.TowerDefense.model.map.Board;
+import up.TowerDefense.model.map.Tile;
 import up.TowerDefense.model.object.Obstacle;
 
 import javax.imageio.ImageIO;
@@ -12,14 +13,12 @@ import java.io.IOException;
 public class MapGenerator {
     private Board gameBoard;
     private GamePanel gp;
-    private BufferedImage mapImage;
+    private BufferedImage mapImage; // NB: de dimension fixée 64*64
 
     //private int [][] mapTileNum;
 
     public int nbCol;
     public int nbRow;
-
-
 
 
 
@@ -29,7 +28,8 @@ public class MapGenerator {
         this.nbCol = mapImage.getWidth();
         this.nbRow = mapImage.getHeight();
 
-        this.gameBoard = new Board(this);
+        this.gameBoard = new Board();
+        gameBoard.setTile(nbRow,nbCol);
 
 
         loadMap();
@@ -95,6 +95,7 @@ public class MapGenerator {
     }
 
 
+
     public void loadMap(){
         try {
             int col = 0 ;
@@ -106,15 +107,12 @@ public class MapGenerator {
                 while (col < gp.nbCol){
                     // Dans la génération de la map nous n'avons besoin
                     // de connaitre que si la couleur du pixel est blanche ou pas blanche
-                    int num = (rgb[row][col] != -1 ? 1 : 0) ;
 
-                    //mapTileNum[row][col]=num;
+                    Tile t = new Tile();
+                    getTileImage(t, rgb[row][col], row,col);
 
-                    if(num != 0){
-                        gameBoard.getTile(row,col).placeObstacle(new Obstacle(row,col,new int[]{1,1},"/tree.png"));
-                    }else{
-                        gameBoard.getTile(row,col).placeRoad();
-                    }
+                    gameBoard.initTile(row,col,t);
+
                     col++;
                 }
                 if (col == gp.nbCol){
@@ -127,13 +125,24 @@ public class MapGenerator {
         }
     }
 
+    private void getTileImage(Tile t, int num, int row, int col){
+        //todo à compléter au fur et à mesure
+        switch (num){
+            case TileColor.BLEU: t.placeObstacle(new Obstacle(row,col,new int[]{1,1},"/water01.png")); break;
+            case TileColor.JAUNE: t.placeObstacle(new Obstacle(row,col,new int[]{1,1},"/grass01.png")); break;
+            case TileColor.VERT: t.placeObstacle(new Obstacle(row,col,new int[]{1,1},"/tree.png")); break;
+            case TileColor.NOIR: t.placeObstacle(new Obstacle(row,col,new int[]{1,1}, "/wall.png")); break;
+            default : t.placeRoad();
+        }
+    }
+
     public void draw(Graphics2D g){
         int col = 0 ;
         int row = 0;
 
         while (col < gp.nbCol && row < gp.nbRow){
             //int tileNum = mapTileNum[col][row];
-            g.drawImage(gameBoard.getTile(row,col).getImageTile(), col , row, gp.sizeCase, gp.sizeCase, null);
+            g.drawImage(gameBoard.getTile(row,col).getImageTile(), col*16 , row*16, 16, 16, null);
             col++;
             if(col == gp.nbCol){
                 col = 0 ;
@@ -142,6 +151,8 @@ public class MapGenerator {
         }
 
     }
+
+
 
     public Board getBoard() {
         return this.gameBoard;
