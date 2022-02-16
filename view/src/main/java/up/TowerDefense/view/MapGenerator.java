@@ -33,6 +33,7 @@ public class MapGenerator {
 
 
         loadMap();
+
     }
 
     private void loadImage(String path){
