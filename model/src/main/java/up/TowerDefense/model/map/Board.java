@@ -10,4 +10,8 @@ public class Board {
         this.tiles = new Tile [mapG.nbRow][mapG.nbCol];
     }
 
+    public Tile getTile(int row, int col){
+        return tiles[row][col];
+    }
+
 }
