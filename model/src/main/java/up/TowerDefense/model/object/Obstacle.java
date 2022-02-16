@@ -13,6 +13,7 @@ public class Obstacle {
     public Obstacle(double posX , double posY, int [] size, String imgName){
         this.position  = new Position( posX, posY );
         this.size = size;
+        loadImage(imgName);
     }
     public Obstacle(Position pos, int[] size){
         this.position  = pos;
@@ -25,5 +26,9 @@ public class Obstacle {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public BufferedImage getImage() {
+        return image;
     }
 }
