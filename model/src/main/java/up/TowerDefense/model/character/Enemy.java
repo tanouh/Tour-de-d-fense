@@ -11,7 +11,7 @@ public abstract class Enemy extends Character{
 	private int coins_value;
 	
 	/**
-	 * Correspond a l'agressivite de l'enemy (va t'il plutot attaquer les tours ou ï¿½tre plus agressif et attaquer les allies)
+	 * Correspond a l'agressivite de l'enemy (va t'il plutot attaquer les tours ou etre plus agressif et attaquer les allies)
 	 */
 	private float agressiveness_degree;
 	
@@ -31,7 +31,7 @@ public abstract class Enemy extends Character{
 	private boolean suicid;
 	
 	/**
-	 * Construit un enemy de taille "size" Ã  la position "position"
+	 * Construit un enemy de taille "size" à  la position "position"
 	 * 
 	 * @param position Definit la position de l'ennemy
 	 * @param coins_value Correspond au nombre de coins que rapporte par l'enemy.
