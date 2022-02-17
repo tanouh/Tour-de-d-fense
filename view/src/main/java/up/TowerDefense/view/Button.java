@@ -19,7 +19,7 @@ public class Button extends JButton {
         this.setBackground(foreground);
         this.setPreferredSize(new Dimension(200, gameWindow.getHeight()/10));
         this.addActionListener(event -> {
-            GamePanel gamePanel = new GamePanel();
+            GamePanel gamePanel = new GamePanel(gameWindow);
             gameWindow.getContentPane().removeAll();
             gameWindow.getContentPane().add(gamePanel);
             gameWindow.getContentPane().revalidate();
