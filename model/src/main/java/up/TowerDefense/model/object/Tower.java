@@ -25,7 +25,7 @@ public class Tower extends PlaceableObstacle{
     protected long lastAttackTime;
     protected Type towerType;
 
-    public Tower(double x, double y, int[] size, double buyingCost, double range, double power, int upgradeCost, double reloadTime, long lastAttackTime, Type twType, String image) {
+    public Tower(double x, double y, int size, double buyingCost, double range, double power, int upgradeCost, double reloadTime, long lastAttackTime, Type twType, String image) {
         super(x, y, size, STARTING_HEALTH, STARTING_HEALTH, ObsType.TOWER, buyingCost,image);
         this.range=range;
         this.power=power;
