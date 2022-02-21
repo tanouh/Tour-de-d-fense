@@ -28,8 +28,8 @@ public class MapGenerator {
         this.nbCol = mapImage.getWidth();
         this.nbRow = mapImage.getHeight();
 
-        this.gameBoard = new Board();
-        gameBoard.setTile(nbRow,nbCol);
+        /*this.gameBoard = new Board();
+        gameBoard.setTile(nbRow,nbCol);*/
 
 
         loadMap();
@@ -128,10 +128,10 @@ public class MapGenerator {
     private void getTileImage(Tile t, int num, int row, int col){
         //todo à compléter au fur et à mesure
         switch (num){
-            case TileColor.BLEU: t.placeObstacle(new Obstacle(row,col,new int[]{1,1},"/water01.png")); break;
-            case TileColor.JAUNE: t.placeObstacle(new Obstacle(row,col,new int[]{1,1},"/grass01.png")); break;
-            case TileColor.VERT: t.placeObstacle(new Obstacle(row,col,new int[]{1,1},"/tree.png")); break;
-            case TileColor.NOIR: t.placeObstacle(new Obstacle(row,col,new int[]{1,1}, "/wall.png")); break;
+            case TileColor.BLEU: t.placeObstacle(new Obstacle(row,col,3,"/water01.png")); break;
+            case TileColor.JAUNE: t.placeObstacle(new Obstacle(row,col,3,"/grass01.png")); break;
+            case TileColor.VERT: t.placeObstacle(new Obstacle(row,col,3,"/tree.png")); break;
+            case TileColor.NOIR: t.placeObstacle(new Obstacle(row,col,3, "/wall.png")); break;
             default : t.placeRoad();
         }
     }
