@@ -1,43 +1,55 @@
 package up.TowerDefense.view;
 
 import javax.swing.*;
+import javax.swing.border.LineBorder;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class HomePanel extends JPanel{
-    private JLabel titre = new JLabel("Covid Defense (titre provisoire)");
-    private JButton lancementPartie = new JButton();
-    private JButton quitterPartie = new JButton();
+    private JLabel title = new JLabel("project Covid Defense");
+    private JPanel body = new JPanel();
+    private JPanel buttons = new JPanel(new GridLayout(2,1, 0, 10));
+    private JPanel footer = new JPanel(new BorderLayout());
+    private Button startGame = new Button();
+    private Button leaveGame = new Button();
+    private Button options = new Button();
+
+    private Color background = new Color(173,175,192);
+    private Color foreground = new Color(30,35,71);
 
     public HomePanel(GameWindow gameWindow){
-        this.setLayout(new GridLayout(3 ,1));
-        this.setBackground(new Color(173,175,192));
+        gameWindow.setTitle("project Covid Defense");
 
-        titre.setFont(new Font("Bernard MT Condensed",Font.BOLD, 32));
-        titre.setHorizontalAlignment(JLabel.CENTER);
-        titre.setForeground(new Color(30,35,71));
-        this.add(titre);
+        startGame.startButton(gameWindow);
+        leaveGame.leaveButton(gameWindow.getWidth(), gameWindow.getHeight());
+        options.optionButton(gameWindow);
 
-        JLabel demarrer = new JLabel("Demarrer");
-        demarrer.setForeground(new Color(173,175,192));
-        lancementPartie.add(demarrer);
-        lancementPartie.setBackground(new Color(30,35,71));
-        lancementPartie.addActionListener(event -> {
-            GamePanel gamePanel = new GamePanel();
-            gameWindow.getContentPane().removeAll();
-            gameWindow.getContentPane().add(gamePanel);
-            gameWindow.getContentPane().revalidate();
-            gameWindow.getContentPane().repaint();
-        });
+        this.setLayout(new BorderLayout());
+        this.setBackground(background);
+        this.setBorder(new LineBorder(foreground, 5));
+        body.setBackground(background);
+        buttons.setBackground(background);
+        footer.setBackground(background);
 
-        JLabel quitter = new JLabel("Quitter");
-        quitter.setForeground(new Color(173,175,192));
-        quitterPartie.add(quitter);
-        quitterPartie.setBackground(new Color(30,35,71));
-        quitterPartie.addActionListener(event -> System.exit(0));
+        this.add(title, BorderLayout.NORTH);
+        this.add(body, BorderLayout.CENTER);
+        this.add(footer, BorderLayout.SOUTH);
 
-        this.add(lancementPartie);
-        this.add(quitterPartie);
+        title.setPreferredSize(new Dimension(gameWindow.getWidth(), gameWindow.getHeight()/5));
+        footer.setPreferredSize(new Dimension(gameWindow.getWidth(), gameWindow.getHeight()/7));
+        title.setFont(new Font("Bernard MT Condensed",Font.BOLD, 48));
+        title.setForeground(foreground);
+        title.setHorizontalAlignment(JLabel.CENTER);
+        title.setVerticalAlignment(JLabel.CENTER);
+
+        buttons.setPreferredSize(new Dimension(100, 50));
+        startGame.setHorizontalAlignment(JButton.CENTER);
+        buttons.add(startGame);
+        buttons.add(leaveGame);
+        body.setLayout(new BoxLayout(body, BoxLayout.Y_AXIS));
+        body.add(Box.createVerticalGlue());
+        body.add(buttons);
+        body.add(Box.createVerticalGlue());
+
+        footer.add(options, BorderLayout.EAST);
     }
 }
