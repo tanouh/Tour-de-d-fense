@@ -5,7 +5,7 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
-import static up.TowerDefense.view.MapGenerator.convertTo2D;
+import static up.TowerDefense.view.TileDisplayManager.convertTo2D;
 
 public class TileColor {
 
