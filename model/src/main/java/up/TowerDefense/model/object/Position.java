@@ -1,6 +1,6 @@
 package up.TowerDefense.model.object;
 
-import up.TowerDefense.model.map.Map;
+import up.TowerDefense.model.map.Board;
 
 public class Position {
     public double x;
@@ -12,7 +12,7 @@ public class Position {
     }
 
     public boolean Legal(){
-        return  x >= 0 && x < Map.map.sizeX()  && y >= 0 && y < Map.map.sizeY();
+        return  x >= 0 && x < Board.map.sizeX()  && y >= 0 && y < Board.map.sizeY();
     }
 
     public double Distance(Position pos2){

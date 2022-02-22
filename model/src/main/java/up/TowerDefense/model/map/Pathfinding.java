@@ -5,8 +5,8 @@ import java.util.*;
 public class Pathfinding {
 
     Tile[] FindPath(Position startPos, Position targetPos) {
-        Node startNode = new Node(Map.map.getTile(startPos));
-        Node targetNode = new Node(Map.map.getTile(targetPos));
+        Node startNode = new Node(Board.map.getTile(startPos));
+        Node targetNode = new Node(Board.map.getTile(targetPos));
 
         List<Node> openSet = new ArrayList<Node>();
         HashSet<Node> closedSet = new HashSet<Node>();

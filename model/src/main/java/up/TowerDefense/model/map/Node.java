@@ -22,7 +22,7 @@ public class Node {
                     continue;
                 Position neighbourPos = new Position((int)tile.getPos().x + x,  (int)tile.getPos().y + y);
                 if (neighbourPos.Legal()) {
-                    neighbours.add(new Node(Map.map.getTile(neighbourPos)));
+                    neighbours.add(new Node(Board.map.getTile(neighbourPos)));
                 }
             }
         }

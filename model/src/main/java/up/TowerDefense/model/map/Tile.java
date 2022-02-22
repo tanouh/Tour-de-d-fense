@@ -1,6 +1,7 @@
 package up.TowerDefense.model.map;
 
 import up.TowerDefense.model.object.Obstacle;
+import up.TowerDefense.model.object.Position;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -8,29 +9,36 @@ import java.io.IOException;
 
 public class Tile {
     protected boolean isEmpty;
-    protected Obstacle occupier;
+    protected Obstacle obstacle;
     protected BufferedImage imageTile;
+    protected Position pos;
 
 
     public Tile (){
         setDefault();
     }
+
+    public Tile(Position _pos, Obstacle _obstacle){
+        pos = _pos;
+        obstacle = _obstacle;
+    }
+
     public void setDefault(){
         this.isEmpty = true;
-        this.occupier= null;
+        this.obstacle= null;
         this.imageTile=null;
     }
 
     public void setOccupier(Obstacle occupier) {
-        this.occupier = occupier;
+        this.obstacle = occupier;
     }
 
     public void setImageTile(BufferedImage imageTile) {
         this.imageTile = imageTile;
     }
 
-    public boolean isOccupied(){
-        return !this.isEmpty;
+    public boolean isEmpty(){
+        return this.isEmpty;
     }
     public void placeObstacle(Obstacle obs){
         setOccupier(obs);
@@ -39,7 +47,7 @@ public class Tile {
     }
 
     public void placeRoad(){
-        occupier = null;
+        obstacle = null;
         isEmpty = true;
 
         try{
@@ -53,4 +61,7 @@ public class Tile {
     public BufferedImage getImageTile() {
         return imageTile;
     }
+    public Position getPos(){return pos;}
 }
+
+

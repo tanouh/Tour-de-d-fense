@@ -86,8 +86,6 @@ public class ScreenPanel extends JPanel implements Runnable, MouseListener {
     @Override
     public void mouseClicked(MouseEvent e) {
 
-        System.out.println(e.getX()/widthCase + " " + e.getY()/heightCase ) ;
-        System.out.println(mapGen.gameBoard.getTile(e.getY()/heightCase,e.getX()/widthCase).isOccupied());
     }
 
     @Override
