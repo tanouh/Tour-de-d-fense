@@ -1,8 +1,10 @@
 package up.TowerDefense.model.object;
 
-import javax.imageio.ImageIO;
+
 import java.awt.image.BufferedImage;
-import java.io.IOException;
+
+import static up.TowerDefense.model.game.StaticFunctions.*;
+
 
 public class Obstacle {
 
@@ -13,22 +15,24 @@ public class Obstacle {
     public Obstacle(double posX , double posY, int size, String imgName){
         this.position  = new Position( posX, posY );
         this.size = size;
-        loadImage(imgName);
+        image = loadImage(imgName);
     }
     public Obstacle(Position pos, int size){
         this.position  = pos;
         this.size = size;
     }
 
-    private void loadImage(String imgName){
-        try{
-            image = ImageIO.read(getClass().getResourceAsStream(imgName));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 
     public BufferedImage getImage() {
         return image;
     }
+
+
+    /*
+    * Des instances statiques pour le décor
+    * */
+    public static Obstacle FOREST = new Obstacle(0,0,1,"/tree.png");
+    public static Obstacle WATER = new Obstacle(0,0,1,"/water01.png");
+    public static Obstacle WALL = new Obstacle(0,0,1,"/wall.png");
+
 }

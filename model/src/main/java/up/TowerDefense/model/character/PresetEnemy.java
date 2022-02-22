@@ -31,7 +31,7 @@ public class PresetEnemy {
 	private float speed;
 	
 	/**
-	 * taille du personnage par rapport ï¿½ une case
+	 * taille du personnage par rapport Ã  une case
 	 */
 	private float size;
 	
@@ -49,7 +49,7 @@ public class PresetEnemy {
 	 * @param agressiveness_degree agressivite d'un enemy
 	 * @param attackspeed vitesse d'attaque d'un enemy
 	 * @param dammage degat d'un enemy
-	 * @param suicid indique si l'enemy est suicidaire, si ça premiere attaque le tuera ou non
+	 * @param suicid indique si l'enemy est suicidaire, si la premiere attaque le tuera ou non
 	 * @param size indique la taille de l'enemy par rapport a une case
 	 * @param resistance indique la resistance de l'enemy contre une tour
 	 */
@@ -71,7 +71,7 @@ public class PresetEnemy {
 	 * Cette enemy aura :
 	 * 
 	 * -100 points de vie maximale 
-	 * -Une vitesse 1.25 fois supérieur a la normale
+	 * -Une vitesse 1.25 fois supï¿½rieur a la normale
 	 * -Il raportera 30 coins une fois tue
 	 * -Une agressivite 5 fois superieur a la normale
 	 * -Une vitesse d'attaque normale
@@ -91,7 +91,7 @@ public class PresetEnemy {
 	 * Cette enemy aura :
 	 * 
 	 * -100 points de vie maximale 
-	 * -Une vitesse 1.25 fois supérieur a la normale
+	 * -Une vitesse 1.25 fois supï¿½rieur a la normale
 	 * -Il raportera 15 coins une fois tue
 	 * -Une agressivite normale
 	 * -Une vitesse d'attaque normale
@@ -151,7 +151,7 @@ public class PresetEnemy {
 	 * Cette enemy aura :
 	 * 
 	 * -100 points de vie maximale 
-	 * -Une vitesse 1.5 fois supérieur a la normale
+	 * -Une vitesse 1.5 fois supï¿½rieur a la normale
 	 * -Il raportera 40 coins une fois tue
 	 * -Une agressivite 1.25 fois superieur a la normale
 	 * -Une vitesse d'attaque normale

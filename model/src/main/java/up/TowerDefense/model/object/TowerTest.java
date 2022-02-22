@@ -1,6 +1,5 @@
 package up.TowerDefense.model.object;
 
-import java.awt.image.BufferedImage;
 
 public class TowerTest extends Tower{
 
@@ -13,11 +12,13 @@ public class TowerTest extends Tower{
     private static double startingReloadTime = 1000;
     private static long newLastAttackTime = 0;
     private static Type towerType = Tower.Type.TOWERTEST;
-    private static String image;
+    private static String image = "/tour.png";
 
     public TowerTest(double x, double y) {
         super(x, y, newSize, newBuyingCost,startingRange, startingPower, startingUpgradeCost, startingReloadTime, newLastAttackTime, towerType,image);
     }
+
+
 
 
 

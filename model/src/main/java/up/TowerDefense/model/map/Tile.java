@@ -12,6 +12,14 @@ public class Tile {
     protected BufferedImage imageTile;
 
 
+    public Tile (){
+        setDefault();
+    }
+    public void setDefault(){
+        this.isEmpty = true;
+        this.occupier= null;
+        this.imageTile=null;
+    }
 
     public void setOccupier(Obstacle occupier) {
         this.occupier = occupier;
@@ -21,15 +29,18 @@ public class Tile {
         this.imageTile = imageTile;
     }
 
+    public boolean isOccupied(){
+        return !this.isEmpty;
+    }
     public void placeObstacle(Obstacle obs){
         setOccupier(obs);
-        isEmpty = occupier != null;
+        isEmpty = false;
         setImageTile(obs.getImage());
     }
 
     public void placeRoad(){
         occupier = null;
-        isEmpty = occupier != null;
+        isEmpty = true;
 
         try{
             imageTile= ImageIO.read(getClass().getResourceAsStream("/road00.png"));

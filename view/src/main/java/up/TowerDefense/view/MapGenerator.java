@@ -2,37 +2,43 @@ package up.TowerDefense.view;
 
 
 import up.TowerDefense.model.map.Board;
-import up.TowerDefense.model.object.Obstacle;
+import up.TowerDefense.model.map.Tile;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.awt.image.DataBufferByte;
 import java.io.IOException;
 
-public class MapGenerator {
-    private Board gameBoard;
-    private GamePanel gp;
-    private BufferedImage mapImage;
+import static up.TowerDefense.view.TileDisplayManager.*;
+import static up.TowerDefense.model.object.Obstacle.*;
 
-    //private int [][] mapTileNum;
+public class MapGenerator {
+    public Board gameBoard;
+    private ScreenPanel screenPanel;
+    private BufferedImage mapImage;
+    private int widthTile;
+    private int heightTile;
+
+
+    private int [][] mapTileNum;
 
     public int nbCol;
     public int nbRow;
 
 
-
-
-
-    public MapGenerator(GamePanel gp, String imagePath){
-        this.gp = gp;
+    public MapGenerator(ScreenPanel gp, String imagePath){
+        this.screenPanel = gp;
         loadImage(imagePath);
         this.nbCol = mapImage.getWidth();
         this.nbRow = mapImage.getHeight();
 
+        mapTileNum = new int [nbRow][nbCol];
+
         this.gameBoard = new Board();
+        gameBoard.setTile(nbRow,nbCol);
 
-
+        widthTile = screenPanel.widthCase;
+        heightTile = screenPanel.heightCase;
         loadMap();
     }
 
@@ -45,85 +51,69 @@ public class MapGenerator {
         }
     }
 
-    /***
-     * Accéde aux pixels d'une image
-     * @return les valeurs rouge , vert et bleu
-     * d'un pixel et rajoutera le canal alpha s'il y en a
+
+    /**
+     * Crée la carte à partir de l'image référencée par imagePath
      */
-
-    public static int[][] convertTo2D(BufferedImage image) {
-
-        byte[] pixels = ((DataBufferByte) image.getRaster().getDataBuffer()).getData();
-        int width = image.getWidth();
-        int height = image.getHeight();
-        boolean hasAlphaChannel = image.getAlphaRaster() != null;
-
-        int[][] result = new int[height][width];
-
-        if (hasAlphaChannel) {
-            int pixelLength = 4;
-            for (int pixel = 0, row = 0, col = 0; pixel + 3 < pixels.length; pixel += pixelLength) {
-                int argb = 0;
-                argb += (((int) pixels[pixel] & 0xff) << 24); // alpha
-                argb += ((int) pixels[pixel + 1] & 0xff); // blue
-                argb += (((int) pixels[pixel + 2] & 0xff) << 8); // green
-                argb += (((int) pixels[pixel + 3] & 0xff) << 16); // red
-                result[row][col] = argb;
-                col++;
-                if (col == width) {
-                    col = 0;
-                    row++;
-                }
-            }
-        } else {
-            int pixelLength = 3;
-            for (int pixel = 0, row = 0, col = 0; pixel + 2 < pixels.length; pixel += pixelLength) {
-                int argb = 0;
-                argb += -16777216; // 255 alpha
-                argb += ((int) pixels[pixel] & 0xff); // blue
-                argb += (((int) pixels[pixel + 1] & 0xff) << 8); // green
-                argb += (((int) pixels[pixel + 2] & 0xff) << 16); // red
-                result[row][col] = argb;
-                col++;
-                if (col == width) {
-                    col = 0;
-                    row++;
-                }
-            }
-        }
-        return result;
-    }
-
-
     public void loadMap(){
         try {
             int col = 0 ;
             int row = 0;
-            int [][] rgb = convertTo2D(mapImage);
-
-            while(col < gp.nbCol && row < gp.nbRow){
-
-                while (col < gp.nbCol){
-                    // Dans la génération de la map nous n'avons besoin
-                    // de connaitre que si la couleur du pixel est blanche ou pas blanche
-                    int num = (rgb[row][col] != -1 ? 1 : 0) ;
-
-                    //mapTileNum[row][col]=num;
-
-                    if(num != 0){
-                        gameBoard.getTile(row,col).placeObstacle(new Obstacle(row,col,3,"/tree.png"));
-                    }else{
-                        gameBoard.getTile(row,col).placeRoad();
-                    }
+            setNumTile();
+            long a  = System.currentTimeMillis();
+            while(col < screenPanel.nbCol && row < screenPanel.nbRow){
+                while (col < screenPanel.nbCol){
+                    Tile t = new Tile();
+                    setUpTile(t,mapTileNum[row][col]);
+                    gameBoard.initTile(row,col,t);
                     col++;
                 }
-                if (col == gp.nbCol){
+                if (col == screenPanel.nbCol){
                     col = 0;
                     row++;
                 }
             }
+            System.out.println(System.currentTimeMillis()-a);
         }catch(Exception e){
             e.printStackTrace();
+        }
+    }
+
+    /**
+     * Complète le contenu des tuiles
+     * (à compléter au fur et à mesure où on créer des tuiles)
+    * */
+    private void setUpTile(Tile t, int num){
+        switch (num){
+            case 0 :
+            case 4 : t.placeObstacle(FOREST); break;
+            case 2 : t.placeObstacle(WALL); break;
+            case 3 : t.placeObstacle(WATER); break;
+            case 1 :
+            default: t.placeRoad(); break;
+        }
+    }
+
+    /**
+     * Fait correspondre les pixels avec des numéros afin de
+     * dessiner les tuiles adéquates
+     */
+    private void setNumTile(){
+        int [][] rgb = convertTo2D(mapImage);
+        for (int i = 0 ; i < rgb.length ; i++){
+            for (int j = 0 ; j < rgb.length ; j++){
+                if ( rgb[i][j] == NOIR){
+                    mapTileNum[i][j]=0;
+                }else if (rgb[i][j] == JAUNE){
+                    mapTileNum[i][j]=2;
+                }else if (rgb[i][j] == BLEU){
+                    mapTileNum[i][j]=3;
+                }else if (rgb[i][j] == VERT){
+                    mapTileNum[i][j]=4;
+                }else if (rgb[i][j]== BLANC){
+                    mapTileNum[i][j]=1;
+                }
+            }
         }
     }
 
@@ -131,20 +121,14 @@ public class MapGenerator {
         int col = 0 ;
         int row = 0;
 
-        while (col < gp.nbCol && row < gp.nbRow){
-            //int tileNum = mapTileNum[col][row];
-            g.drawImage(gameBoard.getTile(row,col).getImageTile(), col , row, gp.sizeCase, gp.sizeCase, null);
+        while (col < screenPanel.nbCol && row < screenPanel.nbRow){
+            g.drawImage(gameBoard.getTile(row,col).getImageTile(), col*widthTile, row*heightTile, widthTile, heightTile, null);
             col++;
-            if(col == gp.nbCol){
+            if(col == screenPanel.nbCol){
                 col = 0 ;
                 row++;
             }
         }
-
-    }
-
-    public Board getBoard() {
-        return this.gameBoard;
     }
 }
 

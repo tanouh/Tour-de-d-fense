@@ -4,6 +4,8 @@ import javax.swing.*;
 import java.awt.*;
 
 public class GamePanel extends JPanel {
+
+    //Mettre les contenus de label dans une classe "partie"
     private JPanel header = new JPanel(new GridLayout(1,4));
     private JLabel title = new JLabel("project\nCovid Defense");
     private JLabel numWave = new JLabel("vague numero 0");
