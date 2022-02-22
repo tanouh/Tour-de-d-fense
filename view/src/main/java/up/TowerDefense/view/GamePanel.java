@@ -3,50 +3,36 @@ package up.TowerDefense.view;
 import javax.swing.*;
 import java.awt.*;
 
-public class GamePanel extends JPanel implements Runnable {
-    final int sizeCase = 16;
-    final int nbCol = 64;
-    final int nbRow = 64;
-    final int windowWidth = sizeCase*nbCol;
-    final int windowHeight = sizeCase*nbRow;
-
-    Thread gameThread;
-    MapGenerator mapGen;
-
-    public GamePanel(String imgPath){
-        startThread();
-        this.setPreferredSize(new Dimension(windowWidth, windowHeight));
-        this.setBackground(Color.GRAY);
-        mapGen = new MapGenerator(this,imgPath);
-
-        this.setFocusable(true);
-
-    }
+public class GamePanel extends JPanel {
+    private JPanel header = new JPanel(new GridLayout(1,4));
+    private JLabel title = new JLabel("project\nCovid Defense");
+    private JLabel numWave = new JLabel("vague numero 0");
+    private JLabel ennemyLeft = new JLabel("ennemis restant");
+    private JLabel money = new JLabel("you're poor");
+    private JPanel body = new JPanel();
+    private Color background = new Color(173,175,192);
+    private Color foreground = new Color(30,35,71);
 
 
-    public void startThread(){
-        gameThread = new Thread(this);
-        gameThread.start();
-    }
 
-    @Override
-    public void run(){
-        while (gameThread != null){
-            update();
-            repaint();
-        }
-    }
+    public GamePanel(GameWindow gameWindow){
+        this.setLayout(new BorderLayout());
 
-    public void update(){
+        title.setPreferredSize(new Dimension(gameWindow.getWidth()/5, gameWindow.getHeight()/5));
+        title.setFont(new Font("Bernard MT Condensed",Font.BOLD, 20));
+        title.setForeground(foreground);
+        title.setHorizontalAlignment(JLabel.CENTER);
+        title.setVerticalAlignment(JLabel.CENTER);
+
+        header.add(title);
+        header.add(numWave);
+        header.add(ennemyLeft);
+        header.add(money);
+        body.add(new ScreenPanel());
+
+        this.add(header, BorderLayout.NORTH);
+        this.add(body, BorderLayout.CENTER);
 
     }
-
-    public void paintComponent(Graphics g){
-        super.paintComponent(g);
-        Graphics2D g2D = (Graphics2D)g;
-        mapGen.draw(g2D);
-        g2D.dispose();
-    }
-
 
 }

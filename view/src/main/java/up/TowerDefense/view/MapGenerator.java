@@ -12,7 +12,7 @@ import java.io.IOException;
 
 public class MapGenerator {
     private Board gameBoard;
-    private GamePanel gp;
+    private ScreenPanel gp;
     private BufferedImage mapImage;
 
     //private int [][] mapTileNum;
@@ -21,17 +21,13 @@ public class MapGenerator {
     public int nbRow;
 
 
-
-
-
-    public MapGenerator(GamePanel gp, String imagePath){
+    public MapGenerator(ScreenPanel gp, String imagePath){
         this.gp = gp;
         loadImage(imagePath);
         this.nbCol = mapImage.getWidth();
         this.nbRow = mapImage.getHeight();
 
         this.gameBoard = new Board();
-
 
         loadMap();
     }
