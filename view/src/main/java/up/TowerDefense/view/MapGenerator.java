@@ -27,11 +27,11 @@ public class MapGenerator {
 
 
     public MapGenerator(ScreenPanel gp, String imagePath){
+
         this.screenPanel = gp;
         loadImage(imagePath);
         this.nbCol = mapImage.getWidth();
         this.nbRow = mapImage.getHeight();
-
         mapTileNum = new int [nbRow][nbCol];
 
         this.gameBoard = new Board();
@@ -39,6 +39,7 @@ public class MapGenerator {
 
         widthTile = screenPanel.widthCase;
         heightTile = screenPanel.heightCase;
+
         loadMap();
     }
 
@@ -50,7 +51,6 @@ public class MapGenerator {
             e.printStackTrace();
         }
     }
-
 
     /**
      * Crée la carte à partir de l'image référencée par imagePath
@@ -69,16 +69,15 @@ public class MapGenerator {
                     col++;
                 }
                 if (col == screenPanel.nbCol){
+
                     col = 0;
                     row++;
                 }
             }
-            System.out.println(System.currentTimeMillis()-a);
         }catch(Exception e){
             e.printStackTrace();
         }
     }
-
     /**
      * Complète le contenu des tuiles
      * (à compléter au fur et à mesure où on créer des tuiles)
@@ -125,10 +124,12 @@ public class MapGenerator {
             g.drawImage(gameBoard.getTile(row,col).getImageTile(), col*widthTile, row*heightTile, widthTile, heightTile, null);
             col++;
             if(col == screenPanel.nbCol){
+
                 col = 0 ;
                 row++;
             }
         }
     }
+
 }
 

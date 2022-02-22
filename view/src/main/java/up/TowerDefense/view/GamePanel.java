@@ -15,6 +15,8 @@ public class GamePanel extends JPanel {
     private Color background = new Color(173,175,192);
     private Color foreground = new Color(30,35,71);
 
+
+
     public GamePanel(GameWindow gameWindow){
         this.setLayout(new BorderLayout());
 
@@ -34,4 +36,5 @@ public class GamePanel extends JPanel {
         this.add(body, BorderLayout.CENTER);
 
     }
+
 }

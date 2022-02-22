@@ -10,10 +10,10 @@ public class Ally extends Character implements Movable{
 	private static final float SIZE = 0.50f;
 	private static final float DAMAGE = 10.00f;
 	
-	private final Position LEFT = new Position(this.getPosition().getX() - this.getSpeed(), this.getPosition().getY());
-	private final Position RIGHT = new Position(this.getPosition().getX() + this.getSpeed(), this.getPosition().getY());
-	private final Position UP = new Position(this.getPosition().getX(), this.getPosition().getY() + this.getSpeed());
-	private final Position DOWN = new Position(this.getPosition().getX(), this.getPosition().getY() - this.getSpeed());
+	private final Position LEFT = new Position(this.getPosition().x - this.getSpeed(), this.getPosition().y);
+	private final Position RIGHT = new Position(this.getPosition().x + this.getSpeed(), this.getPosition().y);
+	private final Position UP = new Position(this.getPosition().x, this.getPosition().y + this.getSpeed());
+	private final Position DOWN = new Position(this.getPosition().x, this.getPosition().y - this.getSpeed());
 
 	/**
 	 * Construit un allie de la taille definit par la constante SIZE

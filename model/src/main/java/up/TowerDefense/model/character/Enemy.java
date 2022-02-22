@@ -31,7 +31,7 @@ public abstract class Enemy extends Character{
 	private boolean suicid;
 	
 	/**
-	 * Construit un enemy de taille "size" à  la position "position"
+	 * Construit un enemy de taille "size" Ã  la position "position"
 	 * 
 	 * @param position Definit la position de l'ennemy
 	 * @param coins_value Correspond au nombre de coins que rapporte par l'enemy.
@@ -45,7 +45,7 @@ public abstract class Enemy extends Character{
 	}*/
 	
 	/**
-	 * Construit un enemy à la position "position" a partir des informations d'un PresetEnemy
+	 * Construit un enemy ï¿½ la position "position" a partir des informations d'un PresetEnemy
 	 * 
 	 * @param presetEnemy Contient toute les informations concernant l'enemy notament son degre d'agressivite ou sa vitesse.
 	 * @param position Definit la position de l'enemy

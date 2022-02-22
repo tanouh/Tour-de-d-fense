@@ -1,9 +1,12 @@
 package up.TowerDefense.model.map;
 import up.TowerDefense.model.object.Position;
-import java.util.List;
 
 public class Board {
     private Tile [][]  tiles;
+
+    public Board(){
+        map = this;
+    }
 
     public Tile getTile(Position pos){ return tiles[(int)pos.x][(int)pos.y];}
 
@@ -16,9 +19,6 @@ public class Board {
 
     public static Board map;
 
-    public Board(){
-        map = this;
-    }
 
     public void setTile(int row, int col){
         tiles = new Tile[row][col];
@@ -32,5 +32,4 @@ public class Board {
         tiles[row][col]= tile;
     }
 
-
-    }
+}

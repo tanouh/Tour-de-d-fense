@@ -40,8 +40,8 @@ public abstract class Character implements Movable{
 	 * @param position definit la position du personnage
 	 * @param size definit la taille du personnage
 	 * @param resistance definit la resistance du personnage
-	 * @param definit la vie maximale du personnage
-	 * @param definit la vitesse du personnage
+	 * @param maxHealth definit la vie maximale du personnage
+	 * @param speed definit la vitesse du personnage
 	 */
 	public Character(Position position, float size, float resistance, int maxHealth, float speed) {
 		this.position = position;

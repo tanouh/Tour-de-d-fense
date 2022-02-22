@@ -40,6 +40,7 @@ public class Tile {
     public boolean isEmpty(){
         return this.isEmpty;
     }
+
     public void placeObstacle(Obstacle obs){
         setOccupier(obs);
         isEmpty = false;
@@ -62,6 +63,7 @@ public class Tile {
         return imageTile;
     }
     public Position getPos(){return pos;}
+
 }
 
 
