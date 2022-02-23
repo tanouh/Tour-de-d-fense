@@ -1,5 +1,6 @@
 package up.TowerDefense.model.map;
 import up.TowerDefense.model.object.Position;
+import up.TowerDefense.model.object.TowerTest;
 
 public class Board {
     private Tile [][]  tiles;
@@ -19,7 +20,6 @@ public class Board {
 
     public static Board map;
 
-
     public void setTile(int row, int col){
         tiles = new Tile[row][col];
     }
@@ -30,6 +30,19 @@ public class Board {
 
     public void initTile(int row, int col, Tile tile ){
         tiles[row][col]= tile;
+    }
+
+
+    /**
+     * Place les tours sur les tuiles
+     * @param posX
+     * @param posY
+     * @return
+     */
+    public boolean placeTower(int posX, int posY){
+        if (getTile(posX,posY).isEmpty)
+            getTile(posX,posY).setOccupier(new TowerTest(posX,posY));
+        return true;
     }
 
 }
