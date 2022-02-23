@@ -1,10 +1,12 @@
 package up.TowerDefense.model.game;
 
 public class Player {
-    private static double credits;
-    private static int lives;
+
     private final static double STARTING_CREDITS= 500;
     private final static int STARTING_LIVES = 16;
+    private static double credits = STARTING_CREDITS;
+    private static int lives = STARTING_LIVES;
+//    private static int wavesLeft;
 
     private static Player instance = null;
 
@@ -19,6 +21,9 @@ public class Player {
     public static double getCredits() {
         return credits;
     }
+    public static int getLives() { return lives; }
+//    public static int getWavesLeft(){ return wavesLeft;}
+
     public static void reset(){
         credits=STARTING_CREDITS;
         lives=STARTING_LIVES;

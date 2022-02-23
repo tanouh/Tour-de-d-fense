@@ -2,48 +2,32 @@ package up.TowerDefense.view;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
-public class ScreenPanel extends JPanel implements Runnable, MouseListener {
-    Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-    int screenWidth = screenSize.width*4/5;
-    int screenHeight = screenSize.height*4/5;
-
-    public int nbCol = 80;
-    public int nbRow = 64;
-    public int widthCase = screenWidth/80;
-    public int heightCase = screenHeight/64;
-
-    public int windowWidth = widthCase*nbCol;
-    public int windowHeight = heightCase*nbRow;
-
-
+public class ScreenPanel extends JPanel implements Runnable {
+    final int sizeCase = 48;
+    final int nbCol = 10;
+    final int nbRow = 8;
+    final int windowWidth = sizeCase*nbCol;
+    final int windowHeight = sizeCase*nbRow;
+    final int widthCase = 10;
+    final int heightCase = 10;
     private JPanel header = new JPanel(new GridLayout(1,5));
     private Color background = new Color(173,175,192);
     private Color foreground = new Color(30,35,71);
     private JLabel title = new JLabel("project Covid Defense");
+    private GameWindow gameWindow;
+    int[] c = {100, 100};
 
     Thread gameThread;
-    MapGenerator mapGen;
-    int FPS = 60; //Frame per second
-
-
 
     public ScreenPanel(){
         this.setLayout(new BorderLayout());
         this.add(header, BorderLayout.NORTH);
 
-        mapGen= new MapGenerator(this, "/map4.png"); /*A modifier : ajouter un paramètrage pour l'image*/
 
-
+        startThread();
         this.setPreferredSize(new Dimension(windowWidth, windowHeight));
         this.setBackground(Color.GRAY);
-
-        this.addMouseListener(this);
-        this.setFocusable(true);
-        startThread();
-
     }
 
     public void startThread(){
@@ -53,58 +37,23 @@ public class ScreenPanel extends JPanel implements Runnable, MouseListener {
 
     @Override
     public void run(){
-        double drawInterval =1000000000/FPS;
-        double delta = 0;
-        long lastTime = System.nanoTime();
-        long currentTime;
-
-        while(gameThread != null) {
-            currentTime = System.nanoTime();
-            delta += (currentTime - lastTime) /drawInterval;
-            lastTime=currentTime;
-            if(delta>=1){
-                update();
-                repaint();
-                delta --;
-            }
-        }
-
+        //while (gameThread != null){
+            update();
+            repaint();
+        //}
     }
 
     public void update(){
-
-
+        c[0] += 10;
+        c[1] += 10;
     }
 
     public void paintComponent(Graphics g){
         super.paintComponent(g);
         Graphics2D g2D = (Graphics2D)g;
-        mapGen.draw(g2D);
+        g2D.setColor(Color.BLUE);
+        g2D.fillRect(c[0],c[1], 100, 100);
         g2D.dispose();
     }
 
-    @Override
-    public void mouseClicked(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mousePressed(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseReleased(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseEntered(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseExited(MouseEvent e) {
-
-    }
 }

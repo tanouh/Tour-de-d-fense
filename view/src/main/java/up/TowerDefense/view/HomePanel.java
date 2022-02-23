@@ -36,7 +36,7 @@ public class HomePanel extends JPanel{
 
         title.setPreferredSize(new Dimension(gameWindow.getWidth(), gameWindow.getHeight()/5));
         footer.setPreferredSize(new Dimension(gameWindow.getWidth(), gameWindow.getHeight()/7));
-        title.setFont(new Font("Bernard MT Condensed",Font.BOLD, 48));
+        title.setFont(new Font("Bernard MT Condensed",Font.BOLD, 50));
         title.setForeground(foreground);
         title.setHorizontalAlignment(JLabel.CENTER);
         title.setVerticalAlignment(JLabel.CENTER);
