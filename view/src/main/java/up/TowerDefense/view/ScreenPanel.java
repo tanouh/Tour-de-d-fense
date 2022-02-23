@@ -18,8 +18,6 @@ public class ScreenPanel extends JPanel implements Runnable, MouseListener {
     public int windowWidth = widthCase*nbCol;
     public int windowHeight = heightCase*nbRow;
 
-
-    private JPanel header = new JPanel(new GridLayout(1,5));
     private Color background = new Color(173,175,192);
     private Color foreground = new Color(30,35,71);
     private JLabel title = new JLabel("project Covid Defense");
@@ -36,9 +34,6 @@ public class ScreenPanel extends JPanel implements Runnable, MouseListener {
 
 
     public ScreenPanel(){
-        this.setLayout(new BorderLayout());
-        this.add(header, BorderLayout.NORTH);
-
         mapGen= new MapGenerator(this, "/map3.png"); /*A modifier : ajouter un paramètrage pour l'image*/
 
 

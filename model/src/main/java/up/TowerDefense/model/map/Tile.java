@@ -1,6 +1,7 @@
 package up.TowerDefense.model.map;
 
 import up.TowerDefense.model.object.Obstacle;
+import up.TowerDefense.model.object.PlaceableObstacle;
 import up.TowerDefense.model.object.Position;
 
 import javax.imageio.ImageIO;
@@ -8,7 +9,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 public class Tile {
-    protected boolean isEmpty;
+    protected boolean isEmpty = true;
     protected Obstacle obstacle;
     protected BufferedImage imageTile;
     protected Position pos;
@@ -31,6 +32,15 @@ public class Tile {
 
     public void setOccupier(Obstacle occupier) {
         this.obstacle = occupier;
+    }
+
+    public Obstacle getOccupier(){
+        return this.obstacle;
+    }
+
+    public PlaceableObstacle getPlaceableObstacle(){
+        if (obstacle instanceof PlaceableObstacle) return (PlaceableObstacle) obstacle;
+        return null;
     }
 
     public void setImageTile(BufferedImage imageTile) {

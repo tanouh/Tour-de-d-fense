@@ -14,9 +14,9 @@ public class Board {
     public int sizeX(){ return tiles.length; }
     public int sizeY(){ return tiles[0].length; }
 
-    public boolean Empty(int x, int y) {return tiles[x][y].isEmpty();}
+    public boolean isEmpty(int x, int y) {return tiles[x][y].isEmpty();}
 
-    public boolean Empty(Position pos) {return Empty((int)pos.x, (int)pos.y);}
+    public boolean isEmpty(Position pos) {return isEmpty((int)pos.x, (int)pos.y);}
 
     public static Board map;
 
@@ -42,6 +42,7 @@ public class Board {
     public boolean placeTower(int posX, int posY){
         if (getTile(posX,posY).isEmpty)
             getTile(posX,posY).setOccupier(new TowerTest(posX,posY));
+
         return true;
     }
 

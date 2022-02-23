@@ -45,7 +45,7 @@ public class GamePanel extends JPanel {
         header.add(title);
 
         Label.addHeaderLabel(header,"Vague numero 0");
-        Label.addHeaderLabel(header, "Ennemis restant : ");
+        Label.addHeaderLabel(header, "Ennemis restants : ");
         Label.addHeaderLabel(header,"Argent : " + Player.getCredits());
         Label.addHeaderLabel(header, "Vies : " + Player.getLives());
         body.add(new ScreenPanel());

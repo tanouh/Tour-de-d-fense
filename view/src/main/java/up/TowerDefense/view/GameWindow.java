@@ -8,9 +8,7 @@ public class GameWindow extends JFrame {
     public GameWindow(){
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        Dimension windowSize = new Dimension(screenSize.width*2/3, screenSize.height*3/4);
-        this.setSize(windowSize);
-        //this.setPreferredSize(windowSize);
+        Dimension windowSize = new Dimension(screenSize.width, screenSize.height*24/25);
         this.setMinimumSize(windowSize);
         this.setLocationRelativeTo(null);
 
