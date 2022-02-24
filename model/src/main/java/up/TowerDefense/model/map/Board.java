@@ -1,4 +1,6 @@
 package up.TowerDefense.model.map;
+import up.TowerDefense.model.object.Obstacle;
+import up.TowerDefense.model.object.PlaceableObstacle;
 import up.TowerDefense.model.object.Position;
 import up.TowerDefense.model.object.TowerTest;
 
@@ -20,30 +22,37 @@ public class Board {
 
     public static Board map;
 
-    public void setTile(int row, int col){
-        tiles = new Tile[row][col];
+    public void setTile(int x, int y){
+        tiles = new Tile[x][y];
     }
 
-    public Tile getTile(int row, int col){
-        return tiles[row][col];
+    public Tile getTile(int x, int y){
+        return tiles[x][y];
     }
 
-    public void initTile(int row, int col, Tile tile ){
-        tiles[row][col]= tile;
+    public void initTile(int x, int y, Tile tile ){
+        tiles[x][y]= tile;
     }
 
+    public void setOccupier(Obstacle obstacle, int x, int y){
+        Tile t = getTile(x, y);
+        t.setOccupier(obstacle);
+    }
 
     /**
-     * Place les tours sur les tuiles
+     * Ajoute les obstacles dans la grille de map
+     * @param obstacle
      * @param posX
      * @param posY
-     * @return
      */
-    public boolean placeTower(int posX, int posY){
-        if (getTile(posX,posY).isEmpty)
-            getTile(posX,posY).setOccupier(new TowerTest(posX,posY));
-
-        return true;
+    public boolean addObstacle(PlaceableObstacle obstacle, int posX, int posY) {
+        if (getTile(posX, posY).isEmpty ){
+            setOccupier(obstacle, posX, posY);
+            return true;
+        }else{
+            Exception e = new Exception("Action denied");
+            e.printStackTrace();
+        }
+        return false;
     }
-
 }

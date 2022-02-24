@@ -3,6 +3,7 @@ package up.TowerDefense.view;
 
 import up.TowerDefense.model.map.Board;
 import up.TowerDefense.model.map.Tile;
+import up.TowerDefense.model.object.Obstacle;
 import up.TowerDefense.model.object.PlaceableObstacle;
 import up.TowerDefense.model.object.Tower;
 import up.TowerDefense.model.object.TowerTest;
@@ -146,8 +147,23 @@ public class MapGenerator {
 
     }
 
+
+    /*
+     * Pour les test: vérifier la disponibilité des cases en position
+     * (x,y) , (x,y+1), (x+1,y) , (x+1,y)
+     * ATTENTION : la position x et y est l'inverse de MouseX et MouseY
+     */
     public void addObstacle(int posX, int posY) {
-        obstaclesList.add(new TowerTest(posX, posY));
+
+        /*Ce qui est à retravailler :
+        * ajouter un paramètrage pour que l'obstacle à placer dépend
+        * de ce que demande l'utilisateur
+        * */
+        PlaceableObstacle obstacle = new TowerTest(posX, posY);
+
+        if(gameBoard.addObstacle(obstacle, posX, posY)){
+            obstaclesList.add(obstacle);
+        }
     }
 }
 
