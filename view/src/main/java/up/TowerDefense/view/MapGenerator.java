@@ -153,7 +153,7 @@ public class MapGenerator {
      * (x,y) , (x,y+1), (x+1,y) , (x+1,y)
      * ATTENTION : la position x et y est l'inverse de MouseX et MouseY
      */
-    public void addObstacle(int posX, int posY) {
+    public void addObstacle(int posX, int posY) throws Exception {
 
         /*Ce qui est à retravailler :
         * ajouter un paramètrage pour que l'obstacle à placer dépend
