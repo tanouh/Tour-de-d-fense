@@ -51,4 +51,15 @@ public class Button extends JButton {
             gameWindow.getContentPane().repaint();
         });
     }
+
+    public void sideMenuButton(String type){
+        JLabel typeTower = new JLabel(type);
+        typeTower.setForeground(foreground);
+        typeTower.setFont(new Font("Bernard MT Condensed", Font.PLAIN, 16));
+        typeTower.setHorizontalAlignment(JLabel.CENTER);
+        this.setHorizontalAlignment(JButton.CENTER);
+        this.add(typeTower);
+        this.setBackground(background);
+        this.setForeground(foreground);
+    }
 }

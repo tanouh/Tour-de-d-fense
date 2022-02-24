@@ -12,7 +12,7 @@ public class GamePanel extends JPanel {
 
     //Mettre les contenus de label dans une classe "partie"
     private JPanel header = new JPanel(new GridLayout(1,4));
-    private JPanel sideMenu = new JPanel();
+    private JPanel sideMenu = new JPanel(new GridLayout(5,1));
     private JPanel body = new JPanel();
     private Color background = new Color(173,175,192);
     private Color foreground = new Color(30,35,71);
@@ -62,5 +62,18 @@ public class GamePanel extends JPanel {
         title.setHorizontalAlignment(JLabel.CENTER);
         title.setVerticalAlignment(JLabel.CENTER);
         sideMenu.add(title);
+
+        Button towerType1 = new Button();
+        Button towerType2 = new Button();
+        Button towerType3 = new Button();
+        Button towerType4 = new Button();
+        towerType1.sideMenuButton("TourTest");
+        towerType2.sideMenuButton("Tour anti-champi");
+        towerType3.sideMenuButton("Leucocyte T");
+        towerType4.sideMenuButton("Anticorps");
+        sideMenu.add(towerType1);
+        sideMenu.add(towerType2);
+        sideMenu.add(towerType3);
+        sideMenu.add(towerType4);
     }
 }
