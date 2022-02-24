@@ -14,7 +14,9 @@ public class Slider extends JSlider {
         label.setForeground(foreground);
         container.add(label);
         this.setMaximum(maxValue);
+        this.setAlignmentX(JSlider.CENTER);
         this.setMajorTickSpacing(1);
+        this.setPaintTicks(true);
 
         container.add(this);
 

@@ -1,5 +1,7 @@
 package up.TowerDefense.view;
 
+import up.TowerDefense.model.game.Game;
+
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
@@ -38,16 +40,29 @@ public class Button extends JButton {
         this.addActionListener(event -> System.exit(0));
     }
 
-    public void optionButton(GameWindow gameWindow){
+    public void optionButton(GameWindow gameWindow, JPanel returnPanel){
         JLabel options = new JLabel("Options", JLabel.CENTER);
         options.setForeground(background);
         options.setFont(new Font("Bernard MT Condensed",Font.PLAIN, 20));
         this.add(options);
         this.setBackground(foreground);
         this.addActionListener(event -> {
-            OptionPanel optionPanel = new OptionPanel(gameWindow);
+            OptionPanel optionPanel = new OptionPanel(gameWindow, returnPanel);
             gameWindow.getContentPane().removeAll();
             gameWindow.getContentPane().add(optionPanel);
+            gameWindow.getContentPane().revalidate();
+            gameWindow.getContentPane().repaint();
+        });
+    }
+
+    public void applyButton(GameWindow gameWindow, JPanel returnPanel){
+        JLabel apply = new JLabel("Valider");
+        this.setBackground(foreground);
+        apply.setForeground(background);
+        this.add(apply);
+        this.addActionListener(event -> {
+            gameWindow.getContentPane().removeAll();
+            gameWindow.getContentPane().add(returnPanel);
             gameWindow.getContentPane().revalidate();
             gameWindow.getContentPane().repaint();
         });

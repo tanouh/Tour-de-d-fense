@@ -21,7 +21,7 @@ public class HomePanel extends JPanel{
 
         startGame.startButton(gameWindow);
         leaveGame.leaveButton(gameWindow.getWidth(), gameWindow.getHeight());
-        options.optionButton(gameWindow);
+        options.optionButton(gameWindow, this);
 
         this.setLayout(new BorderLayout());
         this.setBackground(background);

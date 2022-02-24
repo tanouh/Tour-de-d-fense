@@ -46,7 +46,7 @@ public class Board {
      * @param posY
      */
     public boolean addObstacle (PlaceableObstacle obstacle, int posX, int posY) throws Exception {
-        if (getTile(posX, posY).isEmpty ){
+        if (getTile(posY, posX).isEmpty ){
             setOccupier(obstacle, posX, posY);
             return true;
         }else{

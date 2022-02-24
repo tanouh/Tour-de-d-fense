@@ -83,7 +83,7 @@ public class GamePanel extends JPanel {
         sideMenu.add(listTower, BorderLayout.CENTER);
 
         Button optionMenu = new Button();
-        optionMenu.optionButton(gameWindow);
+        optionMenu.optionButton(gameWindow, this);
         JPanel footerSideMenu = new JPanel(new BorderLayout());
         footerSideMenu.setBackground(background);
         footerSideMenu.setBorder(new LineBorder(foreground, 2));
