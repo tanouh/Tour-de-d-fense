@@ -35,9 +35,15 @@ public class Tower extends PlaceableObstacle{
         this.towerType=twType;
     }
 
+    /**
+     * Détermine la capacité de la tour à lancer une attaque
+     * après un temps de recouvrement (qui dépend de chaque tour)
+     * @return
+     */
     public boolean canAttack(){
         return (System.currentTimeMillis()-lastAttackTime>=reloadTime);
     }
+
     public void setLastAttackTime() {
         this.lastAttackTime = System.currentTimeMillis();
     }
@@ -63,4 +69,40 @@ public class Tower extends PlaceableObstacle{
         return false;
     }
 
+    /**
+     * @return la portée de la tour
+     */
+    public double getRange() {
+        return range;
+    }
+
+    /**
+     * @return la puissance de la tour
+     */
+    public double getPower() {
+        return power;
+    }
+
+    /**
+     * @return le niveau de la tour
+     */
+    public int getLevel() {
+        return level;
+    }
+
+    public static int getMaxLevel() {
+        return MAX_LEVEL;
+    }
+
+    public double getUpgradeCost() {
+        return upgradeCost;
+    }
+
+    public static int getStartingHealth() {
+        return STARTING_HEALTH;
+    }
+
+    public Type getTowerType() {
+        return towerType;
+    }
 }

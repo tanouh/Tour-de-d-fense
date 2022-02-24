@@ -45,14 +45,12 @@ public class Board {
      * @param posX
      * @param posY
      */
-    public boolean addObstacle(PlaceableObstacle obstacle, int posX, int posY) {
+    public boolean addObstacle (PlaceableObstacle obstacle, int posX, int posY) throws Exception {
         if (getTile(posX, posY).isEmpty ){
             setOccupier(obstacle, posX, posY);
             return true;
         }else{
-            Exception e = new Exception("Action denied");
-            e.printStackTrace();
+            throw new Exception("Action denied");
         }
-        return false;
     }
 }

@@ -13,13 +13,31 @@ public class PlaceableObstacle extends DestructibleObstacle{
         this.buyingCost = buyingCost;
         this.refundValue = buyingCost; // augmente à chaque fois que l'obstacle augmente en niveau
     }
+
+    /**
+     * Remboursement de la valeur de l'obstacle après sa destruction
+     */
     public void refundTower(){
         Player.getPlayer().setCredits(refundValue);
     }
 
+    /**
+     * @return le prix de construction de l'obstacle
+     */
     public double getBuyingCost() {
         return  buyingCost;
     }
+
+    /**
+     * @return la valeur de l'obstacle (augmente au fur et à mesure où la tour évolue)
+     */
+    public double getRefundValue() {
+        return refundValue;
+    }
+
+    /** Modifie la valeur d'un obstacle
+     * @param refundValue sa nouvelle valeur
+     */
     public void setRefundValue(double refundValue) {
         this.refundValue = refundValue;
     }
