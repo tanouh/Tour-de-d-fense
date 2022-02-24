@@ -24,8 +24,10 @@ public class Tower extends PlaceableObstacle{
     protected double reloadTime; // temps de charge avant de pouvoir attaquer de nouveau
     protected long lastAttackTime;
     protected Type towerType;
+    private double price;
 
-    public Tower(double x, double y, int size, double buyingCost, double range, double power, int upgradeCost, double reloadTime, long lastAttackTime, Type twType, String image) {
+    public Tower(double x, double y, int size, double buyingCost, double range, double power, int upgradeCost,
+                 double reloadTime, long lastAttackTime, Type twType, String image) {
         super(x, y, size, STARTING_HEALTH, STARTING_HEALTH, ObsType.TOWER, buyingCost,image);
         this.range=range;
         this.power=power;

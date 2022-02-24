@@ -1,6 +1,7 @@
 package up.TowerDefense.view;
 
 import javax.swing.*;
+import javax.swing.border.LineBorder;
 import java.awt.*;
 
 public class Button extends JButton {
@@ -57,9 +58,13 @@ public class Button extends JButton {
         typeTower.setForeground(foreground);
         typeTower.setFont(new Font("Bernard MT Condensed", Font.PLAIN, 16));
         typeTower.setHorizontalAlignment(JLabel.CENTER);
+        this.setBorder(new LineBorder(foreground, 2));
         this.setHorizontalAlignment(JButton.CENTER);
         this.add(typeTower);
         this.setBackground(background);
         this.setForeground(foreground);
+        this.addActionListener(event -> {
+
+        });
     }
 }
