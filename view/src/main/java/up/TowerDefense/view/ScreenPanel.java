@@ -12,7 +12,7 @@ public class ScreenPanel extends JPanel implements Runnable, MouseListener {
 
     public int nbCol = 80;
     public int nbRow = 64;
-    public int widthCase = screenWidth/80;
+    public int widthCase = screenWidth/100;
     public int heightCase = screenHeight/64;
 
     public int windowWidth = widthCase*nbCol;
@@ -89,6 +89,8 @@ public class ScreenPanel extends JPanel implements Runnable, MouseListener {
         mouseX = e.getX()/heightCase;
         mouseY = e.getY()/widthCase ;
         mousePressed = true;
+        System.out.println(mouseX + " " + mouseY);
+        mapGen.addObstacle(mouseX, mouseY);
     }
 
     @Override

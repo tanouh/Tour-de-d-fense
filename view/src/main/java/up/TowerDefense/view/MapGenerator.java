@@ -138,7 +138,7 @@ public class MapGenerator {
 
     public void drawComponents(Graphics g){
         for (PlaceableObstacle ob : obstaclesList ){
-            g.drawImage(ob.getImage(),(int) ob.position.x*widthTile, (int) ob.position.y*heightTile, 32,32 , null);
+            g.drawImage(ob.getImage(),(int) ob.position.x*widthTile, (int) ob.position.y*heightTile, widthTile*2, heightTile*2, null);
             //if(gameBoard.Empty((int) ob.position.x, (int) ob.position.y))
                 //g.drawImage(ob.getImage(),(int) ob.position.x*widthTile, (int) ob.position.y*heightTile, null);
         }
