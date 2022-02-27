@@ -6,7 +6,8 @@ public interface Movable {
 	
 	/**
 	 * Deplace l'element a la position "position"
-	 * @param position
+	 * 
+	 * @param position de la case sur laquelle deplacer l'element
 	 */
 	public void moveTo(Position position);
 	
