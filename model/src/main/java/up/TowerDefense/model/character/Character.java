@@ -35,6 +35,26 @@ public abstract class Character implements Movable{
 	private float resistance;
 	
 	/**
+	 * Represente un deplacement du personnage vers la gauche en fonction de sa vitesse
+	 */
+	private final Position LEFT = new Position(this.getPosition().x - this.getSpeed(), this.getPosition().y);
+	
+	/**
+	 * Represente un deplacement du personnage vers la droite en fonction de sa vitesse
+	 */
+	private final Position RIGHT = new Position(this.getPosition().x + this.getSpeed(), this.getPosition().y);
+	
+	/**
+	 * Represente un deplacement du personnage vers le haut en fonction de sa vitesse
+	 */
+	private final Position UP = new Position(this.getPosition().x, this.getPosition().y + this.getSpeed());
+	
+	/**
+	 * Represente un deplacement du personnage vers le bas en fonction de sa vitesse
+	 */
+	private final Position DOWN = new Position(this.getPosition().x, this.getPosition().y - this.getSpeed());
+	
+	/**
 	 * Construit un personnage de taille "size" à la position "position"
 	 * 
 	 * @param position definit la position du personnage
@@ -66,6 +86,26 @@ public abstract class Character implements Movable{
 	 */
 	public Character() {
 		this(new Position(0.00,0.00), 0.50f, 1.00f, 100, 1.00f);
+	}
+	
+	public final void moveTo(Position position) {
+		this.setPosition(position);
+	}
+	
+	public final void moveUp() {
+		this.moveTo(UP);
+	}
+	
+	public final void moveDown() {
+		this.moveTo(DOWN);
+	}
+	
+	public final void moveLeft() {
+		this.moveTo(LEFT);
+	}
+	
+	public final void moveRight() {
+		this.moveTo(RIGHT);
 	}
 	
 	public Position getPosition() {
