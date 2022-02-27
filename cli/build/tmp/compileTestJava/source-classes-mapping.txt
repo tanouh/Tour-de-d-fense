@@ -1,2 +1,0 @@
-up/TowerDefense/cli/TestCLILauncher.java
- up.TowerDefense.cli.TestCLILauncher
