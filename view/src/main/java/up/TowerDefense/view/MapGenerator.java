@@ -38,8 +38,11 @@ public class MapGenerator {
 
         this.screenPanel = screenPanel;
         loadImage(imagePath);
+
         this.nbCol = mapImage.getWidth();
         this.nbRow = mapImage.getHeight();
+
+
         mapTileNum = new int [nbRow][nbCol];
 
         this.gameBoard = new Board();
@@ -49,13 +52,12 @@ public class MapGenerator {
         heightTile = screenPanel.heightCase;
 
         loadMap();
-        obstaclesList.add(new TowerTest(10, 33));
     }
+
 
     private void loadImage(String path){
         try{
             mapImage= ImageIO.read(getClass().getResourceAsStream(path));
-
         }catch(IOException e){
             e.printStackTrace();
         }

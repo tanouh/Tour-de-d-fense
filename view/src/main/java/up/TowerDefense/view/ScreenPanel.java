@@ -10,10 +10,10 @@ public class ScreenPanel extends JPanel implements Runnable, MouseListener {
     int screenWidth = (screenSize.width*4)/5;
     int screenHeight = (screenSize.height*4)/5;
 
-    public int nbCol = 80;
+    public int nbCol = 100;
     public int nbRow = 64;
-    public int widthCase = screenWidth/100;
-    public int heightCase = screenHeight/64;
+    public int widthCase = 8;
+    public int heightCase =8;
 
     public int windowWidth = widthCase*nbCol;
     public int windowHeight = heightCase*nbRow;
