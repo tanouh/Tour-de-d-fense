@@ -1,2 +1,0 @@
-up/TowerDefense/cli/CLILauncher.java
- up.TowerDefense.cli.CLILauncher

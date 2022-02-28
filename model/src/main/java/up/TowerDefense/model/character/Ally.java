@@ -1,5 +1,6 @@
 package up.TowerDefense.model.character;
 
+import up.TowerDefense.model.object.DestructibleObstacle;
 import up.TowerDefense.model.object.Position;
 
 public class Ally extends Character implements Movable{
@@ -8,12 +9,11 @@ public class Ally extends Character implements Movable{
 	 * Definit la taille constante de chaque allie a la moitier d'une case (0.50)
 	 */
 	private static final float SIZE = 0.50f;
-	private static final float DAMAGE = 10.00f;
 	
-	private final Position LEFT = new Position(this.getPosition().x - this.getSpeed(), this.getPosition().y);
-	private final Position RIGHT = new Position(this.getPosition().x + this.getSpeed(), this.getPosition().y);
-	private final Position UP = new Position(this.getPosition().x, this.getPosition().y + this.getSpeed());
-	private final Position DOWN = new Position(this.getPosition().x, this.getPosition().y - this.getSpeed());
+	/**
+	 * Definit les dégats constants de chaque allie a 10.
+	 */
+	private static final float DAMAGE = 10.00f;
 
 	/**
 	 * Construit un allie de la taille definit par la constante SIZE
@@ -31,28 +31,22 @@ public class Ally extends Character implements Movable{
 		super(position, SIZE, 1.00f, 100, 1.00f);
 	}
 	
-	public void attack(Enemy target) {
+	/**
+	 * L'ennemi attaque un obstacle destructible "target"
+	 *
+	 * @param target Represente l'obstacle cible de l'ennemi (tour ou autre)
+	 */
+	public void attackObstacle(DestructibleObstacle target) {
+		target.setCurrentHealth(target.getCurrentHealth()-(int)DAMAGE);
+	}
+	
+	/**
+	 * L'Allié attaque un allié "target".
+	 * 
+	 * @param target Represente l'enemy ciblé par l'allié
+	 */
+	public void attackEnemy(Enemy target) {
 		target.setlifePoint_current(target.getlifePoint_current()-(int)(DAMAGE/target.getResistance()));
-	}
-	
-	public void moveTo(Position position) {
-		this.setPosition(position);
-	}
-	
-	public void moveUp() {
-		this.moveTo(UP);
-	}
-	
-	public void moveDown() {
-		this.moveTo(DOWN);
-	}
-	
-	public void moveLeft() {
-		this.moveTo(LEFT);
-	}
-	
-	public void moveRight() {
-		this.moveTo(RIGHT);
 	}
 	
 }

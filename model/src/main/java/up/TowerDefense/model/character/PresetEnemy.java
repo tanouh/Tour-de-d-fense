@@ -2,6 +2,9 @@ package up.TowerDefense.model.character;
 
 public class PresetEnemy {
 	
+	/**
+	 * Correspond au nombre de coins rapportes une fois l'enemy mort.
+	 */
 	private int coins_value;
 	
 	/**
@@ -9,10 +12,19 @@ public class PresetEnemy {
 	 */
 	private float agressiveness_degree;
 	
+	/**
+	 * Correspond a la vitesse d'attaque de l'enemy
+	 */
 	private float attackspeed;
 	
+	/**
+	 * Correspond aux degats de l'enemy
+	 */
 	private float dammage;
 	
+	/**
+	 * Determine si l'enemy est suicidaire ou non (s'il meurt des sa premiere attaque ou pas).
+	 */
 	private boolean suicidal;
 		
 	/** 

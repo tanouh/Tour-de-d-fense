@@ -2,8 +2,10 @@ package up.TowerDefense.model.character;
 
 import up.TowerDefense.model.object.Position;
 import up.TowerDefense.model.object.DestructibleObstacle;
+import up.TowerDefense.model.object.Tower;
+import up.TowerDefense.model.object.Obstacle;
 
-public abstract class Enemy extends Character{
+public abstract class Enemy extends Character implements Movable{
 	
 	/**
 	 * Correspond au nombre de coins rapportes une fois l'enemy mort.
@@ -28,7 +30,27 @@ public abstract class Enemy extends Character{
 	/**
 	 * Determine si l'enemy est suicidaire ou non (s'il meurt des sa premiere attaque ou pas).
 	 */
-	private boolean suicid;
+	private boolean suicidal;
+	
+	/**
+	 * Represente un deplacement de l'enemy vers la gauche en fonction de sa vitesse
+	 */
+	private final Position LEFT = new Position(this.getPosition().x - this.getSpeed(), this.getPosition().y);
+	
+	/**
+	 * Represente un deplacement de l'enemy vers la droite en fonction de sa vitesse
+	 */
+	private final Position RIGHT = new Position(this.getPosition().x + this.getSpeed(), this.getPosition().y);
+	
+	/**
+	 * Represente un deplacement de l'enemy vers le haut en fonction de sa vitesse
+	 */
+	private final Position UP = new Position(this.getPosition().x, this.getPosition().y + this.getSpeed());
+	
+	/**
+	 * Represente un deplacement de l'enemy vers le bas en fonction de sa vitesse
+	 */
+	private final Position DOWN = new Position(this.getPosition().x, this.getPosition().y - this.getSpeed());
 	
 	/**
 	 * Construit un enemy de taille "size" Ã  la position "position"
@@ -45,7 +67,7 @@ public abstract class Enemy extends Character{
 	}*/
 	
 	/**
-	 * Construit un enemy ï¿½ la position "position" a partir des informations d'un PresetEnemy
+	 * Construit un enemy a la position "position" a partir des informations d'un PresetEnemy
 	 * 
 	 * @param presetEnemy Contient toute les informations concernant l'enemy notament son degre d'agressivite ou sa vitesse.
 	 * @param position Definit la position de l'enemy
@@ -56,28 +78,34 @@ public abstract class Enemy extends Character{
 		this.agressiveness_degree = presetEnemy.getAgressiv_Degree();
 		this.attackspeed = presetEnemy.getAgressiv_Degree();
 		this.damage = presetEnemy.getDammage();
-		this.suicid = presetEnemy.isSuicidal();
+		this.suicidal = presetEnemy.isSuicidal();
 	}
 	
 	/**
-	 * L'enemy attaque un obstacle destructible "target"
+	 * L'ennemi attaque un obstacle destructible "target"
 	 *
-	 * @param target Represente l'obstacle cible de l'enemy (tour ou autre)
+	 * @param target Represente l'obstacle cible de l'ennemi (tour ou autre)
 	 */
-	public void attack(DestructibleObstacle target) {
-//		target.setCurrentHealth(target.getCurrentHealth-(int)this.damage);
+	public void attackObstacle(DestructibleObstacle target) {
+		target.setCurrentHealth(target.getCurrentHealth()-(int)this.damage);
 	}
 	
+	/**
+	 * L'ennemi attaque un allié "target".
+	 * 
+	 * @param target Represente l'allié cible de l'ennemi
+	 */
+	public void attackAlly(Ally target) {
+		target.setlifePoint_current(target.getlifePoint_current()-(int)(this.damage/target.getResistance()));
+	}
+	
+	/**
+	 * L'enemy soigne un autre enemy "target".
+	 * 
+	 * @param target Represente l'enemy soigné par l'enemy courant.
+	 */
 	private void heal(Enemy target) {
 		target.setlifePoint_current(target.getlifePoint_current()+2);
-	}
-	
-	public void attack(Ally target) {
-		target.setlifePoint_current(target.getlifePoint_current()-(int)this.damage);
-	}
-	
-	public void moove() {
-		
 	}
 	
 	public int getCoins_value() {

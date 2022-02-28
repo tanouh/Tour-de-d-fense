@@ -9,7 +9,7 @@ public class OptionPanel extends JPanel {
     private Color background = new Color(173,175,192);
     private Color foreground = new Color(30,35,71);
 
-    public OptionPanel(GameWindow gameWindow){
+    public OptionPanel(GameWindow gameWindow, JPanel returnPanel){
         this.setLayout(new BorderLayout());
         this.add(title, BorderLayout.NORTH);
         this.add(body, BorderLayout.CENTER);
@@ -23,10 +23,7 @@ public class OptionPanel extends JPanel {
         title.setVerticalAlignment(JLabel.CENTER);
 
         Button applyOptions = new Button();
-        JLabel apply = new JLabel("Valider");
-        applyOptions.setBackground(foreground);
-        apply.setForeground(background);
-        applyOptions.add(apply);
+        applyOptions.applyButton(gameWindow, returnPanel);
 
         body.setLayout(new BoxLayout(body, BoxLayout.Y_AXIS));
         body.add(Box.createVerticalGlue());

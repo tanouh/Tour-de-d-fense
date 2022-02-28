@@ -10,6 +10,9 @@ public class GameWindow extends JFrame {
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         Dimension windowSize = new Dimension(screenSize.width, screenSize.height*24/25);
         this.setMinimumSize(windowSize);
+        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        this.setUndecorated(true);
+        this.setResizable(false);
         this.setLocationRelativeTo(null);
 
         HomePanel homePanel = new HomePanel(this);
