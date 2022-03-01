@@ -1,34 +1,34 @@
 package up.TowerDefense.view;
 
 
+import up.TowerDefense.model.game.StaticFunctions;
 import up.TowerDefense.model.map.Board;
 import up.TowerDefense.model.map.Tile;
-import up.TowerDefense.model.object.Obstacle;
 import up.TowerDefense.model.object.PlaceableObstacle;
-import up.TowerDefense.model.object.Tower;
 import up.TowerDefense.model.object.TowerTest;
 
-import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
 import java.util.ArrayList;
 
+import static up.TowerDefense.view.ScreenPanel.*;
 import static up.TowerDefense.view.TileDisplayManager.*;
 import static up.TowerDefense.model.object.Obstacle.*;
+
+/**
+ * Classe qui édite la carte suivant un modèle
+ * Elle englobe également les fonctions qui permettent de dessiner les composants du jeu sur l'interface graphique
+ * */
 
 public class MapGenerator {
     public Board gameBoard;
     private ScreenPanel screenPanel;
     private BufferedImage mapImage;
-    private int widthTile;
-    private int heightTile;
-
-
+    private int tileSize;
     private int [][] mapTileNum;
 
-    public int nbCol;
-    public int nbRow;
+    private int nbCol;
+    private int nbRow;
 
     public static ArrayList<PlaceableObstacle> obstaclesList = new ArrayList<PlaceableObstacle>();
     public static ArrayList<Character> charactersList = new ArrayList<Character>();
@@ -37,8 +37,8 @@ public class MapGenerator {
     public MapGenerator(ScreenPanel screenPanel, String imagePath){
 
         this.screenPanel = screenPanel;
-        loadImage(imagePath);
 
+        mapImage = StaticFunctions.loadImage(imagePath);
         this.nbCol = mapImage.getWidth();
         this.nbRow = mapImage.getHeight();
 
@@ -48,19 +48,9 @@ public class MapGenerator {
         this.gameBoard = new Board();
         gameBoard.setTile(nbRow,nbCol);
 
-        widthTile = screenPanel.widthCase;
-        heightTile = screenPanel.heightCase;
+        tileSize = screenPanel.tileSize;
 
         loadMap();
-    }
-
-
-    private void loadImage(String path){
-        try{
-            mapImage= ImageIO.read(getClass().getResourceAsStream(path));
-        }catch(IOException e){
-            e.printStackTrace();
-        }
     }
 
     /**
@@ -71,14 +61,14 @@ public class MapGenerator {
             int col = 0 ;
             int row = 0;
             setNumTile();
-            while(col < screenPanel.nbCol && row < screenPanel.nbRow){
-                while (col < screenPanel.nbCol){
+            while(col < MAX_WORLD_COL && row < MAX_WORLD_ROW){
+                while (col < MAX_WORLD_COL){
                     Tile t = new Tile();
                     setUpTile(t,mapTileNum[row][col]);
                     gameBoard.initTile(row,col,t);
                     col++;
                 }
-                if (col == screenPanel.nbCol){
+                if (col == MAX_WORLD_COL){
 
                     col = 0;
                     row++;
@@ -88,6 +78,7 @@ public class MapGenerator {
             e.printStackTrace();
         }
     }
+
     /**
      * Complète le contenu des tuiles
      * (à compléter au fur et à mesure où on créer des tuiles)
@@ -126,24 +117,55 @@ public class MapGenerator {
         }
     }
 
+
+    /**
+     * Dessine la carte au fur et à mesure où on se déplace sur la carte
+     * @param g
+     */
     public void draw(Graphics2D g){
-        int col = 0 ;
-        int row = 0;
-        while (col < screenPanel.nbCol && row < screenPanel.nbRow){
-            g.drawImage(gameBoard.getTile(row,col).getImageTile(), col*widthTile, row*heightTile, widthTile, heightTile, null);
-            col++;
-            if(col == screenPanel.nbCol){
-                col = 0 ;
-                row++;
+        int worldCol = 0;
+        int worldRow = 0;
+
+
+        while (worldCol < MAX_WORLD_COL && worldRow < MAX_WORLD_ROW){
+
+
+            int worldX = worldCol * tileSize;
+            int worldY = worldRow * tileSize;
+
+            /*
+            Pour déterminer la position sur l'écran @param screenX on doit veiller à ce qu'il y ait toujours
+            une marge par rapport aux bords de la carte d'où les valeurs qui ont été soustraits
+             */
+            int screenX = worldX - screenPanel.camera.worldX + screenPanel.camera.screenX;
+            int screenY = worldY - screenPanel.camera.worldY + screenPanel.camera.screenY;
+
+
+            if(worldX + screenPanel.tileSize > screenPanel.camera.worldX - screenPanel.camera.screenX &&
+                    worldX - screenPanel.tileSize < screenPanel.camera.worldX + screenPanel.camera.screenX &&
+                    worldY + screenPanel.tileSize > screenPanel.camera.worldY - screenPanel.camera.screenY &&
+                    worldY - screenPanel.tileSize < screenPanel.camera.worldY + screenPanel.camera.screenY
+            ){
+                Tile t = gameBoard.getTile(worldRow,worldCol);
+                g.drawImage(t.getImageTile(),screenX,screenY,tileSize,tileSize,null);
+            }
+            worldCol ++;
+            if(worldCol == MAX_WORLD_COL){
+                worldCol = 0;
+                worldRow++;
             }
         }
+
     }
 
+
+    /**
+     * Dessine les objets sur la carte au fur et à mesure où ils sont créés
+     * @param g
+     */
     public void drawComponents(Graphics g){
         for (PlaceableObstacle ob : obstaclesList ){
-            g.drawImage(ob.getImage(),(int) ob.position.x*heightTile, (int) ob.position.y*widthTile, widthTile*2, heightTile*2, null);
-            //if(gameBoard.Empty((int) ob.position.x, (int) ob.position.y))
-                //g.drawImage(ob.getImage(),(int) ob.position.x*widthTile, (int) ob.position.y*heightTile, null);
+            g.drawImage(ob.getImage(),(int) ob.position.x*tileSize, (int) ob.position.y*tileSize, tileSize*2, tileSize*2, null);
         }
 
 

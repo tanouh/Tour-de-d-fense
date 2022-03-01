@@ -13,12 +13,12 @@ public class GameWindow extends JFrame {
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         this.setUndecorated(true);
         this.setResizable(false);
-        this.setLocationRelativeTo(null);
+
 
         HomePanel homePanel = new HomePanel(this);
         this.getContentPane().add(homePanel);
         this.pack();
-
+        this.setLocationRelativeTo(null);
         this.setVisible(true);
     }
 }
