@@ -1,7 +1,5 @@
 package up.TowerDefense.view;
 
-import up.TowerDefense.model.game.Game;
-
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;

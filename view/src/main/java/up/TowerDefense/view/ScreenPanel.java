@@ -140,12 +140,11 @@ public class ScreenPanel extends JPanel implements Runnable, MouseListener {
         mouseX = e.getX()/sizeCase;
         mouseY = e.getY()/sizeCase ;
         mousePressed = true;
-        System.out.println(e.getX()+ " "+ e.getY());
-        /*try {
+        try {
             mapGen.addObstacle(mouseX, mouseY);
         } catch (Exception ex) {
             ex.printStackTrace();
-        }*/
+        }
     }
 
     @Override

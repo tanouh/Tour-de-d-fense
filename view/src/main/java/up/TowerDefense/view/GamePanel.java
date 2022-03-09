@@ -1,6 +1,6 @@
 package up.TowerDefense.view;
 
-import up.TowerDefense.model.game.Player;
+import up.TowerDefense.model.game.Game;
 
 
 import javax.swing.*;
@@ -47,8 +47,8 @@ public class GamePanel extends JPanel {
 
         Label.addHeaderLabel(header,"Vague numero 0");
         Label.addHeaderLabel(header, "Ennemis restants : ");
-        Label.addHeaderLabel(header,"Argent : " + Player.getCredits());
-        Label.addHeaderLabel(header, "Vies : " + Player.getLives());
+        Label.addHeaderLabel(header,"Argent : " + Game.getCredits());
+        Label.addHeaderLabel(header, "Vies : " + Game.getLives());
         body.add(new ScreenPanel(gameWindow));
     }
 

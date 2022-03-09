@@ -1,8 +1,6 @@
 package up.TowerDefense.model.object;
 
-import up.TowerDefense.model.game.Player;
-
-import java.awt.image.BufferedImage;
+import up.TowerDefense.model.game.Game;
 
 public abstract class Tower extends PlaceableObstacle{
 
@@ -40,7 +38,7 @@ public abstract class Tower extends PlaceableObstacle{
     protected final static int MAX_LEVEL = 5 ; //Ã  dÃ©terminer
     
     /**
-     * Represente le coût de l'amelioration.
+     * Represente le coï¿½t de l'amelioration.
      */
     protected double upgradeCost;
     
@@ -70,7 +68,7 @@ public abstract class Tower extends PlaceableObstacle{
     private double price;
 
     /**
-     * Construit une Tour de taille "size" a la position determinée par "x" et "y".
+     * Construit une Tour de taille "size" a la position determinï¿½e par "x" et "y".
      * 
      * @param x Position horizontale de la Tour sur la carte
      * @param y Position verticale de la Tour sur la carte
@@ -108,7 +106,7 @@ public abstract class Tower extends PlaceableObstacle{
             range*=getModifier();
             upgradeCost*=getModifier();
             setRefundValue(upgradeCost);
-            Player.getPlayer().setCredits(-1*upgradeCost);
+            Game.getPlayer().setCredits(-1*upgradeCost);
 
             return true;
         }
@@ -119,7 +117,7 @@ public abstract class Tower extends PlaceableObstacle{
      * Determine la capacite de la tour a lancer une attaque
      * apres un temps de recouvrement (qui depend de chaque tour)
      * 
-     * @return renvoie True si la Tour peux attaquée False sinon 
+     * @return renvoie True si la Tour peux attaquï¿½e False sinon 
      */
     public boolean canAttack(){
         return (System.currentTimeMillis()-lastAttackTime>=reloadTime);
