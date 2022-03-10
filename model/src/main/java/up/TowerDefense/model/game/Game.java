@@ -9,7 +9,11 @@ public class Game {
     private static double credits = STARTING_CREDITS;
     private static int lives = STARTING_LIVES;
     private static Board board = new Board();
-//    private static int wavesLeft;
+    private static int numberWavesTotal;
+    private static int wavesLeft;
+    private static int bgMusic;
+    private static int soundLevel;
+    private static int gameSpeed;
 
     /**
      * inutile ?
@@ -23,7 +27,12 @@ public class Game {
 //        return instance;
 //    }
 
-    public Game(){
+    public Game(int numberWaves, int backgroundMusic, int gameSound, int speed){
+        numberWavesTotal = numberWaves;
+        wavesLeft = numberWaves;
+        bgMusic = backgroundMusic;
+        soundLevel = gameSound;
+        gameSpeed = speed;
 
     }
 

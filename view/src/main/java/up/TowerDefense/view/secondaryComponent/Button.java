@@ -1,5 +1,6 @@
 package up.TowerDefense.view.secondaryComponent;
 
+import up.TowerDefense.model.game.Game;
 import up.TowerDefense.view.mainComponent.GamePanel;
 import up.TowerDefense.view.mainComponent.GameWindow;
 import up.TowerDefense.view.mainComponent.HomePanel;
@@ -17,7 +18,8 @@ public class Button extends JButton {
         super();
     }
 
-    public void startButton(GameWindow gameWindow){
+    public void startButton(GameWindow gameWindow, int numberWaves, int backgroundMusic,
+                            int gameSound, int gameSpeed){
         JLabel start = new JLabel("Demarrer", JLabel.CENTER);
         start.setForeground(background);
         start.setFont(new Font("Bernard MT Condensed",Font.PLAIN, 20));
@@ -25,7 +27,8 @@ public class Button extends JButton {
         this.setBackground(foreground);
         this.setPreferredSize(new Dimension(200, gameWindow.getHeight()/10));
         this.addActionListener(event -> {
-            GamePanel gamePanel = new GamePanel(gameWindow);
+            GamePanel gamePanel = new GamePanel(gameWindow, numberWaves,
+                    backgroundMusic, gameSound, gameSpeed);
             gameWindow.getContentPane().removeAll();
             gameWindow.getContentPane().add(gamePanel);
             gameWindow.getContentPane().revalidate();
@@ -94,7 +97,7 @@ public class Button extends JButton {
     }
 
     public void abandonButton(GameWindow gameWindow){
-        //Game.reset();
+        Game.reset();
         JLabel abandon = new JLabel("Abandonner");
         this.setBackground(foreground);
         abandon.setForeground(background);

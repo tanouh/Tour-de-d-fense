@@ -22,14 +22,15 @@ public class GamePanel extends JPanel {
     private Color foreground = new Color(30,35,71);
 
     //stockage des options choisies (stockage dans une List ?) :
-    private int backgroundMusic = 5;
-    private int gameSound = 5;
-    private int gameSpeed = 2;
+    private int backgroundMusic;
+    private int gameSound;
+    private int gameSpeed;
     //...
 
-    public GamePanel(GameWindow gameWindow){
+    public GamePanel(GameWindow gameWindow, int numberWaves, int backgroundMusic,
+                     int gameSound, int gameSpeed){
         this.gameWindow = gameWindow;
-        this.game = game;
+        this.game = new Game(numberWaves, backgroundMusic, gameSound, gameSpeed);
 
         this.setLayout(new BorderLayout());
 
