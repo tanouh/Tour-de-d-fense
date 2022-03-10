@@ -1,6 +1,6 @@
 package up.TowerDefense.view;
 
-import up.TowerDefense.model.game.Player;
+import up.TowerDefense.model.game.Game;
 
 
 import javax.swing.*;
@@ -9,6 +9,7 @@ import java.awt.*;
 
 public class GamePanel extends JPanel {
     private GameWindow gameWindow;
+    private Game game;
 
     //Mettre les contenus de label dans une classe "partie"
     private JPanel header = new JPanel(new GridLayout(1,4));
@@ -18,10 +19,16 @@ public class GamePanel extends JPanel {
     private Color background = new Color(173,175,192);
     private Color foreground = new Color(30,35,71);
 
-
+    //stockage des options choisies (stockage dans une List ?) :
+    private int backgroundMusic = 5;
+    private int gameSound = 5;
+    private int gameSpeed = 2;
+    //...
 
     public GamePanel(GameWindow gameWindow){
         this.gameWindow = gameWindow;
+        this.game = game;
+
         this.setLayout(new BorderLayout());
 
         this.setHeader();
@@ -29,6 +36,7 @@ public class GamePanel extends JPanel {
         this.add(header, BorderLayout.NORTH);
         this.add(body, BorderLayout.CENTER);
         this.add(sideMenu, BorderLayout.EAST);
+
 
     }
 
@@ -47,8 +55,8 @@ public class GamePanel extends JPanel {
 
         Label.addHeaderLabel(header,"Vague numero 0");
         Label.addHeaderLabel(header, "Ennemis restants : ");
-        Label.addHeaderLabel(header,"Argent : " + Player.getCredits());
-        Label.addHeaderLabel(header, "Vies : " + Player.getLives());
+        Label.addHeaderLabel(header,"Argent : " + Game.getCredits());
+        Label.addHeaderLabel(header, "Vies : " + Game.getLives());
         body.add(new ScreenPanel(gameWindow));
     }
 
@@ -83,11 +91,17 @@ public class GamePanel extends JPanel {
         sideMenu.add(listTower, BorderLayout.CENTER);
 
         Button optionMenu = new Button();
-        optionMenu.optionButton(gameWindow, this);
+        optionMenu.optionButton(gameWindow, null, this, this);
         JPanel footerSideMenu = new JPanel(new BorderLayout());
         footerSideMenu.setBackground(background);
         footerSideMenu.setBorder(new LineBorder(foreground, 2));
         footerSideMenu.add(optionMenu, BorderLayout.EAST);
         sideMenu.add(footerSideMenu, BorderLayout.SOUTH);
+    }
+
+    public void applyOptions(int backgroundMusic, int gameSound, int gameSpeed){
+        this.backgroundMusic = backgroundMusic;
+        this.gameSound = gameSound;
+        this.gameSpeed = gameSpeed;
     }
 }
