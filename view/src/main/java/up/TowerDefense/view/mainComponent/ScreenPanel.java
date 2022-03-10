@@ -101,7 +101,6 @@ public class ScreenPanel extends JPanel implements Runnable{
         super.paintComponent(g);
         Graphics2D g2D = (Graphics2D)g;
         mapGen.draw(g2D);
-        camera.draw(g2D);
         mapGen.drawComponents(g2D);
         g2D.dispose();
     }

@@ -50,6 +50,7 @@ public class Board {
           où on rencontre d'autres problèmes liés à ça après
          */
 
+        System.out.println(posX+" "+ posY);
         if (getTile(posY, posX).isEmpty ){
             setOccupier(obstacle, posY, posX);
             return true;

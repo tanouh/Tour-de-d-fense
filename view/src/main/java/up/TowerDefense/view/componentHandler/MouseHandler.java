@@ -18,11 +18,11 @@ public class MouseHandler implements MouseListener {
         this.screenPanel = screenPanel;
     }
 
+
     private void update(int x , int y){
         mouseX = (x + screenPanel.camera.worldX - screenPanel.camera.screenX )/tileSize;
         mouseY = (y + screenPanel.camera.worldY - screenPanel.camera.screenY)/tileSize;
     }
-
 
     @Override
     public void mouseClicked(MouseEvent e) {
@@ -31,13 +31,14 @@ public class MouseHandler implements MouseListener {
         int y = e.getY();
         update(x,y);
 
+        /* Ceci est encore provisoire
+        todo : dès qu'on clique sur une position, les possibilités de construction s'affichent sur le menu latéral
+         */
         try {
             screenPanel.mapGen.addObstacle(mouseX, mouseY);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-
-
     }
 
 
