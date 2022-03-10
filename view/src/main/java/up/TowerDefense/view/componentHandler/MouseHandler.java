@@ -16,39 +16,28 @@ public class MouseHandler implements MouseListener {
 
     public MouseHandler(ScreenPanel screenPanel){
         this.screenPanel = screenPanel;
+    }
 
+    private void update(int x , int y){
+        mouseX = (x + screenPanel.camera.worldX - screenPanel.camera.screenX )/tileSize;
+        mouseY = (y + screenPanel.camera.worldY - screenPanel.camera.screenY)/tileSize;
     }
 
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        /*mouseX = e.getX()/sizeCase;
-        mouseY = e.getY()/sizeCase ;*/
         mousePressed = true;
-
-        /*try {
-            mapGen.addObstacle(mouseX, mouseY);
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }*/
-
-        /*à revoir
-         */
         int x  = e.getX();
         int y = e.getY();
-        if(x < windowWidth/2) {
-            mouseX = (screenPanel.camera.worldX - x/tileSize)/tileSize;
+        update(x,y);
+
+        try {
+            screenPanel.mapGen.addObstacle(mouseX, mouseY);
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
-        else{
-            mouseX = (screenPanel.camera.worldX + x/tileSize)/tileSize;
-        }
-        if(y < windowHeight/2) {
-            mouseY = (screenPanel.camera.worldY - y/tileSize)/tileSize;
-        }
-        else{
-            mouseY = (screenPanel.camera.worldY + y/tileSize)/tileSize;
-        }
-        System.out.println(mouseX+ " "+mouseY);
+
+
     }
 
 

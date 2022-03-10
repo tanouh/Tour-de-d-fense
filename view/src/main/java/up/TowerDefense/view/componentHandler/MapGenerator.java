@@ -164,12 +164,10 @@ public class MapGenerator {
      * Dessine les objets sur la carte au fur et à mesure où ils sont créés
      * @param g
      */
-    public void drawComponents(Graphics g){
+    public void drawComponents(Graphics2D g){
         for (PlaceableObstacle ob : obstaclesList ){
             g.drawImage(ob.getImage(),(int) ob.position.x*tileSize, (int) ob.position.y*tileSize, tileSize*2, tileSize*2, null);
         }
-
-
     }
 
 
@@ -187,6 +185,7 @@ public class MapGenerator {
         PlaceableObstacle obstacle = new TowerTest(posX, posY);
 
         if(gameBoard.addObstacle(obstacle, posX, posY)){
+            System.out.println("true");
             obstaclesList.add(obstacle);
         }
     }

@@ -55,7 +55,7 @@ public class Camera {
                 worldX-=speed;
         }
         else if(rightPressed){
-            if (worldX+(speed+windowWidth /2) <= MAX_WORLD_COL* tileSize)
+            if (worldX+(speed+windowWidth/2) <= MAX_WORLD_COL* tileSize)
                 worldX+=speed;
         }
     }
