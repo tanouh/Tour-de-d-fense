@@ -1,6 +1,7 @@
 package up.TowerDefense.view.secondaryComponent;
 
 import up.TowerDefense.model.game.Game;
+import up.TowerDefense.model.object.TowerTest;
 import up.TowerDefense.view.mainComponent.GamePanel;
 import up.TowerDefense.view.mainComponent.GameWindow;
 import up.TowerDefense.view.mainComponent.HomePanel;
@@ -88,7 +89,7 @@ public class Button extends JButton {
             int backgroundMusic = optionPanel.getBackgroundMusic().getValue();
             int gameSound = optionPanel.getGameSound().getValue();
             int gameSpeed = optionPanel.getGameSpeed().getValue();
-            gamePanel.applyOptions(backgroundMusic, gameSound, gameSpeed);
+            gamePanel.getGame().applyOptions(backgroundMusic, gameSound, gameSpeed);
             gameWindow.getContentPane().removeAll();
             gameWindow.getContentPane().add(gamePanel);
             gameWindow.getContentPane().revalidate();
@@ -110,8 +111,8 @@ public class Button extends JButton {
         });
     }
 
-    public void sideMenuButton(String type){
-        JLabel typeTower = new JLabel(type);
+    public void sideMenuButton(int typeObstacle){
+        JLabel typeTower = new JLabel(Game.getListTowerTypes()[typeObstacle]);
         typeTower.setForeground(foreground);
         typeTower.setFont(new Font("Bernard MT Condensed", Font.PLAIN, 16));
         typeTower.setHorizontalAlignment(JLabel.CENTER);
@@ -121,7 +122,7 @@ public class Button extends JButton {
         this.setBackground(background);
         this.setForeground(foreground);
         this.addActionListener(event -> {
-
+            Game.setCurrentlyPlacing(typeObstacle);
         });
     }
 }

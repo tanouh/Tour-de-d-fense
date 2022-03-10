@@ -1,11 +1,13 @@
 package up.TowerDefense.view.componentHandler;
 
 
+import up.TowerDefense.model.game.Game;
 import up.TowerDefense.model.game.StaticFunctions;
 import up.TowerDefense.model.map.Board;
 import up.TowerDefense.model.map.Tile;
 import up.TowerDefense.model.object.PlaceableObstacle;
 import up.TowerDefense.model.object.TowerTest;
+import up.TowerDefense.model.object.Wall;
 import up.TowerDefense.view.mainComponent.ScreenPanel;
 
 import java.awt.*;
@@ -198,8 +200,24 @@ public class MapGenerator {
         * ajouter un paramètrage pour que l'obstacle à placer dépend
         * de ce que demande l'utilisateur
         * */
-        PlaceableObstacle obstacle = new TowerTest(posX, posY);
-
+        PlaceableObstacle obstacle = null;
+        switch(Game.getCurrentlyPlacing()) {
+            case 0:
+                obstacle = new TowerTest(posX, posY);
+                break;
+//            case 1 :
+//                obstacle = new TowerAntiMushroom(posX, posY);
+//                break;
+//            case 2 :
+//                obstacle = new Leucocyte(posX, posY);
+//                break;
+//            case 3 :
+//                obstacle = new Anticorps(posX, posY);
+//                break;
+            case 4:
+                obstacle = new Wall(posX, posY);
+                break;
+        }
         if(gameBoard.addObstacle(obstacle, posX, posY)){
             obstaclesList.add(obstacle);
         }
