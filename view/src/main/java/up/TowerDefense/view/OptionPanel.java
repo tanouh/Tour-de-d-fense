@@ -34,13 +34,18 @@ public class OptionPanel extends JPanel {
         }
         body.setLayout(new BoxLayout(body, BoxLayout.Y_AXIS));
         body.add(Box.createVerticalGlue());
-        if (returnPanel instanceof OptionPanel) {
-            numberWaves = new Slider(body, "Nombre de vagues", 5);
+        if (homePanel != null) {
+            numberWaves = new Slider(body, "Nombre de vagues", 1, 5);
         }
-        backgroundMusic = new Slider(body, "Musique", 10);
-        gameSound = new Slider(body, "Son du jeu", 10);
-        gameSpeed = new Slider(body, "Vitesse de jeu", 3);
+        backgroundMusic = new Slider(body, "Musique", 0, 10);
+        gameSound = new Slider(body, "Son du jeu", 0,10);
+        gameSpeed = new Slider(body, "Vitesse de jeu", 1,3);
         body.add(applyOptions);
+        if (gamePanel != null){
+            Button abandonButton = new Button();
+            abandonButton.abandonButton(gameWindow);
+            body.add(abandonButton);
+        }
         body.add(Box.createVerticalGlue());
     }
 

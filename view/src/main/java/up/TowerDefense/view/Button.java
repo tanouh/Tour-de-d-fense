@@ -90,6 +90,20 @@ public class Button extends JButton {
         });
     }
 
+    public void abandonButton(GameWindow gameWindow){
+        //Game.reset();
+        JLabel abandon = new JLabel("Abandonner");
+        this.setBackground(foreground);
+        abandon.setForeground(background);
+        this.add(abandon);
+        this.addActionListener(event -> {
+            gameWindow.getContentPane().removeAll();
+            gameWindow.getContentPane().add(new HomePanel(gameWindow));
+            gameWindow.getContentPane().revalidate();
+            gameWindow.getContentPane().repaint();
+        });
+    }
+
     public void sideMenuButton(String type){
         JLabel typeTower = new JLabel(type);
         typeTower.setForeground(foreground);

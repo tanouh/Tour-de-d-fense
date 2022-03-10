@@ -22,7 +22,7 @@ public class GamePanel extends JPanel {
     //stockage des options choisies (stockage dans une List ?) :
     private int backgroundMusic = 5;
     private int gameSound = 5;
-    private int gameSpeed = 5;
+    private int gameSpeed = 2;
     //...
 
     public GamePanel(GameWindow gameWindow){
