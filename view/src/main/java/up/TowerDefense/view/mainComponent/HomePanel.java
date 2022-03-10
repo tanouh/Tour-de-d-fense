@@ -1,4 +1,6 @@
-package up.TowerDefense.view;
+package up.TowerDefense.view.mainComponent;
+
+import up.TowerDefense.view.secondaryComponent.Button;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
@@ -16,12 +18,19 @@ public class HomePanel extends JPanel{
     private Color background = new Color(173,175,192);
     private Color foreground = new Color(30,35,71);
 
+    //stockage des options choisies (stockage dans une List ?) :
+    private int numberWaves = 5;
+    private int backgroundMusic = 5;
+    private int gameSound = 5;
+    private int gameSpeed = 2;
+    //...
+
     public HomePanel(GameWindow gameWindow){
         gameWindow.setTitle("project Covid Defense");
 
         startGame.startButton(gameWindow);
         leaveGame.leaveButton(gameWindow.getWidth(), gameWindow.getHeight());
-        options.optionButton(gameWindow, this);
+        options.optionButton(gameWindow, this, null, this);
 
         this.setLayout(new BorderLayout());
         this.setBackground(background);
@@ -52,4 +61,14 @@ public class HomePanel extends JPanel{
 
         footer.add(options, BorderLayout.EAST);
     }
+
+    public void applyOptions(int numberWaves, int backgroundMusic, int gameSound, int gameSpeed){
+        if (numberWaves != 0){
+            this.numberWaves = numberWaves;
+        }
+        this.backgroundMusic = backgroundMusic;
+        this.gameSound = gameSound;
+        this.gameSpeed = gameSpeed;
+    }
+
 }

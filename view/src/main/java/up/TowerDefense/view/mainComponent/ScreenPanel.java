@@ -1,49 +1,48 @@
-package up.TowerDefense.view;
+package up.TowerDefense.view.mainComponent;
+
+import up.TowerDefense.view.componentHandler.Camera;
+import up.TowerDefense.view.componentHandler.KeyAction;
+import up.TowerDefense.view.componentHandler.MapGenerator;
+import up.TowerDefense.view.componentHandler.MouseHandler;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import static up.TowerDefense.view.componentHandler.KeyAction.*;
+import static up.TowerDefense.view.componentHandler.KeyAction.Action.*;
 
-import static up.TowerDefense.view.KeyAction.*;
-import static up.TowerDefense.view.KeyAction.Action.*;
-
-public class ScreenPanel extends JPanel implements Runnable, MouseListener {
+public class ScreenPanel extends JPanel implements Runnable{
     //Paramètrages de l'écran
-    public int nbCol = 25;
-    public int nbRow = 16;
-    public int sizeCase = 40;
+    public static int nbCol = 25;
+    public static int nbRow = 16;
+    public static int sizeCase = 40;
 
-    public int windowWidth = sizeCase*nbCol;
-    public int windowHeight = sizeCase*nbRow;
+    public static int windowWidth = sizeCase*nbCol;
+    public static int windowHeight = sizeCase*nbRow;
 
 
-    public int originalTileSize = 8;
-    public int scale = 3;
+    public static int originalTileSize = 8;
+    public static int scale = 3;
 
-    public int tileSize = originalTileSize*scale;
+    public static int tileSize = originalTileSize*scale;
 
     //Paramètrage du monde de jeu
     public static final int MAX_WORLD_COL = 100;
     public static final int MAX_WORLD_ROW= 64;
 
 
-    private Color background = new Color(173,175,192);
-    private Color foreground = new Color(30,35,71);
-    private JLabel title = new JLabel("project Covid Defense");
+    public Color background = new Color(173,175,192);
+    public Color foreground = new Color(30,35,71);
+    public JLabel title = new JLabel("project Covid Defense");
 
-    GameWindow gameWindow;
-    Thread gameThread;
+    protected GameWindow gameWindow;
+    private Thread gameThread;
     public MapGenerator mapGen;
     int FPS = 60; //Frame per second
 
 
-    public int mouseX;
-    public int mouseY;
-    public boolean mousePressed;
-
+    public MouseHandler mouseHandler;
     public Camera camera;
 
     public InputMap inputMap;
@@ -61,9 +60,10 @@ public class ScreenPanel extends JPanel implements Runnable, MouseListener {
 
         camera = new Camera(this);
         setKeyBinding();
+        mouseHandler = new MouseHandler(this);
 
         this.setDoubleBuffered(true);
-        this.addMouseListener(this);
+        this.addMouseListener(mouseHandler);
 
         this.setFocusable(true);
     }
@@ -101,8 +101,8 @@ public class ScreenPanel extends JPanel implements Runnable, MouseListener {
         super.paintComponent(g);
         Graphics2D g2D = (Graphics2D)g;
         mapGen.draw(g2D);
+        camera.draw(g2D);
         mapGen.drawComponents(g2D);
-        //camera.draw(g2D);
         g2D.dispose();
     }
 
@@ -132,40 +132,6 @@ public class ScreenPanel extends JPanel implements Runnable, MouseListener {
         actionMap.put(RIGHT,new KeyAction(MOVE_RIGHT));
         actionMap.put(STOP,new KeyAction(STAY_STILL));
 
-
-    }
-
-    @Override
-    public void mouseClicked(MouseEvent e) {
-        mouseX = e.getX()/sizeCase;
-        mouseY = e.getY()/sizeCase ;
-        mousePressed = true;
-        System.out.println(e.getX()+ " "+ e.getY());
-        /*try {
-            mapGen.addObstacle(mouseX, mouseY);
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }*/
-    }
-
-    @Override
-    public void mousePressed(MouseEvent e) {
-        mousePressed =false;
-    }
-
-    @Override
-    public void mouseReleased(MouseEvent e) {
-        mousePressed = false;
-    }
-
-    @Override
-    public void mouseEntered(MouseEvent e) {
-        mousePressed = false;
-    }
-
-    @Override
-    public void mouseExited(MouseEvent e) {
-        mousePressed = false;
     }
 
 }

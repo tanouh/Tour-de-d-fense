@@ -1,4 +1,4 @@
-package up.TowerDefense.view;
+package up.TowerDefense.view.componentHandler;
 
 
 import javax.imageio.ImageIO;

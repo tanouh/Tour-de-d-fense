@@ -1,8 +1,6 @@
 package up.TowerDefense.model.object;
 
-import up.TowerDefense.model.game.Player;
-
-import java.awt.image.BufferedImage;
+import up.TowerDefense.model.game.Game;
 
 public class PlaceableObstacle extends DestructibleObstacle{
     protected double buyingCost;
@@ -18,7 +16,7 @@ public class PlaceableObstacle extends DestructibleObstacle{
      * Remboursement de la valeur de l'obstacle après sa destruction
      */
     public void refundTower(){
-        Player.getPlayer().setCredits(refundValue);
+        Game.setCredits(refundValue);
     }
 
     /**

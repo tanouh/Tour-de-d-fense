@@ -1,4 +1,4 @@
-package up.TowerDefense.view;
+package up.TowerDefense.view.componentHandler;
 
 
 import up.TowerDefense.model.game.StaticFunctions;
@@ -6,13 +6,14 @@ import up.TowerDefense.model.map.Board;
 import up.TowerDefense.model.map.Tile;
 import up.TowerDefense.model.object.PlaceableObstacle;
 import up.TowerDefense.model.object.TowerTest;
+import up.TowerDefense.view.mainComponent.ScreenPanel;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
-import static up.TowerDefense.view.ScreenPanel.*;
-import static up.TowerDefense.view.TileDisplayManager.*;
+import static up.TowerDefense.view.mainComponent.ScreenPanel.*;
+import static up.TowerDefense.view.componentHandler.TileDisplayManager.*;
 import static up.TowerDefense.model.object.Obstacle.*;
 
 /**
@@ -77,6 +78,7 @@ public class MapGenerator {
         }catch(Exception e){
             e.printStackTrace();
         }
+        gameBoard.getTile(30,30).setOccupier(new TowerTest(30,30));
     }
 
     /**
@@ -163,15 +165,28 @@ public class MapGenerator {
      * Dessine les objets sur la carte au fur et à mesure où ils sont créés
      * @param g
      */
-    public void drawComponents(Graphics g){
+    public void drawComponents(Graphics2D g){
         for (PlaceableObstacle ob : obstaclesList ){
-            g.drawImage(ob.getImage(),(int) ob.position.x*tileSize, (int) ob.position.y*tileSize, tileSize*2, tileSize*2, null);
+            int posX = (int) ob.position.x*tileSize;
+            int posY = (int) ob.position.y*tileSize;
+
+            int screenX = posX - screenPanel.camera.worldX + screenPanel.camera.screenX;
+            int screenY = posY - screenPanel.camera.worldY + screenPanel.camera.screenY;
+
+            /*
+            padding  = screenX et screenY
+            posX compris dans [worldX-padding, worldX+ padding]
+            posY compris dans [worldY-padding, worldY+ padding]
+             */
+            if (
+                    posX > screenPanel.camera.worldX - screenPanel.camera.screenX &&
+                    posX < screenPanel.camera.worldX + screenPanel.camera.screenX &&
+                    posY > screenPanel.camera.worldY - screenPanel.camera.screenY &&
+                    posY < screenPanel.camera.worldY + screenPanel.camera.screenY
+            )
+                g.drawImage(ob.getImage(),screenX, screenY, tileSize*2, tileSize*2, null);
         }
-
-
     }
-
-
     /*
      * Pour les test: vérifier la disponibilité des cases en position
      * (x,y) , (x,y+1), (x+1,y) , (x+1,y)

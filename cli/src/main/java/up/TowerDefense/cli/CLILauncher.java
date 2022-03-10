@@ -1,7 +1,6 @@
 package up.TowerDefense.cli;
 
-import up.TowerDefense.view.*;
-import javax.swing.*;
+import up.TowerDefense.view.mainComponent.GameWindow;
 
 public class CLILauncher {
 
