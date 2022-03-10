@@ -1,8 +1,10 @@
-package up.TowerDefense.view;
+package up.TowerDefense.view.componentHandler;
 
+
+import up.TowerDefense.view.mainComponent.ScreenPanel;
 
 import java.awt.*;
-import static up.TowerDefense.view.ScreenPanel.*;
+import static up.TowerDefense.view.mainComponent.ScreenPanel.*;
 
 public class Camera {
     private ScreenPanel screenPanel;

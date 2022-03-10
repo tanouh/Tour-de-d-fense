@@ -1,4 +1,6 @@
-package up.TowerDefense.view;
+package up.TowerDefense.view.mainComponent;
+
+import up.TowerDefense.view.secondaryComponent.Button;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;

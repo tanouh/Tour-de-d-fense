@@ -1,4 +1,7 @@
-package up.TowerDefense.view;
+package up.TowerDefense.view.mainComponent;
+
+import up.TowerDefense.view.secondaryComponent.Button;
+import up.TowerDefense.view.secondaryComponent.Slider;
 
 import javax.swing.*;
 import java.awt.*;

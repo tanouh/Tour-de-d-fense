@@ -1,16 +1,18 @@
-package up.TowerDefense.view;
+package up.TowerDefense.view.mainComponent;
+
+import up.TowerDefense.view.componentHandler.Camera;
+import up.TowerDefense.view.componentHandler.KeyAction;
+import up.TowerDefense.view.componentHandler.MapGenerator;
+import up.TowerDefense.view.componentHandler.MouseHandler;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import static up.TowerDefense.view.componentHandler.KeyAction.*;
+import static up.TowerDefense.view.componentHandler.KeyAction.Action.*;
 
-import static up.TowerDefense.view.KeyAction.*;
-import static up.TowerDefense.view.KeyAction.Action.*;
-
-public class ScreenPanel extends JPanel implements Runnable, MouseListener {
+public class ScreenPanel extends JPanel implements Runnable{
     //Paramètrages de l'écran
     public static int nbCol = 25;
     public static int nbRow = 16;
@@ -31,19 +33,16 @@ public class ScreenPanel extends JPanel implements Runnable, MouseListener {
 
 
     public Color background = new Color(173,175,192);
-    private Color foreground = new Color(30,35,71);
-    private JLabel title = new JLabel("project Covid Defense");
+    public Color foreground = new Color(30,35,71);
+    public JLabel title = new JLabel("project Covid Defense");
 
-    GameWindow gameWindow;
-    Thread gameThread;
+    protected GameWindow gameWindow;
+    private Thread gameThread;
     public MapGenerator mapGen;
     int FPS = 60; //Frame per second
 
 
-    public int mouseX;
-    public int mouseY;
-    public boolean mousePressed;
-
+    public MouseHandler mouseHandler;
     public Camera camera;
 
     public InputMap inputMap;
@@ -61,9 +60,10 @@ public class ScreenPanel extends JPanel implements Runnable, MouseListener {
 
         camera = new Camera(this);
         setKeyBinding();
+        mouseHandler = new MouseHandler(this);
 
         this.setDoubleBuffered(true);
-        this.addMouseListener(this);
+        this.addMouseListener(mouseHandler);
 
         this.setFocusable(true);
     }
@@ -132,59 +132,6 @@ public class ScreenPanel extends JPanel implements Runnable, MouseListener {
         actionMap.put(RIGHT,new KeyAction(MOVE_RIGHT));
         actionMap.put(STOP,new KeyAction(STAY_STILL));
 
-
-    }
-
-    @Override
-    public void mouseClicked(MouseEvent e) {
-        /*mouseX = e.getX()/sizeCase;
-        mouseY = e.getY()/sizeCase ;*/
-        mousePressed = true;
-
-        /*try {
-            mapGen.addObstacle(mouseX, mouseY);
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }*/
-
-        /*à revoir
-         */
-        int x  = e.getX();
-        int y = e.getY();
-        if(x < windowWidth/2) {
-            mouseX = (camera.worldX - x/tileSize)/tileSize;
-        }
-        else{
-            mouseX = (camera.worldX + x/tileSize)/tileSize;
-        }
-        if(y < windowHeight/2) {
-            mouseY = (camera.worldY - y/tileSize)/tileSize;
-        }
-        else{
-            mouseY = (camera.worldY + y/tileSize)/tileSize;
-        }
-        System.out.println(mouseX+ " "+mouseY);
-    }
-
-
-    @Override
-    public void mousePressed(MouseEvent e) {
-        mousePressed =false;
-    }
-
-    @Override
-    public void mouseReleased(MouseEvent e) {
-        mousePressed = false;
-    }
-
-    @Override
-    public void mouseEntered(MouseEvent e) {
-        mousePressed = false;
-    }
-
-    @Override
-    public void mouseExited(MouseEvent e) {
-        mousePressed = false;
     }
 
 }

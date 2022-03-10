@@ -1,4 +1,4 @@
-package up.TowerDefense.view;
+package up.TowerDefense.view.componentHandler;
 
 
 import up.TowerDefense.model.game.StaticFunctions;
@@ -6,13 +6,14 @@ import up.TowerDefense.model.map.Board;
 import up.TowerDefense.model.map.Tile;
 import up.TowerDefense.model.object.PlaceableObstacle;
 import up.TowerDefense.model.object.TowerTest;
+import up.TowerDefense.view.mainComponent.ScreenPanel;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
-import static up.TowerDefense.view.ScreenPanel.*;
-import static up.TowerDefense.view.TileDisplayManager.*;
+import static up.TowerDefense.view.mainComponent.ScreenPanel.*;
+import static up.TowerDefense.view.componentHandler.TileDisplayManager.*;
 import static up.TowerDefense.model.object.Obstacle.*;
 
 /**

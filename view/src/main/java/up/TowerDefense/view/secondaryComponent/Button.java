@@ -1,6 +1,9 @@
-package up.TowerDefense.view;
+package up.TowerDefense.view.secondaryComponent;
 
-import up.TowerDefense.model.game.Game;
+import up.TowerDefense.view.mainComponent.GamePanel;
+import up.TowerDefense.view.mainComponent.GameWindow;
+import up.TowerDefense.view.mainComponent.HomePanel;
+import up.TowerDefense.view.mainComponent.OptionPanel;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;

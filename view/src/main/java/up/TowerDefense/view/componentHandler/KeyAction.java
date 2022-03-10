@@ -1,4 +1,4 @@
-package up.TowerDefense.view;
+package up.TowerDefense.view.componentHandler;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -15,7 +15,7 @@ public class KeyAction extends AbstractAction {
     public static String RIGHT = "MOVE RIGHT";
     public static String STOP = "STAY STILL";
 
-    enum Action {
+    public enum Action {
         MOVE_UP, MOVE_DOWN, MOVE_LEFT,MOVE_RIGHT,STAY_STILL
     }
 

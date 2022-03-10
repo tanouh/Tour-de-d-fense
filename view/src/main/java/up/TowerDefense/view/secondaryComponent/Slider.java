@@ -1,4 +1,4 @@
-package up.TowerDefense.view;
+package up.TowerDefense.view.secondaryComponent;
 
 import javax.swing.*;
 import java.awt.*;
