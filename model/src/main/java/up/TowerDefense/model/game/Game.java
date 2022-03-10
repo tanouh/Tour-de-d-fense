@@ -61,7 +61,7 @@ public class Game {
     }
 
     public static void setCredits(double deltaCredits) {
-        Game.credits += credits;
+        Game.credits += deltaCredits;
     }
 
     public static void setLives(int deltaLives) {

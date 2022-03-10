@@ -217,6 +217,8 @@ public class MapGenerator {
             case 4:
                 obstacle = new Wall(posX, posY);
                 break;
+            default :
+                return;
         }
         if(gameBoard.addObstacle(obstacle, posX, posY)){
             obstaclesList.add(obstacle);
