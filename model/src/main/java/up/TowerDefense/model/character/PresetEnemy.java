@@ -1,7 +1,7 @@
 package up.TowerDefense.model.character;
 
 public class PresetEnemy {
-	
+	public final String imgName;
 	/**
 	 * Correspond au nombre de coins rapportes une fois l'enemy mort.
 	 */
@@ -65,7 +65,8 @@ public class PresetEnemy {
 	 * @param size indique la taille de l'enemy par rapport a une case
 	 * @param resistance indique la resistance de l'enemy contre une tour
 	 */
-	public PresetEnemy(int maxHealth, float speed, int coins, float agressiveness_degree, float attackspeed, float dammage, boolean suicid, float size, float resistance) {
+	public PresetEnemy(int maxHealth, float speed, int coins, float agressiveness_degree, float attackspeed, float dammage,
+						 boolean suicid, float size, float resistance,String imgName) {
 		this.maxHealth = maxHealth;
 		this.setSpeed(speed);
 		this.setCoins_value(coins);
@@ -76,6 +77,7 @@ public class PresetEnemy {
 		this.size = size;
 		this.currentHealth = maxHealth;
 		this.resistance = resistance;
+		this.imgName = imgName;
 	}
 	
 	/**
@@ -95,7 +97,7 @@ public class PresetEnemy {
 	 * @return Renvoie un objet PresetEnemy contenant toute ces informations afin de creer l'enemy
 	 */
 	public static PresetEnemy Covid() {
-		return new PresetEnemy(100,1.25f,30,5.00f, 1.00f, 100.00f, false, 0.5f, 1.00f);
+		return new PresetEnemy(100,1.25f,30,5.00f, 1.00f, 100.00f, false, 0.5f, 1.00f,"/null.png");
 	}
 
 	/**
@@ -115,7 +117,7 @@ public class PresetEnemy {
 	 * @return Renvoie un objet PresetEnemy contenant toute ces informations afin de creer l'enemy
 	 */
 	public static PresetEnemy Bacterium() {
-		return new PresetEnemy(100, 1.25f, 15, 1.00f, 1.00f, 10.00f, false, 0.5f, 1.00f);
+		return new PresetEnemy(100, 1.25f, 15, 1.00f, 1.00f, 10.00f, false, 0.5f, 1.00f, "/bacterium.jpg");
 	}
 	
 	/**
@@ -135,7 +137,7 @@ public class PresetEnemy {
 	 * @return Renvoie un objet PresetEnemy contenant toute ces informations afin de creer l'enemy
 	 */
 	public static PresetEnemy Virus() {
-		return new PresetEnemy(100, 1.00f, 20, 1.50f, 1.00f, 15.00f, false, 0.5f, 1.25f);
+		return new PresetEnemy(100, 1.00f, 20, 1.50f, 1.00f, 15.00f, false, 0.5f, 1.25f,"/null.png");
 	}
 
 	/**
@@ -155,7 +157,7 @@ public class PresetEnemy {
 	 * @return Renvoie un objet PresetEnemy contenant toute ces informations afin de creer l'enemy
 	 */
 	public static PresetEnemy Fungus() {
-		return new PresetEnemy(100, 0.5f, 5, 1.75f, 1.00f, 5.00f, false, 0.75f, 1.75f);
+		return new PresetEnemy(100, 0.5f, 5, 1.75f, 1.00f, 5.00f, false, 0.75f, 1.75f,"/null.png");
 	}
 	
 	/**
@@ -175,7 +177,7 @@ public class PresetEnemy {
 	 * @return Renvoie un objet PresetEnemy contenant toute ces informations afin de creer l'enemy
 	 */
 	public static PresetEnemy Parasite() {
-		return new PresetEnemy(100, 1.5f, 40, 1.25f, 1.00f, 20.00f, false, 0.5f, 0.75f);
+		return new PresetEnemy(100, 1.5f, 40, 1.25f, 1.00f, 20.00f, false, 0.5f, 0.75f,"/null.png");
 	}
 	
 	public float getSize() {

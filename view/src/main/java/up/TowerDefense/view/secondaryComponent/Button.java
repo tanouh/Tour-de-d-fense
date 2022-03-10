@@ -1,5 +1,7 @@
 package up.TowerDefense.view.secondaryComponent;
 
+import up.TowerDefense.model.game.Game;
+import up.TowerDefense.model.object.TowerTest;
 import up.TowerDefense.view.mainComponent.GamePanel;
 import up.TowerDefense.view.mainComponent.GameWindow;
 import up.TowerDefense.view.mainComponent.HomePanel;
@@ -17,7 +19,8 @@ public class Button extends JButton {
         super();
     }
 
-    public void startButton(GameWindow gameWindow){
+    public void startButton(GameWindow gameWindow, int numberWaves, int backgroundMusic,
+                            int gameSound, int gameSpeed){
         JLabel start = new JLabel("Demarrer", JLabel.CENTER);
         start.setForeground(background);
         start.setFont(new Font("Bernard MT Condensed",Font.PLAIN, 20));
@@ -25,7 +28,8 @@ public class Button extends JButton {
         this.setBackground(foreground);
         this.setPreferredSize(new Dimension(200, gameWindow.getHeight()/10));
         this.addActionListener(event -> {
-            GamePanel gamePanel = new GamePanel(gameWindow);
+            GamePanel gamePanel = new GamePanel(gameWindow, numberWaves,
+                    backgroundMusic, gameSound, gameSpeed);
             gameWindow.getContentPane().removeAll();
             gameWindow.getContentPane().add(gamePanel);
             gameWindow.getContentPane().revalidate();
@@ -85,7 +89,7 @@ public class Button extends JButton {
             int backgroundMusic = optionPanel.getBackgroundMusic().getValue();
             int gameSound = optionPanel.getGameSound().getValue();
             int gameSpeed = optionPanel.getGameSpeed().getValue();
-            gamePanel.applyOptions(backgroundMusic, gameSound, gameSpeed);
+            gamePanel.getGame().applyOptions(backgroundMusic, gameSound, gameSpeed);
             gameWindow.getContentPane().removeAll();
             gameWindow.getContentPane().add(gamePanel);
             gameWindow.getContentPane().revalidate();
@@ -94,7 +98,7 @@ public class Button extends JButton {
     }
 
     public void abandonButton(GameWindow gameWindow){
-        //Game.reset();
+        Game.reset();
         JLabel abandon = new JLabel("Abandonner");
         this.setBackground(foreground);
         abandon.setForeground(background);
@@ -107,8 +111,8 @@ public class Button extends JButton {
         });
     }
 
-    public void sideMenuButton(String type){
-        JLabel typeTower = new JLabel(type);
+    public void sideMenuButton(int typeObstacle){
+        JLabel typeTower = new JLabel(Game.getListTowerTypes()[typeObstacle]);
         typeTower.setForeground(foreground);
         typeTower.setFont(new Font("Bernard MT Condensed", Font.PLAIN, 16));
         typeTower.setHorizontalAlignment(JLabel.CENTER);
@@ -118,7 +122,7 @@ public class Button extends JButton {
         this.setBackground(background);
         this.setForeground(foreground);
         this.addActionListener(event -> {
-
+            Game.setCurrentlyPlacing(typeObstacle);
         });
     }
 }

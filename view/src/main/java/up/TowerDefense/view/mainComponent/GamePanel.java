@@ -21,15 +21,10 @@ public class GamePanel extends JPanel {
     private Color background = new Color(173,175,192);
     private Color foreground = new Color(30,35,71);
 
-    //stockage des options choisies (stockage dans une List ?) :
-    private int backgroundMusic = 5;
-    private int gameSound = 5;
-    private int gameSpeed = 2;
-    //...
-
-    public GamePanel(GameWindow gameWindow){
+    public GamePanel(GameWindow gameWindow, int numberWaves, int backgroundMusic,
+                     int gameSound, int gameSpeed){
         this.gameWindow = gameWindow;
-        this.game = game;
+        this.game = new Game(numberWaves, backgroundMusic, gameSound, gameSpeed);
 
         this.setLayout(new BorderLayout());
 
@@ -80,11 +75,11 @@ public class GamePanel extends JPanel {
         Button towerType3 = new Button();
         Button towerType4 = new Button();
         Button wall = new Button();
-        towerType1.sideMenuButton("TourTest");
-        towerType2.sideMenuButton("Tour anti-champi");
-        towerType3.sideMenuButton("Leucocyte T");
-        towerType4.sideMenuButton("Anticorps");
-        wall.sideMenuButton("Mur");
+        towerType1.sideMenuButton(0); //TourTest
+        towerType2.sideMenuButton(1); //Tour anti-champi
+        towerType3.sideMenuButton(2); //Leucocyte T"
+        towerType4.sideMenuButton(3); //Anticorps
+        wall.sideMenuButton(4); //Mur
         listTower.add(towerType1);
         listTower.add(towerType2);
         listTower.add(towerType3);
@@ -101,9 +96,5 @@ public class GamePanel extends JPanel {
         sideMenu.add(footerSideMenu, BorderLayout.SOUTH);
     }
 
-    public void applyOptions(int backgroundMusic, int gameSound, int gameSpeed){
-        this.backgroundMusic = backgroundMusic;
-        this.gameSound = gameSound;
-        this.gameSpeed = gameSpeed;
-    }
+    public Game getGame(){ return this.game; }
 }

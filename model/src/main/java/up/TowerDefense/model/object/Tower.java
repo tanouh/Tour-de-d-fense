@@ -38,7 +38,7 @@ public abstract class Tower extends PlaceableObstacle{
     protected final static int MAX_LEVEL = 5 ; //à déterminer
     
     /**
-     * Represente le co�t de l'amelioration.
+     * Represente le cout de l'amelioration.
      */
     protected double upgradeCost;
     

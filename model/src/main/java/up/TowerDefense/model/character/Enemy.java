@@ -5,7 +5,7 @@ import up.TowerDefense.model.object.DestructibleObstacle;
 import up.TowerDefense.model.object.Tower;
 import up.TowerDefense.model.object.Obstacle;
 
-public abstract class Enemy extends Character implements Movable{
+public abstract class Enemy extends Personnage implements Movable{
 	
 	/**
 	 * Correspond au nombre de coins rapportes une fois l'enemy mort.
@@ -73,7 +73,7 @@ public abstract class Enemy extends Character implements Movable{
 	 * @param position Definit la position de l'enemy
 	 */
 	public Enemy(PresetEnemy presetEnemy, Position position) {
-		super(position, presetEnemy.getSize(), presetEnemy.getResistance(), presetEnemy.getMaxHealth(), presetEnemy.getSpeed());
+		super(position, presetEnemy.getSize(), presetEnemy.getResistance(), presetEnemy.getMaxHealth(), presetEnemy.getSpeed(), presetEnemy.imgName);
 		this.coins_value = presetEnemy.getCoins();
 		this.agressiveness_degree = presetEnemy.getAgressiv_Degree();
 		this.attackspeed = presetEnemy.getAgressiv_Degree();
@@ -91,9 +91,9 @@ public abstract class Enemy extends Character implements Movable{
 	}
 	
 	/**
-	 * L'ennemi attaque un allié "target".
+	 * L'ennemi attaque un alliï¿½ "target".
 	 * 
-	 * @param target Represente l'allié cible de l'ennemi
+	 * @param target Represente l'alliï¿½ cible de l'ennemi
 	 */
 	public void attackAlly(Ally target) {
 		target.setlifePoint_current(target.getlifePoint_current()-(int)(this.damage/target.getResistance()));
@@ -102,7 +102,7 @@ public abstract class Enemy extends Character implements Movable{
 	/**
 	 * L'enemy soigne un autre enemy "target".
 	 * 
-	 * @param target Represente l'enemy soigné par l'enemy courant.
+	 * @param target Represente l'enemy soignï¿½ par l'enemy courant.
 	 */
 	private void heal(Enemy target) {
 		target.setlifePoint_current(target.getlifePoint_current()+2);
@@ -119,4 +119,5 @@ public abstract class Enemy extends Character implements Movable{
 	public void setAgressiv_degree(int newdegree) {
 		this.agressiveness_degree = newdegree;
 	}
+	public abstract Enemy copy();
 }

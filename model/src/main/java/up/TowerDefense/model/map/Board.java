@@ -1,8 +1,11 @@
 package up.TowerDefense.model.map;
+import up.TowerDefense.model.game.Game;
 import up.TowerDefense.model.object.Obstacle;
 import up.TowerDefense.model.object.PlaceableObstacle;
 import up.TowerDefense.model.object.Position;
 import up.TowerDefense.model.object.TowerTest;
+
+import java.sql.SQLOutput;
 
 public class Board {
     private Tile [][]  tiles;
@@ -50,12 +53,13 @@ public class Board {
           où on rencontre d'autres problèmes liés à ça après
          */
 
-        System.out.println(posX+" "+ posY);
-        if (getTile(posY, posX).isEmpty ){
+        if (getTile(posY, posX).isEmpty && obstacle.getBuyingCost() <= Game.getCredits()){
             setOccupier(obstacle, posY, posX);
+            Game.setCredits(-obstacle.getBuyingCost());
             return true;
         }else{
-            throw new Exception("Action denied");
+//            throw new Exception("Action denied");
+            return false;
         }
     }
 }
