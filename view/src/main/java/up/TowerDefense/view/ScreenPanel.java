@@ -12,25 +12,25 @@ import static up.TowerDefense.view.KeyAction.Action.*;
 
 public class ScreenPanel extends JPanel implements Runnable, MouseListener {
     //Paramètrages de l'écran
-    public int nbCol = 25;
-    public int nbRow = 16;
-    public int sizeCase = 40;
+    public static int nbCol = 25;
+    public static int nbRow = 16;
+    public static int sizeCase = 40;
 
-    public int windowWidth = sizeCase*nbCol;
-    public int windowHeight = sizeCase*nbRow;
+    public static int windowWidth = sizeCase*nbCol;
+    public static int windowHeight = sizeCase*nbRow;
 
 
-    public int originalTileSize = 8;
-    public int scale = 3;
+    public static int originalTileSize = 8;
+    public static int scale = 3;
 
-    public int tileSize = originalTileSize*scale;
+    public static int tileSize = originalTileSize*scale;
 
     //Paramètrage du monde de jeu
     public static final int MAX_WORLD_COL = 100;
     public static final int MAX_WORLD_ROW= 64;
 
 
-    private Color background = new Color(173,175,192);
+    public Color background = new Color(173,175,192);
     private Color foreground = new Color(30,35,71);
     private JLabel title = new JLabel("project Covid Defense");
 
@@ -102,7 +102,7 @@ public class ScreenPanel extends JPanel implements Runnable, MouseListener {
         Graphics2D g2D = (Graphics2D)g;
         mapGen.draw(g2D);
         mapGen.drawComponents(g2D);
-        //camera.draw(g2D);
+        camera.draw(g2D);
         g2D.dispose();
     }
 
@@ -137,16 +137,35 @@ public class ScreenPanel extends JPanel implements Runnable, MouseListener {
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        mouseX = e.getX()/sizeCase;
-        mouseY = e.getY()/sizeCase ;
+        /*mouseX = e.getX()/sizeCase;
+        mouseY = e.getY()/sizeCase ;*/
         mousePressed = true;
-        System.out.println(e.getX()+ " "+ e.getY());
+
         /*try {
             mapGen.addObstacle(mouseX, mouseY);
         } catch (Exception ex) {
             ex.printStackTrace();
         }*/
+
+        /*à revoir
+         */
+        int x  = e.getX();
+        int y = e.getY();
+        if(x < windowWidth/2) {
+            mouseX = (camera.worldX - x/tileSize)/tileSize;
+        }
+        else{
+            mouseX = (camera.worldX + x/tileSize)/tileSize;
+        }
+        if(y < windowHeight/2) {
+            mouseY = (camera.worldY - y/tileSize)/tileSize;
+        }
+        else{
+            mouseY = (camera.worldY + y/tileSize)/tileSize;
+        }
+        System.out.println(mouseX+ " "+mouseY);
     }
+
 
     @Override
     public void mousePressed(MouseEvent e) {

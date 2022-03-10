@@ -1,7 +1,8 @@
 package up.TowerDefense.view;
 
-import static up.TowerDefense.view.Camera.Direction.*;
 
+import java.awt.*;
+import static up.TowerDefense.view.ScreenPanel.*;
 
 public class Camera {
     private ScreenPanel screenPanel;
@@ -17,14 +18,8 @@ public class Camera {
     public int speed;
     public int screenX;
     public int screenY;
-    public Direction dir;
 
     public static boolean upPressed, downPressed, leftPressed, rightPressed;
-
-
-    public enum Direction{
-        UP,DOWN,LEFT,RIGHT;
-    }
 
 
     public Camera(ScreenPanel screenPanel){
@@ -34,10 +29,11 @@ public class Camera {
 
     private void setDefaultValues(){
         // On décide de diviser par deux pour que la caméra soit toujours centrée
-        screenX = screenPanel.windowWidth/2;
-        screenY= screenPanel.windowHeight/2;
-        speed = 5;
-        dir = Direction.UP;
+        worldX = (MAX_WORLD_COL/2)* screenPanel.tileSize;
+        worldY = (MAX_WORLD_ROW/2)* screenPanel.tileSize;
+        screenX = windowWidth/2;
+        screenY= windowHeight/2;
+        speed = tileSize;
     }
 
 
@@ -46,21 +42,31 @@ public class Camera {
      */
     public void update(){
         if(upPressed){
-            worldY-=speed;
-            dir = UP;
+            if (worldY-(speed+windowHeight/2) >=0)
+                worldY-=speed;
         }
         else if(downPressed) {
-            worldY += speed;
-            dir = DOWN;
-
+            if (worldY+ (speed+windowHeight/2) <= MAX_WORLD_ROW*tileSize)
+                worldY += speed;
         }else if(leftPressed){
-            worldX-=speed;
-            dir = LEFT;
+            if (worldX-(speed+windowWidth/2) >=0)
+                worldX-=speed;
         }
         else if(rightPressed){
-            worldX+=speed;
-            dir = RIGHT;
+            if (worldX+(speed+windowWidth /2) <= MAX_WORLD_COL* tileSize)
+                worldX+=speed;
         }
     }
+
+    /*
+    Dessin(provisoire) pas vraiment important, mais qui aidera juste à visualiser
+    le déplacement de la caméra
+     */
+    public void draw (Graphics2D g){
+        g.setColor(screenPanel.background);
+        g.fillRect(screenX,screenY, screenPanel.tileSize, screenPanel.tileSize);
+    }
+
+
 }
 
