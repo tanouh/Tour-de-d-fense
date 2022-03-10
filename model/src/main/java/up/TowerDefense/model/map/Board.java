@@ -45,8 +45,13 @@ public class Board {
      * @param posY
      */
     public boolean addObstacle (PlaceableObstacle obstacle, int posX, int posY) throws Exception {
+        /*
+         fixme : voir s'il n'y a pas moyen d'éviter le switch entre posX et posY ici au cas
+          où on rencontre d'autres problèmes liés à ça après
+         */
+
         if (getTile(posY, posX).isEmpty ){
-            setOccupier(obstacle, posX, posY);
+            setOccupier(obstacle, posY, posX);
             return true;
         }else{
             throw new Exception("Action denied");
