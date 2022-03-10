@@ -167,7 +167,24 @@ public class MapGenerator {
      */
     public void drawComponents(Graphics2D g){
         for (PlaceableObstacle ob : obstaclesList ){
-            g.drawImage(ob.getImage(),(int) ob.position.x*tileSize, (int) ob.position.y*tileSize, tileSize*2, tileSize*2, null);
+            int posX = (int) ob.position.x*tileSize;
+            int posY = (int) ob.position.y*tileSize;
+
+            int screenX = posX - screenPanel.camera.worldX + screenPanel.camera.screenX;
+            int screenY = posY - screenPanel.camera.worldY + screenPanel.camera.screenY;
+
+            /*
+            padding  = screenX et screenY
+            posX compris dans [worldX-padding, worldX+ padding]
+            posY compris dans [worldY-padding, worldY+ padding]
+             */
+            if (
+                    posX > screenPanel.camera.worldX - screenPanel.camera.screenX &&
+                    posX < screenPanel.camera.worldX + screenPanel.camera.screenX &&
+                    posY > screenPanel.camera.worldY - screenPanel.camera.screenY &&
+                    posY < screenPanel.camera.worldY + screenPanel.camera.screenY
+            )
+                g.drawImage(ob.getImage(),screenX, screenY, tileSize*2, tileSize*2, null);
         }
     }
     /*
@@ -184,7 +201,6 @@ public class MapGenerator {
         PlaceableObstacle obstacle = new TowerTest(posX, posY);
 
         if(gameBoard.addObstacle(obstacle, posX, posY)){
-            System.out.println("true");
             obstaclesList.add(obstacle);
         }
     }
