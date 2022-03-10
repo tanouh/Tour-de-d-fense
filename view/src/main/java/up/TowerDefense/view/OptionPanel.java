@@ -8,8 +8,12 @@ public class OptionPanel extends JPanel {
     private JPanel body = new JPanel();
     private Color background = new Color(173,175,192);
     private Color foreground = new Color(30,35,71);
+    private Slider numberWaves = null;
+    private Slider backgroundMusic = null;
+    private Slider gameSound = null;
+    private Slider gameSpeed = null;
 
-    public OptionPanel(GameWindow gameWindow, JPanel returnPanel){
+    public OptionPanel(GameWindow gameWindow, HomePanel homePanel, GamePanel gamePanel, JPanel returnPanel){
         this.setLayout(new BorderLayout());
         this.add(title, BorderLayout.NORTH);
         this.add(body, BorderLayout.CENTER);
@@ -23,17 +27,25 @@ public class OptionPanel extends JPanel {
         title.setVerticalAlignment(JLabel.CENTER);
 
         Button applyOptions = new Button();
-        applyOptions.applyButton(gameWindow, returnPanel);
-
+        if (homePanel != null) {
+            applyOptions.applyButtonInHome(gameWindow, this, homePanel);
+        }else{
+            applyOptions.applyButtonInGame(gameWindow, this, gamePanel);
+        }
         body.setLayout(new BoxLayout(body, BoxLayout.Y_AXIS));
         body.add(Box.createVerticalGlue());
-        new Slider(body, "Nombre de vagues", 5);
-        new Slider(body, "Musique", 10);
-        new Slider(body, "Son du jeu", 10);
-        new Slider(body, "Vitesse de jeu", 3);
+        if (returnPanel instanceof OptionPanel) {
+            numberWaves = new Slider(body, "Nombre de vagues", 5);
+        }
+        backgroundMusic = new Slider(body, "Musique", 10);
+        gameSound = new Slider(body, "Son du jeu", 10);
+        gameSpeed = new Slider(body, "Vitesse de jeu", 3);
         body.add(applyOptions);
         body.add(Box.createVerticalGlue());
-
-
     }
+
+    public Slider getNumberWaves(){ return numberWaves; }
+    public Slider getBackgroundMusic(){ return backgroundMusic; }
+    public Slider getGameSound(){ return gameSound; }
+    public Slider getGameSpeed(){ return gameSpeed; }
 }

@@ -11,15 +11,21 @@ public class Game {
     private static Board board = new Board();
 //    private static int wavesLeft;
 
-    private static Game instance = null;
+    /**
+     * inutile ?
+     */
+//    private static Game instance = null;
+//
+//    public static Game getPlayer(){
+//        if( instance == null){
+//            instance = new Game();
+//        }
+//        return instance;
+//    }
 
-    public static Game getPlayer(){
-        if( instance == null){
-            instance = new Game();
-        }
-        return instance;
+    public Game(){
+
     }
-
 
     public static double getCredits() {
         return credits;

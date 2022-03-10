@@ -16,7 +16,7 @@ public class PlaceableObstacle extends DestructibleObstacle{
      * Remboursement de la valeur de l'obstacle après sa destruction
      */
     public void refundTower(){
-        Game.getPlayer().setCredits(refundValue);
+        Game.setCredits(refundValue);
     }
 
     /**
