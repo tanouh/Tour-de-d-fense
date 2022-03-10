@@ -78,6 +78,7 @@ public class MapGenerator {
         }catch(Exception e){
             e.printStackTrace();
         }
+        gameBoard.getTile(30,30).setOccupier(new TowerTest(30,30));
     }
 
     /**
@@ -169,8 +170,6 @@ public class MapGenerator {
             g.drawImage(ob.getImage(),(int) ob.position.x*tileSize, (int) ob.position.y*tileSize, tileSize*2, tileSize*2, null);
         }
     }
-
-
     /*
      * Pour les test: vérifier la disponibilité des cases en position
      * (x,y) , (x,y+1), (x+1,y) , (x+1,y)

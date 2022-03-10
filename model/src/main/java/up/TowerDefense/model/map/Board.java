@@ -6,6 +6,7 @@ import up.TowerDefense.model.object.TowerTest;
 
 public class Board {
     private Tile [][]  tiles;
+    public static Board map;
 
     public Board(){
         map = this;
@@ -19,8 +20,6 @@ public class Board {
     public boolean isEmpty(int x, int y) {return tiles[x][y].isEmpty();}
 
     public boolean isEmpty(Position pos) {return isEmpty((int)pos.x, (int)pos.y);}
-
-    public static Board map;
 
     public void setTile(int x, int y){
         tiles = new Tile[x][y];
