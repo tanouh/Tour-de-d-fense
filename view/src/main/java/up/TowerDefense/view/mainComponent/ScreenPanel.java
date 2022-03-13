@@ -37,6 +37,7 @@ public class ScreenPanel extends JPanel implements Runnable{
     public JLabel title = new JLabel("project Covid Defense");
 
     protected GameWindow gameWindow;
+    protected GamePanel gamePanel;
     private Thread gameThread;
     public MapGenerator mapGen;
     int FPS = 60; //Frame per second
@@ -49,8 +50,9 @@ public class ScreenPanel extends JPanel implements Runnable{
     public ActionMap actionMap;
 
 
-    public ScreenPanel(GameWindow gameWindow){
+    public ScreenPanel(GameWindow gameWindow, GamePanel gamePanel){
         this.gameWindow = gameWindow;
+        this.gamePanel = gamePanel;
 
         mapGen= new MapGenerator(this, "/map3.png"); /*A modifier : ajouter un paramètrage pour l'image*/
 
@@ -77,12 +79,14 @@ public class ScreenPanel extends JPanel implements Runnable{
     public void run() {
         double drawInterval = 1000000000 / FPS;
         double delta = 0;
+        double delta2 = 0;
         long lastTime = System.nanoTime();
         long currentTime;
 
         while (gameThread != null) {
             currentTime = System.nanoTime();
             delta += (currentTime - lastTime) / drawInterval;
+            delta2 += (currentTime - lastTime) / drawInterval;
             lastTime = currentTime;
             if (delta >= 1) {
                 update();
@@ -95,6 +99,7 @@ public class ScreenPanel extends JPanel implements Runnable{
 
     public void update(){
         camera.update();
+        gamePanel.updateHeader();
     }
 
     public void paintComponent(Graphics g){

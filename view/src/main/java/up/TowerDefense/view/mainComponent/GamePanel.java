@@ -21,6 +21,12 @@ public class GamePanel extends JPanel {
     private Color background = new Color(173,175,192);
     private Color foreground = new Color(30,35,71);
 
+    //JLabel du header :
+    private JLabel wavesLeft;
+    private JLabel enemyLeft;
+    private JLabel creditsLeft;
+    private JLabel lifesLeft;
+
     public GamePanel(GameWindow gameWindow, int numberWaves, int backgroundMusic,
                      int gameSound, int gameSpeed){
         this.gameWindow = gameWindow;
@@ -31,6 +37,7 @@ public class GamePanel extends JPanel {
         this.setHeader();
         this.setSideMenu();
         this.add(header, BorderLayout.NORTH);
+        body.add(new ScreenPanel(gameWindow, this));
         this.add(body, BorderLayout.CENTER);
         this.add(sideMenu, BorderLayout.EAST);
 
@@ -50,11 +57,10 @@ public class GamePanel extends JPanel {
         title.setBorder(new LineBorder(foreground, 2));
         header.add(title);
 
-        Label.addHeaderLabel(header,"Vague numero 0");
-        Label.addHeaderLabel(header, "Ennemis restants : ");
-        Label.addHeaderLabel(header,"Argent : " + Game.getCredits());
-        Label.addHeaderLabel(header, "Vies : " + Game.getLives());
-        body.add(new ScreenPanel(gameWindow));
+        wavesLeft = Label.addHeaderLabel(header,"Vague 0/" + Game.getWavesLeft());
+        enemyLeft = Label.addHeaderLabel(header, "Ennemis restants : ");
+        creditsLeft = Label.addHeaderLabel(header,"Argent : " + Game.getCredits());
+        lifesLeft = Label.addHeaderLabel(header, "Vies : " + Game.getLives());
     }
 
     public void setSideMenu(){
@@ -94,6 +100,13 @@ public class GamePanel extends JPanel {
         footerSideMenu.setBorder(new LineBorder(foreground, 2));
         footerSideMenu.add(optionMenu, BorderLayout.EAST);
         sideMenu.add(footerSideMenu, BorderLayout.SOUTH);
+    }
+
+    public void updateHeader(){
+        wavesLeft.setText("Vague 0/" + Game.getWavesLeft());
+        enemyLeft.setText("Ennemis restants : ");
+        creditsLeft.setText("Argent : " + Game.getCredits());
+        lifesLeft.setText("Vies : " + Game.getLives());
     }
 
     public Game getGame(){ return this.game; }
