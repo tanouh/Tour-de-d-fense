@@ -66,9 +66,10 @@ public class WaitingScreen extends JPanel{
             this.add(nextInfo, BorderLayout.EAST);
         }
 
-//        this.infoPanel.removeAll();
-//        this.remove(infoPanel);
-//        this.add(new InfoPanel(currentInfo), BorderLayout.CENTER);
+        this.infoPanel.removeAll();
+        this.remove(infoPanel);
+        infoPanel = new InfoPanel(currentInfo);
+        this.add(infoPanel, BorderLayout.CENTER);
         this.repaint();
         this.revalidate();
     }
