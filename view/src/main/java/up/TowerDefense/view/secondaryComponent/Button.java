@@ -2,14 +2,12 @@ package up.TowerDefense.view.secondaryComponent;
 
 import up.TowerDefense.model.game.Game;
 import up.TowerDefense.model.object.TowerTest;
-import up.TowerDefense.view.mainComponent.GamePanel;
-import up.TowerDefense.view.mainComponent.GameWindow;
-import up.TowerDefense.view.mainComponent.HomePanel;
-import up.TowerDefense.view.mainComponent.OptionPanel;
+import up.TowerDefense.view.mainComponent.*;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
+import java.util.Optional;
 
 public class Button extends JButton {
     private Color background = new Color(173,175,192);
@@ -19,19 +17,27 @@ public class Button extends JButton {
         super();
     }
 
-    public void startButton(GameWindow gameWindow, int numberWaves, int backgroundMusic,
+    public void startButton(GameWindow gameWindow, JPanel callPanel, int numberWaves, int backgroundMusic,
                             int gameSound, int gameSpeed){
         JLabel start = new JLabel("Demarrer", JLabel.CENTER);
         start.setForeground(background);
         start.setFont(new Font("Bernard MT Condensed",Font.PLAIN, 20));
         this.add(start);
-        this.setBackground(foreground);
+        JPanel nextScreen;
+        if (callPanel instanceof HomePanel){
+            this.setBackground(foreground);
+            nextScreen = new WaitingScreen(gameWindow, numberWaves,
+                    backgroundMusic, gameSound, gameSpeed);
+        }
+        else {
+            this.setBackground(Color.GRAY);
+            this.setEnabled(false);
+            nextScreen = new GamePanel(gameWindow, numberWaves, backgroundMusic, gameSound, gameSpeed);
+        }
         this.setPreferredSize(new Dimension(200, gameWindow.getHeight()/10));
         this.addActionListener(event -> {
-            GamePanel gamePanel = new GamePanel(gameWindow, numberWaves,
-                    backgroundMusic, gameSound, gameSpeed);
             gameWindow.getContentPane().removeAll();
-            gameWindow.getContentPane().add(gamePanel);
+            gameWindow.getContentPane().add(nextScreen);
             gameWindow.getContentPane().revalidate();
             gameWindow.getContentPane().repaint();
         });
@@ -59,6 +65,33 @@ public class Button extends JButton {
             gameWindow.getContentPane().add(optionPanel);
             gameWindow.getContentPane().revalidate();
             gameWindow.getContentPane().repaint();
+        });
+    }
+
+    public void lastInfoButton(WaitingScreen waitingScreen, int currentInfo){
+        JLabel lastInfo = new JLabel("Precedent");
+        lastInfo.setForeground(background);
+        lastInfo.setFont(new Font("Bernard MT Condensed",Font.PLAIN, 20));
+        this.add(lastInfo);
+        this.setBackground(foreground);
+        this.addActionListener(event -> {
+            waitingScreen.setCurrentInfo(currentInfo-1);
+            waitingScreen.refreshInfo();
+        });
+    }
+
+    public void nextInfoButton(WaitingScreen waitingScreen, int currentInfo, boolean lastInfoReached){
+        JLabel nextInfo = new JLabel("Suivant");
+        nextInfo.setForeground(background);
+        nextInfo.setFont(new Font("Bernard MT Condensed",Font.PLAIN, 20));
+        this.add(nextInfo);
+        this.setBackground(foreground);
+        this.addActionListener(event -> {
+            if (currentInfo == 4 && !lastInfoReached) {
+                waitingScreen.lastInfoReached();
+            }
+            waitingScreen.setCurrentInfo(currentInfo+1);
+            waitingScreen.refreshInfo();
         });
     }
 

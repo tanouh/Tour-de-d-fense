@@ -5,6 +5,7 @@ import up.TowerDefense.view.secondaryComponent.Button;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
+import java.util.Optional;
 
 public class HomePanel extends JPanel{
     private JLabel title = new JLabel("project Covid Defense");
@@ -28,7 +29,7 @@ public class HomePanel extends JPanel{
     public HomePanel(GameWindow gameWindow){
         gameWindow.setTitle("project Covid Defense");
 
-        startGame.startButton(gameWindow, numberWaves, backgroundMusic, gameSound, gameSpeed);
+        startGame.startButton(gameWindow, this, numberWaves, backgroundMusic, gameSound, gameSpeed);
         leaveGame.leaveButton(gameWindow.getWidth(), gameWindow.getHeight());
         options.optionButton(gameWindow, this, null, this);
 

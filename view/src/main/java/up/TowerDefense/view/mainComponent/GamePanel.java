@@ -1,6 +1,7 @@
 package up.TowerDefense.view.mainComponent;
 
 import up.TowerDefense.model.game.Game;
+import up.TowerDefense.view.componentHandler.MapGenerator;
 import up.TowerDefense.view.secondaryComponent.Button;
 import up.TowerDefense.view.secondaryComponent.Label;
 
