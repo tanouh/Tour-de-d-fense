@@ -17,7 +17,6 @@ public class WaitingScreen extends JPanel{
 
     private int currentInfo = 1;
     private int totalInfo = 5;
-    private boolean lastInfoReached = false;
 
     private int numberWaves;
     private int backgroundMusic;
@@ -34,14 +33,7 @@ public class WaitingScreen extends JPanel{
         this.gameSound = gameSound;
         this.gameSpeed = gameSpeed;
 
-        JLabel start = new JLabel("Demarrer", JLabel.CENTER);
-        start.setForeground(background);
-        start.setFont(new Font("Bernard MT Condensed",Font.PLAIN, 20));
-        startGame.add(start);
-        startGame.setBackground(Color.GRAY);
-        startGame.setPreferredSize(new Dimension(200, gameWindow.getHeight()/10));
-        startGame.setEnabled(false);
-        startGame.setBackground(Color.GRAY);
+        startGame.startButton(gameWindow, this, numberWaves, backgroundMusic, gameSound, gameSpeed);
         this.refreshInfo();
         this.add(startGame, BorderLayout.SOUTH);
     }
@@ -62,7 +54,7 @@ public class WaitingScreen extends JPanel{
             this.add(lastInfo, BorderLayout.WEST);
         }
         if (currentInfo < totalInfo){
-            nextInfo.nextInfoButton(this, currentInfo, lastInfoReached);
+            nextInfo.nextInfoButton(this, currentInfo);
             this.add(nextInfo, BorderLayout.EAST);
         }
 
@@ -76,14 +68,5 @@ public class WaitingScreen extends JPanel{
 
     public void setCurrentInfo(int currentInfo){
         this.currentInfo = currentInfo;;
-    }
-
-    public void lastInfoReached(){
-        this.remove(startGame);
-        startGame.startButton(gameWindow, this, numberWaves, backgroundMusic, gameSound, gameSpeed);
-        startGame.setBackground(foreground);
-        startGame.setEnabled(true);
-        this.add(startGame, BorderLayout.SOUTH);
-        lastInfoReached = true;
     }
 }

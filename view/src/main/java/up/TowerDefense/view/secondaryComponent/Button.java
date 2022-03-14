@@ -23,19 +23,17 @@ public class Button extends JButton {
         start.setForeground(background);
         start.setFont(new Font("Bernard MT Condensed",Font.PLAIN, 20));
         this.add(start);
-        JPanel nextScreen;
-        if (callPanel instanceof HomePanel){
-            this.setBackground(foreground);
-            nextScreen = new WaitingScreen(gameWindow, numberWaves,
-                    backgroundMusic, gameSound, gameSpeed);
-        }
-        else {
-            this.setBackground(Color.GRAY);
-            this.setEnabled(false);
-            nextScreen = new GamePanel(gameWindow, numberWaves, backgroundMusic, gameSound, gameSpeed);
-        }
+        this.setBackground(foreground);
         this.setPreferredSize(new Dimension(200, gameWindow.getHeight()/10));
         this.addActionListener(event -> {
+            JPanel nextScreen;
+            if (callPanel instanceof HomePanel){
+                nextScreen = new WaitingScreen(gameWindow, numberWaves,
+                        backgroundMusic, gameSound, gameSpeed);
+            }
+            else {
+                nextScreen = new GamePanel(gameWindow, numberWaves, backgroundMusic, gameSound, gameSpeed);
+            }
             gameWindow.getContentPane().removeAll();
             gameWindow.getContentPane().add(nextScreen);
             gameWindow.getContentPane().revalidate();
@@ -80,16 +78,13 @@ public class Button extends JButton {
         });
     }
 
-    public void nextInfoButton(WaitingScreen waitingScreen, int currentInfo, boolean lastInfoReached){
+    public void nextInfoButton(WaitingScreen waitingScreen, int currentInfo){
         JLabel nextInfo = new JLabel("Suivant");
         nextInfo.setForeground(background);
         nextInfo.setFont(new Font("Bernard MT Condensed",Font.PLAIN, 20));
         this.add(nextInfo);
         this.setBackground(foreground);
         this.addActionListener(event -> {
-            if (currentInfo == 4 && !lastInfoReached) {
-                waitingScreen.lastInfoReached();
-            }
             waitingScreen.setCurrentInfo(currentInfo+1);
             waitingScreen.refreshInfo();
         });
