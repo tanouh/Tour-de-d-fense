@@ -1,5 +1,6 @@
 package up.TowerDefense.view.mainComponent;
 
+import up.TowerDefense.model.game.Game;
 import up.TowerDefense.view.componentHandler.Camera;
 import up.TowerDefense.view.componentHandler.KeyAction;
 import up.TowerDefense.view.componentHandler.MapGenerator;
@@ -38,7 +39,8 @@ public class ScreenPanel extends JPanel implements Runnable{
 
     protected GameWindow gameWindow;
     protected GamePanel gamePanel;
-    private Thread gameThread;
+    private Thread gameThread = null;
+    public boolean paused = false;
     public MapGenerator mapGen;
     int FPS = 60; //Frame per second
 
@@ -53,6 +55,7 @@ public class ScreenPanel extends JPanel implements Runnable{
     public ScreenPanel(GameWindow gameWindow, GamePanel gamePanel){
         this.gameWindow = gameWindow;
         this.gamePanel = gamePanel;
+        KeyAction.setScreenPanel(this);
 
         mapGen= new MapGenerator(this, "/map3.png"); /*A modifier : ajouter un paramètrage pour l'image*/
 
@@ -75,6 +78,12 @@ public class ScreenPanel extends JPanel implements Runnable{
         gameThread.start();
     }
 
+    public void setPaused(boolean paused){
+        this.paused = paused;
+    }
+
+    public boolean isPaused(){ return paused;}
+
     @Override
     public void run() {
         double drawInterval = 1000000000 / FPS;
@@ -84,6 +93,7 @@ public class ScreenPanel extends JPanel implements Runnable{
         long currentTime;
 
         while (gameThread != null) {
+            if (paused) continue;
             currentTime = System.nanoTime();
             delta += (currentTime - lastTime) / drawInterval;
             delta2 += (currentTime - lastTime) / drawInterval;
@@ -122,9 +132,11 @@ public class ScreenPanel extends JPanel implements Runnable{
         inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_DOWN,0,false),DOWN);
         inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_LEFT,0,false),LEFT);
         inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_RIGHT,0,false),RIGHT);
+        inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_P,0,false),PAUSE);
+
 
         //Equivalent à keyReleased
-        inputMap.put(KeyStroke.getKeyStroke( KeyEvent.VK_UP,0,true),STOP);
+        inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_UP,0,true),STOP);
         inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_DOWN,0,true),STOP);
         inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_LEFT,0,true),STOP);
         inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_RIGHT,0,true),STOP);
@@ -135,6 +147,8 @@ public class ScreenPanel extends JPanel implements Runnable{
         actionMap.put(LEFT,new KeyAction(MOVE_LEFT));
         actionMap.put(RIGHT,new KeyAction(MOVE_RIGHT));
         actionMap.put(STOP,new KeyAction(STAY_STILL));
+        actionMap.put(PAUSE,new KeyAction(PAUSE_GAME));
+
 
     }
 

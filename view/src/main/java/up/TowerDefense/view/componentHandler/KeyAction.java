@@ -1,5 +1,8 @@
 package up.TowerDefense.view.componentHandler;
 
+import up.TowerDefense.model.game.Game;
+import up.TowerDefense.view.mainComponent.ScreenPanel;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 
@@ -14,9 +17,15 @@ public class KeyAction extends AbstractAction {
     public static String LEFT = "MOVE LEFT";
     public static String RIGHT = "MOVE RIGHT";
     public static String STOP = "STAY STILL";
+    public static String PAUSE = "PAUSE GAME";
+    private static ScreenPanel screenPanel;
+
+    public static void setScreenPanel(ScreenPanel screenP){
+        screenPanel = screenP;
+    }
 
     public enum Action {
-        MOVE_UP, MOVE_DOWN, MOVE_LEFT,MOVE_RIGHT,STAY_STILL
+        MOVE_UP, MOVE_DOWN, MOVE_LEFT,MOVE_RIGHT,STAY_STILL,PAUSE_GAME
     }
 
     Action action;
@@ -28,6 +37,10 @@ public class KeyAction extends AbstractAction {
     @Override
     public void actionPerformed(ActionEvent e) {
         switch (action){
+            case PAUSE_GAME:
+                if (!screenPanel.isPaused()) screenPanel.setPaused(true);
+                else screenPanel.setPaused(false);
+                break;
             case MOVE_UP:
                 Camera.upPressed = true;
 

@@ -26,6 +26,7 @@ public class MouseHandler implements MouseListener {
 
     @Override
     public void mouseClicked(MouseEvent e) {
+        if (screenPanel.isPaused()) return;
         mousePressed = true;
         int x  = e.getX();
         int y = e.getY();
