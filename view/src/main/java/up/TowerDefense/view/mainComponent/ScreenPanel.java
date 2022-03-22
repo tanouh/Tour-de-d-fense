@@ -88,7 +88,6 @@ public class ScreenPanel extends JPanel implements Runnable{
     public void run() {
         double drawInterval = 1000000000 / FPS;
         double delta = 0;
-        double delta2 = 0;
         long lastTime = System.nanoTime();
         long currentTime;
 
@@ -96,7 +95,6 @@ public class ScreenPanel extends JPanel implements Runnable{
             if (paused) continue;
             currentTime = System.nanoTime();
             delta += (currentTime - lastTime) / drawInterval;
-            delta2 += (currentTime - lastTime) / drawInterval;
             lastTime = currentTime;
             if (delta >= 1) {
                 update();
@@ -110,6 +108,8 @@ public class ScreenPanel extends JPanel implements Runnable{
     public void update(){
         camera.update();
         gamePanel.updateHeader();
+
+        mapGen.updateCharacters();
     }
 
     public void paintComponent(Graphics g){

@@ -1,5 +1,10 @@
 package up.TowerDefense.model.game;
 
+import up.TowerDefense.model.map.Board;
+import up.TowerDefense.model.map.Tile;
+import up.TowerDefense.model.object.DestructibleObstacle;
+import up.TowerDefense.model.object.Position;
+
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -24,5 +29,45 @@ public class StaticFunctions {
             e.printStackTrace();
         }
         return img;
+    }
+
+
+
+    /**************   LES FONCTIONS RELIEES A LA CARTE  ****************/
+
+    /**
+     * Détecte les tours aux environs du personnage
+     * @param src la position du personnage
+     * @param range sa portée
+     * @param board la carte de jeu
+     * @return
+     */
+    public static Position findTower(Position src, int range, Board board){
+        int posX = (int)src.x;
+        int posY = (int)src.y;
+        for (int i = - range ; i != 0 && i < range+1  ; i++){
+           for (int j = -range ; j !=0 && j < range +1 ; j++){
+               if(check_Tower(board, posX + i, posY +j))
+                   return board.getTile(posX+i, posY+j).getPos();
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Vérifie s'il y a une tour à la position
+     * @param x et @param y de @param board
+     */
+    public static boolean check_Tower(Board board, int x, int y){
+        return  board.getTile(x, y)!= null && board.getTile(x, y).hasATower();
+    }
+
+
+    /**************   LES FONCTIONS DE CALCULS  ****************/
+
+    public static double getDistance(Position a , Position b){
+        return Math.sqrt(
+                Math.pow(Math.abs(a.x-b.x),2) + Math.pow(Math.abs(a.y-b.y),2)
+        );
     }
 }

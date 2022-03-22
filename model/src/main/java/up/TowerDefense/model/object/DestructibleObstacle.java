@@ -46,4 +46,8 @@ public class DestructibleObstacle extends Obstacle{
     public void setCurrentHealth(int currentHealth) {
         this.currentHealth = currentHealth;
     }
+
+    public boolean isATower(){
+        return this.obstacleType == ObsType.TOWER;
+    }
 }

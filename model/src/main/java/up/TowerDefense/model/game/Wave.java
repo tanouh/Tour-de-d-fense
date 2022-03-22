@@ -72,10 +72,10 @@ public class Wave{
                     // puis relance le compteur de spawn
                     EnemySpawn nextEnemySpawn = currentWave.enemies.get(0);
                     if (nextEnemySpawn.quantity-- <= 1)
-                        EnemyList.add(currentWave.enemies.remove(0).enemy.copy()); // on ajoute dans la liste des enemy en cours
+                        EnemyList.add(currentWave.enemies.remove(0).enemy); // on ajoute dans la liste des enemy en cours
                                                                                  // et on le retire de la sous vague en cours
                     else
-                        EnemyList.add(nextEnemySpawn.getEnemy().copy());
+                        EnemyList.add(nextEnemySpawn.getEnemy());
                     timeSinceLastSpawn = 0;
                 }
         }

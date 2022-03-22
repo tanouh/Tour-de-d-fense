@@ -1,5 +1,10 @@
 package up.TowerDefense.model.character;
 
+import up.TowerDefense.model.game.Game;
+import up.TowerDefense.model.game.StaticFunctions;
+import up.TowerDefense.model.map.Board;
+import up.TowerDefense.model.map.Pathfinding;
+import up.TowerDefense.model.map.Tile;
 import up.TowerDefense.model.object.Position;
 import up.TowerDefense.model.object.DestructibleObstacle;
 import up.TowerDefense.model.object.Tower;
@@ -31,7 +36,13 @@ public abstract class Enemy extends Personnage implements Movable{
 	 * Determine si l'enemy est suicidaire ou non (s'il meurt des sa premiere attaque ou pas).
 	 */
 	private boolean suicidal;
-	
+
+	/**
+	 * Détermine le type d'obstacle ciblée par l'ennemi
+	 */
+	private DestructibleObstacle.ObsType target;
+
+
 	/**
 	 * Represente un deplacement de l'enemy vers la gauche en fonction de sa vitesse
 	 */
@@ -79,25 +90,9 @@ public abstract class Enemy extends Personnage implements Movable{
 		this.attackspeed = presetEnemy.getAgressiv_Degree();
 		this.damage = presetEnemy.getDammage();
 		this.suicidal = presetEnemy.isSuicidal();
+		this.target = presetEnemy.getTarget();
 	}
-	
-	/**
-	 * L'ennemi attaque un obstacle destructible "target"
-	 *
-	 * @param target Represente l'obstacle cible de l'ennemi (tour ou autre)
-	 */
-	public void attackObstacle(DestructibleObstacle target) {
-		target.setCurrentHealth(target.getCurrentHealth()-(int)this.damage);
-	}
-	
-	/**
-	 * L'ennemi attaque un alli� "target".
-	 * 
-	 * @param target Represente l'alli� cible de l'ennemi
-	 */
-	public void attackAlly(Ally target) {
-		target.setlifePoint_current(target.getlifePoint_current()-(int)(this.damage/target.getResistance()));
-	}
+
 	
 	/**
 	 * L'enemy soigne un autre enemy "target".
@@ -119,5 +114,49 @@ public abstract class Enemy extends Personnage implements Movable{
 	public void setAgressiv_degree(int newdegree) {
 		this.agressiveness_degree = newdegree;
 	}
-	public abstract Enemy copy();
+	//public abstract Enemy copy();
+
+	/**
+	 * Fonction de mise à jour de la position de l'ennemi
+	 * à chaque fois que l'interface graphique se met à jour cette fonction est appelée
+	 */
+
+	/*
+	* todo : revoir le champ target qui représente la cible de l'ennemi
+	*  (celle ci peut être différente selon le type d'ennemi: soit c'est les tours, soit c'est la cible finale)
+	**/
+	public void update_position(Board board){
+		Position destination = null;
+		if (this.target == DestructibleObstacle.ObsType.TARGET){
+			destination = Game.getBoard().getNearestTargetPosition(this.position);
+		}
+		else {
+			destination = StaticFunctions.findTower(this.position,1,board); //fixme : les enemis n'ont pas de portée?
+		}
+
+		if (destination != null) {
+			Tile [] path = Pathfinding.FindPath(this.position, destination);
+			if (path != null)
+				this.position = path[0].getPos();
+		}
+	}
+
+	/**
+	 * L'ennemi attaque un obstacle destructible "target"
+	 * @param target Represente l'obstacle cible de l'ennemi (tour ou autre)
+	 */
+	public void attackObstacle(DestructibleObstacle target) {
+		target.setCurrentHealth(target.getCurrentHealth()-(int)this.damage);
+	}
+
+	/**
+	 * L'ennemi attaque un alli� "target".
+	 *
+	 * @param target Represente l'alli� cible de l'ennemi
+	 */
+	public void attackAlly(Ally target) {
+		target.setlifePoint_current(target.getlifePoint_current()-(int)(this.damage/target.getResistance()));
+	}
+
+
 }

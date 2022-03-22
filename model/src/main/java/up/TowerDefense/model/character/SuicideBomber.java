@@ -13,9 +13,9 @@ public class SuicideBomber extends Enemy{
     public SuicideBomber(PresetEnemy presetEnemy, Position position) {
         super(presetEnemy, position);
     }
-    @Override
+    /*@Override
     public Enemy copy() {
         return new SuicideBomber(this.presetEnemy, position);
-    }
+    }*/
 
 }

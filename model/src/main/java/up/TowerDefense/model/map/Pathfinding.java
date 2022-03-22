@@ -4,7 +4,7 @@ import java.util.*;
 
 public class Pathfinding {
 
-    Tile[] FindPath(Position startPos, Position targetPos) {
+    public static Tile[] FindPath(Position startPos, Position targetPos) {
         Node startNode = new Node(Board.map.getTile(startPos));
         Node targetNode = new Node(Board.map.getTile(targetPos));
 
@@ -40,7 +40,7 @@ public class Pathfinding {
         return null;
     }
 
-    Tile[] RetracePath(Node startNode, Node endNode) {
+    public static Tile[] RetracePath(Node startNode, Node endNode) {
         List<Node> path = new ArrayList<Node>();
         Node currentNode = endNode;
 
@@ -55,7 +55,7 @@ public class Pathfinding {
         return tilePath;
     }
 
-    int GetDistance(Node nodeA, Node nodeB) {
+    public static int GetDistance(Node nodeA, Node nodeB) {
         int dstX = (int)Math.abs(nodeA.tile.getPos().x - nodeB.tile.getPos().x);
         int dstY = (int)Math.abs(nodeA.tile.getPos().y - nodeB.tile.getPos().y);
 

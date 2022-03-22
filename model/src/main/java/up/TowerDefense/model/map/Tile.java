@@ -1,5 +1,6 @@
 package up.TowerDefense.model.map;
 
+import up.TowerDefense.model.object.DestructibleObstacle;
 import up.TowerDefense.model.object.Obstacle;
 import up.TowerDefense.model.object.PlaceableObstacle;
 import up.TowerDefense.model.object.Position;
@@ -74,6 +75,10 @@ public class Tile {
     }
     public Position getPos(){return pos;}
 
+
+    public boolean hasATower() {
+        return (obstacle instanceof DestructibleObstacle) && ((DestructibleObstacle) obstacle).isATower();
+    }
 }
 
 

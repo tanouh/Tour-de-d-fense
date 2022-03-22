@@ -1,6 +1,8 @@
 package up.TowerDefense.view.componentHandler;
 
 
+import up.TowerDefense.model.character.Enemy;
+import up.TowerDefense.model.character.Personnage;
 import up.TowerDefense.model.game.Game;
 import up.TowerDefense.model.game.StaticFunctions;
 import up.TowerDefense.model.map.Board;
@@ -34,7 +36,7 @@ public class MapGenerator {
     private int nbRow;
 
     public static ArrayList<PlaceableObstacle> obstaclesList = new ArrayList<PlaceableObstacle>();
-    public static ArrayList<Character> charactersList = new ArrayList<Character>();
+    public static ArrayList<Personnage> charactersList = new ArrayList<>();
 
 
     public MapGenerator(ScreenPanel screenPanel, String imagePath){
@@ -68,7 +70,8 @@ public class MapGenerator {
                 while (col < MAX_WORLD_COL){
                     Tile t = new Tile();
                     setUpTile(t,mapTileNum[row][col]);
-                    gameBoard.initTile(row,col,t);
+                    gameBoard.initTile(row,col,t,(mapTileNum[row][col]==2)); //le dernier argument indique si la case est parmi celle
+                                                                            // qui stocke la cible principale
                     col++;
                 }
                 if (col == MAX_WORLD_COL){
@@ -107,15 +110,15 @@ public class MapGenerator {
         for (int i = 0 ; i < rgb.length ; i++){
             for (int j = 0 ; j < rgb[0].length ; j++){
                 if ( rgb[i][j] == NOIR){
-                    mapTileNum[i][j]=0;
+                    mapTileNum[i][j]=0; //Obstacles indestructibles (décor)
                 }else if (rgb[i][j] == JAUNE){
-                    mapTileNum[i][j]=2;
+                    mapTileNum[i][j]=2; // Objectif final
                 }else if (rgb[i][j] == BLEU){
-                    mapTileNum[i][j]=3;
+                    mapTileNum[i][j]=3; // Décor aussi
                 }else if (rgb[i][j] == VERT){
-                    mapTileNum[i][j]=4;
+                    mapTileNum[i][j]=4; // Décor
                 }else if (rgb[i][j]== BLANC){
-                    mapTileNum[i][j]=1;
+                    mapTileNum[i][j]=1; //Routes véhiculables
                 }
             }
         }
@@ -223,6 +226,16 @@ public class MapGenerator {
         if(gameBoard.addObstacle(obstacle, posX, posY)){
             obstaclesList.add(obstacle);
         }
+    }
+
+
+    public void updateCharacters() {
+        for (Personnage c : charactersList){
+            if(c instanceof Enemy){
+                ((Enemy)c).update_position(this.gameBoard);
+            }
+        }
+
     }
 }
 
