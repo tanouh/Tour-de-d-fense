@@ -4,14 +4,16 @@ import up.TowerDefense.model.game.StaticFunctions;
 import up.TowerDefense.model.object.Obstacle;
 import up.TowerDefense.model.object.PlaceableObstacle;
 import up.TowerDefense.model.object.Position;
-import up.TowerDefense.model.object.TowerTest;
 
-import java.sql.SQLOutput;
+import static  up.TowerDefense.model.game.StaticFunctions.*;
+
+
 import java.util.ArrayList;
 
 public class Board {
     private Tile [][]  tiles;
     public static Board map;
+    private int count = 0;
 
     /* Stocke les positions des cases qu'occupent la cible principale*/
     private ArrayList<Position> targetZone = new ArrayList<>();
@@ -42,8 +44,11 @@ public class Board {
 
     public void initTile(int x, int y, Tile tile,boolean isATargetZone ){
         tiles[x][y]= tile;
-        if (isATargetZone)
+        if (isATargetZone){
             targetZone.add(new Position(x,y));
+            count++;
+        }
+
     }
 
     public void setOccupier(Obstacle obstacle, int x, int y){
@@ -78,13 +83,13 @@ public class Board {
      * @param startPos
      * @return
      */
-    public Position getNearestTargetPosition(Position startPos) {
-        double distMin = 0;
+    public Position  getNearestTargetPosition(Position startPos) {
+        double distMin = 100;
         Position res = null;
         for (Position pos : targetZone){
         //todo : fonction de comparaison et calcul de distance
-            if (distMin > StaticFunctions.getDistance(pos,startPos)){
-                distMin = StaticFunctions.getDistance(pos,startPos);
+            if (distMin > getDistance(pos,startPos)){
+                distMin =  getDistance(pos,startPos);
                 res = pos;
             }
         }

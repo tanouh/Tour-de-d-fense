@@ -1,16 +1,17 @@
 package up.TowerDefense.model.character;
 
 import up.TowerDefense.model.game.Game;
-import up.TowerDefense.model.game.StaticFunctions;
+
 import up.TowerDefense.model.map.Board;
-import up.TowerDefense.model.map.Pathfinding;
 import up.TowerDefense.model.map.Tile;
 import up.TowerDefense.model.object.Position;
 import up.TowerDefense.model.object.DestructibleObstacle;
-import up.TowerDefense.model.object.Tower;
-import up.TowerDefense.model.object.Obstacle;
 
-public abstract class Enemy extends Personnage implements Movable{
+import static  up.TowerDefense.model.game.StaticFunctions.*;
+import static  up.TowerDefense.model.map.Pathfinding.*;
+
+
+public class Enemy extends Personnage implements Movable{
 	
 	/**
 	 * Correspond au nombre de coins rapportes une fois l'enemy mort.
@@ -127,17 +128,20 @@ public abstract class Enemy extends Personnage implements Movable{
 	**/
 	public void update_position(Board board){
 		Position destination = null;
-		if (this.target == DestructibleObstacle.ObsType.TARGET){
-			destination = Game.getBoard().getNearestTargetPosition(this.position);
+		if (this.target == DestructibleObstacle.ObsType.TOWER){
+			destination = findTower(this.position,1,board); //fixme : les enemis n'ont pas de portée?
+
 		}
-		else {
-			destination = StaticFunctions.findTower(this.position,1,board); //fixme : les enemis n'ont pas de portée?
+		if(destination == null){
+			destination = Game.getBoard().getNearestTargetPosition(this.position);
 		}
 
 		if (destination != null) {
-			Tile [] path = Pathfinding.FindPath(this.position, destination);
-			if (path != null)
+			Tile [] path = FindPath(this.position, destination);
+			if (path != null){
 				this.position = path[0].getPos();
+
+			}
 		}
 	}
 

@@ -16,13 +16,9 @@ public class Tile {
     protected Position pos;
 
 
-    public Tile (){
-        setDefault();
-    }
-
-    public Tile(Position _pos, Obstacle _obstacle){
+    public Tile(Position _pos){
         pos = _pos;
-        obstacle = _obstacle;
+        setDefault();
     }
 
     public void setDefault(){

@@ -3,11 +3,13 @@ package up.TowerDefense.view.componentHandler;
 
 import up.TowerDefense.model.character.Enemy;
 import up.TowerDefense.model.character.Personnage;
+import up.TowerDefense.model.character.PresetEnemy;
 import up.TowerDefense.model.game.Game;
 import up.TowerDefense.model.game.StaticFunctions;
 import up.TowerDefense.model.map.Board;
 import up.TowerDefense.model.map.Tile;
 import up.TowerDefense.model.object.PlaceableObstacle;
+import up.TowerDefense.model.object.Position;
 import up.TowerDefense.model.object.TowerTest;
 import up.TowerDefense.model.object.Wall;
 import up.TowerDefense.view.mainComponent.ScreenPanel;
@@ -50,12 +52,14 @@ public class MapGenerator {
 
         mapTileNum = new int [nbRow][nbCol];
 
-        this.gameBoard = new Board();
+        this.gameBoard = Game.getBoard();
         gameBoard.setTile(nbRow,nbCol);
 
         tileSize = screenPanel.tileSize;
 
         loadMap();
+        Enemy a = new Enemy(PresetEnemy.Bacterium(), new Position(10,10));
+        charactersList.add(a);
     }
 
     /**
@@ -68,7 +72,7 @@ public class MapGenerator {
             setNumTile();
             while(col < MAX_WORLD_COL && row < MAX_WORLD_ROW){
                 while (col < MAX_WORLD_COL){
-                    Tile t = new Tile();
+                    Tile t = new Tile(new Position(row, col));
                     setUpTile(t,mapTileNum[row][col]);
                     gameBoard.initTile(row,col,t,(mapTileNum[row][col]==2)); //le dernier argument indique si la case est parmi celle
                                                                             // qui stocke la cible principale
@@ -172,26 +176,36 @@ public class MapGenerator {
      */
     public void drawComponents(Graphics2D g){
         for (PlaceableObstacle ob : obstaclesList ){
-            int posX = (int) ob.position.x*tileSize;
-            int posY = (int) ob.position.y*tileSize;
+            drawElementaryComponent(g,ob.position,ob.getImage());
+        }
+        for (Personnage perso : charactersList ){
+            drawElementaryComponent(g,perso.position, perso.getImage());
+        }
+    }
 
-            int screenX = posX - screenPanel.camera.worldX + screenPanel.camera.screenX;
-            int screenY = posY - screenPanel.camera.worldY + screenPanel.camera.screenY;
+    private void drawElementaryComponent(Graphics2D g,Position pos, BufferedImage img ){
+
+        int posX = (int) pos.x*tileSize;
+        int posY = (int) pos.y*tileSize;
+
+        int screenX = posX - screenPanel.camera.worldX + screenPanel.camera.screenX;
+        int screenY = posY - screenPanel.camera.worldY + screenPanel.camera.screenY;
 
             /*
             padding  = screenX et screenY
             posX compris dans [worldX-padding, worldX+ padding]
             posY compris dans [worldY-padding, worldY+ padding]
              */
-            if (
-                    posX > screenPanel.camera.worldX - screenPanel.camera.screenX &&
-                    posX < screenPanel.camera.worldX + screenPanel.camera.screenX &&
-                    posY > screenPanel.camera.worldY - screenPanel.camera.screenY &&
-                    posY < screenPanel.camera.worldY + screenPanel.camera.screenY
-            )
-                g.drawImage(ob.getImage(),screenX, screenY, tileSize*2, tileSize*2, null);
-        }
+        if (
+                posX > screenPanel.camera.worldX - screenPanel.camera.screenX &&
+                        posX < screenPanel.camera.worldX + screenPanel.camera.screenX &&
+                        posY > screenPanel.camera.worldY - screenPanel.camera.screenY &&
+                        posY < screenPanel.camera.worldY + screenPanel.camera.screenY
+        )
+            g.drawImage(img,screenX, screenY, tileSize*2, tileSize*2, null);
     }
+
+
     /*
      * Pour les test: vérifier la disponibilité des cases en position
      * (x,y) , (x,y+1), (x+1,y) , (x+1,y)
