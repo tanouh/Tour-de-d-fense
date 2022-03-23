@@ -2,14 +2,17 @@ package up.TowerDefense.model.object;
 
 import up.TowerDefense.model.game.Game;
 
-public abstract class Tower extends PlaceableObstacle{
+public class Tower extends PlaceableObstacle{
 
 
     //mettre en abstract ?
     public enum Type{
-        TOWERTEST
+        TOWERTEST,
+        ANTI_CHAMPIS,
+        LEUCOCYTE_T,
+        ANTICORPS
         //type de tour
-        //selon les types de tours size peut être prédéfini
+        //selon les types de tours size peut etre predefini
     }
 
     /**
@@ -93,6 +96,22 @@ public abstract class Tower extends PlaceableObstacle{
         this.towerType=twType;
     }
 
+    /**
+     * onstruit une Tour a la position "position" a partir des informations d'un PresetTower
+     * 
+     * @param presetTower Contient toute les informations concernant la Tour notament son prix et les degats qu'elle fait.
+     * @param position Definit la position de la Tour.
+     */
+    public Tower(PresetTower presetTower, Position position) {
+    	super(position.x, position.y, presetTower.getSize(), PresetTower.STARTING_HEALTH, PresetTower.STARTING_HEALTH, ObsType.TOWER, presetTower.price, presetTower.imgName);
+    	this.range = presetTower.getRange();
+    	this.power = presetTower.getPower();
+    	this.upgradeCost = presetTower.getUpgradeCost();
+    	this.reloadTime = presetTower.getReloadTime();
+    	this.lastAttackTime = presetTower.getLastAttackTime();
+    	this.towerType = presetTower.getTowerType();
+    }
+    
     /**
      * Amelioration de la Tour.
      * 

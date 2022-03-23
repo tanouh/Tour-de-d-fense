@@ -3,6 +3,10 @@ package up.TowerDefense.model.character;
 import up.TowerDefense.model.object.DestructibleObstacle;
 
 public class PresetEnemy {
+	
+	/**
+	 * Correspond a la localisation de l'image de l'ennemi par rapport au repertoire courant
+	 */
 	public final String imgName;
 	/**
 	 * Correspond au nombre de coins rapportes une fois l'enemy mort.
