@@ -125,14 +125,6 @@ public class Enemy extends Personnage implements Movable{
 		if(destination == null){
 			destination = Game.getBoard().getNearestTargetPosition(this.position);
 		}
-
-		if (destination != null) {
-			Tile [] path = FindPath(this.position, destination);
-			if (path != null){
-				this.position = path[0].getPos();
-
-			}
-		}
 	}
 
 	/**
