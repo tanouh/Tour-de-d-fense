@@ -98,6 +98,14 @@ public class PresetTower {
      * Definit la Tour TowerTest.
      * Cette Tour aura :
      * 
+     * -Un cout d'achat de 100 coins
+     * -Une distance d'attaque de 5
+     * -Une puissance d'attaque de 2
+     * -Un cout d'amelioration de 200 coins
+     * -Un temps entre chaque attaque de 1000
+     * -Un temps de l'attaque precedente de 0
+     * -Le type TowerTest
+     * -Un affichage determiner par le fichier tour.png
      * 
      * @return Renvoie un objet PresetTower contenant toute ces informations afin de creer la Tour
      */
