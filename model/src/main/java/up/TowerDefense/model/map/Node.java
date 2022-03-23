@@ -1,6 +1,7 @@
 package up.TowerDefense.model.map;
 import up.TowerDefense.model.object.Position;
 import java.util.*;
+
 public class Node {
     Tile tile;
     public int gCost;

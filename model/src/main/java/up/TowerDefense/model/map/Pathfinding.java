@@ -4,7 +4,7 @@ import java.util.*;
 
 public class Pathfinding {
 
-    public static Tile[] FindPath(Position startPos, Position targetPos) {
+    Path FindPath(Position startPos, Position targetPos) {
         Node startNode = new Node(Board.map.getTile(startPos));
         Node targetNode = new Node(Board.map.getTile(targetPos));
 
@@ -13,19 +13,20 @@ public class Pathfinding {
         openSet.add(startNode);
 
         while (openSet.size() > 0) {
+            //Cherchez le meilleur node dans openSet et l'ajouter à closedSet
             Node node = Node.BestNode(openSet);
             openSet.remove(node);
             closedSet.add(node);
 
+            //Casa où node est le final
             if (node == targetNode) return RetracePath(startNode,targetNode);
 
             Node[] neighbours = node.Neighbours();
-            for (int i = 0; i < neighbours.length; i++) {
-                Node neighbour = neighbours[i];
-                if (!neighbour.tile.isEmpty() || closedSet.contains(neighbour)) {
-                    continue;
-                }
+            for (Node neighbour : neighbours) {
+                //Annuler si le voisin est une case bloquée ou déjà traitée
+                if (!neighbour.tile.isEmpty() || closedSet.contains(neighbour)) continue;
 
+                //Calcul du coup de chaque voisin puis ajout du voisin à openSet
                 int newCostToNeighbour = node.gCost + GetDistance(node, neighbour);
                 if (newCostToNeighbour < neighbour.gCost || !openSet.contains(neighbour)) {
                     neighbour.gCost = newCostToNeighbour;
@@ -40,22 +41,24 @@ public class Pathfinding {
         return null;
     }
 
-    public static Tile[] RetracePath(Node startNode, Node endNode) {
+    Path RetracePath(Node startNode, Node endNode) {
         List<Node> path = new ArrayList<Node>();
         Node currentNode = endNode;
-
+        //Partir du endNode et remonter jusqu'au premier
         while (currentNode != startNode) {
             path.add(currentNode);
             currentNode = currentNode.parent;
         }
+        //Inverser la suite pour obtenir une liste de tuiles du début à la fin
         Tile[] tilePath = new Tile[path.size()];
         for(int i = 0; i < tilePath.length; i++){
             tilePath[0] = path.get(tilePath.length - i - 1).tile;
         }
-        return tilePath;
+        return new Path(tilePath);
     }
 
-    public static int GetDistance(Node nodeA, Node nodeB) {
+    //La distance est particulière et considère qu'un déplacement vertical à un coup de 14
+    int GetDistance(Node nodeA, Node nodeB) {
         int dstX = (int)Math.abs(nodeA.tile.getPos().x - nodeB.tile.getPos().x);
         int dstY = (int)Math.abs(nodeA.tile.getPos().y - nodeB.tile.getPos().y);
 
