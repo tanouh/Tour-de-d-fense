@@ -55,7 +55,7 @@ public class GamePanel extends JPanel {
 
         JLabel title = new JLabel("project\nCovid Defense");
         title.setPreferredSize(new Dimension(gameWindow.getWidth()/5, gameWindow.getHeight()/5));
-        title.setFont(new Font("Bernard MT Condensed",Font.BOLD, 20));
+        title.setFont(new Font("Bernard MT Condensed",Font.BOLD, GameWindow.widthScreen/60));
         title.setForeground(foreground);
         title.setHorizontalAlignment(JLabel.CENTER);
         title.setVerticalAlignment(JLabel.CENTER);

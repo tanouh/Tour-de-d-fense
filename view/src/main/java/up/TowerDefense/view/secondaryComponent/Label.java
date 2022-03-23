@@ -1,5 +1,7 @@
 package up.TowerDefense.view.secondaryComponent;
 
+import up.TowerDefense.view.mainComponent.GameWindow;
+
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
@@ -17,7 +19,7 @@ public class Label extends JLabel {
         header.add(label);
         label.setBorder(new LineBorder(foreground, 2));
         label.setForeground(foreground);
-        label.setFont(new Font("Bernard MT Condensed", Font.PLAIN, 16));
+        label.setFont(new Font("Bernard MT Condensed", Font.PLAIN, GameWindow.widthScreen/70));
         label.setHorizontalAlignment(JLabel.CENTER);
         return label;
     }

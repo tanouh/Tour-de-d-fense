@@ -32,7 +32,7 @@ public class InfoPanel extends JPanel {
             e.printStackTrace();
         }
         infoDisplay.setForeground(foreground);
-        infoDisplay.setFont(new Font("Bernard MT Condensed",Font.PLAIN, 20));
+        infoDisplay.setFont(new Font("Bernard MT Condensed",Font.PLAIN, GameWindow.widthScreen/50));
         this.add(infoDisplay);
     }
 }

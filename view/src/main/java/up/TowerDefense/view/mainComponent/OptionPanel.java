@@ -9,6 +9,7 @@ import java.awt.*;
 public class OptionPanel extends JPanel {
     private JLabel title = new JLabel("project Covid Defense");
     private JPanel body = new JPanel();
+    private JPanel footer = new JPanel(new GridLayout(1,2));
     private Color background = new Color(173,175,192);
     private Color foreground = new Color(30,35,71);
     private Slider numberWaves = null;
@@ -24,14 +25,17 @@ public class OptionPanel extends JPanel {
         this.setLayout(new BorderLayout());
         this.add(title, BorderLayout.NORTH);
         this.add(body, BorderLayout.CENTER);
+        this.add(footer, BorderLayout.SOUTH);
         this.setBackground(background);
         body.setBackground(background);
+        footer.setBackground(background);
 
         title.setPreferredSize(new Dimension(gameWindow.getWidth(), gameWindow.getHeight()/5));
-        title.setFont(new Font("Bernard MT Condensed",Font.BOLD, 48));
+        title.setFont(new Font("Bernard MT Condensed",Font.BOLD, GameWindow.widthScreen/30));
         title.setForeground(foreground);
         title.setHorizontalAlignment(JLabel.CENTER);
         title.setVerticalAlignment(JLabel.CENTER);
+        footer.setPreferredSize(new Dimension(GameWindow.widthScreen, GameWindow.heightScreen/10));
 
         Button applyOptions = new Button();
         if (homePanel != null) {
@@ -47,11 +51,11 @@ public class OptionPanel extends JPanel {
         backgroundMusic = new Slider(body, "Musique", 0, 10);
         gameSound = new Slider(body, "Son du jeu", 0,10);
         gameSpeed = new Slider(body, "Vitesse de jeu", 1,3);
-        body.add(applyOptions);
+        footer.add(applyOptions);
         if (gamePanel != null){
             Button abandonButton = new Button();
             abandonButton.abandonButton(gameWindow);
-            body.add(abandonButton);
+            footer.add(abandonButton);
         }
         body.add(Box.createVerticalGlue());
     }

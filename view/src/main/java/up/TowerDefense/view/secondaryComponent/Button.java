@@ -6,6 +6,7 @@ import up.TowerDefense.view.mainComponent.*;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
+import javax.xml.transform.dom.DOMLocator;
 import java.awt.*;
 import java.util.Optional;
 
@@ -26,7 +27,7 @@ public class Button extends JButton {
                             int gameSound, int gameSpeed){
         JLabel start = new JLabel("Demarrer", JLabel.CENTER);
         start.setForeground(background);
-        start.setFont(new Font("Bernard MT Condensed",Font.PLAIN, 20));
+        start.setFont(new Font("Bernard MT Condensed",Font.PLAIN, GameWindow.widthScreen/70));
         this.add(start);
         this.setBackground(foreground);
         this.setPreferredSize(new Dimension(200, gameWindow.getHeight()/10));
@@ -51,7 +52,7 @@ public class Button extends JButton {
      */
     public void leaveButton(int gameWindowWidth, int gameWindowHeight){
         JLabel leave = new JLabel("Quitter", JLabel.CENTER);
-        leave.setFont(new Font("Bernard MT Condensed",Font.PLAIN, 20));
+        leave.setFont(new Font("Bernard MT Condensed",Font.PLAIN, GameWindow.widthScreen/70));
         leave.setForeground(background);
         this.add(leave);
         this.setBackground(foreground);
@@ -65,7 +66,7 @@ public class Button extends JButton {
     public void optionButton(GameWindow gameWindow, HomePanel homePanel, GamePanel gamePanel, JPanel returnPanel){
         JLabel options = new JLabel("Options", JLabel.CENTER);
         options.setForeground(background);
-        options.setFont(new Font("Bernard MT Condensed",Font.PLAIN, 20));
+        options.setFont(new Font("Bernard MT Condensed",Font.PLAIN, GameWindow.widthScreen/70));
         this.add(options);
         this.setBackground(foreground);
         this.addActionListener(event -> {
@@ -83,7 +84,7 @@ public class Button extends JButton {
     public void lastInfoButton(WaitingScreen waitingScreen, int currentInfo){
         JLabel lastInfo = new JLabel("Precedent");
         lastInfo.setForeground(background);
-        lastInfo.setFont(new Font("Bernard MT Condensed",Font.PLAIN, 20));
+        lastInfo.setFont(new Font("Bernard MT Condensed",Font.PLAIN, GameWindow.widthScreen/70));
         this.add(lastInfo);
         this.setBackground(foreground);
         this.addActionListener(event -> {
@@ -98,7 +99,7 @@ public class Button extends JButton {
     public void nextInfoButton(WaitingScreen waitingScreen, int currentInfo){
         JLabel nextInfo = new JLabel("Suivant");
         nextInfo.setForeground(background);
-        nextInfo.setFont(new Font("Bernard MT Condensed",Font.PLAIN, 20));
+        nextInfo.setFont(new Font("Bernard MT Condensed",Font.PLAIN, GameWindow.widthScreen/70));
         this.add(nextInfo);
         this.setBackground(foreground);
         this.addActionListener(event -> {
@@ -115,6 +116,7 @@ public class Button extends JButton {
         JLabel apply = new JLabel("Valider");
         this.setBackground(foreground);
         apply.setForeground(background);
+        apply.setFont(new Font("Bernard MT Condensed", Font.PLAIN, GameWindow.widthScreen/70));
         this.add(apply);
         this.addActionListener(event -> {
             int numberWaves = optionPanel.getNumberWaves().getValue();
@@ -137,6 +139,7 @@ public class Button extends JButton {
         JLabel apply = new JLabel("Valider");
         this.setBackground(foreground);
         apply.setForeground(background);
+        apply.setFont(new Font("Bernard MT Condensed", Font.PLAIN, GameWindow.widthScreen/70));
         this.add(apply);
         this.addActionListener(event -> {
             int backgroundMusic = optionPanel.getBackgroundMusic().getValue();
@@ -158,6 +161,7 @@ public class Button extends JButton {
         JLabel abandon = new JLabel("Abandonner");
         this.setBackground(foreground);
         abandon.setForeground(background);
+        abandon.setFont(new Font("Bernard MT Condensed", Font.PLAIN, GameWindow.widthScreen/70));
         this.add(abandon);
         this.addActionListener(event -> {
             gameWindow.getContentPane().removeAll();
@@ -174,7 +178,7 @@ public class Button extends JButton {
     public void sideMenuButton(int typeObstacle){
         JLabel typeTower = new JLabel(Game.getListTowerTypes()[typeObstacle]);
         typeTower.setForeground(foreground);
-        typeTower.setFont(new Font("Bernard MT Condensed", Font.PLAIN, 16));
+        typeTower.setFont(new Font("Bernard MT Condensed", Font.PLAIN, GameWindow.widthScreen/70));
         typeTower.setHorizontalAlignment(JLabel.CENTER);
         this.setBorder(new LineBorder(foreground, 2));
         this.setHorizontalAlignment(JButton.CENTER);

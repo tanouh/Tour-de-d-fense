@@ -1,5 +1,7 @@
 package up.TowerDefense.view.secondaryComponent;
 
+import up.TowerDefense.view.mainComponent.GameWindow;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -13,7 +15,7 @@ public class Slider extends JSlider {
     public Slider(JPanel container, String text, int minValue, int maxValue){
         super();
         JLabel label = new JLabel(text);
-        label.setFont(new Font("Bernard MT Condensed", Font.PLAIN, 20));
+        label.setFont(new Font("Bernard MT Condensed", Font.PLAIN, GameWindow.widthScreen/60));
         label.setForeground(foreground);
         container.add(label);
         this.setBackground(background);
