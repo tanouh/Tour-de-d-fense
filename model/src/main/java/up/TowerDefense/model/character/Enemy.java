@@ -16,6 +16,16 @@ import static  up.TowerDefense.model.map.Pathfinding.*;
 
 public class Enemy extends Personnage implements Movable{
 	
+	public enum Type{
+		COVID,
+        BACTERIUM,
+        VIRUS,
+        FUNGUS,
+        PARASITE,
+        BOMBER
+        //type d'ennemi
+    }
+	
 	/**
 	 * Correspond au nombre de coins rapportes une fois l'enemy mort.
 	 */
