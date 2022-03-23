@@ -238,15 +238,29 @@ public class MapGenerator {
                 return;
         }
         if(gameBoard.addObstacle(obstacle, posX, posY)){
+            updateCharactersPaths();
             obstaclesList.add(obstacle);
         }
     }
 
-
-    public void updateCharacters() {
+    /**
+     * Mets à jour le chemin suivi par l'enemi, cette fonction est appelée à chaque fois qu'une tour a été placée ou supprimée de la carte
+     */
+    private void updateCharactersPaths() {
         for (Personnage c : charactersList){
             if(c instanceof Enemy){
-                ((Enemy)c).update_position(this.gameBoard);
+                ((Enemy)c).update_paths();
+            }
+        }
+    }
+
+    /**
+     * Actualise la position de l'enemi suivant le chemin qu'il est entrain de suivre
+     */
+    public void updateCharactersPositions() {
+        for (Personnage c : charactersList){
+            if(c instanceof Enemy){
+                ((Enemy)c).update_position();
             }
         }
 

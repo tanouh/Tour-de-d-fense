@@ -3,6 +3,8 @@ package up.TowerDefense.model.character;
 import up.TowerDefense.model.game.Game;
 
 import up.TowerDefense.model.map.Board;
+import up.TowerDefense.model.map.Path;
+import up.TowerDefense.model.map.Pathfinding;
 import up.TowerDefense.model.map.Tile;
 import up.TowerDefense.model.object.Position;
 import up.TowerDefense.model.object.DestructibleObstacle;
@@ -13,6 +15,9 @@ import java.util.Random;
 import static  up.TowerDefense.model.game.StaticFunctions.*;
 import static  up.TowerDefense.model.map.Pathfinding.*;
 
+
+/*TODO Les lignes reliées à path devraient être décommentées lorsque le problème relié à pathfinding sera réglé
+ */
 
 public class Enemy extends Personnage implements Movable{
 	
@@ -56,6 +61,16 @@ public class Enemy extends Personnage implements Movable{
 	 */
 	private DestructibleObstacle.ObsType target;
 
+	/**
+	 * Chemin suivi par l'enemi
+	 */
+	private Path path;
+
+	/**
+	 * Durée depuis laquelle l'enemi vit (ie qu'il est sur le plateau)
+	 */
+	private long lifeTime;
+
 
 	/**
 	 * Represente un deplacement de l'enemy vers la gauche en fonction de sa vitesse
@@ -76,21 +91,7 @@ public class Enemy extends Personnage implements Movable{
 	 * Represente un deplacement de l'enemy vers le bas en fonction de sa vitesse
 	 */
 	private final Position DOWN = new Position(this.getPosition().x, this.getPosition().y - this.getSpeed());
-	
-	/**
-	 * Construit un enemy de taille "size" a la position "position"
-	 * 
-	 * @param position Definit la position de l'ennemy
-	 * @param coins_value Correspond au nombre de coins que rapporte par l'enemy.
-	 * @param agressiv_degree Correspond au degre d'agressivite de l'enemy
-	 * @param size Correspond a la taille de l'enemy
-	 */
-	/*public Enemy(Location position, int coins_value, int agressiv_degree, float size) {
-		super(position, size);
-		this.coins_value = coins_value;
-		this.agressiveness_degree = agressiv_degree;
-	}*/
-	
+
 	/**
 	 * Construit un enemy a la position "position" a partir des informations d'un PresetEnemy
 	 * 
@@ -105,6 +106,7 @@ public class Enemy extends Personnage implements Movable{
 		this.damage = presetEnemy.getDammage();
 		this.suicidal = presetEnemy.isSuicidal();
 		this.target = presetEnemy.getTarget();
+		//this.path = Pathfinding.FindPath(position, Game.getBoard().getNearestTargetPosition(position));
 	}
 	
 	/**
@@ -113,18 +115,16 @@ public class Enemy extends Personnage implements Movable{
 	 */
 
 	/*
-	* TODO : revoir le champ target qui représente la cible de l'ennemi
-	*  (celle ci peut etre differente selon le type d'ennemi: soit c'est les tours, soit c'est la cible finale)
+	* FIXME : problème potentiel : un autre personnage pourrait être situé sur une position
+	*  sur laquelle le personnage doit aller pour une raison lamda , il faudrait mettre des tests
 	**/
-	public void update_position(Board board){
-		Position destination = null;
-		if (this.target == DestructibleObstacle.ObsType.TOWER){
-			destination = findTower(this.position,1,board); //FIXME : les enemis n'ont pas de portee?
+	public void update_position(){
+		//this.position = path.GetPos(System.currentTimeMillis()-lifeTime, this.getSpeed());
+	}
 
-		}
-		if(destination == null){
-			destination = Game.getBoard().getNearestTargetPosition(this.position);
-		}
+
+	public void update_paths(){
+		//this.path = Pathfinding.FindPath(this.position, Game.getBoard().getNearestTargetPosition(position));
 	}
 
 	/**
@@ -205,6 +205,9 @@ public class Enemy extends Personnage implements Movable{
 	/**
 	 * devra permettre d'augmenter une capacite aleatoire a la fin d'une vague
 	 */
+
+	/* fixme : à quoi ça sert de mettre en aléatoire?
+	 */
 	public void nextWaveStat() {
 		Random rd = new Random();
 		int value = rd.nextInt(6);
@@ -250,7 +253,10 @@ public class Enemy extends Personnage implements Movable{
 	public float getDamage() {
 		return this.damage;
 	}
-	
+
+	public void setLifeTime(long lifeTime) {
+		this.lifeTime = lifeTime;
+	}
 	//public abstract Enemy copy();
 
 

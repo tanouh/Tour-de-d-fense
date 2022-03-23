@@ -162,5 +162,5 @@ public abstract class Personnage implements Movable{
 	public void setPosition(Position newPosition) {
 		this.position = newPosition;
 	}
-	
+
 }

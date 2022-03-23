@@ -122,7 +122,7 @@ public class ScreenPanel extends JPanel implements Runnable{
     public void update(){
         camera.update();
         gamePanel.updateHeader();
-        mapGen.updateCharacters();
+        mapGen.updateCharactersPositions();
     }
 
     /**

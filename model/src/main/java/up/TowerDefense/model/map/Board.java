@@ -71,6 +71,7 @@ public class Board {
         if (getTile(posY, posX).isEmpty && obstacle.getBuyingCost() <= Game.getCredits()){
             setOccupier(obstacle, posY, posX);
             Game.setCredits(-obstacle.getBuyingCost());
+            //todo : maj des positions des enemis
             return true;
         }else{
 //            throw new Exception("Action denied");
@@ -87,9 +88,8 @@ public class Board {
         double distMin = 100;
         Position res = null;
         for (Position pos : targetZone){
-        //todo : fonction de comparaison et calcul de distance
-            if (distMin > getDistance(pos,startPos)){
-                distMin =  getDistance(pos,startPos);
+            if (distMin > startPos.Distance(pos)){
+                distMin = startPos.Distance(pos);
                 res = pos;
             }
         }
