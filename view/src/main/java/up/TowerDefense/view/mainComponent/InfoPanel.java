@@ -6,6 +6,8 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.util.Scanner;
 
 public class InfoPanel extends JPanel {
     private Color background = new Color(173,175,192);
@@ -15,37 +17,14 @@ public class InfoPanel extends JPanel {
         this.setBackground(background);
         this.setForeground(foreground);
         JLabel infoDisplay;
-//        switch (currentInfo){
-//            case 1 :
-//                infoDisplay = new JLabel("Information sur les TowerTest");
-//                break;
-//            case 2 :
-//                infoDisplay = new JLabel("Information sur les Tours anti-champis");
-//                break;
-//            case 3 :
-//                infoDisplay = new JLabel("Information sur les Leucocyte T");
-//                break;
-//            case 4 :
-//                infoDisplay = new JLabel("Information sur les Anticorps");
-//                break;
-//            case 5 :
-//                infoDisplay = new JLabel("Information sur les Murs");
-//                break;
-//            default :
-//                infoDisplay = new JLabel("erreur");
-//                break;
-//        }
-        try(BufferedReader br = new BufferedReader(new FileReader("infos.txt")))
-        {
-            String line = br.readLine();
-            for (int i = 0; i<currentInfo; i++){
-                while (line != "*"){
-                    br.readLine();
-                }
-            }
-            infoDisplay = new JLabel(br.readLine());
-        }
-        catch (IOException e) {
+        try{
+            Scanner scanner = new Scanner( new File("view/src/main/resources/infos.txt"));
+            String text = scanner.useDelimiter("\\A").next();
+            scanner.close();
+            String[] info = text.split("[*]");
+            for (int i = 0; i < info.length; i++) System.out.println(info[i]);
+            infoDisplay = new JLabel(info[currentInfo-1]);
+        }catch (IOException e) {
             infoDisplay = new JLabel("An error occurred.");
             e.printStackTrace();
         }
