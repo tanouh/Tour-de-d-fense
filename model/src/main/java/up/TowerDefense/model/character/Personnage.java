@@ -131,6 +131,10 @@ public abstract class Personnage implements Movable{
 		return this.maxHealth;
 	}
 	
+	public void setlifePoint_max(int newlifePoint_max) {
+		this.maxHealth = newlifePoint_max;
+	}
+	
 	public int getlifePoint_current() {
 		return this.currentHealth;
 	}
