@@ -16,6 +16,10 @@ public class OptionPanel extends JPanel {
     private Slider gameSound = null;
     private Slider gameSpeed = null;
 
+    /**
+     * Cree un Panel avec des sliders permettant de seletionner des options de jeu
+     * Ajoute un bouton pour abandonner la partie si ce Panel est appele depuis un GamePanel
+     */
     public OptionPanel(GameWindow gameWindow, HomePanel homePanel, GamePanel gamePanel, JPanel returnPanel){
         this.setLayout(new BorderLayout());
         this.add(title, BorderLayout.NORTH);

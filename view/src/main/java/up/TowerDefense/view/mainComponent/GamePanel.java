@@ -45,6 +45,10 @@ public class GamePanel extends JPanel {
 
     }
 
+    /**
+     * Cree un header qui prend 1/4 de la hauteur de l'ecran
+     * Affiche les statistiques de la partie en cours dans le header
+     */
     public void setHeader(){
         header.setBackground(background);
         header.setBorder(new LineBorder(foreground, 5));
@@ -64,6 +68,10 @@ public class GamePanel extends JPanel {
         lifesLeft = Label.addHeaderLabel(header, "Vies : " + Game.getLives());
     }
 
+    /**
+     * Cree un menu qui prend 1/5 de la largeur de l'ecran
+     * Ajoute des boutons correspondants aux tours que le joueur peut creer
+     */
     public void setSideMenu(){
         sideMenu.setBackground(background);
         sideMenu.setBorder(new LineBorder(foreground, 5));
@@ -103,6 +111,9 @@ public class GamePanel extends JPanel {
         sideMenu.add(footerSideMenu, BorderLayout.SOUTH);
     }
 
+    /**
+     * Met à jour les statistiques de la partie
+     */
     public void updateHeader(){
         wavesLeft.setText("Vague 0/" + Game.getWavesLeft());
         enemyLeft.setText("Ennemis restants : ");

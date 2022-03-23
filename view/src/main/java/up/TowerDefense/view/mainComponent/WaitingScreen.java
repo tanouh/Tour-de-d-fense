@@ -38,6 +38,11 @@ public class WaitingScreen extends JPanel{
         this.add(startGame, BorderLayout.SOUTH);
     }
 
+    /**
+     * Affiche un bouton "precedent" si des infos ont deja ete lues
+     * Affiche un bouton "suivant" si il reste des infos a lire
+     * Cree et affiche l'InfoPanel correpondant à la page actuelle
+     */
     public void refreshInfo(){
         if (lastInfo.getActionListeners().length != 0){
             lastInfo.removeActionListener(lastInfo.getActionListeners()[0]);
@@ -66,6 +71,9 @@ public class WaitingScreen extends JPanel{
         this.revalidate();
     }
 
+    /**
+     * Actualise le numero de la page actuelle
+     */
     public void setCurrentInfo(int currentInfo){
         this.currentInfo = currentInfo;;
     }

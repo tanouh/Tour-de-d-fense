@@ -73,17 +73,28 @@ public class ScreenPanel extends JPanel implements Runnable{
         this.setFocusable(true);
     }
 
+    /**
+     * Lance le Thread
+     */
     public void startThread(){
         gameThread = new Thread(this);
         gameThread.start();
     }
 
+    /**
+     * Met en pause/relance le jeu
+     */
     public void setPaused(boolean paused){
         this.paused = paused;
     }
 
     public boolean isPaused(){ return paused;}
 
+    /**
+     * Definit l'intervalle entre deux update du jeu
+     * Reaffiche le jeu a chaque fois que cet intervalle est
+     * atteint à condition que le jeu ne soit pas en pause
+     */
     @Override
     public void run() {
         double drawInterval = 1000000000 / FPS;
@@ -105,12 +116,18 @@ public class ScreenPanel extends JPanel implements Runnable{
 
     }
 
+    /**
+     * Met a jour tout l'affichage
+     */
     public void update(){
         camera.update();
         gamePanel.updateHeader();
         mapGen.updateCharacters();
     }
 
+    /**
+     * "Dessine" la map sur le ScreenPanel
+     */
     public void paintComponent(Graphics g){
         super.paintComponent(g);
         Graphics2D g2D = (Graphics2D)g;

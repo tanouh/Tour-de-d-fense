@@ -13,6 +13,10 @@ public class InfoPanel extends JPanel {
     private Color background = new Color(173,175,192);
     private Color foreground = new Color(30,35,71);
 
+    /**
+     * Lis le fichier "infos.txt" et affiche la partie des
+     * informations correspondant à la page actuelle
+     */
     public InfoPanel(int currentInfo){
         this.setBackground(background);
         this.setForeground(foreground);
@@ -22,7 +26,6 @@ public class InfoPanel extends JPanel {
             String text = scanner.useDelimiter("\\A").next();
             scanner.close();
             String[] info = text.split("[*]");
-            for (int i = 0; i < info.length; i++) System.out.println(info[i]);
             infoDisplay = new JLabel(info[currentInfo-1]);
         }catch (IOException e) {
             infoDisplay = new JLabel("An error occurred.");

@@ -7,6 +7,9 @@ public class Slider extends JSlider {
     private Color background = new Color(173,175,192);
     private Color foreground = new Color(30,35,71);
 
+    /**
+     * Cree un slider text allant de minValue a maxValue et l'affiche dans container
+     */
     public Slider(JPanel container, String text, int minValue, int maxValue){
         super();
         JLabel label = new JLabel(text);

@@ -7,6 +7,11 @@ import java.awt.*;
 
 public class GameWindow extends JFrame {
 
+    /**
+     * Cree la fenetre de jeu
+     * Fixe sa taille à la taille de l'ecran
+     * Affiche un HomePanel
+     */
     public GameWindow(){
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();

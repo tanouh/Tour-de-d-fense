@@ -17,6 +17,11 @@ public class Button extends JButton {
         super();
     }
 
+    /**
+     * Cree un bouton Demarrer qui :
+     * -affiche un WaitingScreen s'il est appele depuis un HomePanel
+     * -affiche un GamePanel s'il est appele depuis un WaitingScreen
+     */
     public void startButton(GameWindow gameWindow, JPanel callPanel, int numberWaves, int backgroundMusic,
                             int gameSound, int gameSpeed){
         JLabel start = new JLabel("Demarrer", JLabel.CENTER);
@@ -41,6 +46,9 @@ public class Button extends JButton {
         });
     }
 
+    /**
+     * Ajoute un bouton Quitter qui arrete le programme et ferme la fenetre
+     */
     public void leaveButton(int gameWindowWidth, int gameWindowHeight){
         JLabel leave = new JLabel("Quitter", JLabel.CENTER);
         leave.setFont(new Font("Bernard MT Condensed",Font.PLAIN, 20));
@@ -51,6 +59,9 @@ public class Button extends JButton {
         this.addActionListener(event -> System.exit(0));
     }
 
+    /**
+     * Cree un bouton Options qui envoie vers un OptionPanel
+     */
     public void optionButton(GameWindow gameWindow, HomePanel homePanel, GamePanel gamePanel, JPanel returnPanel){
         JLabel options = new JLabel("Options", JLabel.CENTER);
         options.setForeground(background);
@@ -66,6 +77,9 @@ public class Button extends JButton {
         });
     }
 
+    /**
+     * Cree un bouton qui renvoie a la derniere info lue (supposee existante)
+     */
     public void lastInfoButton(WaitingScreen waitingScreen, int currentInfo){
         JLabel lastInfo = new JLabel("Precedent");
         lastInfo.setForeground(background);
@@ -78,6 +92,9 @@ public class Button extends JButton {
         });
     }
 
+    /**
+     * Cree un bouton qui renvoie a la prochaine info a lire (supposee existante)
+     */
     public void nextInfoButton(WaitingScreen waitingScreen, int currentInfo){
         JLabel nextInfo = new JLabel("Suivant");
         nextInfo.setForeground(background);
@@ -90,6 +107,10 @@ public class Button extends JButton {
         });
     }
 
+    /**
+     * Cree un bouton Valider qui applique les choix faits dans le OptionPanel et
+     * affiche le HomePanel
+     */
     public void applyButtonInHome(GameWindow gameWindow, OptionPanel optionPanel, HomePanel homePanel){
         JLabel apply = new JLabel("Valider");
         this.setBackground(foreground);
@@ -108,6 +129,10 @@ public class Button extends JButton {
         });
     }
 
+    /**
+     * Cree un bouton Valider qui applique les choix faits dans le OptionPanel et
+     * affiche le GamePanel
+     */
     public void applyButtonInGame(GameWindow gameWindow, OptionPanel optionPanel, GamePanel gamePanel){
         JLabel apply = new JLabel("Valider");
         this.setBackground(foreground);
@@ -125,6 +150,9 @@ public class Button extends JButton {
         });
     }
 
+    /**
+     * Cree un bouton Abandonner qui renvoie le joueur a un HomePanel
+     */
     public void abandonButton(GameWindow gameWindow){
         Game.reset();
         JLabel abandon = new JLabel("Abandonner");
@@ -139,6 +167,10 @@ public class Button extends JButton {
         });
     }
 
+    /**
+     * Cree un bouton pour un certain type d'obstacle qui
+     * permet de placer un obstacle de cette sorte
+     */
     public void sideMenuButton(int typeObstacle){
         JLabel typeTower = new JLabel(Game.getListTowerTypes()[typeObstacle]);
         typeTower.setForeground(foreground);

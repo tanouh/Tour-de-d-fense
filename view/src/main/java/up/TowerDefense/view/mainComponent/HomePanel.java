@@ -63,6 +63,10 @@ public class HomePanel extends JPanel{
         footer.add(options, BorderLayout.EAST);
     }
 
+    /**
+     *Modifie les parametres de jeu en fonction
+     * des choix faits dans le OptionPanel
+     */
     public void applyOptions(int numberWaves, int backgroundMusic, int gameSound, int gameSpeed){
         if (numberWaves != 0){
             this.numberWaves = numberWaves;

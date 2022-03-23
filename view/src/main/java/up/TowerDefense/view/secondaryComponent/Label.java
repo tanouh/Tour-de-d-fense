@@ -9,6 +9,9 @@ public class Label extends JLabel {
     private static Color foreground = new Color(30,35,71);
 
 
+    /**
+     * Affiche une certaine statistique dans une case dans le header
+     */
     public static JLabel addHeaderLabel(JPanel header, String text){
         JLabel label = new JLabel(text);
         header.add(label);
