@@ -107,7 +107,7 @@ public class Path {
             if (Math.abs(angle - Math.PI/2f) < 0.1f)    //Si les 3 points sont alignés, créer un chemin droit
                 subs[i] = new SubStraight(path[i].pos,path[i+1].pos,path[i+2].pos);
             else                                        //Sinon créer un arc
-                subs[i] = new SubArc(path[i].pos,path[i+1].pos,path[i+2].pos);
+                subs[i] = new SubStraight(path[i].pos,path[i+1].pos,path[i+2].pos); // !!!!! Test sans arc !!!!!!
             length += subs[i].Distance();
         }
     }
