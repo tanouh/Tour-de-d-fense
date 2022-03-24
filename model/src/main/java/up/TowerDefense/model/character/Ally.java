@@ -8,7 +8,7 @@ public class Ally extends Personnage implements Movable{
 	/**
 	 * Definit la taille constante de chaque allie a la moitier d'une case (0.50)
 	 */
-	private static final float SIZE = 0.50f;
+	private static final int SIZE = 1;
 	
 	/**
 	 * Definit les d�gats constants de chaque allie a 10.

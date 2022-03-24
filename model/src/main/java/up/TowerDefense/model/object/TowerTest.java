@@ -3,7 +3,7 @@ package up.TowerDefense.model.object;
 
 public class TowerTest extends Tower{
 
-    private static final int newSize = 3;
+    private static final int newSize = 2;
     // variables à déterminer
     private static double newBuyingCost=100;
     private static double startingRange = 5.0;

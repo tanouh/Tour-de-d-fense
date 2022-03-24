@@ -27,9 +27,9 @@ public abstract class Personnage implements Movable{
 	private float speed;
 	
 	/**
-	 * taille du personnage par rapport � une case
-	 */
-	private float size;
+	 * taille du personnage par rapport � une case (coefficient multiplicatif)
+	 * */
+	private int size;
 	
 	/**
 	 * resistance du personnage 
@@ -65,7 +65,7 @@ public abstract class Personnage implements Movable{
 	 * @param maxHealth definit la vie maximale du personnage
 	 * @param speed definit la vitesse du personnage
 	 */
-	public Personnage(Position position, float size, float resistance, int maxHealth, float speed, String imgName) {
+	public Personnage(Position position, int size, float resistance, int maxHealth, float speed, String imgName) {
 		this.position = position;
 		this.maxHealth = maxHealth;
 		this.currentHealth = this.maxHealth;
@@ -80,7 +80,7 @@ public abstract class Personnage implements Movable{
 	 * 
 	 * @param size definit la taille du personnage
 	 */
-	public Personnage(float size) {
+	public Personnage(int size) {
 		this(new Position(0.00,0.00), size, 1.00f, 100, 1.00f, "/null.png");
 	}
 	
@@ -88,7 +88,7 @@ public abstract class Personnage implements Movable{
 	 * Construit un personnage de taille 0.50 (par rapport � 1 case) � la position par defaut 0.00
 	 */
 	public Personnage() {
-		this(new Position(0.00,0.00), 0.50f, 1.00f, 100, 1.00f, "/null.png");
+		this(new Position(0.00,0.00), 1, 1.00f, 100, 1.00f, "/null.png");
 	}
 	
 	public final void moveTo(Position position) {
@@ -123,7 +123,7 @@ public abstract class Personnage implements Movable{
 		return this.speed;
 	}
 	
-	public float getSize() {
+	public int getSize() {
 		return this.size;
 	}
 	
@@ -143,7 +143,7 @@ public abstract class Personnage implements Movable{
         return image;
     }
 	
-	public void setSize(float newSize) {
+	public void setSize(int newSize) {
 		this.size = newSize;
 	}
 	

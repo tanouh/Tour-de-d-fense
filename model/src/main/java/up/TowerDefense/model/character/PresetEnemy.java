@@ -52,7 +52,7 @@ public class PresetEnemy {
 	/**
 	 * taille du personnage par rapport à une case
 	 */
-	private float size;
+	private int size;
 	
 	/**
 	 * resistance du personnage 
@@ -83,7 +83,7 @@ public class PresetEnemy {
 	 * @param resistance indique la resistance de l'enemy contre une tour
 	 */
 	public PresetEnemy(int maxHealth, float speed, int coins, float agressiveness_degree, float attackspeed, float dammage,
-					   boolean suicid, float size, float resistance, String imgName , DestructibleObstacle.ObsType target_obs, Enemy.Type EnemyType) {
+					   boolean suicid, int size, float resistance, String imgName , DestructibleObstacle.ObsType target_obs, Enemy.Type EnemyType) {
 		this.maxHealth = maxHealth;
 		this.setSpeed(speed);
 		this.setCoins_value(coins);
@@ -116,7 +116,7 @@ public class PresetEnemy {
 	 * @return Renvoie un objet PresetEnemy contenant toute ces informations afin de creer l'enemy
 	 */
 	public static PresetEnemy Covid() {
-		return new PresetEnemy(100,1.25f,30,5.00f, 1.00f, 100.00f, false, 0.5f, 1.00f,"/null.png", DestructibleObstacle.ObsType.TARGET, Enemy.Type.COVID);
+		return new PresetEnemy(100,1.25f,30,5.00f, 1.00f, 100.00f, false, 1, 1.00f,"/null.png", DestructibleObstacle.ObsType.TARGET, Enemy.Type.COVID);
 	}
 
 	/**
@@ -136,7 +136,7 @@ public class PresetEnemy {
 	 * @return Renvoie un objet PresetEnemy contenant toute ces informations afin de creer l'enemy
 	 */
 	public static PresetEnemy Bacterium() {
-		return new PresetEnemy(100, 1.25f, 15, 1.00f, 1.00f, 10.00f, false, 0.5f, 1.00f, "/bacterium.jpg", DestructibleObstacle.ObsType.TARGET, Enemy.Type.BACTERIUM);
+		return new PresetEnemy(100, 1.25f, 15, 1.00f, 1.00f, 10.00f, false, 1, 1.00f, "/bacterium.jpg", DestructibleObstacle.ObsType.TARGET, Enemy.Type.BACTERIUM);
 	}
 	
 	/**
@@ -156,7 +156,7 @@ public class PresetEnemy {
 	 * @return Renvoie un objet PresetEnemy contenant toute ces informations afin de creer l'enemy
 	 */
 	public static PresetEnemy Virus() {
-		return new PresetEnemy(100, 1.00f, 20, 1.50f, 1.00f, 15.00f, false, 0.5f, 1.25f,"/null.png", DestructibleObstacle.ObsType.TARGET, Enemy.Type.VIRUS);
+		return new PresetEnemy(100, 1.00f, 20, 1.50f, 1.00f, 15.00f, false, 1, 1.25f,"/null.png", DestructibleObstacle.ObsType.TARGET, Enemy.Type.VIRUS);
 	}
 
 	/**
@@ -176,7 +176,7 @@ public class PresetEnemy {
 	 * @return Renvoie un objet PresetEnemy contenant toute ces informations afin de creer l'enemy
 	 */
 	public static PresetEnemy Fungus() {
-		return new PresetEnemy(100, 0.5f, 5, 1.75f, 1.00f, 5.00f, false, 0.75f, 1.75f,"/null.png", DestructibleObstacle.ObsType.TOWER, Enemy.Type.FUNGUS);
+		return new PresetEnemy(100, 0.5f, 5, 1.75f, 1.00f, 5.00f, false, 1, 1.75f,"/null.png", DestructibleObstacle.ObsType.TOWER, Enemy.Type.FUNGUS);
 	}
 	
 	/**
@@ -196,10 +196,10 @@ public class PresetEnemy {
 	 * @return Renvoie un objet PresetEnemy contenant toute ces informations afin de creer l'enemy
 	 */
 	public static PresetEnemy Parasite() {
-		return new PresetEnemy(100, 1.5f, 40, 1.25f, 1.00f, 20.00f, false, 0.5f, 0.75f,"/null.png", DestructibleObstacle.ObsType.TOWER, Enemy.Type.PARASITE);
+		return new PresetEnemy(100, 1.5f, 40, 1.25f, 1.00f, 20.00f, false, 1, 0.75f,"/null.png", DestructibleObstacle.ObsType.TOWER, Enemy.Type.PARASITE);
 	}
 	
-	public float getSize() {
+	public int getSize() {
 		return this.size;
 	}
 

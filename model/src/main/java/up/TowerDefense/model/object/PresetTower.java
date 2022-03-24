@@ -13,7 +13,7 @@ public class PresetTower {
 	/**
 	 * Represente la taille d'une tour sur la carte.
 	 */
-	public static final int SIZE = 3;
+	public static final int SIZE = 2;
 	
 	/**
      * Represente la porte d'attaque de la Tour.

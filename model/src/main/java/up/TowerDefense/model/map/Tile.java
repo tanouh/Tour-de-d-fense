@@ -29,6 +29,7 @@ public class Tile {
 
     public void setOccupier(Obstacle occupier) {
         this.obstacle = occupier;
+        this.isEmpty=false;
     }
 
     public Obstacle getOccupier(){

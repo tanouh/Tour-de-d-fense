@@ -52,8 +52,12 @@ public class Board {
     }
 
     public void setOccupier(Obstacle obstacle, int x, int y){
-        Tile t = getTile(x, y);
-        t.setOccupier(obstacle);
+        for (int i = 0; i < obstacle.getSize() ; i++){
+            for(int j =0; j< obstacle.getSize(); j++){
+                Tile t = getTile(x+i, y+j);
+                t.setOccupier(obstacle);
+            }
+        }
     }
 
     /**
@@ -62,23 +66,41 @@ public class Board {
      * @param posX
      * @param posY
      */
-    public boolean addObstacle (PlaceableObstacle obstacle, int posX, int posY) throws Exception {
+    public boolean addObstacle (PlaceableObstacle obstacle, int posX, int posY) {
         /*
          fixme : voir s'il n'y a pas moyen d'éviter le switch entre posX et posY ici au cas
           où on rencontre d'autres problèmes liés à ça après
          */
 
-        if (getTile(posY, posX).isEmpty && obstacle.getBuyingCost() <= Game.getCredits()){
+        if (getTile(posY, posX).isEmpty
+                && legalPlacement(obstacle,posY,posX)
+                && obstacle.getBuyingCost() <= Game.getCredits()){
+
             setOccupier(obstacle, posY, posX);
             Game.setCredits(-obstacle.getBuyingCost());
             //todo : maj des positions des enemis
+
+            for(int i = 0;i<obstacle.getSize();i++){
+                for (int j=0;j< obstacle.getSize();j++){
+                    System.out.println(getTile(posY+i,posX+j).obstacle);
+                }
+            }
             return true;
         }else{
-//            throw new Exception("Action denied");
+            Exception e = new Exception("Action denied");
+            e.printStackTrace();
             return false;
         }
+
+
     }
 
+    private boolean legalPlacement(PlaceableObstacle obstacle, int posX, int posY){
+        for (int i = 1; i <=obstacle.getSize(); i++ )
+            for (int j = 1; j <= obstacle.getSize(); j++)
+                if(!getTile(posX+i,posY+j).isEmpty) return false;
+        return true;
+    }
     /**
      * Retourne la position dans la zone ciblée qui est la plus proche de
      * @param startPos
@@ -94,6 +116,27 @@ public class Board {
             }
         }
         return res;
+    }
+
+    /**
+     * Renvoie les points de frai
+     */
+    public ArrayList<Position> getSpawnablePoint() {
+        ArrayList<Position> spawnPoint = new ArrayList<>();
+
+        for (int i = 0; i < tiles.length; i += tiles.length - 1)
+            for (int j = 0; j < tiles[0].length; j++)
+                if (tiles[i][j].isEmpty)
+                    spawnPoint.add(tiles[i][j].getPos());
+
+
+        for (int j = 0; j < tiles[0].length; j += tiles[0].length - 1)
+            for (int i = 0; i < tiles.length; i++)
+                if (tiles[i][j].isEmpty)
+                    spawnPoint.add(tiles[i][j].getPos());
+
+
+        return spawnPoint;
     }
 
 }

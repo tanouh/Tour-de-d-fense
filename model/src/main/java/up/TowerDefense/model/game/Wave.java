@@ -52,6 +52,9 @@ public class Wave{
                     running = true;
                 }
             }
+            //todo : intégrer ici l'initiation des lifeTime des ennemis
+            // et compléter la liste des ennemis dans mapGen
+            // donc il faut avoir la mapGen dans les attributs de la classe !!
         }
     }
 

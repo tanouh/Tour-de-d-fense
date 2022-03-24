@@ -58,6 +58,8 @@ public class MapGenerator {
         tileSize = screenPanel.tileSize;
 
         loadMap();
+
+
         Enemy a = new Enemy(PresetEnemy.Bacterium(), new Position(10,10));
         charactersList.add(a);
     }
@@ -176,14 +178,14 @@ public class MapGenerator {
      */
     public void drawComponents(Graphics2D g){
         for (PlaceableObstacle ob : obstaclesList ){
-            drawElementaryComponent(g,ob.position,ob.getImage());
+            drawElementaryComponent(g,ob.position,ob.getImage(),ob.getSize());
         }
         for (Personnage perso : charactersList ){
-            drawElementaryComponent(g,perso.position, perso.getImage());
+            drawElementaryComponent(g,perso.position, perso.getImage(),perso.getSize());
         }
     }
 
-    private void drawElementaryComponent(Graphics2D g,Position pos, BufferedImage img ){
+    private void drawElementaryComponent(Graphics2D g,Position pos, BufferedImage img,int size){
 
         int posX = (int) pos.x*tileSize;
         int posY = (int) pos.y*tileSize;
@@ -202,7 +204,7 @@ public class MapGenerator {
                         posY > screenPanel.camera.worldY - screenPanel.camera.screenY &&
                         posY < screenPanel.camera.worldY + screenPanel.camera.screenY
         )
-            g.drawImage(img,screenX, screenY, tileSize*2, tileSize*2, null);
+            g.drawImage(img,screenX, screenY, tileSize*size, tileSize*size, null);
     }
 
 
