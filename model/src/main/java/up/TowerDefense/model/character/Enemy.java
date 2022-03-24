@@ -71,6 +71,11 @@ public class Enemy extends Personnage implements Movable{
 	 */
 	private long lifeTime;
 
+	/**
+	 * Le temps durant lequel l'enemi a effectué un mouvement
+	 */
+	private long travelTime;
+
 
 	/**
 	 * Represente un deplacement de l'enemy vers la gauche en fonction de sa vitesse
@@ -107,6 +112,9 @@ public class Enemy extends Personnage implements Movable{
 		this.suicidal = presetEnemy.isSuicidal();
 		this.target = presetEnemy.getTarget();
 		//this.path = Pathfinding.FindPath(position, Game.getBoard().getNearestTargetPosition(position));
+
+		this.lifeTime=System.currentTimeMillis();
+		this.travelTime = System.currentTimeMillis();
 	}
 	
 	/**
@@ -119,7 +127,18 @@ public class Enemy extends Personnage implements Movable{
 	*  sur laquelle le personnage doit aller pour une raison lamda , il faudrait mettre des tests
 	**/
 	public void update_position(){
-		//this.position = path.GetPos(System.currentTimeMillis()-lifeTime, this.getSpeed());
+
+		if(System.currentTimeMillis() - travelTime > 500){
+			/* todo : l'intervalle de temps entre deux pas est arbitraire
+			    à stocker selon le type d'enemi je suppose
+			    => au lieu de mettre un attribut float pour speed mettre plutôt un long pour gérer cet intervalle
+			 */
+			travelTime = System.currentTimeMillis();
+			this.position.x++;
+
+			//this.position = path.GetPos(System.currentTimeMillis()-lifeTime, this.getSpeed());
+		}
+
 	}
 
 

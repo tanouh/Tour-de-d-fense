@@ -13,7 +13,6 @@ import java.util.ArrayList;
 public class Board {
     private Tile [][]  tiles;
     public static Board map;
-    private int count = 0;
 
     /* Stocke les positions des cases qu'occupent la cible principale*/
     private ArrayList<Position> targetZone = new ArrayList<>();
@@ -46,7 +45,6 @@ public class Board {
         tiles[x][y]= tile;
         if (isATargetZone){
             targetZone.add(new Position(x,y));
-            count++;
         }
 
     }
@@ -78,7 +76,6 @@ public class Board {
 
             setOccupier(obstacle, posY, posX);
             Game.setCredits(-obstacle.getBuyingCost());
-            //todo : maj des positions des enemis
 
             for(int i = 0;i<obstacle.getSize();i++){
                 for (int j=0;j< obstacle.getSize();j++){
@@ -95,6 +92,9 @@ public class Board {
 
     }
 
+    /**
+     * Retourne vrai si les cases occupées par l'obstacle sont toutes libres
+     */
     private boolean legalPlacement(PlaceableObstacle obstacle, int posX, int posY){
         for (int i = 1; i <=obstacle.getSize(); i++ )
             for (int j = 1; j <= obstacle.getSize(); j++)
@@ -137,6 +137,5 @@ public class Board {
 
 
         return spawnPoint;
-    }
-
+    }/*todo: lors des créations des vagues il faudrait leur attribut une position aléatoire parmi celles dans ce tableau*/
 }

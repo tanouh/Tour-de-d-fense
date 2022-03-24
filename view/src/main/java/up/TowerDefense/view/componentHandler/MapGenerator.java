@@ -60,7 +60,7 @@ public class MapGenerator {
         loadMap();
 
 
-        Enemy a = new Enemy(PresetEnemy.Bacterium(), new Position(10,10));
+        Enemy a = new Enemy(PresetEnemy.Bacterium(), gameBoard.getSpawnablePoint().get(0) );
         charactersList.add(a);
     }
 
@@ -213,7 +213,7 @@ public class MapGenerator {
      * (x,y) , (x,y+1), (x+1,y) , (x+1,y)
      * ATTENTION : la position x et y est l'inverse de MouseX et MouseY
      */
-    public void addObstacle(int posX, int posY) throws Exception {
+    public void addObstacle(int posX, int posY) {
 
         /*Ce qui est à retravailler :
         * ajouter un paramètrage pour que l'obstacle à placer dépend
