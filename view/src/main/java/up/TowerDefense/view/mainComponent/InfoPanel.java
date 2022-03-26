@@ -2,10 +2,7 @@ package up.TowerDefense.view.mainComponent;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.Files;
 import java.util.Scanner;
 
@@ -21,16 +18,18 @@ public class InfoPanel extends JPanel {
         this.setBackground(background);
         this.setForeground(foreground);
         JLabel infoDisplay;
-        try{
-            Scanner scanner = new Scanner( new File("view/src/main/resources/infos.txt"));
+        //try{
+            InputStream is = this.getClass().getResourceAsStream("/infos.txt");
+            Scanner scanner = new Scanner(is);
             String text = scanner.useDelimiter("\\A").next();
             scanner.close();
             String[] info = text.split("[*]");
             infoDisplay = new JLabel(info[currentInfo-1]);
-        }catch (IOException e) {
+        /*}catch (IOException e) {
             infoDisplay = new JLabel("An error occurred.");
             e.printStackTrace();
-        }
+        }*/
+
         infoDisplay.setForeground(foreground);
         infoDisplay.setFont(new Font("Bernard MT Condensed",Font.PLAIN, GameWindow.widthScreen/50));
         this.add(infoDisplay);

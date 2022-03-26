@@ -1,6 +1,7 @@
 package up.TowerDefense.view.mainComponent;
 
 import up.TowerDefense.model.game.Game;
+import up.TowerDefense.model.game.Wave;
 import up.TowerDefense.view.componentHandler.Camera;
 import up.TowerDefense.view.componentHandler.KeyAction;
 import up.TowerDefense.view.componentHandler.MapGenerator;
@@ -44,9 +45,11 @@ public class ScreenPanel extends JPanel implements Runnable{
     public MapGenerator mapGen;
     int FPS = 60; //Frame per second
 
+    public long time;//Représente le temps depuis lequel le jeu a été lancé
 
     public MouseHandler mouseHandler;
     public Camera camera;
+    public Wave wavesGen;
 
     public InputMap inputMap;
     public ActionMap actionMap;

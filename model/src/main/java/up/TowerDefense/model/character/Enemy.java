@@ -64,7 +64,7 @@ public class Enemy extends Personnage implements Movable{
 	/**
 	 * Chemin suivi par l'enemi
 	 */
-	private Path path;
+	//private Path path;
 
 	/**
 	 * Durée depuis laquelle l'enemi vit (ie qu'il est sur le plateau)
@@ -112,7 +112,6 @@ public class Enemy extends Personnage implements Movable{
 		this.suicidal = presetEnemy.isSuicidal();
 		this.target = presetEnemy.getTarget();
 		//this.path = Pathfinding.FindPath(position, Game.getBoard().getNearestTargetPosition(position));
-
 		this.lifeTime=System.currentTimeMillis();
 		this.travelTime = System.currentTimeMillis();
 	}

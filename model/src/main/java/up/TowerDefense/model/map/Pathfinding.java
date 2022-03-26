@@ -13,6 +13,7 @@ public class Pathfinding {
         openSet.add(startNode);
 
         while (openSet.size() > 0) {
+            System.out.println("ici");
             //Cherchez le meilleur node dans openSet et l'ajouter à closedSet
             Node node = Node.BestNode(openSet);
             openSet.remove(node);

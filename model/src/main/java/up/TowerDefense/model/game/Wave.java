@@ -34,6 +34,9 @@ public class Wave{
         waves.add(subwaves);*/
     }
 
+    public void init(){
+        timeSinceLastSpawn = System.currentTimeMillis();
+    }
     /**
      * Lance la prochaine vague lorque c'est possible
      */
@@ -69,7 +72,7 @@ public class Wave{
                 running = false;
                 return;
             } 
-            timeSinceLastSpawn = System.nanoTime();
+            timeSinceLastSpawn = System.currentTimeMillis() - timeSinceLastSpawn;
                 if (timeSinceLastSpawn >= currentWave.enemies.get(0).getInterval()) {
                     // Fait spawn le premier enemy de la liste et le supprime de la liste des enemy à spawner
                     // puis relance le compteur de spawn
@@ -79,7 +82,7 @@ public class Wave{
                                                                                  // et on le retire de la sous vague en cours
                     else
                         EnemyList.add(nextEnemySpawn.getEnemy());
-                    timeSinceLastSpawn = 0;
+                    timeSinceLastSpawn = System.currentTimeMillis();
                 }
         }
     }

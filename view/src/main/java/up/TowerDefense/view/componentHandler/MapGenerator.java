@@ -89,7 +89,6 @@ public class MapGenerator {
         }catch(Exception e){
             e.printStackTrace();
         }
-        gameBoard.getTile(30,30).setOccupier(new TowerTest(30,30));
     }
 
     /**
