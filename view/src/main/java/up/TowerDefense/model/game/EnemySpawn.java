@@ -52,6 +52,7 @@ public class EnemySpawn extends TimerTask {
          return new EnemySpawn(PresetEnemy.Bacterium(), 10,spawnPoint );
     }
 
+
     public void spawnEnemy() {
         //Mettre les ennemis dans mapGen un à un
 

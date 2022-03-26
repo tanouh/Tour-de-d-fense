@@ -16,24 +16,16 @@ import java.util.TimerTask;
  */
 public class Subwave  extends TimerTask{
     private long spawnInterval; // temps entre l'apparition des enemy
-    //private String name; 
     public ArrayList<EnemySpawn> enemies;
-    private long timeSinceLastSpawn;
-    public static int count =0;
-    private Timer enemyTimer;
+    public static int count = 0;
 
     public Subwave() {
         enemies = new ArrayList<>();
         enemies.add(EnemySpawn.getBacterium());
-        enemyTimer = new Timer();
     }
 
     public long getInterval(){
         return this.spawnInterval;
-    }
-
-    public void spawn(){
-        enemies.add(EnemySpawn.getBacterium());
     }
 
 
@@ -42,24 +34,28 @@ public class Subwave  extends TimerTask{
      */
     @Override
     public void run() {
-        /*for (int i =0 ; i < enemies.get(0).quantity; i++){
-            MapGenerator.charactersList.add(new Enemy(enemies.get(0).enemy, enemies.get(0).spawnPoint));
-        }*/
         MapGenerator.charactersList.add(new Enemy(PresetEnemy.Bacterium(), new Position(0,30)));
         count++;
 
-        // todo : Pour respecter l'intervalles de repos entre deux vagues
-        // mais cette solution n'est pas vraiment adaptée donc c'est mieux de
-        // de chercher autre chose
+        /* fixme : Pour respecter l'intervalles de repos entre deux vagues
+            mais cette solution n'est pas vraiment adaptée
+            donc c'est mieux de chercher autre chose
+         */
         if(count > 2){
             try{
-                long a= System.currentTimeMillis();
                 Thread.sleep(10000);
-                System.out.println(System.currentTimeMillis()-a);
             }catch (InterruptedException e) {
                 e.printStackTrace();
             }
             count =0;
         }
+
+        /* todo: le principe est que :
+            on lance d'abord une vague de 10 ennemis de même type,
+            on lance la vague suivante que lorsque tous les ennemis de cette vague sont morts ou ont atteint la cible, etc...
+         */
+
+        /*
+        * fixme : je pense qu'on peut nous contenter de la classe Waves à ce niveau là (idée à voir un peu plus) */
     }
 }
