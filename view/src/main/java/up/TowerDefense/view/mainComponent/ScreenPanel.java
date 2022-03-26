@@ -1,6 +1,7 @@
 package up.TowerDefense.view.mainComponent;
 
 import up.TowerDefense.model.game.Game;
+import up.TowerDefense.model.game.Subwave;
 import up.TowerDefense.model.game.Wave;
 import up.TowerDefense.view.componentHandler.Camera;
 import up.TowerDefense.view.componentHandler.KeyAction;
@@ -10,6 +11,7 @@ import up.TowerDefense.view.componentHandler.MouseHandler;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.util.Timer;
 
 import static up.TowerDefense.view.componentHandler.KeyAction.*;
 import static up.TowerDefense.view.componentHandler.KeyAction.Action.*;
@@ -45,11 +47,12 @@ public class ScreenPanel extends JPanel implements Runnable{
     public MapGenerator mapGen;
     int FPS = 60; //Frame per second
 
-    public long time;//Représente le temps depuis lequel le jeu a été lancé
+
 
     public MouseHandler mouseHandler;
     public Camera camera;
-    public Wave wavesGen;
+    public Timer timer;
+    public long TIME;
 
     public InputMap inputMap;
     public ActionMap actionMap;
@@ -72,6 +75,9 @@ public class ScreenPanel extends JPanel implements Runnable{
 
         this.setDoubleBuffered(true);
         this.addMouseListener(mouseHandler);
+
+        timer = new Timer();
+        timer.schedule(new Subwave(),10000,2000);
 
         this.setFocusable(true);
     }

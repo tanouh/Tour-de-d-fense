@@ -61,9 +61,6 @@ public class MapGenerator {
 
         loadMap();
 
-        REF = this;
-        Enemy a = new Enemy(PresetEnemy.Bacterium(), gameBoard.getSpawnablePoint().get(0) );
-        charactersList.add(a);
     }
 
     /**
@@ -244,6 +241,7 @@ public class MapGenerator {
             updateCharactersPaths();
             obstaclesList.add(obstacle);
         }
+
     }
 
     /**
@@ -266,7 +264,6 @@ public class MapGenerator {
                 ((Enemy)c).update_position();
             }
         }
-
     }
 }
 

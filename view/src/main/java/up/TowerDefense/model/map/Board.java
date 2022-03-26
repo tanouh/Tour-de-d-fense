@@ -76,12 +76,6 @@ public class Board {
 
             setOccupier(obstacle, posY, posX);
             Game.setCredits(-obstacle.getBuyingCost());
-
-            for(int i = 0;i<obstacle.getSize();i++){
-                for (int j=0;j< obstacle.getSize();j++){
-                    System.out.println(getTile(posY+i,posX+j).obstacle);
-                }
-            }
             return true;
         }else{
             Exception e = new Exception("Action denied");

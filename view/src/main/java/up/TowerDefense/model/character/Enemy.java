@@ -134,6 +134,10 @@ public class Enemy extends Personnage implements Movable{
 			 */
 			travelTime = System.currentTimeMillis();
 			this.position.x++;
+			/*if(this.position.x == Game.getBoard().sizeX() - 1){
+				this.position.x=0;
+			}*/
+
 
 			//this.position = path.GetPos(System.currentTimeMillis()-lifeTime, this.getSpeed());
 		}
