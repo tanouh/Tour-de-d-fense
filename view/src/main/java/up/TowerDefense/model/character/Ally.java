@@ -28,7 +28,7 @@ public class Ally extends Personnage implements Movable{
 	 * @param position definit la position de l'allie sur la carte
 	 */
 	public Ally(Position position) {
-		super(position, SIZE, 1.00f, 100, 1.00f,"/null.png");
+		super(position, SIZE, 1.00f, 100, 1.00f, "/null.png");
 	}
 	
 	/**

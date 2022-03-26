@@ -28,6 +28,8 @@ import static up.TowerDefense.model.object.Obstacle.*;
  * */
 
 public class MapGenerator {
+
+    public static MapGenerator REF;
     public Board gameBoard;
     private ScreenPanel screenPanel;
     private BufferedImage mapImage;
@@ -59,7 +61,7 @@ public class MapGenerator {
 
         loadMap();
 
-
+        REF = this;
         Enemy a = new Enemy(PresetEnemy.Bacterium(), gameBoard.getSpawnablePoint().get(0) );
         charactersList.add(a);
     }
