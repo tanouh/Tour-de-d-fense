@@ -1,5 +1,6 @@
 package up.TowerDefense.view.mainComponent;
 
+import org.w3c.dom.ls.LSOutput;
 import up.TowerDefense.model.game.Game;
 import up.TowerDefense.model.game.Subwave;
 import up.TowerDefense.view.componentHandler.Camera;
@@ -17,13 +18,12 @@ import static up.TowerDefense.view.componentHandler.KeyAction.Action.*;
 
 public class ScreenPanel extends JPanel implements Runnable{
     //Paramètrages de l'écran
-    public static int nbCol = 25;
-    public static int nbRow = 16;
-    public static int sizeCase = 40;
+    public static int sizeCase = 20;
+    public static int nbCol = GameWindow.widthScreen*4/(5*sizeCase);
+    public static int nbRow = GameWindow.heightScreen*9/(10*sizeCase);
 
     public static int windowWidth = sizeCase*nbCol;
     public static int windowHeight = sizeCase*nbRow;
-
 
     public static int originalTileSize = 8;
     public static int scale = 3;
@@ -35,14 +35,12 @@ public class ScreenPanel extends JPanel implements Runnable{
     public static final int MAX_WORLD_ROW= 64;
 
     public JLabel title = new JLabel("project Covid Defense");
-
     protected GameWindow gameWindow;
     protected GamePanel gamePanel;
     private Thread gameThread = null;
     public boolean paused = false;
     public MapGenerator mapGen;
     int FPS = 60; //Frame per second
-
 
 
     public MouseHandler mouseHandler;
@@ -58,7 +56,6 @@ public class ScreenPanel extends JPanel implements Runnable{
         this.gameWindow = gameWindow;
         this.gamePanel = gamePanel;
         KeyAction.setScreenPanel(this);
-
         mapGen= new MapGenerator(this, "/map3.png"); /*A modifier : ajouter un paramètrage pour l'image*/
 
         startThread();

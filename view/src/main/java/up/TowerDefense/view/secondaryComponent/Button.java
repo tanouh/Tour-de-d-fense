@@ -26,7 +26,7 @@ public class Button extends JButton {
         JLabel start = new JLabel("Demarrer", JLabel.CENTER);
         start.setForeground(GameWindow.background);
         start.setFont(new Font(GameWindow.font,Font.PLAIN, GameWindow.widthScreen/70));
-        this.add(start);
+        this.centerText(start);
         this.setBackground(GameWindow.foreground);
         this.setPreferredSize(new Dimension(200, gameWindow.getHeight()/10));
         this.addActionListener(event -> {
@@ -52,7 +52,7 @@ public class Button extends JButton {
         JLabel leave = new JLabel("Quitter", JLabel.CENTER);
         leave.setFont(new Font(GameWindow.font,Font.PLAIN, GameWindow.widthScreen/70));
         leave.setForeground(GameWindow.background);
-        this.add(leave);
+        this.centerText(leave);
         this.setBackground(GameWindow.foreground);
         this.setPreferredSize(new Dimension(gameWindowWidth,gameWindowHeight/10));
         this.addActionListener(event -> System.exit(0));
@@ -65,7 +65,7 @@ public class Button extends JButton {
         JLabel options = new JLabel("Options", JLabel.CENTER);
         options.setForeground(GameWindow.background);
         options.setFont(new Font(GameWindow.font,Font.PLAIN, GameWindow.widthScreen/70));
-        this.add(options);
+        this.centerText(options);
         this.setBackground(GameWindow.foreground);
         this.addActionListener(event -> {
             OptionPanel optionPanel = new OptionPanel(gameWindow, homePanel, gamePanel, returnPanel);
@@ -83,7 +83,7 @@ public class Button extends JButton {
         JLabel lastInfo = new JLabel("Precedent");
         lastInfo.setForeground(GameWindow.background);
         lastInfo.setFont(new Font(GameWindow.font,Font.PLAIN, GameWindow.widthScreen/70));
-        this.add(lastInfo);
+        this.centerText(lastInfo);
         this.setBackground(GameWindow.foreground);
         this.addActionListener(event -> {
             waitingScreen.setCurrentInfo(currentInfo-1);
@@ -98,7 +98,7 @@ public class Button extends JButton {
         JLabel nextInfo = new JLabel("Suivant");
         nextInfo.setForeground(GameWindow.background);
         nextInfo.setFont(new Font(GameWindow.font,Font.PLAIN, GameWindow.widthScreen/70));
-        this.add(nextInfo);
+        this.centerText(nextInfo);
         this.setBackground(GameWindow.foreground);
         this.addActionListener(event -> {
             waitingScreen.setCurrentInfo(currentInfo+1);
@@ -115,7 +115,7 @@ public class Button extends JButton {
         this.setBackground(GameWindow.foreground);
         apply.setForeground(GameWindow.background);
         apply.setFont(new Font(GameWindow.font, Font.PLAIN, GameWindow.widthScreen/70));
-        this.add(apply);
+        this.centerText(apply);
         this.addActionListener(event -> {
             int numberWaves = optionPanel.getNumberWaves().getValue();
             int backgroundMusic = optionPanel.getBackgroundMusic().getValue();
@@ -138,7 +138,7 @@ public class Button extends JButton {
         this.setBackground(GameWindow.foreground);
         apply.setForeground(GameWindow.background);
         apply.setFont(new Font(GameWindow.font, Font.PLAIN, GameWindow.widthScreen/70));
-        this.add(apply);
+        this.centerText(apply);
         this.addActionListener(event -> {
             int backgroundMusic = optionPanel.getBackgroundMusic().getValue();
             int gameSound = optionPanel.getGameSound().getValue();
@@ -160,7 +160,7 @@ public class Button extends JButton {
         this.setBackground(GameWindow.foreground);
         abandon.setForeground(GameWindow.background);
         abandon.setFont(new Font(GameWindow.font, Font.PLAIN, GameWindow.widthScreen/70));
-        this.add(abandon);
+        this.centerText(abandon);
         this.addActionListener(event -> {
             gameWindow.getContentPane().removeAll();
             gameWindow.getContentPane().add(new HomePanel(gameWindow));
@@ -180,11 +180,18 @@ public class Button extends JButton {
         typeTower.setHorizontalAlignment(JLabel.CENTER);
         this.setBorder(new LineBorder(GameWindow.foreground, 2));
         this.setHorizontalAlignment(JButton.CENTER);
-        this.add(typeTower);
+        this.centerText(typeTower);
         this.setBackground(GameWindow.background);
         this.setForeground(GameWindow.foreground);
         this.addActionListener(event -> {
             Game.setCurrentlyPlacing(typeObstacle);
         });
+    }
+
+    private void centerText(JLabel label){
+        this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
+        this.add(Box.createHorizontalGlue());
+        this.add(label);
+        this.add(Box.createHorizontalGlue());
     }
 }
