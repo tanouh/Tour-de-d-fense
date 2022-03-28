@@ -20,6 +20,7 @@ public class GamePanel extends JPanel {
     private JPanel body = new JPanel();
 
     //JLabel du header :
+    private JLabel level;
     private JLabel wavesLeft;
     private JLabel enemyLeft;
     private JLabel creditsLeft;
@@ -48,10 +49,10 @@ public class GamePanel extends JPanel {
      */
     public void setHeader(){
         header.setBackground(GameWindow.background);
-        header.setBorder(new LineBorder(GameWindow.foreground, 5));
+        header.setBorder(new LineBorder(GameWindow.foreground, 6));
 
         JLabel title = new JLabel("project\nCovid Defense");
-        title.setPreferredSize(new Dimension(gameWindow.getWidth()/5, gameWindow.getHeight()/10));
+        title.setPreferredSize(new Dimension(gameWindow.getWidth()/6, gameWindow.getHeight()/10));
         title.setFont(new Font(GameWindow.font,Font.BOLD, GameWindow.widthScreen/60));
         title.setForeground(GameWindow.foreground);
         title.setHorizontalAlignment(JLabel.CENTER);
@@ -59,6 +60,7 @@ public class GamePanel extends JPanel {
         title.setBorder(new LineBorder(GameWindow.foreground, 2));
         header.add(title);
 
+        level = Label.addHeaderLabel(header, "Niveau " + Game.getLevel());
         wavesLeft = Label.addHeaderLabel(header,"Vague 0/" + Game.getWavesLeft());
         enemyLeft = Label.addHeaderLabel(header, "Ennemis restants : " + Game.getNbEnemyLeft());
         creditsLeft = Label.addHeaderLabel(header,"Argent : " + Game.getCredits());
@@ -72,7 +74,7 @@ public class GamePanel extends JPanel {
     public void setSideMenu(){
         sideMenu.setBackground(GameWindow.background);
         sideMenu.setBorder(new LineBorder(GameWindow.foreground, 5));
-        sideMenu.setPreferredSize(new Dimension(gameWindow.getWidth()/5, gameWindow.getHeight()/5));
+        sideMenu.setPreferredSize(new Dimension(gameWindow.getWidth()/6, gameWindow.getHeight()/5));
 
         JLabel title = new JLabel("Construction Tour");
         title.setFont(new Font(GameWindow.font ,Font.BOLD, 20));

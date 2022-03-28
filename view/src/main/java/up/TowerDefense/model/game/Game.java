@@ -11,6 +11,7 @@ public class Game {
     private static int lives = STARTING_LIVES;
     private static Board board = new Board();
     private static int numberWavesTotal;
+    private static int level = 1;
     private static int wavesLeft;
     private static int nbEnemyLeft = 0;
     private static int bgMusic;
@@ -40,6 +41,7 @@ public class Game {
     }
     public static int getLives() { return lives; }
     public static Board getBoard(){ return board; }
+    public static int getLevel(){ return level; }
     public static int getWavesLeft(){ return wavesLeft;}
     public static int getNbEnemyLeft(){ return nbEnemyLeft;}
     public static String[] getListTowerTypes(){ return listTowerTypes; }
