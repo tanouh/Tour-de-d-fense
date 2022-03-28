@@ -36,5 +36,6 @@ public class Obstacle {
     public static Obstacle FOREST = new Obstacle(0,0,1, "/tree.png");
     public static Obstacle WATER = new Obstacle(0,0,1, "/water01.png");
     public static Obstacle WALL = new Obstacle(0,0,1, "/wall.png");
+    public static Obstacle SKIN = new Obstacle(0,0,1, "/sol.png");
 
 }

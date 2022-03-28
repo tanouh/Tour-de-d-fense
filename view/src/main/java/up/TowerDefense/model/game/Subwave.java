@@ -56,6 +56,6 @@ public class Subwave  extends TimerTask{
          */
 
         /*
-        * fixme : je pense qu'on peut nous contenter de la classe Waves à ce niveau là (idée à voir un peu plus) */
+        * fixme : je pense qu'on peut se contenter de la classe Waves à ce niveau là (idée à voir un peu plus) */
     }
 }

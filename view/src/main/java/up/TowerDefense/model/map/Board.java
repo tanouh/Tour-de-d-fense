@@ -100,7 +100,7 @@ public class Board {
      * @param startPos
      * @return
      */
-    public Position  getNearestTargetPosition(Position startPos) {
+    public Position getNearestTargetPosition(Position startPos) {
         double distMin = 100;
         Position res = null;
         for (Position pos : targetZone){
