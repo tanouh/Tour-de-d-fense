@@ -98,8 +98,8 @@ public class MapGenerator {
     private void setUpTile(Tile t, int num){
         switch (num){
             case 0 :
-            case 4 : t.placeObstacle(FOREST); break;
-            case 2 : t.placeObstacle(WALL); break;
+            case 4 : t.placeObstacle(VEIN); break;
+            case 2 : t.placeObstacle(SKIN); break;
             case 3 : t.placeObstacle(WATER); break;
             case 1 :
             default: t.placeRoad(); break;

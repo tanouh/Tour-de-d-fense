@@ -60,7 +60,7 @@ public class Tile {
         isEmpty = true;
 
         try{
-            imageTile= ImageIO.read(getClass().getResourceAsStream("/sol.png"));
+            imageTile= ImageIO.read(getClass().getResourceAsStream("/sol_V4.png"));
         }catch(IOException e){
             e.printStackTrace();
         }
