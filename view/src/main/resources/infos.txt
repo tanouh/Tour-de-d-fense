@@ -1,4 +1,4 @@
-Contrôles
+Controles
 *
 Information sur les TowerTest
 *

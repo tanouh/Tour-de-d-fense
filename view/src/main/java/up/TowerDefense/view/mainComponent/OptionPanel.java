@@ -10,8 +10,6 @@ public class OptionPanel extends JPanel {
     private JLabel title = new JLabel("project Covid Defense");
     private JPanel body = new JPanel();
     private JPanel footer = new JPanel(new GridLayout(1,2));
-    private Color background = new Color(173,175,192);
-    private Color foreground = new Color(30,35,71);
     private Slider numberWaves = null;
     private Slider backgroundMusic = null;
     private Slider gameSound = null;
@@ -26,13 +24,13 @@ public class OptionPanel extends JPanel {
         this.add(title, BorderLayout.NORTH);
         this.add(body, BorderLayout.CENTER);
         this.add(footer, BorderLayout.SOUTH);
-        this.setBackground(background);
-        body.setBackground(background);
-        footer.setBackground(background);
+        this.setBackground(GameWindow.background);
+        body.setBackground(GameWindow.background);
+        footer.setBackground(GameWindow.background);
 
         title.setPreferredSize(new Dimension(gameWindow.getWidth(), gameWindow.getHeight()/5));
-        title.setFont(new Font("Bernard MT Condensed",Font.BOLD, GameWindow.widthScreen/30));
-        title.setForeground(foreground);
+        title.setFont(new Font(GameWindow.font,Font.BOLD, GameWindow.widthScreen/30));
+        title.setForeground(GameWindow.foreground);
         title.setHorizontalAlignment(JLabel.CENTER);
         title.setVerticalAlignment(JLabel.CENTER);
         footer.setPreferredSize(new Dimension(GameWindow.widthScreen, GameWindow.heightScreen/10));

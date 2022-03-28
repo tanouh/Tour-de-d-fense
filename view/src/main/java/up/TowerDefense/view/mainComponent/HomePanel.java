@@ -16,9 +16,6 @@ public class HomePanel extends JPanel{
     private Button leaveGame = new Button();
     private Button options = new Button();
 
-    private Color background = new Color(173,175,192);
-    private Color foreground = new Color(30,35,71);
-
     //stockage des options choisies (stockage dans une List ?) :
     private int numberWaves = 5;
     private int backgroundMusic = 5;
@@ -34,11 +31,11 @@ public class HomePanel extends JPanel{
         options.optionButton(gameWindow, this, null, this);
 
         this.setLayout(new BorderLayout());
-        this.setBackground(background);
-        this.setBorder(new LineBorder(foreground, 5));
-        body.setBackground(background);
-        buttons.setBackground(background);
-        footer.setBackground(background);
+        this.setBackground(GameWindow.background);
+        this.setBorder(new LineBorder(GameWindow.foreground, 5));
+        body.setBackground(GameWindow.background);
+        buttons.setBackground(GameWindow.background);
+        footer.setBackground(GameWindow.background);
 
         this.add(title, BorderLayout.NORTH);
         this.add(body, BorderLayout.CENTER);
@@ -46,8 +43,8 @@ public class HomePanel extends JPanel{
 
         title.setPreferredSize(new Dimension(gameWindow.getWidth(), gameWindow.getHeight()/5));
         footer.setPreferredSize(new Dimension(gameWindow.getWidth(), gameWindow.getHeight()/7));
-        title.setFont(new Font("Bernard MT Condensed",Font.BOLD, GameWindow.widthScreen/20));
-        title.setForeground(foreground);
+        title.setFont(new Font(GameWindow.font,Font.BOLD, GameWindow.widthScreen/20));
+        title.setForeground(GameWindow.foreground);
         title.setHorizontalAlignment(JLabel.CENTER);
         title.setVerticalAlignment(JLabel.CENTER);
 

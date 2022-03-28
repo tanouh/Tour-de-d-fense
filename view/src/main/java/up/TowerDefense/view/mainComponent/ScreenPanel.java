@@ -35,9 +35,6 @@ public class ScreenPanel extends JPanel implements Runnable{
     public static final int MAX_WORLD_COL = 100;
     public static final int MAX_WORLD_ROW= 64;
 
-
-    public Color background = new Color(173,175,192);
-    public Color foreground = new Color(30,35,71);
     public JLabel title = new JLabel("project Covid Defense");
 
     protected GameWindow gameWindow;
@@ -132,6 +129,7 @@ public class ScreenPanel extends JPanel implements Runnable{
         camera.update();
         gamePanel.updateHeader();
         mapGen.updateCharactersPositions();
+//        Game.endGame();
     }
 
     /**

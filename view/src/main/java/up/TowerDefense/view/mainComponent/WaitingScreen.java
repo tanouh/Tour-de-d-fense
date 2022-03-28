@@ -12,8 +12,6 @@ public class WaitingScreen extends JPanel{
     private Button startGame = new Button();
     private Button lastInfo = new Button();
     private Button nextInfo = new Button();
-    private Color background = new Color(173,175,192);
-    private Color foreground = new Color(30,35,71);
 
     private GameWindow gameWindow;
 
