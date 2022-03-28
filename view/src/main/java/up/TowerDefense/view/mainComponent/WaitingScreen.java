@@ -4,6 +4,8 @@ import up.TowerDefense.view.secondaryComponent.Button;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.InputStream;
+import java.util.Scanner;
 
 public class WaitingScreen extends JPanel{
     private JPanel infoPanel = new JPanel();
@@ -16,7 +18,7 @@ public class WaitingScreen extends JPanel{
     private GameWindow gameWindow;
 
     private int currentInfo = 1;
-    private int totalInfo = 5;
+    private int totalInfo;
 
     private int numberWaves;
     private int backgroundMusic;
@@ -34,6 +36,7 @@ public class WaitingScreen extends JPanel{
         this.gameSpeed = gameSpeed;
 
         startGame.startButton(gameWindow, this, numberWaves, backgroundMusic, gameSound, gameSpeed);
+        this.setTotalInfo();
         this.refreshInfo();
         this.add(startGame, BorderLayout.SOUTH);
     }
@@ -76,5 +79,14 @@ public class WaitingScreen extends JPanel{
      */
     public void setCurrentInfo(int currentInfo){
         this.currentInfo = currentInfo;;
+    }
+
+    public void setTotalInfo(){
+        InputStream is = this.getClass().getResourceAsStream("/infos.txt");
+        Scanner scanner = new Scanner(is);
+        String text = scanner.useDelimiter("\\A").next();
+        scanner.close();
+        String[] info = text.split("[*]");
+        this.totalInfo = info.length;
     }
 }
