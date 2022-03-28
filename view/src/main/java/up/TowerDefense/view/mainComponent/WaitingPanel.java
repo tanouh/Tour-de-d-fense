@@ -7,7 +7,7 @@ import java.awt.*;
 import java.io.InputStream;
 import java.util.Scanner;
 
-public class WaitingScreen extends JPanel{
+public class WaitingPanel extends JPanel{
     private JPanel infoPanel = new JPanel();
     private Button startGame = new Button();
     private Button lastInfo = new Button();
@@ -23,7 +23,7 @@ public class WaitingScreen extends JPanel{
     private int gameSound;
     private int gameSpeed;
 
-    public WaitingScreen(GameWindow gameWindow, int numberWaves,
+    public WaitingPanel(GameWindow gameWindow, int numberWaves,
                          int backgroundMusic, int gameSound, int gameSpeed){
 
         this.setLayout(new BorderLayout());

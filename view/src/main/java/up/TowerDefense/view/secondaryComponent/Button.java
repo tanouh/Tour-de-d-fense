@@ -32,7 +32,7 @@ public class Button extends JButton {
         this.addActionListener(event -> {
             JPanel nextScreen;
             if (callPanel instanceof HomePanel){
-                nextScreen = new WaitingScreen(gameWindow, numberWaves,
+                nextScreen = new WaitingPanel(gameWindow, numberWaves,
                         backgroundMusic, gameSound, gameSpeed);
             }
             else {
@@ -79,7 +79,7 @@ public class Button extends JButton {
     /**
      * Cree un bouton qui renvoie a la derniere info lue (supposee existante)
      */
-    public void lastInfoButton(WaitingScreen waitingScreen, int currentInfo){
+    public void lastInfoButton(WaitingPanel waitingScreen, int currentInfo){
         JLabel lastInfo = new JLabel("Precedent");
         lastInfo.setForeground(GameWindow.background);
         lastInfo.setFont(new Font(GameWindow.font,Font.PLAIN, GameWindow.widthScreen/70));
@@ -94,7 +94,7 @@ public class Button extends JButton {
     /**
      * Cree un bouton qui renvoie a la prochaine info a lire (supposee existante)
      */
-    public void nextInfoButton(WaitingScreen waitingScreen, int currentInfo){
+    public void nextInfoButton(WaitingPanel waitingScreen, int currentInfo){
         JLabel nextInfo = new JLabel("Suivant");
         nextInfo.setForeground(GameWindow.background);
         nextInfo.setFont(new Font(GameWindow.font,Font.PLAIN, GameWindow.widthScreen/70));

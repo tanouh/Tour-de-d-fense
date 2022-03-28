@@ -2,7 +2,6 @@ package up.TowerDefense.view.mainComponent;
 
 import up.TowerDefense.model.game.Game;
 import up.TowerDefense.model.game.Subwave;
-import up.TowerDefense.model.game.Wave;
 import up.TowerDefense.view.componentHandler.Camera;
 import up.TowerDefense.view.componentHandler.KeyAction;
 import up.TowerDefense.view.componentHandler.MapGenerator;
@@ -129,7 +128,20 @@ public class ScreenPanel extends JPanel implements Runnable{
         camera.update();
         gamePanel.updateHeader();
         mapGen.updateCharactersPositions();
-//        Game.endGame();
+        if (Game.gameWon()){
+            gameWindow.getContentPane().removeAll();
+            gameWindow.getContentPane().add(new EndPanel(true));
+            gameWindow.getContentPane().revalidate();
+            gameWindow.getContentPane().repaint();
+            return;
+        }
+        if (Game.gameLost()){
+            gameWindow.getContentPane().removeAll();
+            gameWindow.getContentPane().add(new EndPanel(false));
+            gameWindow.getContentPane().revalidate();
+            gameWindow.getContentPane().repaint();
+            return;
+        }
     }
 
     /**
