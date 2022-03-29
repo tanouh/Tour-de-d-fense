@@ -27,9 +27,9 @@ public class GamePanel extends JPanel {
     private JLabel lifesLeft;
 
     public GamePanel(GameWindow gameWindow, int numberWaves, int backgroundMusic,
-                     int gameSound, int gameSpeed){
+                     int gameSound, int gameSpeed, int level){
         this.gameWindow = gameWindow;
-        this.game = new Game(numberWaves, backgroundMusic, gameSound, gameSpeed);
+        this.game = new Game(numberWaves, backgroundMusic, gameSound, gameSpeed, level);
 
         this.setLayout(new BorderLayout());
 

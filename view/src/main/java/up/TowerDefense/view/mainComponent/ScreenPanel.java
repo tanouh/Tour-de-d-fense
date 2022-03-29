@@ -76,6 +76,7 @@ public class ScreenPanel extends JPanel implements Runnable{
                                                                 // le délai avant la première exécution et l'intervalle de temps entre deux exécutions (en millisecondes)
 
         this.setFocusable(true);
+        paused = false;
     }
 
     /**
@@ -128,20 +129,7 @@ public class ScreenPanel extends JPanel implements Runnable{
         camera.update();
         gamePanel.updateHeader();
         mapGen.updateCharactersPositions();
-        if (Game.gameWon()){
-            gameWindow.getContentPane().removeAll();
-            gameWindow.getContentPane().add(new EndPanel(true));
-            gameWindow.getContentPane().revalidate();
-            gameWindow.getContentPane().repaint();
-            return;
-        }
-        if (Game.gameLost()){
-            gameWindow.getContentPane().removeAll();
-            gameWindow.getContentPane().add(new EndPanel(false));
-            gameWindow.getContentPane().revalidate();
-            gameWindow.getContentPane().repaint();
-            return;
-        }
+        testVictory();
     }
 
     /**
@@ -184,7 +172,22 @@ public class ScreenPanel extends JPanel implements Runnable{
         actionMap.put(STOP,new KeyAction(STAY_STILL));
         actionMap.put(PAUSE,new KeyAction(PAUSE_GAME));
 
+    }
 
+    public void testVictory(){
+        if (Game.gameWon()){
+            gameWindow.getContentPane().removeAll();
+            gameWindow.getContentPane().add(new EndPanel(true, gameWindow));
+            gameWindow.getContentPane().revalidate();
+            gameWindow.getContentPane().repaint();
+            paused = true;
+        }else if (Game.gameLost()){
+            gameWindow.getContentPane().removeAll();
+            gameWindow.getContentPane().add(new EndPanel(false, gameWindow));
+            gameWindow.getContentPane().revalidate();
+            gameWindow.getContentPane().repaint();
+            paused = true;
+        }
     }
 
 }
