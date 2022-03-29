@@ -12,7 +12,7 @@ import java.util.TimerTask;
 /**
  * le contenu des sous vagues du jeu
  */
-public class EnemySpawn extends TimerTask {
+public class EnemySpawn {
     public final Position spawnPoint; // position à laquelle va apparaitre les enemy
     public PresetEnemy enemy;
     private static long INTERVAL = 500;
@@ -59,11 +59,4 @@ public class EnemySpawn extends TimerTask {
         //fixme : voir si on n'a pas besoin de nouveau threads pour gérer les vagues
     }
 
-    /**
-     * The action to be performed by this timer task.
-     */
-    @Override
-    public void run() {
-
-    }
 }

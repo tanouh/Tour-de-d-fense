@@ -49,9 +49,9 @@ public class ScreenPanel extends JPanel implements Runnable{
 
 
 
-    public MouseHandler mouseHandler;
-    public Camera camera;
-    public Timer timer;
+    public MouseHandler mouseHandler; // pour contrôler les informations reçues à partir de la souris
+    public Camera camera; // pour pouvoir déplacer le champs de vision
+    public Timer timer; // un chronomètre pour gérer le lancement des vagues d'ennemis
     public long TIME;
 
     public InputMap inputMap;
@@ -77,7 +77,8 @@ public class ScreenPanel extends JPanel implements Runnable{
         this.addMouseListener(mouseHandler);
 
         timer = new Timer();
-        timer.schedule(new Subwave(),10000,2000);
+        timer.schedule(new Subwave(),10000,2000); // Planifie les actions , paramètres = la tâche à effectuer,
+                                                                // le délai avant la première exécution et l'intervalle de temps entre deux exécutions (en millisecondes)
 
         this.setFocusable(true);
     }

@@ -76,6 +76,11 @@ public class Enemy extends Personnage implements Movable{
 	 */
 	private long travelTime;
 
+	/**
+	 * Pour indiquer si l'ennemi est encore vivant
+	 */
+	private boolean alive;
+
 
 	/**
 	 * Represente un deplacement de l'enemy vers la gauche en fonction de sa vitesse
@@ -243,7 +248,10 @@ public class Enemy extends Personnage implements Movable{
 			case 6 : this.upgrade_coins_value(); break;
 		}
 	}
-	
+
+	public boolean isAlive(){
+		return this.alive;
+	}
 	public int getCoins_value() {
 		return this.coins_value;
 	}
