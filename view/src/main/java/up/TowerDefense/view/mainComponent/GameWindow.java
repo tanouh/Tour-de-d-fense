@@ -8,6 +8,9 @@ import java.awt.*;
 public class GameWindow extends JFrame {
     public static int widthScreen;
     public static int heightScreen;
+    public static Color background = new Color(173,175,192);
+    public static Color foreground = new Color(30,35,71);
+    public static String font = "Bernard MT Condensed";
 
     /**
      * Cree la fenetre de jeu

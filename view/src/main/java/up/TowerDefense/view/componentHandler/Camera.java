@@ -1,6 +1,7 @@
 package up.TowerDefense.view.componentHandler;
 
 
+import up.TowerDefense.view.mainComponent.GameWindow;
 import up.TowerDefense.view.mainComponent.ScreenPanel;
 
 import java.awt.*;
@@ -65,7 +66,7 @@ public class Camera {
     le déplacement de la caméra
      */
     public void draw (Graphics2D g){
-        g.setColor(screenPanel.background);
+        g.setColor(GameWindow.background);
         g.fillRect(screenX,screenY, screenPanel.tileSize, screenPanel.tileSize);
     }
 

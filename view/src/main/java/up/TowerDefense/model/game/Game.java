@@ -5,13 +5,15 @@ import up.TowerDefense.model.object.Obstacle;
 
 public class Game {
 
-    private final static double STARTING_CREDITS= 500;
+    private final static double STARTING_CREDITS= 5000;
     private final static int STARTING_LIVES = 16;
     private static double credits = STARTING_CREDITS;
     private static int lives = STARTING_LIVES;
     private static Board board = new Board();
     private static int numberWavesTotal;
+    private static int level = 1;
     private static int wavesLeft;
+    private static int nbEnemyLeft = 0;
     private static int bgMusic;
     private static int soundLevel;
     private static int gameSpeed;
@@ -24,18 +26,6 @@ public class Game {
             "Anticorps",
             "Mur"
     };
-
-    /**
-     * inutile ?
-     */
-//    private static Game instance = null;
-//
-//    public static Game getPlayer(){
-//        if( instance == null){
-//            instance = new Game();
-//        }
-//        return instance;
-//    }
 
     public Game(int numberWaves, int backgroundMusic, int gameSound, int speed){
         numberWavesTotal = numberWaves;
@@ -51,7 +41,9 @@ public class Game {
     }
     public static int getLives() { return lives; }
     public static Board getBoard(){ return board; }
+    public static int getLevel(){ return level; }
     public static int getWavesLeft(){ return wavesLeft;}
+    public static int getNbEnemyLeft(){ return nbEnemyLeft;}
     public static String[] getListTowerTypes(){ return listTowerTypes; }
     public static int getCurrentlyPlacing(){ return currentlyPlacing; }
 
@@ -76,5 +68,13 @@ public class Game {
         bgMusic = backgroundMusic;
         soundLevel = gameSound;
         gameSpeed = speed;
+    }
+
+    public static boolean gameWon(){
+        return (wavesLeft == 0 && nbEnemyLeft == 0 && lives > 0);
+    }
+
+    public static boolean gameLost(){
+        return ((wavesLeft > 0 || nbEnemyLeft > 0) && lives == 0);
     }
 }

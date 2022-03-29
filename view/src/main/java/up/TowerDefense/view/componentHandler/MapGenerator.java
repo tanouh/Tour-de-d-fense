@@ -29,7 +29,7 @@ import static up.TowerDefense.model.object.Obstacle.*;
 
 public class MapGenerator {
 
-    public static MapGenerator REF;
+//    public static MapGenerator REF;
     public Board gameBoard;
     private ScreenPanel screenPanel;
     private BufferedImage mapImage;
@@ -39,12 +39,13 @@ public class MapGenerator {
     private int nbCol;
     private int nbRow;
 
-    public static ArrayList<PlaceableObstacle> obstaclesList = new ArrayList<PlaceableObstacle>();
-    public static ArrayList<Personnage> charactersList = new ArrayList<>();
+    public static ArrayList<PlaceableObstacle> obstaclesList;
+    public static ArrayList<Personnage> charactersList;
 
 
     public MapGenerator(ScreenPanel screenPanel, String imagePath){
-
+        obstaclesList = new ArrayList<PlaceableObstacle>();
+        charactersList = new ArrayList<>();
         this.screenPanel = screenPanel;
 
         mapImage = StaticFunctions.loadImage(imagePath);
@@ -97,8 +98,8 @@ public class MapGenerator {
     private void setUpTile(Tile t, int num){
         switch (num){
             case 0 :
-            case 4 : t.placeObstacle(FOREST); break;
-            case 2 : t.placeObstacle(WALL); break;
+            case 4 : t.placeObstacle(VEIN); break;
+            case 2 : t.placeObstacle(SKIN); break;
             case 3 : t.placeObstacle(WATER); break;
             case 1 :
             default: t.placeRoad(); break;
