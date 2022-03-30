@@ -20,10 +20,15 @@ public class InfoPanel extends JPanel {
         String text = scanner.useDelimiter("\\A").next();
         scanner.close();
         String[] info = text.split("[*]");
-        infoDisplay = new JLabel(info[currentInfo-1]);
 
-        infoDisplay.setForeground(GameWindow.foreground);
-        infoDisplay.setFont(new Font(GameWindow.font, Font.PLAIN, GameWindow.widthScreen/50));
-        this.add(infoDisplay);
+        JEditorPane pane = new JEditorPane();
+        pane.setContentType("text/html");
+        pane.setText(info[currentInfo-1]);
+        this.add(pane);
+
+//        infoDisplay = new JLabel(info[currentInfo-1]);
+//        infoDisplay.setForeground(GameWindow.foreground);
+//        infoDisplay.setFont(new Font(GameWindow.font, Font.PLAIN, GameWindow.widthScreen/50));
+//        this.add(infoDisplay);
     }
 }
