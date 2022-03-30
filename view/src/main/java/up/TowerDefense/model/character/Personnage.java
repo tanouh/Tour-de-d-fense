@@ -26,9 +26,9 @@ public abstract class Personnage implements Movable{
 	private int currentHealth;
 	
 	/**
-	 * vitesse d'attaque du personnage
+	 * vitesse d'attaque (plus précisément le nombre de secondes pour effectuer un pas)du personnage
 	 */
-	private float speed;
+	private long speed;
 	
 	/**
 	 * taille du personnage par rapport � une case (coefficient multiplicatif)
@@ -69,7 +69,7 @@ public abstract class Personnage implements Movable{
 	 * @param maxHealth definit la vie maximale du personnage
 	 * @param speed definit la vitesse du personnage
 	 */
-	public Personnage(Position position, int size, float resistance, int maxHealth, float speed, String imgName) {
+	public Personnage(Position position, int size, float resistance, int maxHealth, long speed, String imgName) {
 		this.position = position;
 		this.maxHealth = maxHealth;
 		this.currentHealth = this.maxHealth;
@@ -86,14 +86,14 @@ public abstract class Personnage implements Movable{
 	 * @param size definit la taille du personnage
 	 */
 	public Personnage(int size) {
-		this(new Position(0.00,0.00), size, 1.00f, 100, 1.00f, "/null.png");
+		this(new Position(0.00,0.00), size, 1.00f, 100, 1000, "/null.png");
 	}
 	
 	/**
 	 * Construit un personnage de taille 0.50 (par rapport � 1 case) � la position par defaut 0.00
 	 */
 	public Personnage() {
-		this(new Position(0.00,0.00), 1, 1.00f, 100, 1.00f, "/null.png");
+		this(new Position(0.00,0.00), 1, 1.00f, 100, 1000, "/null.png");
 	}
 	
 	public final void moveTo(Position position) {
@@ -124,7 +124,7 @@ public abstract class Personnage implements Movable{
 		return this.resistance;
 	}
 	
-	public float getSpeed() {
+	public long getSpeed() {
 		return this.speed;
 	}
 	
@@ -156,7 +156,7 @@ public abstract class Personnage implements Movable{
 		this.currentHealth = newlifePoint;
 	}
 	
-	public void setSpeed(float newSpeed) {
+	public void setSpeed(long newSpeed) {
 		this.speed = newSpeed;
 	}
 	

@@ -129,17 +129,13 @@ public class Enemy extends Personnage implements Movable{
 	**/
 	public void update_position(){
 
-		if(System.currentTimeMillis() - travelTime > 750){
+		if(System.currentTimeMillis() - travelTime > this.getSpeed()){
 			/* todo : l'intervalle de temps entre deux pas est arbitraire
 			    à stocker selon le type d'enemi je suppose
 			    => au lieu de mettre un attribut float pour speed mettre plutôt un long pour gérer cet intervalle
 			 */
 			travelTime = System.currentTimeMillis();
 			this.position.x++;
-			/*if(this.position.x == Game.getBoard().sizeX() - 1){
-				this.position.x=0;
-			}*/
-
 
 			//this.position = path.GetPos(System.currentTimeMillis()-lifeTime, this.getSpeed());
 		}
@@ -181,7 +177,7 @@ public class Enemy extends Personnage implements Movable{
 	 * augmente la capacite speed de l'ennemi de 0.15
 	 */
 	public void upgrade_speed() {
-		this.setSpeed((float)(this.getSpeed()+0.15));
+		this.setSpeed((this.getSpeed()-500));
 	}
 	
 	/**

@@ -17,6 +17,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import static up.TowerDefense.view.mainComponent.ScreenPanel.*;
 import static up.TowerDefense.view.componentHandler.TileDisplayManager.*;
@@ -190,7 +191,7 @@ public class MapGenerator {
         for (PlaceableObstacle ob : obstaclesList ){
             drawElementaryComponent(g,ob.position,ob.getImage(),ob.getSize());
         }
-        for (Personnage perso : charactersList ){
+        for (Personnage perso : new CopyOnWriteArrayList<>(charactersList)){
             drawElementaryComponent(g,perso.position, perso.getImage(),perso.getSize());
         }
     }
