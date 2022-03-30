@@ -49,8 +49,8 @@ public class EnemySpawn {
     /*
     TODO : à compléter
      */
-    public static EnemySpawn getBacterium(){
-         return new EnemySpawn(PresetEnemy.Bacterium(), 10 );
+    public static EnemySpawn getBacterium(int order){
+         return new EnemySpawn(PresetEnemy.Bacterium(), 5*order );
     }
 
     public static EnemySpawn getVirus(){
