@@ -161,6 +161,8 @@ public class PresetTower {
 		return this.power;
 	}
 
+	public double getPrice(){ return price; }
+
 	public double getUpgradeCost() {
 		return this.upgradeCost;
 	}
