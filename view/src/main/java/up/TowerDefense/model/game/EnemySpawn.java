@@ -4,40 +4,26 @@ import up.TowerDefense.model.character.Enemy;
 import up.TowerDefense.model.character.PresetEnemy;
 import up.TowerDefense.model.map.Board;
 import up.TowerDefense.model.object.Position;
-import up.TowerDefense.view.componentHandler.MapGenerator;
 
 import java.util.Random;
-import java.util.TimerTask;
+
+import static up.TowerDefense.view.componentHandler.MapGenerator.charactersList;
 
 /**
  * le contenu des sous vagues du jeu
  */
 public class EnemySpawn {
-    public final Position spawnPoint; // position à laquelle va apparaitre les enemy
     public PresetEnemy enemy;
-    private static long INTERVAL = 500;
     public int quantity;
+    private boolean finishedSpawn = false;
 
-    /*La quantité de temps entre le spawn de deux enemis successifs*/
-    private long spawnTime;
+    private int count;
 
-    public EnemySpawn(PresetEnemy enemy, int quantity, Position spawnPoint) {
+    public EnemySpawn(PresetEnemy enemy, int quantity) {
         this.enemy = enemy;
         this.quantity = quantity;
-        this.spawnPoint = spawnPoint;
+        this.count=0;
     }
-
-    public PresetEnemy getEnemy(){
-        return this.enemy;
-    }
-
-    public long getInterval(){
-        return this.INTERVAL;
-    }
-    public int getQuantity(){
-        return this.quantity;
-    }
-
     /**
      * Retourne un point de frai aléatoire
      */
@@ -47,16 +33,35 @@ public class EnemySpawn {
         return board.getSpawnablePoint().get(i);
     }
 
+    /**
+     * Lance une sous-vagues d'ennemis de même type
+     */
+    public void spawnEnemies(){
+        charactersList.add(new Enemy(this.enemy, getRandomSpawnPosition(Game.getBoard())));
+        count++;
+        if(count == quantity){
+            finishedSpawn = true;
+        }
+
+        //fixme: à un certain moment certains ennemis se chevauchent sur l'interface graphique , problème à travailler plus tard
+    }
+
+    /*
+    TODO : à compléter
+     */
     public static EnemySpawn getBacterium(){
-         Position spawnPoint = getRandomSpawnPosition(Game.getBoard());
-         return new EnemySpawn(PresetEnemy.Bacterium(), 10,spawnPoint );
+         return new EnemySpawn(PresetEnemy.Bacterium(), 10 );
     }
 
+    public static EnemySpawn getVirus(){
+        return new EnemySpawn(PresetEnemy.Virus(), 10);
 
-    public void spawnEnemy() {
-        //Mettre les ennemis dans mapGen un à un
-
-        //fixme : voir si on n'a pas besoin de nouveau threads pour gérer les vagues
+    }
+    public boolean isFinished(){
+        return finishedSpawn;
     }
 
+    public void setFinishedSpawn(boolean finishedSpawn) {
+        this.finishedSpawn = finishedSpawn;
+    }
 }

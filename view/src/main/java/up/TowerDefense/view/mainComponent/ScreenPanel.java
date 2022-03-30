@@ -1,8 +1,7 @@
 package up.TowerDefense.view.mainComponent;
 
-import org.w3c.dom.ls.LSOutput;
 import up.TowerDefense.model.game.Game;
-import up.TowerDefense.model.game.Subwave;
+import up.TowerDefense.model.game.Wave;
 import up.TowerDefense.view.componentHandler.Camera;
 import up.TowerDefense.view.componentHandler.KeyAction;
 import up.TowerDefense.view.componentHandler.MapGenerator;
@@ -46,7 +45,7 @@ public class ScreenPanel extends JPanel implements Runnable{
 
     public MouseHandler mouseHandler; // pour contrôler les informations reçues à partir de la souris
     public Camera camera; // pour pouvoir déplacer le champs de vision
-    public Timer timer; // un chronomètre pour gérer le lancement des vagues d'ennemis
+    public static Timer timer; // un chronomètre pour gérer le lancement des vagues d'ennemis
 
     public long TIME;
 
@@ -72,7 +71,7 @@ public class ScreenPanel extends JPanel implements Runnable{
         this.addMouseListener(mouseHandler);
 
         timer = new Timer();
-        timer.schedule(new Subwave(),10000,2000); // Planifie les actions , paramètres = la tâche à effectuer,
+        timer.schedule(new Wave(),Wave.DELAY,Wave.TIME_INTERVAL); // Planifie les actions , paramètres = la tâche à effectuer,
                                                                 // le délai avant la première exécution et l'intervalle de temps entre deux exécutions (en millisecondes)
 
         this.setFocusable(true);

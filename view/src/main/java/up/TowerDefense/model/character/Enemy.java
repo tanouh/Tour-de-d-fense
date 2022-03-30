@@ -12,9 +12,6 @@ import up.TowerDefense.model.object.Tower;
 import up.TowerDefense.model.object.Obstacle;
 import java.util.Random;
 
-import static  up.TowerDefense.model.game.StaticFunctions.*;
-import static  up.TowerDefense.model.map.Pathfinding.*;
-
 
 /*TODO Les lignes reliées à path devraient être décommentées lorsque le problème relié à pathfinding sera réglé
  */
@@ -132,7 +129,7 @@ public class Enemy extends Personnage implements Movable{
 	**/
 	public void update_position(){
 
-		if(System.currentTimeMillis() - travelTime > 500){
+		if(System.currentTimeMillis() - travelTime > 750){
 			/* todo : l'intervalle de temps entre deux pas est arbitraire
 			    à stocker selon le type d'enemi je suppose
 			    => au lieu de mettre un attribut float pour speed mettre plutôt un long pour gérer cet intervalle
