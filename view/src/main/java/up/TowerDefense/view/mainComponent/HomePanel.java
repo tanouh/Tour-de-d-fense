@@ -17,10 +17,10 @@ public class HomePanel extends JPanel{
     private Button options = new Button();
 
     //stockage des options choisies (stockage dans une List ?) :
-    private int numberWaves = 5;
-    private int backgroundMusic = 5;
-    private int gameSound = 5;
-    private int gameSpeed = 2;
+    private static int  numberWaves = 5;
+    private static int backgroundMusic = 5;
+    private static int gameSound = 5;
+    private static int gameSpeed = 2;
     //...
 
     public HomePanel(GameWindow gameWindow){
@@ -73,4 +73,7 @@ public class HomePanel extends JPanel{
         this.gameSpeed = gameSpeed;
     }
 
+    public static int[] getOptions(){
+        return new int[]{numberWaves, backgroundMusic, gameSound, gameSpeed};
+    }
 }

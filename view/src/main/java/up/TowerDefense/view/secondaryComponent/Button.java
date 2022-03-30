@@ -36,7 +36,7 @@ public class Button extends JButton {
                         backgroundMusic, gameSound, gameSpeed);
             }
             else {
-                nextScreen = new GamePanel(gameWindow, numberWaves, backgroundMusic, gameSound, gameSpeed);
+                nextScreen = new GamePanel(gameWindow, numberWaves, backgroundMusic, gameSound, gameSpeed, 1);
             }
             gameWindow.getContentPane().removeAll();
             gameWindow.getContentPane().add(nextScreen);
@@ -185,6 +185,44 @@ public class Button extends JButton {
         this.setForeground(GameWindow.foreground);
         this.addActionListener(event -> {
             Game.setCurrentlyPlacing(typeObstacle);
+        });
+    }
+
+    public void tryAgainButton(boolean hasWon, GameWindow gameWindow){
+        JLabel tryAgain;
+        if (hasWon){
+            tryAgain = new JLabel("Passer au niveau " + (Game.getLevel()+1));
+        }else{
+            tryAgain = new JLabel("Reessayer");
+        }
+        tryAgain.setForeground(GameWindow.background);
+        tryAgain.setFont(new Font(GameWindow.font, Font.PLAIN, GameWindow.widthScreen/70));
+        tryAgain.setHorizontalAlignment(JLabel.CENTER);
+        this.setHorizontalAlignment(JButton.CENTER);
+        this.centerText(tryAgain);
+        this.setBackground(GameWindow.foreground);
+        this.setForeground(GameWindow.background);
+        this.addActionListener(event -> {
+            JPanel nextPanel;
+            if (hasWon){
+                nextPanel = new GamePanel(gameWindow,
+                        HomePanel.getOptions()[0],
+                        HomePanel.getOptions()[1],
+                        HomePanel.getOptions()[2],
+                        HomePanel.getOptions()[3],
+                        Game.getLevel()+1);
+            }else{
+                nextPanel = new GamePanel(gameWindow,
+                        HomePanel.getOptions()[0],
+                        HomePanel.getOptions()[1],
+                        HomePanel.getOptions()[2],
+                        HomePanel.getOptions()[3],
+                        Game.getLevel());
+            }
+            gameWindow.getContentPane().removeAll();
+            gameWindow.getContentPane().add(nextPanel);
+            gameWindow.getContentPane().revalidate();
+            gameWindow.getContentPane().repaint();
         });
     }
 
