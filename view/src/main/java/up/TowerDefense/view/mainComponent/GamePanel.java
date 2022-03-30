@@ -26,6 +26,14 @@ public class GamePanel extends JPanel {
     private JLabel creditsLeft;
     private JLabel lifesLeft;
 
+    //Button du sideMenu :
+    private Button[] towerTypes = new Button[5];
+    //0 : Tour test
+    //1 : Tour Anti_Champi
+    //2 : Leucocyte T
+    //3 : Anticorps
+    //4 : Mur
+
     public GamePanel(GameWindow gameWindow, int numberWaves, int backgroundMusic,
                      int gameSound, int gameSpeed, int level){
         this.gameWindow = gameWindow;
@@ -84,21 +92,21 @@ public class GamePanel extends JPanel {
         title.setVerticalAlignment(JLabel.CENTER);
         sideMenu.add(title, BorderLayout.NORTH);
 
-        Button towerType1 = new Button();
-        Button towerType2 = new Button();
-        Button towerType3 = new Button();
-        Button towerType4 = new Button();
-        Button wall = new Button();
-        towerType1.sideMenuButton(0); //TourTest
-        towerType2.sideMenuButton(1); //Tour anti-champi
-        towerType3.sideMenuButton(2); //Leucocyte T"
-        towerType4.sideMenuButton(3); //Anticorps
-        wall.sideMenuButton(4); //Mur
-        listTower.add(towerType1);
-        listTower.add(towerType2);
-        listTower.add(towerType3);
-        listTower.add(towerType4);
-        listTower.add(wall);
+        for (int i = 0; i < towerTypes.length; i++){
+            towerTypes[i] = new Button();
+            towerTypes[i].sideMenuButton(i);
+            listTower.add(towerTypes[i]);
+        }
+//        towerType1.sideMenuButton(0); //TourTest
+//        towerType2.sideMenuButton(1); //Tour anti-champi
+//        towerType3.sideMenuButton(2); //Leucocyte T"
+//        towerType4.sideMenuButton(3); //Anticorps
+//        wall.sideMenuButton(4); //Mur
+//        listTower.add(towerType1);
+//        listTower.add(towerType2);
+//        listTower.add(towerType3);
+//        listTower.add(towerType4);
+//        listTower.add(wall);
         sideMenu.add(listTower, BorderLayout.CENTER);
 
         Button optionMenu = new Button();
@@ -118,6 +126,12 @@ public class GamePanel extends JPanel {
         enemyLeft.setText("Ennemis restants : ");
         creditsLeft.setText("Argent : " + Game.getCredits());
         lifesLeft.setText("Vies : " + Game.getLives());
+    }
+
+    public void updateSideMenu(){
+        for (int i = 0; i < towerTypes.length; i++){
+            towerTypes[i].updateSideMenuButton(i);
+        }
     }
 
     public Game getGame(){ return this.game; }

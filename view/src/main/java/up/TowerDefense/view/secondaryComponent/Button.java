@@ -1,7 +1,9 @@
 package up.TowerDefense.view.secondaryComponent;
 
 import up.TowerDefense.model.game.Game;
+import up.TowerDefense.model.object.PresetTower;
 import up.TowerDefense.model.object.TowerTest;
+import up.TowerDefense.model.object.Wall;
 import up.TowerDefense.view.mainComponent.*;
 
 import javax.swing.*;
@@ -11,6 +13,7 @@ import java.awt.*;
 import java.util.Optional;
 
 public class Button extends JButton {
+    private JLabel label;
 
     public Button(){
         super();
@@ -23,10 +26,10 @@ public class Button extends JButton {
      */
     public void startButton(GameWindow gameWindow, JPanel callPanel, int numberWaves, int backgroundMusic,
                             int gameSound, int gameSpeed){
-        JLabel start = new JLabel("Demarrer", JLabel.CENTER);
-        start.setForeground(GameWindow.background);
-        start.setFont(new Font(GameWindow.font,Font.PLAIN, GameWindow.widthScreen/70));
-        this.centerText(start);
+        label = new JLabel("Demarrer", JLabel.CENTER);
+        label.setForeground(GameWindow.background);
+        label.setFont(new Font(GameWindow.font,Font.PLAIN, GameWindow.widthScreen/70));
+        this.centerText(label);
         this.setBackground(GameWindow.foreground);
         this.setPreferredSize(new Dimension(200, gameWindow.getHeight()/10));
         this.addActionListener(event -> {
@@ -49,10 +52,10 @@ public class Button extends JButton {
      * Ajoute un bouton Quitter qui arrete le programme et ferme la fenetre
      */
     public void leaveButton(int gameWindowWidth, int gameWindowHeight){
-        JLabel leave = new JLabel("Quitter", JLabel.CENTER);
-        leave.setFont(new Font(GameWindow.font,Font.PLAIN, GameWindow.widthScreen/70));
-        leave.setForeground(GameWindow.background);
-        this.centerText(leave);
+        label = new JLabel("Quitter", JLabel.CENTER);
+        label.setFont(new Font(GameWindow.font,Font.PLAIN, GameWindow.widthScreen/70));
+        label.setForeground(GameWindow.background);
+        this.centerText(label);
         this.setBackground(GameWindow.foreground);
         this.setPreferredSize(new Dimension(gameWindowWidth,gameWindowHeight/10));
         this.addActionListener(event -> System.exit(0));
@@ -62,10 +65,10 @@ public class Button extends JButton {
      * Cree un bouton Options qui envoie vers un OptionPanel
      */
     public void optionButton(GameWindow gameWindow, HomePanel homePanel, GamePanel gamePanel, JPanel returnPanel){
-        JLabel options = new JLabel("Options", JLabel.CENTER);
-        options.setForeground(GameWindow.background);
-        options.setFont(new Font(GameWindow.font,Font.PLAIN, GameWindow.widthScreen/70));
-        this.centerText(options);
+        label = new JLabel("Options", JLabel.CENTER);
+        label.setForeground(GameWindow.background);
+        label.setFont(new Font(GameWindow.font,Font.PLAIN, GameWindow.widthScreen/70));
+        this.centerText(label);
         this.setBackground(GameWindow.foreground);
         this.addActionListener(event -> {
             OptionPanel optionPanel = new OptionPanel(gameWindow, homePanel, gamePanel, returnPanel);
@@ -80,10 +83,10 @@ public class Button extends JButton {
      * Cree un bouton qui renvoie a la derniere info lue (supposee existante)
      */
     public void lastInfoButton(WaitingPanel waitingScreen, int currentInfo){
-        JLabel lastInfo = new JLabel("Precedent");
-        lastInfo.setForeground(GameWindow.background);
-        lastInfo.setFont(new Font(GameWindow.font,Font.PLAIN, GameWindow.widthScreen/70));
-        this.centerText(lastInfo);
+        label = new JLabel("Precedent");
+        label.setForeground(GameWindow.background);
+        label.setFont(new Font(GameWindow.font,Font.PLAIN, GameWindow.widthScreen/70));
+        this.centerText(label);
         this.setBackground(GameWindow.foreground);
         this.addActionListener(event -> {
             waitingScreen.setCurrentInfo(currentInfo-1);
@@ -95,10 +98,10 @@ public class Button extends JButton {
      * Cree un bouton qui renvoie a la prochaine info a lire (supposee existante)
      */
     public void nextInfoButton(WaitingPanel waitingScreen, int currentInfo){
-        JLabel nextInfo = new JLabel("Suivant");
-        nextInfo.setForeground(GameWindow.background);
-        nextInfo.setFont(new Font(GameWindow.font,Font.PLAIN, GameWindow.widthScreen/70));
-        this.centerText(nextInfo);
+        label = new JLabel("Suivant");
+        label.setForeground(GameWindow.background);
+        label.setFont(new Font(GameWindow.font,Font.PLAIN, GameWindow.widthScreen/70));
+        this.centerText(label);
         this.setBackground(GameWindow.foreground);
         this.addActionListener(event -> {
             waitingScreen.setCurrentInfo(currentInfo+1);
@@ -111,11 +114,11 @@ public class Button extends JButton {
      * affiche le HomePanel
      */
     public void applyButtonInHome(GameWindow gameWindow, OptionPanel optionPanel, HomePanel homePanel){
-        JLabel apply = new JLabel("Valider");
+        label = new JLabel("Valider");
         this.setBackground(GameWindow.foreground);
-        apply.setForeground(GameWindow.background);
-        apply.setFont(new Font(GameWindow.font, Font.PLAIN, GameWindow.widthScreen/70));
-        this.centerText(apply);
+        label.setForeground(GameWindow.background);
+        label.setFont(new Font(GameWindow.font, Font.PLAIN, GameWindow.widthScreen/70));
+        this.centerText(label);
         this.addActionListener(event -> {
             int numberWaves = optionPanel.getNumberWaves().getValue();
             int backgroundMusic = optionPanel.getBackgroundMusic().getValue();
@@ -134,11 +137,11 @@ public class Button extends JButton {
      * affiche le GamePanel
      */
     public void applyButtonInGame(GameWindow gameWindow, OptionPanel optionPanel, GamePanel gamePanel){
-        JLabel apply = new JLabel("Valider");
+        label = new JLabel("Valider");
         this.setBackground(GameWindow.foreground);
-        apply.setForeground(GameWindow.background);
-        apply.setFont(new Font(GameWindow.font, Font.PLAIN, GameWindow.widthScreen/70));
-        this.centerText(apply);
+        label.setForeground(GameWindow.background);
+        label.setFont(new Font(GameWindow.font, Font.PLAIN, GameWindow.widthScreen/70));
+        this.centerText(label);
         this.addActionListener(event -> {
             int backgroundMusic = optionPanel.getBackgroundMusic().getValue();
             int gameSound = optionPanel.getGameSound().getValue();
@@ -156,11 +159,11 @@ public class Button extends JButton {
      */
     public void abandonButton(GameWindow gameWindow){
         Game.reset();
-        JLabel abandon = new JLabel("Abandonner");
+        label = new JLabel("Abandonner");
         this.setBackground(GameWindow.foreground);
-        abandon.setForeground(GameWindow.background);
-        abandon.setFont(new Font(GameWindow.font, Font.PLAIN, GameWindow.widthScreen/70));
-        this.centerText(abandon);
+        label.setForeground(GameWindow.background);
+        label.setFont(new Font(GameWindow.font, Font.PLAIN, GameWindow.widthScreen/70));
+        this.centerText(label);
         this.addActionListener(event -> {
             gameWindow.getContentPane().removeAll();
             gameWindow.getContentPane().add(new HomePanel(gameWindow));
@@ -174,32 +177,68 @@ public class Button extends JButton {
      * permet de placer un obstacle de cette sorte
      */
     public void sideMenuButton(int typeObstacle){
-        JLabel typeTower = new JLabel(Game.getListTowerTypes()[typeObstacle]);
-        typeTower.setForeground(GameWindow.foreground);
-        typeTower.setFont(new Font(GameWindow.font, Font.PLAIN, GameWindow.widthScreen/70));
-        typeTower.setHorizontalAlignment(JLabel.CENTER);
+        label = new JLabel(Game.getListTowerTypes()[typeObstacle]);
+        label.setFont(new Font(GameWindow.font, Font.PLAIN, GameWindow.widthScreen/70));
+        label.setHorizontalAlignment(JLabel.CENTER);
+        label.setForeground(GameWindow.foreground);
+        this.setBackground(GameWindow.background);
         this.setBorder(new LineBorder(GameWindow.foreground, 2));
         this.setHorizontalAlignment(JButton.CENTER);
-        this.centerText(typeTower);
-        this.setBackground(GameWindow.background);
-        this.setForeground(GameWindow.foreground);
+        this.centerText(label);
         this.addActionListener(event -> {
             Game.setCurrentlyPlacing(typeObstacle);
         });
     }
 
-    public void tryAgainButton(boolean hasWon, GameWindow gameWindow){
-        JLabel tryAgain;
-        if (hasWon){
-            tryAgain = new JLabel("Passer au niveau " + (Game.getLevel()+1));
-        }else{
-            tryAgain = new JLabel("Reessayer");
+    public void updateSideMenuButton(int typeObstacle){
+        if (typeObstacle == Game.getCurrentlyPlacing()) {
+            this.label.setForeground(GameWindow.background);
+            this.setBackground(GameWindow.foreground);
+            this.setEnabled(false);
+        }else {
+            double price;
+            switch (typeObstacle) {
+                case 0:
+                    price = PresetTower.TowerTest().getPrice();
+                    break;
+                case 1:
+                    price = PresetTower.Anti_champis().getPrice();
+                    break;
+                case 2:
+                    price = PresetTower.Leucocyte_T().getPrice();
+                    break;
+                case 3:
+                    price = PresetTower.Anticorps().getPrice();
+                    break;
+                case 4:
+                    price = Wall.getPrice();
+                    break;
+                default:
+                    price = 0;
+            }
+            if (Game.getCredits() < price) {
+                this.label.setForeground(Color.GRAY);
+                this.setBackground(Color.WHITE);
+                this.setEnabled(false);
+            } else {
+                this.label.setForeground(GameWindow.foreground);
+                this.setBackground(GameWindow.background);
+                this.setEnabled(true);
+            }
         }
-        tryAgain.setForeground(GameWindow.background);
-        tryAgain.setFont(new Font(GameWindow.font, Font.PLAIN, GameWindow.widthScreen/70));
-        tryAgain.setHorizontalAlignment(JLabel.CENTER);
+    }
+
+    public void tryAgainButton(boolean hasWon, GameWindow gameWindow){
+        if (hasWon){
+            label = new JLabel("Passer au niveau " + (Game.getLevel()+1));
+        }else{
+            label = new JLabel("Reessayer");
+        }
+        label.setForeground(GameWindow.background);
+        label.setFont(new Font(GameWindow.font, Font.PLAIN, GameWindow.widthScreen/70));
+        label.setHorizontalAlignment(JLabel.CENTER);
         this.setHorizontalAlignment(JButton.CENTER);
-        this.centerText(tryAgain);
+        this.centerText(label);
         this.setBackground(GameWindow.foreground);
         this.setForeground(GameWindow.background);
         this.addActionListener(event -> {

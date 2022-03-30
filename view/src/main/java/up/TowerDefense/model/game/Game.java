@@ -5,7 +5,7 @@ import up.TowerDefense.model.object.Obstacle;
 
 public class Game {
 
-    private final static double STARTING_CREDITS= 500;
+    private final static double STARTING_CREDITS= 5000;
     private final static int STARTING_LIVES = 16;
     private static double credits = STARTING_CREDITS;
     private static int lives = STARTING_LIVES;
@@ -72,8 +72,7 @@ public class Game {
     }
 
     public static boolean gameWon(){
-//        return (wavesLeft == 0 && nbEnemyLeft == 0 && lives > 0);
-        return credits == 0;
+        return (wavesLeft == 0 && nbEnemyLeft == 0 && lives > 0);
     }
 
     public static boolean gameLost(){
