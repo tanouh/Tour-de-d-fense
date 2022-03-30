@@ -3,9 +3,7 @@ package up.TowerDefense.view.componentHandler;
 
 import up.TowerDefense.model.character.Enemy;
 import up.TowerDefense.model.character.Personnage;
-import up.TowerDefense.model.character.PresetEnemy;
 import up.TowerDefense.model.game.Game;
-import up.TowerDefense.model.game.StaticFunctions;
 import up.TowerDefense.model.map.Board;
 import up.TowerDefense.model.map.Tile;
 import up.TowerDefense.model.object.PlaceableObstacle;
@@ -14,8 +12,10 @@ import up.TowerDefense.model.object.TowerTest;
 import up.TowerDefense.model.object.Wall;
 import up.TowerDefense.view.mainComponent.ScreenPanel;
 
+import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import static up.TowerDefense.view.mainComponent.ScreenPanel.*;
@@ -43,12 +43,13 @@ public class MapGenerator {
     public static ArrayList<Personnage> charactersList;
 
 
+
     public MapGenerator(ScreenPanel screenPanel, String imagePath){
         obstaclesList = new ArrayList<PlaceableObstacle>();
         charactersList = new ArrayList<>();
         this.screenPanel = screenPanel;
 
-        mapImage = StaticFunctions.loadImage(imagePath);
+        mapImage = this.loadImage(imagePath);
         this.nbCol = mapImage.getWidth();
         this.nbRow = mapImage.getHeight();
 
@@ -89,6 +90,16 @@ public class MapGenerator {
         }catch(Exception e){
             e.printStackTrace();
         }
+    }
+
+    public  BufferedImage loadImage(String image){
+        BufferedImage img = null;
+        try{
+            img = ImageIO.read(this.getClass().getResourceAsStream(image));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return img;
     }
 
     /**

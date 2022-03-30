@@ -1,8 +1,12 @@
 package up.TowerDefense.model.character;
 
+import up.TowerDefense.model.game.StaticFunctions;
 import up.TowerDefense.model.object.Position;
+
+import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
-import static up.TowerDefense.model.game.StaticFunctions.*;
+import java.io.IOException;
+
 
 public abstract class Personnage implements Movable{
 	private BufferedImage image;
@@ -72,8 +76,9 @@ public abstract class Personnage implements Movable{
 		this.speed = speed;
 		this.size = size;
 		this.resistance = resistance;
-		image = loadImage(imgName);
+		image = this.loadImage(imgName);
 	}
+
 	
 	/**
 	 * Construit un personnage de taille "size" � une position par defaut 0.00
@@ -163,4 +168,13 @@ public abstract class Personnage implements Movable{
 		this.position = newPosition;
 	}
 
+	public  BufferedImage loadImage(String image){
+		BufferedImage img = null;
+		try{
+			img = ImageIO.read(StaticFunctions.class.getResourceAsStream(image));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return img;
+	}
 }
