@@ -17,17 +17,17 @@ import static up.TowerDefense.view.componentHandler.KeyAction.Action.*;
 
 public class ScreenPanel extends JPanel implements Runnable{
     //Paramètrages de l'écran
-    public static int sizeCase = 20;
-    public static int nbCol = GameWindow.widthScreen*4/(5*sizeCase);
-    public static int nbRow = GameWindow.heightScreen*9/(10*sizeCase);
-
-    public static int windowWidth = sizeCase*nbCol;
-    public static int windowHeight = sizeCase*nbRow;
-
-    public static int originalTileSize = 8;
-    public static int scale = 3;
-
+    public static int originalTileSize = GameWindow.widthScreen*95/12000;
+    public static int scale = 2;
     public static int tileSize = originalTileSize*scale;
+    ;
+
+    public static int sizeCase = 20;
+    public static int nbCol = GameWindow.widthScreen*4/(5*originalTileSize);
+    public static int nbRow = GameWindow.heightScreen*9/(10*originalTileSize);
+
+    public static int windowWidth = originalTileSize*nbCol;
+    public static int windowHeight = originalTileSize*nbRow;
 
     //Paramètrage du monde de jeu
     public static final int MAX_WORLD_COL = 100;

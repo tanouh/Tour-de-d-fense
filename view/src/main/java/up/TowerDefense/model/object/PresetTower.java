@@ -122,7 +122,7 @@ public class PresetTower {
      */
     public static PresetTower Anti_champis() {
 		return new PresetTower(100,5.00,2.00,200,
-				1000, 0, Tower.Type.ANTI_CHAMPIS, "/tour.png");
+				1000, 0, Tower.Type.ANTI_CHAMPIS, "/Anti_Champi.png");
 	}
     
     /**
@@ -134,7 +134,7 @@ public class PresetTower {
      */
     public static PresetTower Leucocyte_T() {
 		return new PresetTower(100,5.00,2.00,200,
-				1000, 0, Tower.Type.LEUCOCYTE_T, "/tour.png");
+				1000, 0, Tower.Type.LEUCOCYTE_T, "/LeucoT.png");
 	}
     
     /**
@@ -146,7 +146,7 @@ public class PresetTower {
      */
     public static PresetTower Anticorps() {
 		return new PresetTower(100,5.00,2.00,200,
-				1000, 0, Tower.Type.ANTICORPS, "/tour.png");
+				1000, 0, Tower.Type.ANTICORPS, "/Anticorps.png");
 	}
     
 	public int getSize() {

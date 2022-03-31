@@ -1,6 +1,8 @@
 package up.TowerDefense.view.mainComponent;
 
 import javax.swing.*;
+import javax.swing.text.html.HTMLEditorKit;
+import javax.swing.text.html.StyleSheet;
 import java.awt.*;
 import java.io.*;
 import java.util.Scanner;
@@ -20,10 +22,20 @@ public class InfoPanel extends JPanel {
         String text = scanner.useDelimiter("\\A").next();
         scanner.close();
         String[] info = text.split("[*]");
-        infoDisplay = new JLabel(info[currentInfo-1]);
 
-        infoDisplay.setForeground(GameWindow.foreground);
-        infoDisplay.setFont(new Font(GameWindow.font, Font.PLAIN, GameWindow.widthScreen/50));
-        this.add(infoDisplay);
+        JEditorPane pane = new JEditorPane();
+        pane.setContentType("text/html");
+        pane.setEditable(false);
+        HTMLEditorKit kit = new HTMLEditorKit();
+        pane.setEditorKit(kit);
+        StyleSheet styleSheet = kit.getStyleSheet();
+        styleSheet.addRule("body {background-color:" +  String.format("#%02X%02X%02X", GameWindow.background.getRed(),
+                GameWindow.background.getGreen(), GameWindow.background.getBlue()) + "; " +
+                "font-family:" + GameWindow.font + "; " +
+                "color : " +  String.format("#%02X%02X%02X", GameWindow.foreground.getRed(),
+                GameWindow.foreground.getGreen(), GameWindow.foreground.getBlue()) +
+                "}");
+        pane.setText(info[currentInfo-1]);
+        this.add(pane);
     }
 }

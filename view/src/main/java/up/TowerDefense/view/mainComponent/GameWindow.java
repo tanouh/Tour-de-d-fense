@@ -1,7 +1,5 @@
 package up.TowerDefense.view.mainComponent;
 
-import up.TowerDefense.view.mainComponent.HomePanel;
-
 import javax.swing.*;
 import java.awt.*;
 

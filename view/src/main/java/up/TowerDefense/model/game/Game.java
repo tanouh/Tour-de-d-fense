@@ -5,7 +5,7 @@ import up.TowerDefense.model.object.Obstacle;
 
 public class Game {
 
-    private final static double STARTING_CREDITS= 5000;
+    private final static double STARTING_CREDITS= 1000;
     private final static int STARTING_LIVES = 16;
     private static double credits = STARTING_CREDITS;
     private static int lives = STARTING_LIVES;
