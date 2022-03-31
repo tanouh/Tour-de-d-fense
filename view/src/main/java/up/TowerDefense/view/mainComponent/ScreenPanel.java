@@ -39,7 +39,7 @@ public class ScreenPanel extends JPanel implements Runnable{
     private Thread gameThread = null;
     public boolean paused = false;
     public MapGenerator mapGen;
-    int FPS = 60; //Frame per second
+    int FPS = 30; //Frame per second
 
 
 

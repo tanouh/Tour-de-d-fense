@@ -3,7 +3,6 @@ package up.TowerDefense.view.mainComponent;
 import javax.swing.*;
 import javax.swing.text.html.HTMLEditorKit;
 import javax.swing.text.html.StyleSheet;
-import java.awt.*;
 import java.io.*;
 import java.util.Scanner;
 
@@ -16,7 +15,6 @@ public class InfoPanel extends JPanel {
     public InfoPanel(int currentInfo){
         this.setBackground(GameWindow.background);
         this.setForeground(GameWindow.foreground);
-        JLabel infoDisplay;
         InputStream is = this.getClass().getResourceAsStream("/infos.txt");
         Scanner scanner = new Scanner(is);
         String text = scanner.useDelimiter("\\A").next();
