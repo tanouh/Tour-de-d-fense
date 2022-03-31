@@ -97,16 +97,6 @@ public class GamePanel extends JPanel {
             towerTypes[i].sideMenuButton(i);
             listTower.add(towerTypes[i]);
         }
-//        towerType1.sideMenuButton(0); //TourTest
-//        towerType2.sideMenuButton(1); //Tour anti-champi
-//        towerType3.sideMenuButton(2); //Leucocyte T"
-//        towerType4.sideMenuButton(3); //Anticorps
-//        wall.sideMenuButton(4); //Mur
-//        listTower.add(towerType1);
-//        listTower.add(towerType2);
-//        listTower.add(towerType3);
-//        listTower.add(towerType4);
-//        listTower.add(wall);
         sideMenu.add(listTower, BorderLayout.CENTER);
 
         Button optionMenu = new Button();

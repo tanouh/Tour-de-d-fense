@@ -6,10 +6,7 @@ import up.TowerDefense.model.character.Personnage;
 import up.TowerDefense.model.game.Game;
 import up.TowerDefense.model.map.Board;
 import up.TowerDefense.model.map.Tile;
-import up.TowerDefense.model.object.PlaceableObstacle;
-import up.TowerDefense.model.object.Position;
-import up.TowerDefense.model.object.TowerTest;
-import up.TowerDefense.model.object.Wall;
+import up.TowerDefense.model.object.*;
 import up.TowerDefense.view.mainComponent.ScreenPanel;
 
 import javax.imageio.ImageIO;
@@ -236,15 +233,15 @@ public class MapGenerator {
             case 0:
                 obstacle = new TowerTest(posX, posY);
                 break;
-//            case 1 :
-//                obstacle = new TowerAntiMushroom(posX, posY);
-//                break;
-//            case 2 :
-//                obstacle = new Leucocyte(posX, posY);
-//                break;
-//            case 3 :
-//                obstacle = new Anticorps(posX, posY);
-//                break;
+            case 1 :
+                obstacle = new Tower(PresetTower.Anti_champis(), new Position(posX, posY));
+                break;
+            case 2 :
+                obstacle = new Tower(PresetTower.Leucocyte_T(), new Position(posX, posY));
+                break;
+            case 3 :
+                obstacle = new Tower(PresetTower.Anticorps(), new Position(posX, posY));
+                break;
             case 4:
                 obstacle = new Wall(posX, posY);
                 break;

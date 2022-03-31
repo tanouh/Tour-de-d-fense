@@ -20,6 +20,7 @@ public class ScreenPanel extends JPanel implements Runnable{
     public static int originalTileSize = GameWindow.widthScreen*95/12000;
     public static int scale = 2;
     public static int tileSize = originalTileSize*scale;
+    ;
 
     public static int sizeCase = 20;
     public static int nbCol = GameWindow.widthScreen*4/(5*originalTileSize);
@@ -128,7 +129,6 @@ public class ScreenPanel extends JPanel implements Runnable{
         gamePanel.updateHeader();
         gamePanel.updateSideMenu();
         mapGen.updateCharactersPositions();
-        scale++;
         testVictory();
     }
 

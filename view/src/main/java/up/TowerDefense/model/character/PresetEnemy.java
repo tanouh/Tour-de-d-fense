@@ -135,7 +135,7 @@ public class PresetEnemy {
 	 * @return Renvoie un objet PresetEnemy contenant toute ces informations afin de creer l'enemy
 	 */
 	public static PresetEnemy Bacterium() {
-		return new PresetEnemy(100, 500, 15, 1.00f, 1.00f, 10.00f, false, 1, 1.00f, "/bacterium.png", DestructibleObstacle.ObsType.TARGET, Enemy.Type.BACTERIUM);
+		return new PresetEnemy(100, 2000, 15, 1.00f, 1.00f, 10.00f, false, 1, 1.00f, "/bacterium.png", DestructibleObstacle.ObsType.TARGET, Enemy.Type.BACTERIUM);
 	}
 	
 	/**
@@ -155,7 +155,7 @@ public class PresetEnemy {
 	 * @return Renvoie un objet PresetEnemy contenant toute ces informations afin de creer l'enemy
 	 */
 	public static PresetEnemy Virus() {
-		return new PresetEnemy(100, 1000, 20, 1.50f, 1.00f, 15.00f, false, 1, 1.25f, "/icontest.png", DestructibleObstacle.ObsType.TARGET, Enemy.Type.VIRUS);
+		return new PresetEnemy(100, 1500, 20, 1.50f, 1.00f, 15.00f, false, 1, 1.25f, "/icontest.png", DestructibleObstacle.ObsType.TARGET, Enemy.Type.VIRUS);
 	}
 
 	/**
