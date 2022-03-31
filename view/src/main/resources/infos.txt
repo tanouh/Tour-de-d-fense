@@ -1,17 +1,6 @@
-<!DOCTYPE html>
-<html lang="fr">
-  <head>
-    <meta charset="utf-8">
-    <title>Controles</title>
-    <link rel="stylesheet" href="infos.css">
-  </head>
-  <body>
-    <h1>Controles</h1>
-    <p>p pour mettre en pause</p>
-    <p>fleches directionnelles pour deplacer la camera</p>
-  </body>
-<html>
-
+<h1>Controles</h1>
+<p>p pour mettre en pause</p>
+<p>fleches directionnelles pour deplacer la camera</p>
 *
 <h1>Information sur les TowerTest</h1>
 *
