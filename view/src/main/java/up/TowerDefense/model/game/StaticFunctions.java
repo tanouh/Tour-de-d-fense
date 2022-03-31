@@ -42,11 +42,12 @@ public class StaticFunctions {
      * @param board la carte de jeu
      * @return
      */
-    public static Position findTower(Position src, int range, Board board){
+    public static Position findTower(Position src, double range, Board board){
         int posX = (int)src.x;
         int posY = (int)src.y;
-        for (int i = - range ; i != 0 && i < range+1  ; i++){
-           for (int j = -range ; j !=0 && j < range +1 ; j++){
+        int _range = (int)range;
+        for (int i = - _range ; i != 0 && i < _range+1  ; i++){
+           for (int j = -_range ; j !=0 && j < _range +1 ; j++){
                if(check_Tower(board, posX + i, posY +j))
                    return board.getTile(posX+i, posY+j).getPos();
             }

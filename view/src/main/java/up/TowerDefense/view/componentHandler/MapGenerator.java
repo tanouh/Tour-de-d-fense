@@ -259,7 +259,7 @@ public class MapGenerator {
      * Mets à jour le chemin suivi par l'enemi, cette fonction est appelée à chaque fois qu'une tour a été placée ou supprimée de la carte
      */
     private void updateCharactersPaths() {
-        for (Personnage c : charactersList){
+        for (Personnage c : new CopyOnWriteArrayList<>(charactersList)){
             if(c instanceof Enemy){
                 ((Enemy)c).update_paths();
             }
@@ -269,8 +269,8 @@ public class MapGenerator {
     /**
      * Actualise la position de l'enemi suivant le chemin qu'il est entrain de suivre
      */
-    public void updateCharactersPositions() {
-        for (Personnage c : charactersList){
+    public synchronized void updateCharactersPositions() {
+        for (Personnage c : new CopyOnWriteArrayList<>(charactersList)){
             if(c instanceof Enemy){
                 ((Enemy)c).update_position();
             }

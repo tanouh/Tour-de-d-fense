@@ -1,5 +1,7 @@
 package up.TowerDefense.model.map;
 import up.TowerDefense.model.game.Game;
+import up.TowerDefense.model.game.StaticFunctions;
+import up.TowerDefense.model.object.DestructibleObstacle;
 import up.TowerDefense.model.object.Obstacle;
 import up.TowerDefense.model.object.PlaceableObstacle;
 import up.TowerDefense.model.object.Position;
@@ -121,8 +123,16 @@ public class Board {
                 res = pos;
             }
         }
+        /**
+         * Vérifie s'il n'y a pas de tours plus proches que la zone cible
+         */
+        if(StaticFunctions.findTower(startPos,distMin,this) != null){
+            res = StaticFunctions.findTower(startPos,distMin,this);
+        }
         return res;
     }
+
+
 
     /**
      * Renvoie les points de frai

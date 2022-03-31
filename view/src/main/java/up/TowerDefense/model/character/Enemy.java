@@ -2,6 +2,7 @@ package up.TowerDefense.model.character;
 
 import up.TowerDefense.model.game.Game;
 
+import up.TowerDefense.model.game.StaticFunctions;
 import up.TowerDefense.model.map.Board;
 import up.TowerDefense.model.map.Path;
 import up.TowerDefense.model.map.Pathfinding;
@@ -10,6 +11,9 @@ import up.TowerDefense.model.object.Position;
 import up.TowerDefense.model.object.DestructibleObstacle;
 import up.TowerDefense.model.object.Tower;
 import up.TowerDefense.model.object.Obstacle;
+import up.TowerDefense.view.componentHandler.MapGenerator;
+
+import java.util.Map;
 import java.util.Random;
 
 
@@ -79,6 +83,8 @@ public class Enemy extends Personnage implements Movable{
 	private boolean alive;
 
 
+
+
 	/**
 	 * Represente un deplacement de l'enemy vers la gauche en fonction de sa vitesse
 	 */
@@ -116,6 +122,7 @@ public class Enemy extends Personnage implements Movable{
 		//this.path = Pathfinding.FindPath(position, Game.getBoard().getNearestTargetPosition(position));
 		this.lifeTime=System.currentTimeMillis();
 		this.travelTime = System.currentTimeMillis();
+		alive = true;
 	}
 	
 	/**
@@ -127,19 +134,25 @@ public class Enemy extends Personnage implements Movable{
 	* FIXME : problème potentiel : un autre personnage pourrait être situé sur une position
 	*  sur laquelle le personnage doit aller pour une raison lamda , il faudrait mettre des tests
 	**/
+
+
 	public void update_position(){
 
 		if(System.currentTimeMillis() - travelTime > this.getSpeed()){
-			/* todo : l'intervalle de temps entre deux pas est arbitraire
-			    à stocker selon le type d'enemi je suppose
-			    => au lieu de mettre un attribut float pour speed mettre plutôt un long pour gérer cet intervalle
-			 */
 			travelTime = System.currentTimeMillis();
 			this.position.x++;
+			if (!Game.getBoard().getTile(this.position).isEmpty()){
+				this.die();
+			}
+
+			//target();
 
 			//this.position = path.GetPos(System.currentTimeMillis()-lifeTime, this.getSpeed());
-		}
 
+			/*Pour que l'ennemi s'arrête à une position avant la cible(tour en l'occurrence),
+			* il faudrait que GetPos s'arrête à l'indice [-2] de path
+			* */
+		}
 	}
 
 
@@ -147,12 +160,31 @@ public class Enemy extends Personnage implements Movable{
 		//this.path = Pathfinding.FindPath(this.position, Game.getBoard().getNearestTargetPosition(position));
 	}
 
+
+	/**
+	 * Cible la tour
+	 * @param target Position calculée par  getNearestTargetPosition
+	 */
+	public DestructibleObstacle fix_target(Position target){
+		if(StaticFunctions.getDistance(this.position, target) < 5) //Range
+			return (DestructibleObstacle) Game.getBoard().getTile(target).getOccupier();
+		return null;
+	}
 	/**
 	 * L'ennemi attaque un obstacle destructible "target"
 	 * @param target Represente l'obstacle cible de l'ennemi (tour ou autre)
 	 */
 	public void attackObstacle(DestructibleObstacle target) {
 		target.setCurrentHealth(target.getCurrentHealth()-(int)this.damage);
+	}
+
+	/**
+	 * Lance l'attaque
+	 */
+	public void target(){
+		if(fix_target(Game.getBoard().getNearestTargetPosition(this.position)) != null){
+			attackObstacle(fix_target(Game.getBoard().getNearestTargetPosition(this.position)));
+		}
 	}
 
 	/**
@@ -164,15 +196,36 @@ public class Enemy extends Personnage implements Movable{
 		target.setlifePoint_current(target.getlifePoint_current()-(int)(this.damage/target.getResistance()));
 	}
 
+
 	/**
 	 * L'enemy soigne un autre enemy "target".
-	 * 
 	 * @param target Represente l'enemy soigne par l'enemy courant.
 	 */
 	private void heal(Enemy target) {
 		target.setlifePoint_current(target.getlifePoint_current()+2);
 	}
-	
+
+
+	public void die(){
+		if(alive){
+			int i = MapGenerator.charactersList.indexOf(this);
+			MapGenerator.charactersList.remove(i);
+		}
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	/**
 	 * augmente la capacite speed de l'ennemi de 0.15
 	 */
