@@ -135,7 +135,7 @@ public class PresetEnemy {
 	 * @return Renvoie un objet PresetEnemy contenant toute ces informations afin de creer l'enemy
 	 */
 	public static PresetEnemy Bacterium() {
-		return new PresetEnemy(100, 500, 15, 1.00f, 1.00f, 10.00f, false, 1, 1.00f, "/bacterium.jpg", DestructibleObstacle.ObsType.TARGET, Enemy.Type.BACTERIUM);
+		return new PresetEnemy(100, 500, 15, 1.00f, 1.00f, 10.00f, false, 1, 1.00f, "/bacterium.png", DestructibleObstacle.ObsType.TARGET, Enemy.Type.BACTERIUM);
 	}
 	
 	/**

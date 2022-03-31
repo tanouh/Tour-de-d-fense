@@ -169,7 +169,8 @@ public class MapGenerator {
                     worldX - screenPanel.tileSize < screenPanel.camera.worldX + screenPanel.camera.screenX &&
                     worldY + screenPanel.tileSize > screenPanel.camera.worldY - screenPanel.camera.screenY &&
                     worldY - screenPanel.tileSize < screenPanel.camera.worldY + screenPanel.camera.screenY
-            ){
+            )
+            {
                 Tile t = gameBoard.getTile(worldRow,worldCol);
                 g.drawImage(t.getImageTile(),screenX,screenY,tileSize,tileSize,null);
             }
