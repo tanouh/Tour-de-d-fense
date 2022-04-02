@@ -217,8 +217,8 @@ public class Button extends JButton {
                     price = 0;
             }
             if (Game.getCredits() < price) {
-                this.label.setForeground(Color.GRAY);
-                this.setBackground(Color.WHITE);
+                this.label.setForeground(Color.LIGHT_GRAY);
+                this.setBackground(Color.GRAY);
                 this.setEnabled(false);
             } else {
                 this.label.setForeground(GameWindow.foreground);

@@ -25,7 +25,7 @@ public class Wave extends TimerTask {
 
     public static int level = 1;
     public static long TIME_SINCE_LAST_SPAWN;
-    public static final int MAX_NB_WAVES = 5;
+    public static final int MAX_NB_WAVES = Game.getNbWavesTotal();
     public static long TIME_INTERVAL = 1000;  // Intervalle de temps entre deux séries de vagues
     public static long DELAY = 10000;
 
@@ -34,6 +34,7 @@ public class Wave extends TimerTask {
 
     public Wave() {
         waveOrder = 1;
+        Game.setWavesLeft(Game.getWavesLeft()-1);
         currentWave = Subwave.subwaves_in_order();
         resetTimeSinceLastSpawn();
     }

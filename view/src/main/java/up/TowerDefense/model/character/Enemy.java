@@ -65,7 +65,7 @@ public class Enemy extends Personnage implements Movable{
 	/**
 	 * Chemin suivi par l'enemi
 	 */
-	//private Path path;
+	private Path path;
 
 	/**
 	 * Durée depuis laquelle l'enemi vit (ie qu'il est sur le plateau)
@@ -119,7 +119,7 @@ public class Enemy extends Personnage implements Movable{
 		this.damage = presetEnemy.getDammage();
 		this.suicidal = presetEnemy.isSuicidal();
 		this.target = presetEnemy.getTarget();
-		//this.path = Pathfinding.FindPath(position, Game.getBoard().getNearestTargetPosition(position));
+		this.path = Pathfinding.FindPath(position, Game.getBoard().getNearestTargetPosition(position));
 		this.lifeTime=System.currentTimeMillis();
 		this.travelTime = System.currentTimeMillis();
 		alive = true;
@@ -143,11 +143,11 @@ public class Enemy extends Personnage implements Movable{
 			this.position.x++;
 			if (!Game.getBoard().getTile(this.position).isEmpty()){
 				this.die();
+				return;
 			}
 
 			//target();
-
-			//this.position = path.GetPos(System.currentTimeMillis()-lifeTime, this.getSpeed());
+			this.position = path.GetPos(System.currentTimeMillis()-lifeTime, this.getSpeed());
 
 			/*Pour que l'ennemi s'arrête à une position avant la cible(tour en l'occurrence),
 			* il faudrait que GetPos s'arrête à l'indice [-2] de path
@@ -157,7 +157,7 @@ public class Enemy extends Personnage implements Movable{
 
 
 	public void update_paths(){
-		//this.path = Pathfinding.FindPath(this.position, Game.getBoard().getNearestTargetPosition(position));
+		this.path = Pathfinding.FindPath(this.position, new Position(this.position.x, this.position.y + 3000));
 	}
 
 

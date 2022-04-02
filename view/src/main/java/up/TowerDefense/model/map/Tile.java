@@ -49,6 +49,8 @@ public class Tile {
         return this.isEmpty;
     }
 
+    public void setTarget(boolean isTarget){ isEmpty = true; }
+
     public void placeObstacle(Obstacle obs){
         setOccupier(obs);
         isEmpty = false;

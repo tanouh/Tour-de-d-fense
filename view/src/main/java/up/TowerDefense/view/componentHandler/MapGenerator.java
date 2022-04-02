@@ -249,7 +249,7 @@ public class MapGenerator {
                 return;
         }
         if(gameBoard.addObstacle(obstacle, posX, posY)){
-            updateCharactersPaths();
+//            updateCharactersPaths();
             obstaclesList.add(obstacle);
         }
 

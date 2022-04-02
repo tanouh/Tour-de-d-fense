@@ -31,7 +31,6 @@ public class MouseHandler implements MouseListener {
         int x  = e.getX();
         int y = e.getY();
         update(x,y);
-
         /* Ceci est encore provisoire
         todo : dès qu'on clique sur une position, les possibilités de construction s'affichent sur le menu latéral
          */

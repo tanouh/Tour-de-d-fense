@@ -7,20 +7,23 @@ public class Pathfinding {
     public static Path FindPath(Position startPos, Position targetPos) {
         Node startNode = new Node(Board.map.getTile(startPos));
         Node targetNode = new Node(Board.map.getTile(targetPos));
+        Board.map.getTile(targetPos).setTarget(true);
 
         List<Node> openSet = new ArrayList<Node>();
         HashSet<Node> closedSet = new HashSet<Node>();
         openSet.add(startNode);
+        System.out.println(startNode + " " + targetNode);
 
         while (openSet.size() > 0) {
-            System.out.println("ici");
             //Cherchez le meilleur node dans openSet et l'ajouter à closedSet
             Node node = Node.BestNode(openSet);
             openSet.remove(node);
             closedSet.add(node);
 
-            //Casa où node est le final
-            if (node == targetNode) return RetracePath(startNode,targetNode);
+            //Cas où node est le final
+            if (node.isTarget(targetPos)){
+                return RetracePath(startNode,node);
+            }
 
             Node[] neighbours = node.Neighbours();
             for (Node neighbour : neighbours) {
@@ -33,7 +36,6 @@ public class Pathfinding {
                     neighbour.gCost = newCostToNeighbour;
                     neighbour.hCost = GetDistance(neighbour, targetNode);
                     neighbour.parent = node;
-
                     if (!openSet.contains(neighbour))
                         openSet.add(neighbour);
                 }
@@ -53,8 +55,10 @@ public class Pathfinding {
         //Inverser la suite pour obtenir une liste de tuiles du début à la fin
         Tile[] tilePath = new Tile[path.size()];
         for(int i = 0; i < tilePath.length; i++){
-            tilePath[0] = path.get(tilePath.length - i - 1).tile;
+            tilePath[i] = path.get(tilePath.length - i - 1).tile;
+            System.out.println(tilePath[i].pos.x + " " + tilePath[i].pos.y);
         }
+        System.out.println();
         return new Path(tilePath);
     }
 

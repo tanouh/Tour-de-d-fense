@@ -44,6 +44,7 @@ public class Game {
     public static Board getBoard(){ return board; }
     public static int getLevel(){ return level; }
     public static int getWavesLeft(){ return wavesLeft;}
+    public static int getNbWavesTotal(){ return numberWavesTotal; }
     public static int getNbEnemyLeft(){ return nbEnemyLeft;}
     public static String[] getListTowerTypes(){ return listTowerTypes; }
     public static int getCurrentlyPlacing(){ return currentlyPlacing; }
@@ -60,6 +61,8 @@ public class Game {
     public static void setLives(int deltaLives) {
         Game.lives += lives;
     }
+
+    public static void setWavesLeft(int nbWavesLeft) { wavesLeft = nbWavesLeft; }
 
     public static void setCurrentlyPlacing(int typeObstacle){
         currentlyPlacing = typeObstacle;

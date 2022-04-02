@@ -69,7 +69,8 @@ public class GamePanel extends JPanel {
         header.add(title);
 
         level = Label.addHeaderLabel(header, "Niveau " + Game.getLevel());
-        wavesLeft = Label.addHeaderLabel(header,"Vague 0/" + Game.getWavesLeft());
+        wavesLeft = Label.addHeaderLabel(header,"Vague "+ (Game.getNbWavesTotal()-Game.getWavesLeft())
+                + "/" + Game.getNbWavesTotal());
         enemyLeft = Label.addHeaderLabel(header, "Ennemis restants : " + Game.getNbEnemyLeft());
         creditsLeft = Label.addHeaderLabel(header,"Argent : " + Game.getCredits());
         lifesLeft = Label.addHeaderLabel(header, "Vies : " + Game.getLives());
@@ -112,7 +113,8 @@ public class GamePanel extends JPanel {
      * Met à jour les statistiques de la partie
      */
     public void updateHeader(){
-        wavesLeft.setText("Vague 0/" + Game.getWavesLeft());
+        wavesLeft.setText("Vague " + (Game.getNbWavesTotal()-Game.getWavesLeft())
+                + "/" + Game.getNbWavesTotal());
         enemyLeft.setText("Ennemis restants : ");
         creditsLeft.setText("Argent : " + Game.getCredits());
         lifesLeft.setText("Vies : " + Game.getLives());

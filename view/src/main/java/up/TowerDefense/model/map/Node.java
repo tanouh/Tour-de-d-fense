@@ -15,6 +15,7 @@ public class Node {
     public int fCost(){
         return gCost + hCost;
     }
+
     public Node[] Neighbours(){
         List<Node> neighbours = new ArrayList<Node>();
         for (int x = -1; x <= 1; x++) {
@@ -29,6 +30,15 @@ public class Node {
         }
         return neighbours.toArray(new Node[0]);
     }
+
+    public String toString(){
+        return tile.getPos().x + "-" + tile.getPos().y;
+    }
+
+    public boolean isTarget(Position targetPos){
+        return (this.tile.pos.x == targetPos.x && this.tile.pos.y == targetPos.y);
+    }
+
     public static Node BestNode(List<Node> nodes){
         Node node = nodes.get(0);
         for (int i = 1; i < nodes.size(); i ++) {
