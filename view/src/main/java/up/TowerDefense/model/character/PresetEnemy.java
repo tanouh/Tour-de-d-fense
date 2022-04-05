@@ -11,7 +11,7 @@ public class PresetEnemy {
 	/**
 	 * Correspond au nombre de coins rapportes une fois l'enemy mort.
 	 */
-	private int coins_value;
+	private int reward;
 	
 	/**
 	 * Correspond a l'agressivite de l'enemy (va t'il plutot attaquer les tours ou être plus agressif et attaquer les allies)
@@ -58,6 +58,8 @@ public class PresetEnemy {
 	 */
 	private float resistance;
 
+	private int range;
+
 	/**
 	 * type de cible
 	 * */
@@ -82,10 +84,10 @@ public class PresetEnemy {
 	 * @param resistance indique la resistance de l'enemy contre une tour
 	 */
 	public PresetEnemy(int maxHealth, long speed, int coins, float agressiveness_degree, float attackspeed, float dammage,
-					   boolean suicid, int size, float resistance, String imgName , DestructibleObstacle.ObsType target_obs, Enemy.Type EnemyType) {
+					   boolean suicid, int size, float resistance, String imgName , DestructibleObstacle.ObsType target_obs, Enemy.Type EnemyType, int range) {
 		this.maxHealth = maxHealth;
 		this.setSpeed(speed);
-		this.setCoins_value(coins);
+		this.setReward(coins);
 		this.attackspeed = attackspeed;
 		this.dammage = dammage;
 		this.suicidal = suicid;
@@ -96,6 +98,7 @@ public class PresetEnemy {
 		this.imgName = imgName;
 		this.target = target_obs;
 		this.EnemyType = EnemyType;
+		this.range=range;
 	}
 	
 	/**
@@ -115,7 +118,7 @@ public class PresetEnemy {
 	 * @return Renvoie un objet PresetEnemy contenant toute ces informations afin de creer l'enemy
 	 */
 	public static PresetEnemy Covid() {
-		return new PresetEnemy(100,500,30,5.00f, 1.00f, 100.00f, false, 1, 1.00f, "/null.png", DestructibleObstacle.ObsType.TARGET, Enemy.Type.COVID);
+		return new PresetEnemy(100,500,30,5.00f, 1.00f, 100.00f, false, 1, 1.00f, "/null.png", DestructibleObstacle.ObsType.TARGET, Enemy.Type.COVID,5);
 	}
 
 	/**
@@ -135,7 +138,7 @@ public class PresetEnemy {
 	 * @return Renvoie un objet PresetEnemy contenant toute ces informations afin de creer l'enemy
 	 */
 	public static PresetEnemy Bacterium() {
-		return new PresetEnemy(100, 2000, 15, 1.00f, 1.00f, 10.00f, false, 1, 1.00f, "/bacterium.png", DestructibleObstacle.ObsType.TARGET, Enemy.Type.BACTERIUM);
+		return new PresetEnemy(100, 1000, 15, 1.00f, 1.00f, 10.00f, false, 1, 1.00f, "/bacterium.png", DestructibleObstacle.ObsType.TARGET, Enemy.Type.BACTERIUM,3);
 	}
 	
 	/**
@@ -155,7 +158,7 @@ public class PresetEnemy {
 	 * @return Renvoie un objet PresetEnemy contenant toute ces informations afin de creer l'enemy
 	 */
 	public static PresetEnemy Virus() {
-		return new PresetEnemy(100, 1500, 20, 1.50f, 1.00f, 15.00f, false, 1, 1.25f, "/icontest.png", DestructibleObstacle.ObsType.TARGET, Enemy.Type.VIRUS);
+		return new PresetEnemy(100, 1500, 20, 1.50f, 1.00f, 15.00f, false, 1, 1.25f, "/icontest.png", DestructibleObstacle.ObsType.TARGET, Enemy.Type.VIRUS,5);
 	}
 
 	/**
@@ -175,7 +178,7 @@ public class PresetEnemy {
 	 * @return Renvoie un objet PresetEnemy contenant toute ces informations afin de creer l'enemy
 	 */
 	public static PresetEnemy Fungus() {
-		return new PresetEnemy(100, 1500, 5, 1.75f, 1.00f, 5.00f, false, 1, 1.75f, "/null.png", DestructibleObstacle.ObsType.TOWER, Enemy.Type.FUNGUS);
+		return new PresetEnemy(100, 1500, 5, 1.75f, 1.00f, 5.00f, false, 1, 1.75f, "/null.png", DestructibleObstacle.ObsType.TOWER, Enemy.Type.FUNGUS,10);
 	}
 	
 	/**
@@ -195,7 +198,7 @@ public class PresetEnemy {
 	 * @return Renvoie un objet PresetEnemy contenant toute ces informations afin de creer l'enemy
 	 */
 	public static PresetEnemy Parasite() {
-		return new PresetEnemy(100, 500, 40, 1.25f, 1.00f, 20.00f, false, 1, 0.75f, "/null.png", DestructibleObstacle.ObsType.TOWER, Enemy.Type.PARASITE);
+		return new PresetEnemy(100, 500, 40, 1.25f, 1.00f, 20.00f, false, 1, 0.75f, "/null.png", DestructibleObstacle.ObsType.TOWER, Enemy.Type.PARASITE,5);
 	}
 	
 	public int getSize() {
@@ -207,11 +210,11 @@ public class PresetEnemy {
 	}
 
 	public int getCoins() {
-		return coins_value;
+		return reward;
 	}
 
-	public void setCoins_value(int coins_value) {
-		this.coins_value = coins_value;
+	public void setReward(int reward) {
+		this.reward = reward;
 	}
 
 	public int getMaxHealth() {
@@ -249,5 +252,7 @@ public class PresetEnemy {
 	public DestructibleObstacle.ObsType getTarget(){
 		return target;
 	}
-	
+
+	public int getRange() { return range;
+	}
 }

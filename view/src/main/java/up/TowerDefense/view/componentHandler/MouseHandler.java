@@ -1,5 +1,6 @@
 package up.TowerDefense.view.componentHandler;
 
+import up.TowerDefense.model.game.Game;
 import up.TowerDefense.view.mainComponent.ScreenPanel;
 
 import java.awt.event.MouseEvent;
@@ -35,6 +36,7 @@ public class MouseHandler implements MouseListener {
         /* Ceci est encore provisoire
         todo : dès qu'on clique sur une position, les possibilités de construction s'affichent sur le menu latéral
          */
+
         try {
             screenPanel.mapGen.addObstacle(mouseX, mouseY);
         } catch (Exception ex) {

@@ -126,7 +126,6 @@ public class Tower extends PlaceableObstacle{
             upgradeCost*=getModifier();
             setRefundValue(upgradeCost);
             Game.setCredits(-1*upgradeCost);
-
             return true;
         }
         return false;

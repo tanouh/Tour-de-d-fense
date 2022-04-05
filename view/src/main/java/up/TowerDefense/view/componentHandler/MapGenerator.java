@@ -12,7 +12,10 @@ import up.TowerDefense.view.mainComponent.ScreenPanel;
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.concurrent.CopyOnWriteArrayList;
 
@@ -33,6 +36,7 @@ public class MapGenerator {
     private BufferedImage mapImage;
     private int tileSize;
     private int [][] mapTileNum;
+    private Tile[]  tileType;
 
     private int nbCol;
     private int nbRow;
@@ -48,8 +52,8 @@ public class MapGenerator {
         this.screenPanel = screenPanel;
 
         mapImage = this.loadImage(imagePath);
-        this.nbCol = mapImage.getWidth();
-        this.nbRow = mapImage.getHeight();
+        this.nbCol = MAX_WORLD_COL;
+        this.nbRow = MAX_WORLD_ROW;
 
 
         mapTileNum = new int [nbRow][nbCol];
@@ -88,6 +92,36 @@ public class MapGenerator {
         }catch(Exception e){
             e.printStackTrace();
         }
+        /*long a = System.currentTimeMillis();
+        try{
+            InputStream is = getClass().getResourceAsStream("/world01.txt");
+            BufferedReader br= new BufferedReader(new InputStreamReader(is));
+            int col = 0;
+            int row = 0;
+            while (col < MAX_WORLD_COL && row < MAX_WORLD_ROW){
+                String line = br.readLine();
+                while (col < MAX_WORLD_COL){
+                    String [] numbers = line.split("\t");
+                    int num = Integer.parseInt(numbers[col]);
+
+                    Tile t = new Tile(new Position(row, col));
+                    setUpTile(t, num);
+
+                    gameBoard.initTile(row, col, t,(num == 2));
+                    System.out.println(System.currentTimeMillis() -a);
+                    a = System.currentTimeMillis();
+
+                    col++;
+                }
+                if(col == MAX_WORLD_COL){
+                    col = 0;
+                    row++;
+                }
+            }
+            br.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }*/
     }
 
     public  BufferedImage loadImage(String image){
@@ -107,6 +141,7 @@ public class MapGenerator {
     private void setUpTile(Tile t, int num){
         switch (num){
             case 0 :
+            case 5 :
             case 4 : t.placeObstacle(VEIN); break;
             case 2 : t.placeObstacle(SKIN); break;
             case 3 : t.placeObstacle(WATER); break;
@@ -276,5 +311,6 @@ public class MapGenerator {
             }
         }
     }
+
 }
 

@@ -3,7 +3,7 @@ package up.TowerDefense.model.character;
 import up.TowerDefense.model.object.DestructibleObstacle;
 import up.TowerDefense.model.object.Position;
 
-public class Ally extends Personnage implements Movable{
+public class Ally extends Personnage{
 	
 	/**
 	 * Definit la taille constante de chaque allie a la moitier d'une case (0.50)
@@ -46,7 +46,7 @@ public class Ally extends Personnage implements Movable{
 	 * @param target Represente l'enemy cibl� par l'alli�
 	 */
 	public void attackEnemy(Enemy target) {
-		target.setlifePoint_current(target.getlifePoint_current()-(int)(DAMAGE/target.getResistance()));
+		target.setCurrentHealth(target.getCurrentHealth()-(int)(DAMAGE/target.getResistance()));
 	}
 	
 }

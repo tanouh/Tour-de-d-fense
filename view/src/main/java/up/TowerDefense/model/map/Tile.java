@@ -8,6 +8,7 @@ import up.TowerDefense.model.object.Position;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.sql.SQLOutput;
 
 public class Tile {
     protected boolean isEmpty = true;
@@ -74,7 +75,7 @@ public class Tile {
 
 
     public boolean hasATower() {
-        return (obstacle instanceof DestructibleObstacle) && ((DestructibleObstacle) obstacle).isATower();
+        return !isEmpty() && (obstacle instanceof DestructibleObstacle) && ((DestructibleObstacle) obstacle).isATower();
     }
 }
 

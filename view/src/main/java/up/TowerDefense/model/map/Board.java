@@ -82,6 +82,7 @@ public class Board {
           où on rencontre d'autres problèmes liés à ça après
          */
 
+
         if (getTile(posY, posX).isEmpty
                 && legalPlacement(obstacle, posY, posX)
                 && obstacle.getBuyingCost() <= Game.getCredits()) {

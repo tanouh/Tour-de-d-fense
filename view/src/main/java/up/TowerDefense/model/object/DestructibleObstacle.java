@@ -10,6 +10,7 @@ public class DestructibleObstacle extends Obstacle{
 
 
 
+
     public enum ObsType {
         WALL, TARGET, TOWER
     }
@@ -49,6 +50,9 @@ public class DestructibleObstacle extends Obstacle{
         }
 
         this.currentHealth = currentHealth;
+    }
+    public void takeDamage(double power) {
+        setCurrentHealth(currentHealth);
     }
 
     public boolean isATower(){

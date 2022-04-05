@@ -46,6 +46,7 @@ public class ScreenPanel extends JPanel implements Runnable{
     public MouseHandler mouseHandler; // pour contrôler les informations reçues à partir de la souris
     public Camera camera; // pour pouvoir déplacer le champs de vision
     public static Timer timer; // un chronomètre pour gérer le lancement des vagues d'ennemis
+    public Wave waves;
 
     public long TIME;
 
@@ -69,10 +70,11 @@ public class ScreenPanel extends JPanel implements Runnable{
 
         this.setDoubleBuffered(true);
         this.addMouseListener(mouseHandler);
+        waves = new Wave();
 
-        timer = new Timer();
+        /*timer = new Timer();
         timer.schedule(new Wave(),Wave.DELAY,Wave.TIME_INTERVAL); // Planifie les actions , paramètres = la tâche à effectuer,
-                                                                // le délai avant la première exécution et l'intervalle de temps entre deux exécutions (en millisecondes)
+            */                                                    // le délai avant la première exécution et l'intervalle de temps entre deux exécutions (en millisecondes)
 
         this.setFocusable(true);
         paused = false;
@@ -128,6 +130,7 @@ public class ScreenPanel extends JPanel implements Runnable{
         camera.update();
         gamePanel.updateHeader();
         gamePanel.updateSideMenu();
+        waves.run();
         mapGen.updateCharactersPositions();
         testVictory();
     }
