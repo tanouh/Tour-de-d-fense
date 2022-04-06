@@ -16,7 +16,7 @@ import static up.TowerDefense.model.game.Subwave.*;
 public class Wave {
     public static boolean endOfLevel = false; // Annonce la fin de la vague
 
-    private Subwave currentWave;
+    private Subwave currentWave ;
     private boolean running = false; // si une vague est en cours actuellement
 
 
@@ -32,6 +32,7 @@ public class Wave {
     public Wave() {
         resetTimeSinceLastSpawn();
         waveOrder = 1;
+        Game.setWavesLeft(Game.getWavesLeft()-1);
         currentWave = Subwave.subwaves_in_order();
     }
 
@@ -53,7 +54,7 @@ public class Wave {
                     currentWave.run();
                 } else {
                     if(System.currentTimeMillis() - TIME_SINCE_LAST_SPAWN > TIME_INTERVAL){
-                        currentWave = subwaves_in_order();
+                        currentWave = Subwave.subwaves_in_order();
                         resetTimeSinceLastSpawn();
                     }
                 }

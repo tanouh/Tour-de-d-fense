@@ -72,10 +72,6 @@ public class ScreenPanel extends JPanel implements Runnable{
         this.addMouseListener(mouseHandler);
         waves = new Wave();
 
-        /*timer = new Timer();
-        timer.schedule(new Wave(),Wave.DELAY,Wave.TIME_INTERVAL); // Planifie les actions , paramètres = la tâche à effectuer,
-            */                                                    // le délai avant la première exécution et l'intervalle de temps entre deux exécutions (en millisecondes)
-
         this.setFocusable(true);
         paused = false;
     }
