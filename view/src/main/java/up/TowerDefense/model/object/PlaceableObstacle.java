@@ -39,4 +39,6 @@ public class PlaceableObstacle extends DestructibleObstacle{
     public void setRefundValue(double refundValue) {
         this.refundValue = refundValue;
     }
+
+
 }

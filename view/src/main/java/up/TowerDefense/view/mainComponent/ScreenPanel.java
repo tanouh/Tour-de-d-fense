@@ -39,13 +39,14 @@ public class ScreenPanel extends JPanel implements Runnable{
     private Thread gameThread = null;
     public boolean paused = false;
     public MapGenerator mapGen;
-    int FPS = 30; //Frame per second
+    int FPS = 60; //Frame per second
 
 
 
     public MouseHandler mouseHandler; // pour contrôler les informations reçues à partir de la souris
     public Camera camera; // pour pouvoir déplacer le champs de vision
     public static Timer timer; // un chronomètre pour gérer le lancement des vagues d'ennemis
+    public Wave waves;
 
     public long TIME;
 
@@ -57,7 +58,7 @@ public class ScreenPanel extends JPanel implements Runnable{
         this.gameWindow = gameWindow;
         this.gamePanel = gamePanel;
         KeyAction.setScreenPanel(this);
-        mapGen= new MapGenerator(this, "/map3_V2.png"); /*A modifier : ajouter un paramètrage pour l'image*/
+        mapGen= new MapGenerator(this, "/map3.png"); /*A modifier : ajouter un paramètrage pour l'image*/
 
         startThread();
         this.setPreferredSize(new Dimension(windowWidth, windowHeight));
@@ -69,10 +70,11 @@ public class ScreenPanel extends JPanel implements Runnable{
 
         this.setDoubleBuffered(true);
         this.addMouseListener(mouseHandler);
+        waves = new Wave();
 
-        timer = new Timer();
+        /*timer = new Timer();
         timer.schedule(new Wave(),Wave.DELAY,Wave.TIME_INTERVAL); // Planifie les actions , paramètres = la tâche à effectuer,
-                                                                // le délai avant la première exécution et l'intervalle de temps entre deux exécutions (en millisecondes)
+            */                                                    // le délai avant la première exécution et l'intervalle de temps entre deux exécutions (en millisecondes)
 
         this.setFocusable(true);
         paused = false;
@@ -128,7 +130,9 @@ public class ScreenPanel extends JPanel implements Runnable{
         camera.update();
         gamePanel.updateHeader();
         gamePanel.updateSideMenu();
-//        mapGen.updateCharactersPositions();
+        waves.run();
+        mapGen.updateCharactersPositions();
+        //mapGen.updateProjectilesPos();
         testVictory();
     }
 

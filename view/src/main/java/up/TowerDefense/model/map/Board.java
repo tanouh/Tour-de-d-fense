@@ -1,7 +1,6 @@
 package up.TowerDefense.model.map;
 import up.TowerDefense.model.game.Game;
 import up.TowerDefense.model.game.StaticFunctions;
-import up.TowerDefense.model.object.DestructibleObstacle;
 import up.TowerDefense.model.object.Obstacle;
 import up.TowerDefense.model.object.PlaceableObstacle;
 import up.TowerDefense.model.object.Position;
@@ -52,6 +51,10 @@ public class Board {
 
     }
 
+    public Obstacle getOccupier(Position position) {
+        return getTile(position).getOccupier();
+    }
+
     public void initTile(int x, int y, Tile tile, boolean isATargetZone) {
         tiles[x][y] = tile;
         if (isATargetZone) {
@@ -63,7 +66,7 @@ public class Board {
     public void setOccupier(Obstacle obstacle, int x, int y) {
         for (int i = 0; i < obstacle.getSize(); i++) {
             for (int j = 0; j < obstacle.getSize(); j++) {
-                Tile t = getTile(x + i, y + j);
+                Tile t = getTile(x+i, y+j);
                 t.setOccupier(obstacle);
             }
         }
@@ -82,11 +85,12 @@ public class Board {
           où on rencontre d'autres problèmes liés à ça après
          */
 
-        if (getTile(posY, posX).isEmpty
-                && legalPlacement(obstacle, posY, posX)
+
+        if (getTile(posX, posY).isEmpty
+                && legalPlacement(obstacle, posX, posY)
                 && obstacle.getBuyingCost() <= Game.getCredits()) {
 
-            setOccupier(obstacle, posY, posX);
+            setOccupier(obstacle, posX, posY);
             Game.setCredits(-obstacle.getBuyingCost());
             return true;
         } else {
@@ -102,8 +106,8 @@ public class Board {
      * Retourne vrai si les cases occupées par l'obstacle sont toutes libres
      */
     private boolean legalPlacement(PlaceableObstacle obstacle, int posX, int posY) {
-        for (int i = 1; i <= obstacle.getSize(); i++)
-            for (int j = 1; j <= obstacle.getSize(); j++)
+        for (int i = 0; i < obstacle.getSize(); i++)
+            for (int j = 0; j < obstacle.getSize(); j++)
                 if (!getTile(posX + i, posY + j).isEmpty) return false;
         return true;
     }
@@ -156,4 +160,6 @@ public class Board {
 
         return spawnPoint;
     }/*fixme : les points obtenus ne sont pas tous sur les bords*/
+
+
 }

@@ -13,9 +13,9 @@ import static up.TowerDefense.model.game.Subwave.*;
 /**
  * la classe est utilisé en tant que gestionnaire de vagues
  */
-public class Wave extends TimerTask {
-    //public ArrayList<Subwave> waves; // Liste des sous-vagues
-    public boolean endOfLevel = false; // Annonce la fin de la vague
+public class Wave {
+    public static boolean endOfLevel = false; // Annonce la fin de la vague
+
     private Subwave currentWave;
     private boolean running = false; // si une vague est en cours actuellement
 
@@ -25,19 +25,69 @@ public class Wave extends TimerTask {
 
     public static int level = 1;
     public static long TIME_SINCE_LAST_SPAWN;
-    public static final int MAX_NB_WAVES = Game.getNbWavesTotal();
-    public static long TIME_INTERVAL = 1000;  // Intervalle de temps entre deux séries de vagues
-    public static long DELAY = 10000;
-
-
-
+    public static final int MAX_NB_WAVES = 2;
+    public static long TIME_INTERVAL = 10000;  // Intervalle de temps entre deux séries de vagues
+    public static long DELAY = 1000;
 
     public Wave() {
-        waveOrder = 1;
-        Game.setWavesLeft(Game.getWavesLeft()-1);
-        currentWave = Subwave.subwaves_in_order();
         resetTimeSinceLastSpawn();
+        waveOrder = 1;
+        currentWave = Subwave.subwaves_in_order();
     }
+
+    /**
+     * The action to be performed by this timer task.
+     */
+    public void run() {
+        if (endOfLevel) return;
+        if (!running &&  System.currentTimeMillis() - TIME_SINCE_LAST_SPAWN > DELAY){
+            TIME_SINCE_LAST_SPAWN = System.currentTimeMillis();
+            running = true;
+        }
+        if(running){
+            if(waveOrder > MAX_NB_WAVES){
+                endOfLevel = true;
+                running = false;
+            }else {
+                if (!currentWave.isFinished()) {
+                    currentWave.run();
+                } else {
+                    if(System.currentTimeMillis() - TIME_SINCE_LAST_SPAWN > TIME_INTERVAL){
+                        currentWave = subwaves_in_order();
+                        resetTimeSinceLastSpawn();
+                    }
+                }
+            }
+        }
+    }
+
+    private void upgrade(){
+        for (int i = 1 ; i < level ; i++){
+            currentWave.upgrade();
+        }
+    }
+
+
+
+    /**
+     * Verifie si la vague a ete lancé
+     */
+    public boolean hasStarted() {
+        return currentWave != null;
+    }
+    
+    /**
+     * vérifie si une vague est en cours
+     */
+    public boolean isRunning() {
+        return running;
+    }
+
+    public static void resetTimeSinceLastSpawn() {
+        TIME_SINCE_LAST_SPAWN = System.currentTimeMillis();
+    }
+
+
     /**
      * Lance la prochaine vague lorsque c'est possible
      */
@@ -87,46 +137,4 @@ public class Wave extends TimerTask {
         }
     }*/
 
-    /**
-     * The action to be performed by this timer task.
-     */
-    @Override
-    public void run() {
-        if(waveOrder > MAX_NB_WAVES){
-            endOfLevel = true;
-            ScreenPanel.timer.cancel();
-        }else{
-            if(!currentWave.isFinished()){
-                currentWave.run();
-            }else{
-                try{
-                    Thread.sleep(TIME_INTERVAL + BREAK_TIME);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                resetTimeSinceLastSpawn();
-                currentWave = subwaves_in_order();
-            }
-        }
-    }
-
-
-
-    /**
-     * Verifie si la vague a ete lancé
-     */
-    public boolean hasStarted() {
-        return currentWave != null;
-    }
-    
-    /**
-     * vérifie si une vague est en cours
-     */
-    public boolean isRunning() {
-        return running;
-    }
-
-    public void resetTimeSinceLastSpawn() {
-        this.TIME_SINCE_LAST_SPAWN = System.currentTimeMillis();
-    }
 }

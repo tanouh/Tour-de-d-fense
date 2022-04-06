@@ -47,9 +47,13 @@ public class StaticFunctions {
         int posY = (int)src.y;
         int _range = (int)range;
         for (int i = - _range ; i != 0 && i < _range+1  ; i++){
+
            for (int j = -_range ; j !=0 && j < _range +1 ; j++){
-               if(check_Tower(board, posX + i, posY +j))
-                   return board.getTile(posX+i, posY+j).getPos();
+               if(check_Tower(board, posY+j, posX+i)){
+                   System.out.println("tower found on : " + posY+j + "-" + posX+i);
+                   return board.getTile(posY+j, posX+i).getPos();
+               }
+
             }
         }
         return null;

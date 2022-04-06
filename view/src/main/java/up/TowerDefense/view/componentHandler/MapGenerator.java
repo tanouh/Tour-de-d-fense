@@ -12,7 +12,10 @@ import up.TowerDefense.view.mainComponent.ScreenPanel;
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.concurrent.CopyOnWriteArrayList;
 
@@ -33,23 +36,27 @@ public class MapGenerator {
     private BufferedImage mapImage;
     private int tileSize;
     private int [][] mapTileNum;
+    private Tile[]  tileType;
 
     private int nbCol;
     private int nbRow;
 
     public static ArrayList<PlaceableObstacle> obstaclesList;
     public static ArrayList<Personnage> charactersList;
+    public static ArrayList<Projectile> projectilesList;
 
 
 
     public MapGenerator(ScreenPanel screenPanel, String imagePath){
-        obstaclesList = new ArrayList<PlaceableObstacle>();
+        obstaclesList = new ArrayList<>();
         charactersList = new ArrayList<>();
+        projectilesList = new ArrayList<>();
+
         this.screenPanel = screenPanel;
 
         mapImage = this.loadImage(imagePath);
-        this.nbCol = mapImage.getWidth();
-        this.nbRow = mapImage.getHeight();
+        this.nbCol = MAX_WORLD_COL;
+        this.nbRow = MAX_WORLD_ROW;
 
 
         mapTileNum = new int [nbRow][nbCol];
@@ -107,6 +114,7 @@ public class MapGenerator {
     private void setUpTile(Tile t, int num){
         switch (num){
             case 0 :
+            case 5 :
             case 4 : t.placeObstacle(VEIN); break;
             case 2 : t.placeObstacle(SKIN); break;
             case 3 : t.placeObstacle(WATER); break;
@@ -189,8 +197,11 @@ public class MapGenerator {
         for (PlaceableObstacle ob : obstaclesList ){
             drawElementaryComponent(g,ob.position,ob.getImage(),ob.getSize());
         }
-        for (Personnage perso : new CopyOnWriteArrayList<>(charactersList)){
+        for (Personnage perso : charactersList){
             drawElementaryComponent(g,perso.position, perso.getImage(),perso.getSize());
+        }
+        for(Projectile proj : projectilesList){
+            drawElementaryComponent(g,proj.getPos(),proj.getImg(),1);
         }
     }
 
@@ -248,8 +259,8 @@ public class MapGenerator {
             default :
                 return;
         }
-        if(gameBoard.addObstacle(obstacle, posX, posY)){
-//            updateCharactersPaths();
+        if(gameBoard.addObstacle(obstacle, posY, posX)){
+            updateCharactersPaths();
             obstaclesList.add(obstacle);
         }
 
@@ -269,12 +280,20 @@ public class MapGenerator {
     /**
      * Actualise la position de l'enemi suivant le chemin qu'il est entrain de suivre
      */
-    public synchronized void updateCharactersPositions() {
+    public void updateCharactersPositions() {
         for (Personnage c : new CopyOnWriteArrayList<>(charactersList)){
             if(c instanceof Enemy){
                 ((Enemy)c).update_position();
             }
         }
     }
+
+    public void updateProjectilesPos(){
+        for (Projectile p :new CopyOnWriteArrayList<>(projectilesList)){
+            if(!p.hasArrived())
+                p.move();
+        }
+    }
+
 }
 

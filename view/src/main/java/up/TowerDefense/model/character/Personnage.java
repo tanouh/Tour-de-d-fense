@@ -8,7 +8,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 
-public abstract class Personnage implements Movable{
+public abstract class Personnage{
 	private BufferedImage image;
 	/**
 	 * position actuelle du personnage
@@ -18,48 +18,29 @@ public abstract class Personnage implements Movable{
 	/** 
 	 * nombre de point de vie maximum du personnage
 	 */
-	private int maxHealth;
+	protected final int maxHealth;
 	
 	/**
 	 * nombre de point de vie actuel du personnage
 	 */
-	private int currentHealth;
+	protected int currentHealth;
 	
 	/**
 	 * vitesse d'attaque (plus précisément le nombre de secondes pour effectuer un pas)du personnage
 	 */
-	private long speed;
+	protected long speed;
 	
 	/**
 	 * taille du personnage par rapport � une case (coefficient multiplicatif)
 	 * */
-	private int size;
+	protected int size;
 	
 	/**
 	 * resistance du personnage 
 	 */
-	private float resistance;
+	protected float resistance;
 	
-	/**
-	 * Represente un deplacement du personnage vers la gauche en fonction de sa vitesse
-	 */
-	//private final Position LEFT = new Position(this.getPosition().x - this.getSpeed(), this.getPosition().y);
-	
-	/**
-	 * Represente un deplacement du personnage vers la droite en fonction de sa vitesse
-	 */
-	//private final Position RIGHT = new Position(this.getPosition().x + this.getSpeed(), this.getPosition().y);
-	
-	/**
-	 * Represente un deplacement du personnage vers le haut en fonction de sa vitesse
-	 */
-	//private final Position UP = new Position(this.getPosition().x, this.getPosition().y + this.getSpeed());
-	
-	/**
-	 * Represente un deplacement du personnage vers le bas en fonction de sa vitesse
-	 */
-	//private final Position DOWN = new Position(this.getPosition().x, this.getPosition().y - this.getSpeed());
-	
+
 	/**
 	 * Construit un personnage de taille "size" à la position "position"
 	 * 
@@ -76,7 +57,7 @@ public abstract class Personnage implements Movable{
 		this.speed = speed;
 		this.size = size;
 		this.resistance = resistance;
-		image = this.loadImage(imgName);
+		image = StaticFunctions.loadImage(imgName);
 	}
 
 	
@@ -87,33 +68,6 @@ public abstract class Personnage implements Movable{
 	 */
 	public Personnage(int size) {
 		this(new Position(0.00,0.00), size, 1.00f, 100, 1000, "/null.png");
-	}
-	
-	/**
-	 * Construit un personnage de taille 0.50 (par rapport � 1 case) � la position par defaut 0.00
-	 */
-	public Personnage() {
-		this(new Position(0.00,0.00), 1, 1.00f, 100, 1000, "/null.png");
-	}
-	
-	public final void moveTo(Position position) {
-		this.setPosition(position);
-	}
-
-	public final void moveUp() {
-		//this.moveTo(UP);
-	}
-	
-	public final void moveDown() {
-		//this.moveTo(DOWN);
-	}
-	
-	public final void moveLeft() {
-		//this.moveTo(LEFT);
-	}
-	
-	public final void moveRight() {
-		//this.moveTo(RIGHT);
 	}
 	
 	public Position getPosition() {
@@ -131,16 +85,8 @@ public abstract class Personnage implements Movable{
 	public int getSize() {
 		return this.size;
 	}
-	
-	public int getlifePoint_max() {
-		return this.maxHealth;
-	}
-	
-	public void setlifePoint_max(int newlifePoint_max) {
-		this.maxHealth = newlifePoint_max;
-	}
-	
-	public int getlifePoint_current() {
+
+	public int getCurrentHealth() {
 		return this.currentHealth;
 	}
 	
@@ -152,7 +98,7 @@ public abstract class Personnage implements Movable{
 		this.size = newSize;
 	}
 	
-	public void setlifePoint_current(int newlifePoint) {
+	public void setCurrentHealth(int newlifePoint) {
 		this.currentHealth = newlifePoint;
 	}
 	
@@ -166,15 +112,5 @@ public abstract class Personnage implements Movable{
 	
 	public void setPosition(Position newPosition) {
 		this.position = newPosition;
-	}
-
-	public  BufferedImage loadImage(String image){
-		BufferedImage img = null;
-		try{
-			img = ImageIO.read(StaticFunctions.class.getResourceAsStream(image));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return img;
 	}
 }

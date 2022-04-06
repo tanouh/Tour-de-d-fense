@@ -2,14 +2,15 @@ package up.TowerDefense.model.game;
 
 import java.util.ArrayList;
 
-import static up.TowerDefense.model.game.Wave.TIME_SINCE_LAST_SPAWN;
+import static up.TowerDefense.model.game.EnemySpawn.*;
+import static up.TowerDefense.model.game.Wave.*;
 
 /**
  * cette classe génère les sous vagues du jeu
  */
 public class Subwave {
-    public static final long SPAWN_INTERVAL = 500; // temps entre l'apparition des enemy
-    public static final long BREAK_TIME = 5000; // pause entre deux sous-vagues d'enemySpawn
+    public static final long SPAWN_INTERVAL = 1000; // temps entre l'apparition des enemy
+    public static final long BREAK_TIME = 10000; // pause entre deux sous-vagues d'enemySpawn
 
 
     private int index;
@@ -35,24 +36,23 @@ public class Subwave {
         ArrayList<EnemySpawn> enemySpawned = new ArrayList<>();
         switch (Wave.waveOrder){
             case 1:
-                EnemySpawn e1 = EnemySpawn.getBacterium(1);
-                enemySpawned.add(e1);
+                enemySpawned.add(getBacterium());
+
                 break;
             case 2:
-                EnemySpawn e2 = EnemySpawn.getVirus();
-                enemySpawned.add(e2);
+                enemySpawned.add(getVirus());
                 break;
             case 3:
-                EnemySpawn e3 = EnemySpawn.getBacterium(3);
-                enemySpawned.add(e3);
+                enemySpawned.add(getBacterium());
+                enemySpawned.add(getFungus());
+
                 break;
             case 4:
-                EnemySpawn e4 = EnemySpawn.getVirus();
-                enemySpawned.add(e4);
+                enemySpawned.add(getParasite());
+                enemySpawned.add(getBacterium());
                 break;
             case 5:
-                EnemySpawn e5 = EnemySpawn.getVirus();
-                enemySpawned.add(e5);
+                enemySpawned.add(getCovid());
                 break;
 
             default:
@@ -63,6 +63,7 @@ public class Subwave {
     }
 
 
+
     /**
      * The action to be performed by this timer task.
      */
@@ -70,14 +71,16 @@ public class Subwave {
         if(!currentSpawn.isFinished()){
             if (System.currentTimeMillis() - TIME_SINCE_LAST_SPAWN > SPAWN_INTERVAL){
                 currentSpawn.spawnEnemies();
-                TIME_SINCE_LAST_SPAWN = System.currentTimeMillis();
+                Wave.resetTimeSinceLastSpawn();
             }
         }else{
             index++;
             finishedSubwave = (count++ == enemies.size());
             if(index < enemies.size()){
-                currentSpawn = enemies.get(index);
-                currentSpawn.spawnEnemies();
+                if(System.currentTimeMillis() - TIME_SINCE_LAST_SPAWN > BREAK_TIME) {
+                    currentSpawn = enemies.get(index);
+                    Wave.resetTimeSinceLastSpawn();
+                }
             }
         }
     }
@@ -87,4 +90,7 @@ public class Subwave {
     }
 
 
+    public void upgrade() {
+
+    }
 }
