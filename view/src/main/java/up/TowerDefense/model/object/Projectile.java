@@ -2,6 +2,9 @@ package up.TowerDefense.model.object;
 
 
 import up.TowerDefense.model.character.Enemy;
+import up.TowerDefense.model.game.StaticFunctions;
+
+import java.awt.image.BufferedImage;
 
 public abstract class  Projectile  {
     //current coordinates
@@ -17,9 +20,11 @@ public abstract class  Projectile  {
     protected double yInit;
 
     protected double power;
-    protected double speed = 20;
+    protected double speed = 10;
     protected boolean arrivedAtTarget = false;
     protected int sourceLevel;
+
+    protected BufferedImage img;
 
     public Projectile(Position initPos, Position destPos , double pPower, int level){
 
@@ -32,9 +37,13 @@ public abstract class  Projectile  {
 
         xLoc = xInit +12*Math.cos(angleOfProjectileInRadians());
         yLoc = yInit +12*Math.sin(angleOfProjectileInRadians());
+
+
         arrivedAtTarget = false;
 
         sourceLevel = level;
+
+        img= StaticFunctions.loadImage("/miniprojecttV1.png");
     }
 
     public double angleOfProjectileInDegrees(){
@@ -61,6 +70,11 @@ public abstract class  Projectile  {
     public double getSpeed(){
         return this.speed;
     }
+    public Position getPos(){
+        return new Position(xLoc,yLoc);
+    }
 
-
+    public BufferedImage getImg() {
+        return img;
+    }
 }

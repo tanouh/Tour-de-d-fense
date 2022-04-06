@@ -75,6 +75,9 @@ public class Enemy extends Personnage{
 	private long freezeStartTime;
 	private long freezeDuration;
 
+	private long reloadTime;
+	private long timeSinceLastAttack;
+
 
 	/**
 	 * Construit un enemy a la position "position" a partir des informations d'un PresetEnemy
@@ -91,9 +94,16 @@ public class Enemy extends Personnage{
 		this.target = presetEnemy.getTarget();
 		this.range= presetEnemy.getRange();
 		//this.path = Pathfinding.FindPath(position, Game.getBoard().getNearestTargetPosition(position));
-		this.lifeTime=System.currentTimeMillis();
-		this.travelTime = System.currentTimeMillis();
+		lifeTime=System.currentTimeMillis();
+		travelTime = System.currentTimeMillis();
+		timeSinceLastAttack = System.currentTimeMillis();
+
 		alive = true;
+
+		//fixme : à intégrer dans les attributs des ennemis
+		reloadTime = 2000;
+
+
 	}
 	
 	/**
@@ -118,9 +128,14 @@ public class Enemy extends Personnage{
 		 */
 		if(System.currentTimeMillis() - travelTime > this.getSpeed()){
 			travelTime = System.currentTimeMillis();
-			this.position.x ++;
-			launch_attack();
-			//target();
+			if(position.x < 99)
+				//fixme : à adapter avec les fonctions de déplacement après
+				this.position.x ++;
+			else
+				die();
+			if(System.currentTimeMillis() - timeSinceLastAttack > reloadTime)
+				identifyTarget();
+
 			//this.position = path.GetPos(System.currentTimeMillis()-lifeTime, this.getSpeed());
 
 		}
@@ -130,8 +145,18 @@ public class Enemy extends Personnage{
 		//this.path = Pathfinding.FindPath(this.position, Game.getBoard().getNearestTargetPosition(position));
 	}
 
-	public void launch_attack(){
+	public void identifyTarget(){
 		Position towerPos = findTower(this.position, this.range, Game.getBoard());
+		if(towerPos != null){
+			launchAttack((PlaceableObstacle) Game.getBoard().getOccupier(towerPos));
+		}
+	}
+
+	private void launchAttack(PlaceableObstacle target) {
+		EnemyProjectile projectile = new EnemyProjectile(this.position, target.position, this.damage, Game.getLevel(), target);
+		MapGenerator.projectilesList.add(projectile);
+		timeSinceLastAttack = System.currentTimeMillis();
+		projectile.move();
 	}
 
 

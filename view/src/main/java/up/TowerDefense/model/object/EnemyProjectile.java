@@ -1,6 +1,8 @@
 package up.TowerDefense.model.object;
 
 
+import up.TowerDefense.view.componentHandler.MapGenerator;
+
 public class EnemyProjectile extends Projectile{
     private PlaceableObstacle target;
 
@@ -16,10 +18,10 @@ public class EnemyProjectile extends Projectile{
         if (Math.abs(xLoc - xDest)< speed/2 || Math.abs(yLoc - yDest)< speed/2){
             arrivedAtTarget = true;
             target.takeDamage(power);
+            MapGenerator.projectilesList.remove(this);
         }
         else{
             xLoc += speed*Math.cos(angleOfProjectileInRadians());
-
             yLoc += speed*Math.sin(angleOfProjectileInRadians());
         }
     }

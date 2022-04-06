@@ -43,12 +43,15 @@ public class MapGenerator {
 
     public static ArrayList<PlaceableObstacle> obstaclesList;
     public static ArrayList<Personnage> charactersList;
+    public static ArrayList<Projectile> projectilesList;
 
 
 
     public MapGenerator(ScreenPanel screenPanel, String imagePath){
-        obstaclesList = new ArrayList<PlaceableObstacle>();
+        obstaclesList = new ArrayList<>();
         charactersList = new ArrayList<>();
+        projectilesList = new ArrayList<>();
+
         this.screenPanel = screenPanel;
 
         mapImage = this.loadImage(imagePath);
@@ -92,36 +95,6 @@ public class MapGenerator {
         }catch(Exception e){
             e.printStackTrace();
         }
-        /*long a = System.currentTimeMillis();
-        try{
-            InputStream is = getClass().getResourceAsStream("/world01.txt");
-            BufferedReader br= new BufferedReader(new InputStreamReader(is));
-            int col = 0;
-            int row = 0;
-            while (col < MAX_WORLD_COL && row < MAX_WORLD_ROW){
-                String line = br.readLine();
-                while (col < MAX_WORLD_COL){
-                    String [] numbers = line.split("\t");
-                    int num = Integer.parseInt(numbers[col]);
-
-                    Tile t = new Tile(new Position(row, col));
-                    setUpTile(t, num);
-
-                    gameBoard.initTile(row, col, t,(num == 2));
-                    System.out.println(System.currentTimeMillis() -a);
-                    a = System.currentTimeMillis();
-
-                    col++;
-                }
-                if(col == MAX_WORLD_COL){
-                    col = 0;
-                    row++;
-                }
-            }
-            br.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }*/
     }
 
     public  BufferedImage loadImage(String image){
@@ -224,8 +197,11 @@ public class MapGenerator {
         for (PlaceableObstacle ob : obstaclesList ){
             drawElementaryComponent(g,ob.position,ob.getImage(),ob.getSize());
         }
-        for (Personnage perso : new CopyOnWriteArrayList<>(charactersList)){
+        for (Personnage perso : charactersList){
             drawElementaryComponent(g,perso.position, perso.getImage(),perso.getSize());
+        }
+        for(Projectile proj : projectilesList){
+            drawElementaryComponent(g,proj.getPos(),proj.getImg(),1);
         }
     }
 
@@ -304,11 +280,18 @@ public class MapGenerator {
     /**
      * Actualise la position de l'enemi suivant le chemin qu'il est entrain de suivre
      */
-    public synchronized void updateCharactersPositions() {
+    public void updateCharactersPositions() {
         for (Personnage c : new CopyOnWriteArrayList<>(charactersList)){
             if(c instanceof Enemy){
                 ((Enemy)c).update_position();
             }
+        }
+    }
+
+    public void updateProjectilesPos(){
+        for (Projectile p :new CopyOnWriteArrayList<>(projectilesList)){
+            if(!p.hasArrived())
+                p.move();
         }
     }
 

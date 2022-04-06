@@ -1,7 +1,6 @@
 package up.TowerDefense.model.map;
 import up.TowerDefense.model.game.Game;
 import up.TowerDefense.model.game.StaticFunctions;
-import up.TowerDefense.model.object.DestructibleObstacle;
 import up.TowerDefense.model.object.Obstacle;
 import up.TowerDefense.model.object.PlaceableObstacle;
 import up.TowerDefense.model.object.Position;
@@ -50,6 +49,10 @@ public class Board {
 
         return tiles[x][y];
 
+    }
+
+    public Obstacle getOccupier(Position position) {
+        return getTile(position).getOccupier();
     }
 
     public void initTile(int x, int y, Tile tile, boolean isATargetZone) {
@@ -157,4 +160,6 @@ public class Board {
 
         return spawnPoint;
     }/*fixme : les points obtenus ne sont pas tous sur les bords*/
+
+
 }
