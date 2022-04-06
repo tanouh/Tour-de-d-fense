@@ -63,7 +63,7 @@ public class Board {
     public void setOccupier(Obstacle obstacle, int x, int y) {
         for (int i = 0; i < obstacle.getSize(); i++) {
             for (int j = 0; j < obstacle.getSize(); j++) {
-                Tile t = getTile(x + i, y + j);
+                Tile t = getTile(x+i, y+j);
                 t.setOccupier(obstacle);
             }
         }
@@ -83,11 +83,11 @@ public class Board {
          */
 
 
-        if (getTile(posY, posX).isEmpty
-                && legalPlacement(obstacle, posY, posX)
+        if (getTile(posX, posY).isEmpty
+                && legalPlacement(obstacle, posX, posY)
                 && obstacle.getBuyingCost() <= Game.getCredits()) {
 
-            setOccupier(obstacle, posY, posX);
+            setOccupier(obstacle, posX, posY);
             Game.setCredits(-obstacle.getBuyingCost());
             return true;
         } else {
@@ -103,8 +103,8 @@ public class Board {
      * Retourne vrai si les cases occupées par l'obstacle sont toutes libres
      */
     private boolean legalPlacement(PlaceableObstacle obstacle, int posX, int posY) {
-        for (int i = 1; i <= obstacle.getSize(); i++)
-            for (int j = 1; j <= obstacle.getSize(); j++)
+        for (int i = 0; i < obstacle.getSize(); i++)
+            for (int j = 0; j < obstacle.getSize(); j++)
                 if (!getTile(posX + i, posY + j).isEmpty) return false;
         return true;
     }

@@ -21,7 +21,7 @@ public class MouseHandler implements MouseListener {
 
 
     private void update(int x , int y){
-        mouseX = (x + screenPanel.camera.worldX - screenPanel.camera.screenX )/tileSize;
+        mouseX = (x + screenPanel.camera.worldX - screenPanel.camera.screenX)/tileSize;
         mouseY = (y + screenPanel.camera.worldY - screenPanel.camera.screenY)/tileSize;
     }
 
