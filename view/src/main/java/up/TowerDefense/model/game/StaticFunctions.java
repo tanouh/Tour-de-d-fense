@@ -60,29 +60,6 @@ public class StaticFunctions {
     }
 
     /**
-     * Détecte les ennemis aux environs de la tour
-     * @param src la position de la tour
-     * @param range sa portée
-     * @param board la carte de jeu
-     * @return
-     */
-    public static Position findEnnemy(Position src, double range, Board board){
-        int posX = (int)src.x;
-        int posY = (int)src.y;
-        int _range = (int)range;
-        for (int i = - _range ; i != 0 && i < _range+1  ; i++){
-            for (int j = -_range ; j !=0 && j < _range +1 ; j++){
-                if(check_Ennemy(board, posY+j, posX+i)){
-                    System.out.println("ennemy found on : " + posY+j + "-" + posX+i);
-                    return board.getTile(posY+j, posX+i).getPos();
-                }
-
-            }
-        }
-        return null;
-    }
-
-    /**
      * Vérifie s'il y a une tour à la position
      * @param x et @param y de @param board
      */
@@ -91,12 +68,12 @@ public class StaticFunctions {
     }
 
     /**
-     * Vérifie s'il y a un ennemi à la position
-     * @param x et @param y de @param board
+     * Vérifie s'il y a un ennemi dans la case
      */
-    public static boolean check_Ennemy(Board board, int x, int y){
-        return  board.getTile(x, y)!= null && board.getTile(x, y).hasAnEnnemy();
+    public static boolean check_Ennemy(Tile attainableTile){
+        return  attainableTile != null && attainableTile.hasAnEnnemy();
     }
+
 
 
     /**************   LES FONCTIONS DE CALCULS  ****************/
