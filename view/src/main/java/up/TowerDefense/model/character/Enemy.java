@@ -128,6 +128,10 @@ public class Enemy extends Personnage{
 		 */
 		if(System.currentTimeMillis() - travelTime > this.getSpeed()){
 			travelTime = System.currentTimeMillis();
+			Game.getBoard().getTile(this.position).setEnemy(null);
+			if (this.position.x < Game.getBoard().sizeX()) this.position.x++;
+			Game.getBoard().getTile(this.position).setEnemy(this);
+			//target();
 			if(position.x < 99)
 				//fixme : à adapter avec les fonctions de déplacement après
 				this.position.x ++;
