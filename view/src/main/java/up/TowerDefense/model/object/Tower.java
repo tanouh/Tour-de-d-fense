@@ -1,6 +1,12 @@
 package up.TowerDefense.model.object;
 
+import up.TowerDefense.model.character.Enemy;
 import up.TowerDefense.model.game.Game;
+import up.TowerDefense.model.map.Tile;
+
+import java.util.ArrayList;
+
+import static up.TowerDefense.model.game.StaticFunctions.check_Ennemy;
 
 public class Tower extends PlaceableObstacle{
 
@@ -71,6 +77,13 @@ public class Tower extends PlaceableObstacle{
     private double price;
 
     /**
+     * Represente l'ennemi que la tour cible actuellement
+     */
+    private Enemy target;
+
+    private ArrayList<Tile> attainableTiles = new ArrayList<Tile>();
+
+    /**
      * Construit une Tour de taille "size" a la position determin�e par "x" et "y".
      * 
      * @param x Position horizontale de la Tour sur la carte
@@ -94,6 +107,8 @@ public class Tower extends PlaceableObstacle{
         this.reloadTime=reloadTime;
         this.lastAttackTime = lastAttackTime;
         this.towerType=twType;
+        Game.getBoard().addToListTowers(this);
+        setAttainableTiles();
     }
 
     /**
@@ -110,6 +125,8 @@ public class Tower extends PlaceableObstacle{
     	this.reloadTime = presetTower.getReloadTime();
     	this.lastAttackTime = presetTower.getLastAttackTime();
     	this.towerType = presetTower.getTowerType();
+        Game.getBoard().addToListTowers(this);
+        setAttainableTiles();
     }
     
     /**
@@ -183,5 +200,25 @@ public class Tower extends PlaceableObstacle{
 
     public Type getTowerType() {
         return towerType;
+    }
+
+    public void setAttainableTiles(){
+        for (int i = -(int)range ; i != 0 && i < range+1  ; i++) {
+            for (int j = -(int)range; j != 0 && j < range + 1; j++) {
+                attainableTiles.add(Game.getBoard().getTile((int)position.y + j, (int)position.x + i));
+                System.out.println(Game.getBoard().getTile((int)position.y + j, (int)position.x + i).getPos().x+" "
+                        +Game.getBoard().getTile((int)position.y + j, (int)position.x + i).getPos().y);
+            }
+        }
+    }
+
+    public void launchAttack(){
+        for (Tile attainableTile : attainableTiles){
+            if (check_Ennemy(attainableTile)){
+                System.out.println("tower found on : " + attainableTile.getPos().x + "-" + attainableTile.getPos().y);
+                Position ennemyPos = attainableTile.getPos();
+                break;
+            }
+        }
     }
 }

@@ -67,6 +67,14 @@ public class StaticFunctions {
         return  board.getTile(x, y)!= null && board.getTile(x, y).hasATower();
     }
 
+    /**
+     * Vérifie s'il y a un ennemi dans la case
+     */
+    public static boolean check_Ennemy(Tile attainableTile){
+        return  attainableTile != null && attainableTile.hasAnEnnemy();
+    }
+
+
 
     /**************   LES FONCTIONS DE CALCULS  ****************/
 
