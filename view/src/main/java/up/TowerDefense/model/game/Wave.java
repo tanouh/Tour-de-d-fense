@@ -1,13 +1,5 @@
 package up.TowerDefense.model.game;
 
-import java.util.ArrayList;
-import java.util.TimerTask;
-
-import up.TowerDefense.model.character.Enemy;
-import up.TowerDefense.model.object.Position;
-import up.TowerDefense.view.componentHandler.MapGenerator;
-import up.TowerDefense.view.mainComponent.ScreenPanel;
-
 import static up.TowerDefense.model.game.Subwave.*;
 
 /**
@@ -25,7 +17,7 @@ public class Wave {
 
     public static int level = 1;
     public static long TIME_SINCE_LAST_SPAWN;
-    public static final int MAX_NB_WAVES = 2;
+    public static final int MAX_NB_WAVES = 5;
     public static long TIME_INTERVAL = 10000;  // Intervalle de temps entre deux séries de vagues
     public static long DELAY = 1000;
 
@@ -33,7 +25,7 @@ public class Wave {
         resetTimeSinceLastSpawn();
         waveOrder = 1;
         Game.setWavesLeft(Game.getWavesLeft()-1);
-        currentWave = Subwave.subwaves_in_order();
+        currentWave = Subwave.subwavesInOrder();
     }
 
     /**
@@ -54,7 +46,7 @@ public class Wave {
                     currentWave.run();
                 } else {
                     if(System.currentTimeMillis() - TIME_SINCE_LAST_SPAWN > TIME_INTERVAL){
-                        currentWave = Subwave.subwaves_in_order();
+                        currentWave = Subwave.subwavesInOrder();
                         resetTimeSinceLastSpawn();
                     }
                 }

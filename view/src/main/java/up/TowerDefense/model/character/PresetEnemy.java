@@ -118,7 +118,7 @@ public class PresetEnemy {
 	 * @return Renvoie un objet PresetEnemy contenant toute ces informations afin de creer l'enemy
 	 */
 	public static PresetEnemy Covid() {
-		return new PresetEnemy(100,500,30,5.00f, 1.00f, 100.00f, false, 1, 1.00f, "/null.png", DestructibleObstacle.ObsType.TARGET, Enemy.Type.COVID,10);
+		return new PresetEnemy(100,1500,30,5.00f, 1.00f, 100.00f, false, 1, 1.00f, "/null.png", DestructibleObstacle.ObsType.TARGET, Enemy.Type.COVID,10);
 	}
 
 	/**
@@ -138,7 +138,7 @@ public class PresetEnemy {
 	 * @return Renvoie un objet PresetEnemy contenant toute ces informations afin de creer l'enemy
 	 */
 	public static PresetEnemy Bacterium() {
-		return new PresetEnemy(100, 1000, 15, 1.00f, 1.00f, 10.00f, false, 1, 1.00f, "/bacterium.png", DestructibleObstacle.ObsType.TARGET, Enemy.Type.BACTERIUM,10);
+		return new PresetEnemy(100, 1500, 15, 1.00f, 1.00f, 10.00f, false, 1, 1.00f, "/bacterium.png", DestructibleObstacle.ObsType.TARGET, Enemy.Type.BACTERIUM,10);
 	}
 	
 	/**
@@ -198,7 +198,7 @@ public class PresetEnemy {
 	 * @return Renvoie un objet PresetEnemy contenant toute ces informations afin de creer l'enemy
 	 */
 	public static PresetEnemy Parasite() {
-		return new PresetEnemy(100, 500, 40, 1.25f, 1.00f, 20.00f, false, 1, 0.75f, "/null.png", DestructibleObstacle.ObsType.TOWER, Enemy.Type.PARASITE,10);
+		return new PresetEnemy(100, 1500, 40, 1.25f, 1.00f, 20.00f, false, 1, 0.75f, "/null.png", DestructibleObstacle.ObsType.TOWER, Enemy.Type.PARASITE,10);
 	}
 	
 	public int getSize() {

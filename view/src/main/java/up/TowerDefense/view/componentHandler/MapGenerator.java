@@ -194,18 +194,18 @@ public class MapGenerator {
      * @param g
      */
     public void drawComponents(Graphics2D g){
-        for (PlaceableObstacle ob : obstaclesList ){
+        for (PlaceableObstacle ob : new CopyOnWriteArrayList<>(obstaclesList) ){
             drawElementaryComponent(g,ob.position,ob.getImage(),ob.getSize());
         }
-        for (Personnage perso : charactersList){
+        for (Personnage perso : new CopyOnWriteArrayList<>(charactersList)){
             drawElementaryComponent(g,perso.position, perso.getImage(),perso.getSize());
         }
-        for(Projectile proj : projectilesList){
-            drawElementaryComponent(g,proj.getPos(),proj.getImg(),1);
+        for(Projectile proj : new CopyOnWriteArrayList<>(projectilesList)){
+            drawElementaryComponent(g,proj.getPos(),proj.getImg(),0.25);
         }
     }
 
-    private void drawElementaryComponent(Graphics2D g,Position pos, BufferedImage img,int size){
+    private void drawElementaryComponent(Graphics2D g,Position pos, BufferedImage img,double size){
 
         int posX = (int) pos.x*tileSize;
         int posY = (int) pos.y*tileSize;
@@ -224,7 +224,7 @@ public class MapGenerator {
                         posY > screenPanel.camera.worldY - screenPanel.camera.screenY &&
                         posY < screenPanel.camera.worldY + screenPanel.camera.screenY
         )
-            g.drawImage(img,screenX, screenY, tileSize*size, tileSize*size, null);
+            g.drawImage(img,screenX, screenY, (int)(tileSize*size), (int)(tileSize*size), null);
     }
 
 

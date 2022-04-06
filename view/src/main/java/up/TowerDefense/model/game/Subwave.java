@@ -32,7 +32,7 @@ public class Subwave {
      * Création des vagues préfabriquées de différents type d'ennemis
      */
 
-    public static Subwave subwaves_in_order(){
+    public static Subwave subwavesInOrder(){
         ArrayList<EnemySpawn> enemySpawned = new ArrayList<>();
         switch (Wave.waveOrder){
             case 1:

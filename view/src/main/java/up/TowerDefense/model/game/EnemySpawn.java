@@ -63,7 +63,7 @@ public class EnemySpawn {
      */
     public static EnemySpawn getBacterium(){
 
-        return new EnemySpawn(PresetEnemy.Bacterium(), 1,getRandomSpawnPosition(Game.getBoard()));
+        return new EnemySpawn(PresetEnemy.Bacterium(), 5*waveOrder,getRandomSpawnPosition(Game.getBoard()));
     }
 
     public static EnemySpawn getVirus(){
