@@ -1,6 +1,7 @@
 package up.TowerDefense.model.map;
 
 import com.sun.security.jgss.GSSUtil;
+import up.TowerDefense.model.character.Enemy;
 import up.TowerDefense.model.object.DestructibleObstacle;
 import up.TowerDefense.model.object.Obstacle;
 import up.TowerDefense.model.object.PlaceableObstacle;
@@ -14,6 +15,7 @@ import java.sql.SQLOutput;
 public class Tile {
     protected boolean isEmpty = true;
     protected Obstacle obstacle;
+    protected Enemy enemy;
     protected BufferedImage imageTile;
     protected Position pos;
 
@@ -33,6 +35,17 @@ public class Tile {
         this.obstacle = occupier;
         this.isEmpty=false;
     }
+
+    public void setEnemy(Enemy enemy){
+        if (enemy != null) {
+            this.enemy = enemy;
+            this.isEmpty = false;
+        }else{
+            this.enemy = null;
+            this.isEmpty = true;
+        }
+    }
+
 
     public Obstacle getOccupier(){
         return this.obstacle;
@@ -77,6 +90,10 @@ public class Tile {
 
     public boolean hasATower() {
         return !isEmpty() && (obstacle instanceof DestructibleObstacle) && ((DestructibleObstacle) obstacle).isATower();
+    }
+
+    public boolean hasAnEnnemy() {
+        return !isEmpty() && (enemy instanceof Enemy);
     }
 }
 

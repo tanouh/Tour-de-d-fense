@@ -1,6 +1,7 @@
 package up.TowerDefense.model.map;
 import up.TowerDefense.model.game.Game;
 import up.TowerDefense.model.game.StaticFunctions;
+import up.TowerDefense.model.object.*;
 import up.TowerDefense.model.object.Obstacle;
 import up.TowerDefense.model.object.PlaceableObstacle;
 import up.TowerDefense.model.object.Position;
@@ -12,6 +13,7 @@ import java.util.ArrayList;
 public class Board {
     private Tile[][] tiles;
     public static Board map;
+    private static ArrayList<Tower> listTowers = new ArrayList<Tower>();
 
     /* Stocke les positions des cases qu'occupent la cible principale*/
     private ArrayList<Position> targetZone = new ArrayList<>();
@@ -21,7 +23,7 @@ public class Board {
     }
 
     public Tile getTile(Position pos) {
-        return tiles[(int) pos.x][(int) pos.y];
+        return tiles[(int) pos.y][(int) pos.x];
     }
 
     public int sizeX() {
@@ -49,6 +51,10 @@ public class Board {
 
         return tiles[x][y];
 
+    }
+
+    public void addToListTowers(Tower tower){
+        listTowers.add(tower);
     }
 
     public Obstacle getOccupier(Position position) {
@@ -160,6 +166,12 @@ public class Board {
 
         return spawnPoint;
     }/*fixme : les points obtenus ne sont pas tous sur les bords*/
+
+    public static void launchAllAttacks(){
+        for (Tower tower : listTowers){
+            tower.launchAttack();
+        }
+    }
 
 
 }

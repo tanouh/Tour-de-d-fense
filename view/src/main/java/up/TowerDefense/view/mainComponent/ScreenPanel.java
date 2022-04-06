@@ -132,6 +132,7 @@ public class ScreenPanel extends JPanel implements Runnable{
         gamePanel.updateSideMenu();
         waves.run();
         mapGen.updateCharactersPositions();
+        Game.getBoard().launchAllAttacks();
         //mapGen.updateProjectilesPos();
         testVictory();
     }
