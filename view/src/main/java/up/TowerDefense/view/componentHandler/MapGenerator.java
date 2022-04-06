@@ -176,7 +176,7 @@ public class MapGenerator {
                     worldY - screenPanel.tileSize < screenPanel.camera.worldY + screenPanel.camera.screenY
             )
             {
-                Tile t = gameBoard.getTile(worldRow,worldCol);
+                Tile t = gameBoard.getTile(worldCol,worldRow);
                 g.drawImage(t.getImageTile(),screenX,screenY,tileSize,tileSize,null);
             }
             worldCol ++;
@@ -259,7 +259,7 @@ public class MapGenerator {
             default :
                 return;
         }
-        if(gameBoard.addObstacle(obstacle, posY, posX)){
+        if(gameBoard.addObstacle(obstacle, posX, posY)){
             updateCharactersPaths();
             obstaclesList.add(obstacle);
         }

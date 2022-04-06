@@ -22,9 +22,7 @@ public class Board {
         map = this;
     }
 
-    public Tile getTile(Position pos) {
-        return tiles[(int) pos.y][(int) pos.x];
-    }
+
 
     public int sizeX() {
         return tiles.length;
@@ -35,7 +33,7 @@ public class Board {
     }
 
     public boolean isEmpty(int x, int y) {
-        return tiles[x][y].isEmpty();
+        return tiles[y][x].isEmpty();
     }
 
     public boolean isEmpty(Position pos) {
@@ -46,11 +44,13 @@ public class Board {
         tiles = new Tile[x][y];
     }
 
-    public Tile getTile(int x, int y) {
-        if (x < 0 || x > tiles.length || y < 0 || y > tiles[0].length) return null;
+    public Tile getTile(int x, int y) { // x = col , y = row
+        if (y < 0 || y > tiles.length || x < 0 || x > tiles[0].length) return null;
 
-        return tiles[x][y];
-
+        return tiles[y][x];
+    }
+    public Tile getTile(Position pos) {
+        return getTile((int)pos.x,(int)pos.y);
     }
 
     public void addToListTowers(Tower tower){
