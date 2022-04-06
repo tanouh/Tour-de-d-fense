@@ -1,6 +1,5 @@
 package up.TowerDefense.view.componentHandler;
 
-import up.TowerDefense.model.game.Game;
 import up.TowerDefense.view.mainComponent.ScreenPanel;
 
 import java.awt.event.MouseEvent;

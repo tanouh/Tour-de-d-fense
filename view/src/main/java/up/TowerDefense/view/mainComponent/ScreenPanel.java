@@ -12,8 +12,8 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.util.Timer;
 
-import static up.TowerDefense.view.componentHandler.KeyAction.*;
 import static up.TowerDefense.view.componentHandler.KeyAction.Action.*;
+import static up.TowerDefense.view.componentHandler.KeyAction.*;
 
 public class ScreenPanel extends JPanel implements Runnable{
     //Paramètrages de l'écran
@@ -39,7 +39,7 @@ public class ScreenPanel extends JPanel implements Runnable{
     private Thread gameThread = null;
     public boolean paused = false;
     public MapGenerator mapGen;
-    int FPS = 60; //Frame per second
+    int FPS = 30; //Frame per second
 
 
 
