@@ -156,7 +156,6 @@ public class Enemy extends Personnage{
 		EnemyProjectile projectile = new EnemyProjectile(this.position, target.position, this.damage, Game.getLevel(), target);
 		MapGenerator.projectilesList.add(projectile);
 		timeSinceLastAttack = System.currentTimeMillis();
-		projectile.move();
 	}
 
 

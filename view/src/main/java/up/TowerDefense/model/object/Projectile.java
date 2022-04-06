@@ -20,7 +20,7 @@ public abstract class  Projectile  {
     protected double yInit;
 
     protected double power;
-    protected double speed = 10;
+    protected double speed = 5;
     protected boolean arrivedAtTarget = false;
     protected int sourceLevel;
 
@@ -35,8 +35,8 @@ public abstract class  Projectile  {
         yDest = destPos.y;
         power = pPower;
 
-        xLoc = xInit +12*Math.cos(angleOfProjectileInRadians());
-        yLoc = yInit +12*Math.sin(angleOfProjectileInRadians());
+        xLoc = xInit;
+        yLoc = yInit;
 
 
         arrivedAtTarget = false;

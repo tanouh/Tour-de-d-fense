@@ -15,14 +15,14 @@ public class EnemyProjectile extends Projectile{
     @Override
     public void move() {
         //projectile has hit
-        if (Math.abs(xLoc - xDest)< speed/2 || Math.abs(yLoc - yDest)< speed/2){
+        if (Math.abs(xLoc - xDest) < speed || Math.abs(yLoc - yDest)< speed){
             arrivedAtTarget = true;
             target.takeDamage(power);
             MapGenerator.projectilesList.remove(this);
         }
         else{
-            xLoc += speed*Math.cos(angleOfProjectileInRadians());
-            yLoc += speed*Math.sin(angleOfProjectileInRadians());
+            xLoc += speed;
+            yLoc += speed;
         }
     }
 }
