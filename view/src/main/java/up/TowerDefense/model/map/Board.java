@@ -151,18 +151,24 @@ public class Board {
         ArrayList<Position> spawnPoint = new ArrayList<>();
 
         int i =0;
-        for (int j = 0; j < tiles[i].length; j++){
-            if (tiles[i][j].isEmpty)
-                spawnPoint.add(tiles[i][j].getPos());
+        int j;
+        for (i = 0 ; i < tiles.length; i+=tiles.length-1){
+            for (j = 0; j < tiles[i].length; j++){
+                if (tiles[i][j].isEmpty)
+                    spawnPoint.add(tiles[i][j].getPos());
+            }
         }
 
         // todo : à modifier quand les fonctions de déplacements auront été réglées
-
-        /*for (int j = 0; j < tiles[0].length; j += tiles[0].length - 1)
-            for (int i = 0; i < tiles.length; i++)
+        for(j = 0 ; j < tiles[0].length ; j+=tiles[0].length -1){
+            for (i = 0; i < tiles.length; i++){
                 if (tiles[i][j].isEmpty)
                     spawnPoint.add(tiles[i][j].getPos());
-*/
+            }
+
+        }
+
+
 
         return spawnPoint;
     }/*fixme : les points obtenus ne sont pas tous sur les bords*/

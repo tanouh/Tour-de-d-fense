@@ -145,7 +145,7 @@ public class Enemy extends Personnage{
 	}
 
 	public void update_paths(){
-//		this.path = Pathfinding.FindPath(this.position, Game.getBoard().getNearestTargetPosition(position));
+		this.path = Pathfinding.FindPath(this.position, Game.getBoard().getNearestTargetPosition(position));
 	}
 
 	public void identifyTarget(){

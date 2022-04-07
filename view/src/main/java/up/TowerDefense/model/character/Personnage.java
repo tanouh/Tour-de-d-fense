@@ -7,6 +7,8 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
+import static up.TowerDefense.view.mainComponent.ScreenPanel.tileSize;
+
 
 public abstract class Personnage{
 	private BufferedImage image;
@@ -33,7 +35,7 @@ public abstract class Personnage{
 	/**
 	 * vitesse du personnage
 	 */
-	private double velocity;
+	protected double velocity;
 	
 	/**
 	 * taille du personnage par rapport � une case (coefficient multiplicatif)
@@ -60,7 +62,6 @@ public abstract class Personnage{
 		this.maxHealth = maxHealth;
 		this.currentHealth = this.maxHealth;
 		this.speed = speed;
-		this.velocity = 1/speed;
 		this.size = size;
 		this.resistance = resistance;
 		image = StaticFunctions.loadImage(imgName);

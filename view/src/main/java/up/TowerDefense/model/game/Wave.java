@@ -17,7 +17,7 @@ public class Wave {
 
     public static int level = 1;
     public static long TIME_SINCE_LAST_SPAWN;
-    public static final int MAX_NB_WAVES = 2;
+    public static final int MAX_NB_WAVES = 5;
     public static long TIME_INTERVAL = 10000;  // Intervalle de temps entre deux séries de vagues
     public static long DELAY = 1000;
 
