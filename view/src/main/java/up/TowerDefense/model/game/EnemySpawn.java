@@ -42,7 +42,9 @@ public class EnemySpawn {
      * Lance une sous-vagues d'ennemis de même type
      */
     public void spawnEnemies(){
-        charactersList.add(new Enemy(this.enemy, new Position(spawnX, spawnY)));
+        Enemy e = new Enemy(this.enemy, new Position(spawnX, spawnY));
+        e.live();
+        charactersList.add(e);
         count++;
         if(count == quantity){
             finishedSpawn = true;

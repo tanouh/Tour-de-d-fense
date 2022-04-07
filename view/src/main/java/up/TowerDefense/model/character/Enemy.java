@@ -72,6 +72,8 @@ public class Enemy extends Personnage{
 
 
 
+
+
 	private boolean alive;
 	private boolean frozen;
 	private long freezeStartTime;
@@ -96,11 +98,8 @@ public class Enemy extends Personnage{
 		this.target = presetEnemy.getTarget();
 		this.range= presetEnemy.getRange();
 		this.path = Pathfinding.FindPath(position, Game.getBoard().getNearestTargetPosition(position));
-		lifeTime=System.currentTimeMillis();
-		travelTime = System.currentTimeMillis();
-		timeSinceLastAttack = System.currentTimeMillis();
 
-		alive = true;
+
 
 		//fixme : à intégrer dans les attributs des ennemis
 		reloadTime = 2000;
@@ -131,9 +130,7 @@ public class Enemy extends Personnage{
 		if(System.currentTimeMillis() - travelTime > this.getSpeed()){
 			travelTime = System.currentTimeMillis();
 			Game.getBoard().getTile(this.position).setEnemy(null);
-//			if (this.position.x < Game.getBoard().sizeX()) this.position.x++;
 			Game.getBoard().getTile(this.position).setEnemy(this);
-			//target();
 //			if(position.x < 99)
 //				//fixme : à adapter avec les fonctions de déplacement après
 //				this.position.x ++;
@@ -141,7 +138,7 @@ public class Enemy extends Personnage{
 //				die();
 			if(System.currentTimeMillis() - timeSinceLastAttack > reloadTime)
 				identifyTarget();
-			this.position = path.GetPos(System.currentTimeMillis()-0.001f, this.getSpeed());
+			this.position = path.GetPos(System.currentTimeMillis() - lifeTime, 0.001);
 			System.out.println(position.x + " " +position.y);
 
 		}
@@ -211,6 +208,13 @@ public class Enemy extends Personnage{
 	public void unfreeze(){
 		this.frozen = false;
 		freezeStartTime = -10000;
+	}
+
+	public void live(){
+		alive = true;
+		lifeTime = System.currentTimeMillis();
+		timeSinceLastAttack = System.currentTimeMillis();
+		travelTime = System.currentTimeMillis();
 	}
 
 

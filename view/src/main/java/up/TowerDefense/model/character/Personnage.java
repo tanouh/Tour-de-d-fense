@@ -26,9 +26,14 @@ public abstract class Personnage{
 	protected int currentHealth;
 	
 	/**
-	 * vitesse d'attaque (plus précisément le nombre de secondes pour effectuer un pas)du personnage
+	 *  Le nombre de secondes pour effectuer un pas
 	 */
 	protected long speed;
+
+	/**
+	 * vitesse du personnage
+	 */
+	private double velocity;
 	
 	/**
 	 * taille du personnage par rapport � une case (coefficient multiplicatif)
@@ -55,6 +60,7 @@ public abstract class Personnage{
 		this.maxHealth = maxHealth;
 		this.currentHealth = this.maxHealth;
 		this.speed = speed;
+		this.velocity = 1/speed;
 		this.size = size;
 		this.resistance = resistance;
 		image = StaticFunctions.loadImage(imgName);
