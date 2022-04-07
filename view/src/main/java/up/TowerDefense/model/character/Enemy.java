@@ -3,6 +3,8 @@ package up.TowerDefense.model.character;
 import up.TowerDefense.model.game.Game;
 
 import up.TowerDefense.model.game.StaticFunctions;
+import up.TowerDefense.model.map.Path;
+import up.TowerDefense.model.map.Pathfinding;
 import up.TowerDefense.model.object.*;
 import up.TowerDefense.view.componentHandler.MapGenerator;
 
@@ -56,7 +58,7 @@ public class Enemy extends Personnage{
 	/**
 	 * Chemin suivi par l'enemi
 	 */
-	//private Path path;
+	private Path path;
 
 	/**
 	 * Durée depuis laquelle l'enemi vit (ie qu'il est sur le plateau)
@@ -93,7 +95,7 @@ public class Enemy extends Personnage{
 		this.damage = presetEnemy.getDammage();
 		this.target = presetEnemy.getTarget();
 		this.range= presetEnemy.getRange();
-		//this.path = Pathfinding.FindPath(position, Game.getBoard().getNearestTargetPosition(position));
+		this.path = Pathfinding.FindPath(position, Game.getBoard().getNearestTargetPosition(position));
 		lifeTime=System.currentTimeMillis();
 		travelTime = System.currentTimeMillis();
 		timeSinceLastAttack = System.currentTimeMillis();
@@ -129,24 +131,24 @@ public class Enemy extends Personnage{
 		if(System.currentTimeMillis() - travelTime > this.getSpeed()){
 			travelTime = System.currentTimeMillis();
 			Game.getBoard().getTile(this.position).setEnemy(null);
-			if (this.position.x < Game.getBoard().sizeX()) this.position.x++;
+//			if (this.position.x < Game.getBoard().sizeX()) this.position.x++;
 			Game.getBoard().getTile(this.position).setEnemy(this);
 			//target();
-			if(position.x < 99)
-				//fixme : à adapter avec les fonctions de déplacement après
-				this.position.x ++;
-			else
-				die();
+//			if(position.x < 99)
+//				//fixme : à adapter avec les fonctions de déplacement après
+//				this.position.x ++;
+//			else
+//				die();
 			if(System.currentTimeMillis() - timeSinceLastAttack > reloadTime)
 				identifyTarget();
-
-			//this.position = path.GetPos(System.currentTimeMillis()-lifeTime, this.getSpeed());
+			this.position = path.GetPos(System.currentTimeMillis()-0.001f, this.getSpeed());
+			System.out.println(position.x + " " +position.y);
 
 		}
 	}
 
 	public void update_paths(){
-		//this.path = Pathfinding.FindPath(this.position, Game.getBoard().getNearestTargetPosition(position));
+//		this.path = Pathfinding.FindPath(this.position, Game.getBoard().getNearestTargetPosition(position));
 	}
 
 	public void identifyTarget(){
@@ -159,10 +161,11 @@ public class Enemy extends Personnage{
 	}
 
 	private void launchAttack(PlaceableObstacle target) {
-		EnemyProjectile projectile = new EnemyProjectile(this.position, target.position, this.damage, Game.getLevel(), target);
-		MapGenerator.projectilesList.add(projectile);
-		timeSinceLastAttack = System.currentTimeMillis();
+//		EnemyProjectile projectile = new EnemyProjectile(this.position, target.position, this.damage, Game.getLevel(), target);
+//		MapGenerator.projectilesList.add(projectile);
+//		timeSinceLastAttack = System.currentTimeMillis();
 	}
+
 
 
 	/**

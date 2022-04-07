@@ -20,7 +20,6 @@ public class ScreenPanel extends JPanel implements Runnable{
     public static int originalTileSize = GameWindow.widthScreen*95/12000;
     public static int scale = 2;
     public static int tileSize = originalTileSize*scale;
-    ;
 
     public static int sizeCase = 20;
     public static int nbCol = GameWindow.widthScreen*4/(5*originalTileSize);
@@ -39,7 +38,7 @@ public class ScreenPanel extends JPanel implements Runnable{
     private Thread gameThread = null;
     public boolean paused = false;
     public MapGenerator mapGen;
-    int FPS = 30; //Frame per second
+    int FPS = 40; //Frame per second
 
 
 
@@ -128,8 +127,8 @@ public class ScreenPanel extends JPanel implements Runnable{
         gamePanel.updateSideMenu();
         waves.run();
         mapGen.updateCharactersPositions();
-        mapGen.updateProjectilesPos();
-        Game.getBoard().launchAllAttacks();
+//        mapGen.updateProjectilesPos();
+//        Game.getBoard().launchAllAttacks();
         testVictory();
     }
 

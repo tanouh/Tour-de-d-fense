@@ -43,7 +43,6 @@ public class KeyAction extends AbstractAction {
                 break;
             case MOVE_UP:
                 Camera.upPressed = true;
-
                             break;
             case MOVE_DOWN:
                 Camera.downPressed = true;

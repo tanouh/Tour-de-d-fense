@@ -50,7 +50,7 @@ public class Board {
         return tiles[y][x];
     }
     public Tile getTile(Position pos) {
-        return getTile((int)pos.x,(int)pos.y);
+        return getTile((int)pos.y,(int)pos.x);
     }
 
     public void addToListTowers(Tower tower){
@@ -64,7 +64,7 @@ public class Board {
     public void initTile(int x, int y, Tile tile, boolean isATargetZone) {
         tiles[x][y] = tile;
         if (isATargetZone) {
-            targetZone.add(new Position(x, y));
+            targetZone.add(new Position(y, x));
         }
 
     }
