@@ -56,7 +56,7 @@ public class Pathfinding {
         Tile[] tilePath = new Tile[path.size()];
         for(int i = 0; i < tilePath.length; i++){
             tilePath[i] = path.get(tilePath.length - i - 1).tile;
-            System.out.println(tilePath[i].pos.x + " " + tilePath[i].pos.y);
+            //System.out.println(tilePath[i].pos.x + " " + tilePath[i].pos.y);
         }
         System.out.println();
         return new Path(tilePath);

@@ -35,7 +35,7 @@ public abstract class Personnage{
 	/**
 	 * vitesse du personnage
 	 */
-	protected double velocity;
+	protected double velocity = 0.001;
 	
 	/**
 	 * taille du personnage par rapport � une case (coefficient multiplicatif)

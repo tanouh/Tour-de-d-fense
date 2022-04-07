@@ -206,8 +206,8 @@ public class Tower extends PlaceableObstacle{
         for (int i = -(int)range ; i != 0 && i < range+1  ; i++) {
             for (int j = -(int)range; j != 0 && j < range + 1; j++) {
                 attainableTiles.add(Game.getBoard().getTile((int)position.x +i, (int)position.y + j));
-                System.out.println(Game.getBoard().getTile((int)position.x + i, (int)position.y + j).getPos().x+" "
-                        +Game.getBoard().getTile((int)position.x + i, (int)position.y + j).getPos().y);
+                //System.out.println(Game.getBoard().getTile((int)position.x + i, (int)position.y + j).getPos().x+" "
+                //        +Game.getBoard().getTile((int)position.x + i, (int)position.y + j).getPos().y);
             }
         }
     }

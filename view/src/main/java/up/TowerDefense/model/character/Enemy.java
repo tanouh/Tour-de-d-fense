@@ -131,15 +131,11 @@ public class Enemy extends Personnage{
 			travelTime = System.currentTimeMillis();
 			Game.getBoard().getTile(this.position).setEnemy(null);
 			Game.getBoard().getTile(this.position).setEnemy(this);
-//			if(position.x < 99)
-//				//fixme : à adapter avec les fonctions de déplacement après
-//				this.position.x ++;
-//			else
-//				die();
+
 			if(System.currentTimeMillis() - timeSinceLastAttack > reloadTime)
 				identifyTarget();
-			this.position = path.GetPos(System.currentTimeMillis() - lifeTime, 0.001);
-			System.out.println(position.x + " " +position.y);
+			this.position = path.GetPos(System.currentTimeMillis() - lifeTime, this.velocity);
+			//System.out.println(position.x + " " +position.y);
 
 		}
 	}
@@ -150,6 +146,7 @@ public class Enemy extends Personnage{
 
 	public void identifyTarget(){
 		Position towerPos = findTower(this.position, this.range, Game.getBoard());
+		System.out.println(towerPos);
 		if(towerPos != null){
 			System.out.println(Game.getBoard().getOccupier(towerPos));
 			//System.out.println((PlaceableObstacle) Game.getBoard().getOccupier(towerPos));
