@@ -131,15 +131,14 @@ public class Enemy extends Personnage{
 			travelTime = System.currentTimeMillis();
 			Game.getBoard().getTile(this.position).setEnemy(null);
 			Game.getBoard().getTile(this.position).setEnemy(this);
-//			if(position.x < 99)
-//				//fixme : à adapter avec les fonctions de déplacement après
-//				this.position.x ++;
-//			else
-//				die();
 			if(System.currentTimeMillis() - timeSinceLastAttack > reloadTime)
 				identifyTarget();
 			this.position = path.GetPos(System.currentTimeMillis() - lifeTime, 0.001);
-			System.out.println(position.x + " " +position.y);
+//			System.out.println((int)position.x + " " + (int)position.y);
+			if (Game.getBoard().getTile((int)position.x,(int)position.y).isTarget()){
+				Game.setLives(-1);
+				this.die();
+			}
 
 		}
 	}
@@ -186,8 +185,8 @@ public class Enemy extends Personnage{
 
 	public void die(){
 		if(alive){
-			int i = MapGenerator.charactersList.indexOf(this);
-			MapGenerator.charactersList.remove(i);
+			this.alive = false;
+			MapGenerator.charactersList.remove(this);
 		}
 	}
 
