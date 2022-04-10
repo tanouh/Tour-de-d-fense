@@ -18,6 +18,7 @@ public class Tile {
     protected Enemy enemy;
     protected BufferedImage imageTile;
     protected Position pos;
+    protected boolean isTarget = false;
 
 
     public Tile(Position _pos){
@@ -49,6 +50,10 @@ public class Tile {
 
     public Obstacle getOccupier(){
         return this.obstacle;
+    }
+
+    public boolean isTarget(){
+        return isTarget;
     }
 
     public PlaceableObstacle getPlaceableObstacle(){
@@ -88,7 +93,7 @@ public class Tile {
         return imageTile;
     }
     public Position getPos(){return pos;}
-
+    public Enemy getEnemy(){ return enemy;}
 
     public boolean hasATower() {
         return !isEmpty() && (obstacle instanceof DestructibleObstacle) && ((DestructibleObstacle) obstacle).isATower();

@@ -1,7 +1,9 @@
 package up.TowerDefense.model.game;
 
 import up.TowerDefense.model.map.Board;
+import up.TowerDefense.model.map.Tile;
 import up.TowerDefense.model.object.Obstacle;
+import up.TowerDefense.model.object.Position;
 
 public class Game {
 
@@ -59,7 +61,7 @@ public class Game {
     }
 
     public static void setLives(int deltaLives) {
-        Game.lives += lives;
+        Game.lives += deltaLives;
     }
 
     public static void setWavesLeft(int nbWavesLeft) { wavesLeft = nbWavesLeft; }

@@ -40,9 +40,15 @@ public class Board {
         return isEmpty((int) pos.x, (int) pos.y);
     }
 
+    public ArrayList<Position> getTargetZone(){
+        return targetZone;
+    }
+
     public void setTile(int x, int y) {
         tiles = new Tile[x][y];
     }
+
+    public Tile[][] getTiles(){ return tiles; }
 
     public Tile getTile(int x, int y) { // x = col , y = row
         if (y < 0 || y > tiles.length || x < 0 || x > tiles[0].length) return null;
@@ -65,6 +71,7 @@ public class Board {
         tiles[x][y] = tile;
         if (isATargetZone) {
             targetZone.add(new Position(y, x));
+            tiles[x][y].isTarget = true;
         }
 
     }
