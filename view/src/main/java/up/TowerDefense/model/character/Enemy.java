@@ -149,7 +149,7 @@ public class Enemy extends Personnage{
 
 	public void identifyTarget(){
 		Position towerPos = findTower(this.position, this.range, Game.getBoard());
-		System.out.println(towerPos);
+		//System.out.println(towerPos);
 		if(towerPos != null){
 			System.out.println(Game.getBoard().getOccupier(towerPos));
 			//System.out.println((PlaceableObstacle) Game.getBoard().getOccupier(towerPos));

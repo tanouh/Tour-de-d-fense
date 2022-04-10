@@ -18,7 +18,7 @@ import static up.TowerDefense.view.componentHandler.KeyAction.*;
 public class ScreenPanel extends JPanel implements Runnable{
     //Paramètrages de l'écran
     public static int originalTileSize = GameWindow.widthScreen*95/12000;
-    public static int scale = 2;
+    public static int scale = 1;
     public static int tileSize = originalTileSize*scale;
 
     public static int sizeCase = 20;

@@ -47,7 +47,6 @@ public class DestructibleObstacle extends Obstacle{
     public void setCurrentHealth(int currentHealth) {
         if(currentHealth < this.currentHealth){
             // TODO: clignotement
-            System.out.println("ouch");
 
         }
 

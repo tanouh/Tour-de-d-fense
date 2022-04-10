@@ -12,7 +12,7 @@ public class Pathfinding {
         List<Node> openSet = new ArrayList<Node>();
         HashSet<Node> closedSet = new HashSet<Node>();
         openSet.add(startNode);
-        System.out.println(startNode + " " + targetNode);
+        //System.out.println(startNode + " " + targetNode);
 
         while (openSet.size() > 0) {
             //Cherchez le meilleur node dans openSet et l'ajouter à closedSet
@@ -58,7 +58,7 @@ public class Pathfinding {
             tilePath[i] = path.get(tilePath.length - i - 1).tile;
             //System.out.println(tilePath[i].pos.x + " " + tilePath[i].pos.y);
         }
-        System.out.println();
+        //System.out.println();
         return new Path(tilePath);
     }
 
