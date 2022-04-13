@@ -4,16 +4,16 @@
 <p>fleches directionnelles pour deplacer la camera</p>
 *
 <h2>Information sur les TowerTest</h2>
-<p>	-Ces tours seront les tours par défaut. Elle couteront 100 coins chacune et auront des statistiques équilibrés. </p>
- 
+<p>	-Ces tours seront les tours par defaut. Elle couteront 100 coins chacune et auront des statistiques equilibres. </p>
+*
 <h2>Information sur les Tours anti-champis</h2>
-<p> -Ces tours seront plus défensive que les autres, elles couteront un peu plus que les tour classique mais feront plus de dégats que la normal <br>
-	aura une vitesse d'attaque et une distance d'attaque plus importante. </p>
-	
+<p> -Ces tours seront plus defensive que les autres, elles couteront un peu plus que les tours classiques mais feront plus de degats que la normale, <br>
+	auront une vitesse d'attaque et une distance d'attaque plus importante. </p>
+*
 <h2>Information sur les Leucocyte T</h2>
 *
 <h2>Information sur les Anticorps</h2>
 *
 <h2>Information sur les Murs</h2>
-<p> Le joueur pourra placé des murs sur la carte pour empêcher les énemies d'approcher les tours. </p>
+<p> Le joueur pourra placer des murs sur la carte pour empecher les ennemis d'approcher les tours. </p>
 </html>

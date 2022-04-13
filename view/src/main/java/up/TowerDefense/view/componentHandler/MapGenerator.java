@@ -207,8 +207,8 @@ public class MapGenerator {
 
     private void drawElementaryComponent(Graphics2D g,Position pos, BufferedImage img,double size){
 
-        int posX = (int) pos.x*tileSize;
-        int posY = (int) pos.y*tileSize;
+        int posX = (int)Math.round(pos.x*tileSize);
+        int posY = (int)Math.round(pos.y*tileSize);
 
         int screenX = posX - screenPanel.camera.worldX + screenPanel.camera.screenX;
         int screenY = posY - screenPanel.camera.worldY + screenPanel.camera.screenY;
