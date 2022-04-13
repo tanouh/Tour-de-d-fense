@@ -134,7 +134,6 @@ public class Enemy extends Personnage{
 			if(System.currentTimeMillis() - timeSinceLastAttack > reloadTime)
 				identifyTarget();
 			this.position = path.GetPos(System.currentTimeMillis() - lifeTime, 0.001);
-//			System.out.println((int)position.x + " " + (int)position.y);
 			if (Game.getBoard().getTile((int)position.x,(int)position.y).isTarget()){
 				Game.setLives(-1);
 				this.die();

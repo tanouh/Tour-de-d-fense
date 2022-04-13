@@ -12,7 +12,10 @@ public class Pathfinding {
         List<Node> openSet = new ArrayList<Node>();
         HashSet<Node> closedSet = new HashSet<Node>();
         openSet.add(startNode);
-        System.out.println(startNode + " " + targetNode);
+        if (startNode == null) System.out.println("bug start");
+        else System.out.println(startNode);
+        if (targetNode == null) System.out.println("bug end");
+        else System.out.println(targetNode);
 
         while (openSet.size() > 0) {
             //Cherchez le meilleur node dans openSet et l'ajouter à closedSet

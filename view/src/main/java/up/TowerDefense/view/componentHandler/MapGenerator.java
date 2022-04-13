@@ -138,7 +138,7 @@ public class MapGenerator {
                 }else if (rgb[i][j] == BLEU){
                     mapTileNum[i][j]=3; // Décor aussi
                 }else if (rgb[i][j] == VERT){
-                    mapTileNum[i][j]=4; // Décor
+                    mapTileNum[i][j]=0; // Décor
                 }else if (rgb[i][j]== BLANC){
                     mapTileNum[i][j]=1; //Routes véhiculables
                 }

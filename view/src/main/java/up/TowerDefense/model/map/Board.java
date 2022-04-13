@@ -37,7 +37,7 @@ public class Board {
     }
 
     public boolean isEmpty(Position pos) {
-        return isEmpty((int) pos.x, (int) pos.y);
+        return isEmpty((int) Math.round(pos.x), (int) Math.round(pos.y));
     }
 
     public ArrayList<Position> getTargetZone(){
@@ -56,7 +56,7 @@ public class Board {
         return tiles[y][x];
     }
     public Tile getTile(Position pos) {
-        return getTile((int)pos.y,(int)pos.x);
+        return getTile((int)Math.round(pos.y),(int)Math.round(pos.x));
     }
 
     public void addToListTowers(Tower tower){
