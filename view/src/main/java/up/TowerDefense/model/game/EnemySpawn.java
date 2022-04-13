@@ -35,7 +35,9 @@ public class EnemySpawn {
     public static Position getRandomSpawnPosition(Board board){
         Random rand = new Random();
         int i = rand.nextInt(board.getSpawnablePoint().size());
-        return board.getSpawnablePoint().get(i);
+        Position invertSpawnPos = board.getSpawnablePoint().get(i);
+        Position spawnPos = new Position(invertSpawnPos.y, invertSpawnPos.x);
+        return spawnPos;
     }
 
     /**
