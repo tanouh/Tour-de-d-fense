@@ -137,7 +137,7 @@ public class MapGenerator {
                 }else if (rgb[i][j] == BLEU){
                     mapTileNum[i][j]=3; // Décor aussi
                 }else if (rgb[i][j] == VERT){
-                    mapTileNum[i][j]=4; // Décor
+                    mapTileNum[i][j]=0; // Décor
                 }else if (rgb[i][j]== BLANC){
                     mapTileNum[i][j]=1; //Routes véhiculables
                 }
@@ -206,8 +206,8 @@ public class MapGenerator {
 
     private void drawElementaryComponent(Graphics2D g,Position pos, BufferedImage img,double size){
 
-        int posX = (int) pos.x*tileSize;
-        int posY = (int) pos.y*tileSize;
+        int posX = (int)Math.round(pos.x*tileSize);
+        int posY = (int)Math.round(pos.y*tileSize);
 
         int screenX = posX - screenPanel.camera.worldX + screenPanel.camera.screenX;
         int screenY = posY - screenPanel.camera.worldY + screenPanel.camera.screenY;

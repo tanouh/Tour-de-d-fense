@@ -108,6 +108,7 @@ public class Path {
                 subs[i] = new SubStraight(path[i].pos,path[i+1].pos,path[i+2].pos);
             else                                        //Sinon créer un arc
                 subs[i] = new SubStraight(path[i].pos,path[i+1].pos,path[i+2].pos); // !!!!! Test sans arc !!!!!!
+//            System.out.println(subs[i].GetPos(0).x + " " + subs[i].GetPos(0).y);
             length += subs[i].Distance();
         }
     }
