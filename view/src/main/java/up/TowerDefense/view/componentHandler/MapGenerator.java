@@ -12,16 +12,14 @@ import up.TowerDefense.view.mainComponent.ScreenPanel;
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-import static up.TowerDefense.view.mainComponent.ScreenPanel.*;
-import static up.TowerDefense.view.componentHandler.TileDisplayManager.*;
 import static up.TowerDefense.model.object.Obstacle.*;
+import static up.TowerDefense.view.componentHandler.TileDisplayManager.*;
+import static up.TowerDefense.view.mainComponent.ScreenPanel.MAX_WORLD_COL;
+import static up.TowerDefense.view.mainComponent.ScreenPanel.MAX_WORLD_ROW;
 
 /**
  * Classe qui édite la carte suivant un modèle
@@ -87,7 +85,6 @@ public class MapGenerator {
                     col++;
                 }
                 if (col == MAX_WORLD_COL){
-
                     col = 0;
                     row++;
                 }
@@ -95,6 +92,8 @@ public class MapGenerator {
         }catch(Exception e){
             e.printStackTrace();
         }
+
+        Game.getBoard().setSpawnablePoint();
     }
 
     public  BufferedImage loadImage(String image){

@@ -18,7 +18,7 @@ import static up.TowerDefense.view.componentHandler.KeyAction.*;
 public class ScreenPanel extends JPanel implements Runnable{
     //Paramètrages de l'écran
     public static int originalTileSize = GameWindow.widthScreen*95/12000;
-    public static int scale = 1;
+    public static int scale = 2;
     public static int tileSize = originalTileSize*scale;
 
     public static int sizeCase = 20;
@@ -29,8 +29,8 @@ public class ScreenPanel extends JPanel implements Runnable{
     public static int windowHeight = originalTileSize*nbRow;
 
     //Paramètrage du monde de jeu
-    public static final int MAX_WORLD_COL = 100;
-    public static final int MAX_WORLD_ROW= 64;
+    public static final int MAX_WORLD_COL = 75;
+    public static final int MAX_WORLD_ROW= 50;
 
     public JLabel title = new JLabel("project Covid Defense");
     protected GameWindow gameWindow;
@@ -57,7 +57,7 @@ public class ScreenPanel extends JPanel implements Runnable{
         this.gameWindow = gameWindow;
         this.gamePanel = gamePanel;
         KeyAction.setScreenPanel(this);
-        mapGen= new MapGenerator(this, "/map3_V2.png"); /*A modifier : ajouter un paramètrage pour l'image*/
+        mapGen= new MapGenerator(this, "/map6.png"); /*A modifier : ajouter un paramètrage pour l'image*/
 
         startThread();
         this.setPreferredSize(new Dimension(windowWidth, windowHeight));
@@ -127,7 +127,7 @@ public class ScreenPanel extends JPanel implements Runnable{
         gamePanel.updateSideMenu();
         waves.run();
         mapGen.updateCharactersPositions();
-//        mapGen.updateProjectilesPos();
+        mapGen.updateProjectilesPos();
 //        Game.getBoard().launchAllAttacks();
         testVictory();
     }

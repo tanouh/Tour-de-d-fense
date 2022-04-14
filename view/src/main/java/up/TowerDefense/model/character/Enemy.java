@@ -1,15 +1,14 @@
 package up.TowerDefense.model.character;
 
 import up.TowerDefense.model.game.Game;
-
-import up.TowerDefense.model.game.StaticFunctions;
 import up.TowerDefense.model.map.Path;
-import up.TowerDefense.model.map.Pathfinding;
-import up.TowerDefense.model.object.*;
+import up.TowerDefense.model.object.DestructibleObstacle;
+import up.TowerDefense.model.object.EnemyProjectile;
+import up.TowerDefense.model.object.PlaceableObstacle;
+import up.TowerDefense.model.object.Position;
 import up.TowerDefense.view.componentHandler.MapGenerator;
 
 import static up.TowerDefense.model.game.StaticFunctions.findTower;
-import static up.TowerDefense.view.componentHandler.MapGenerator.obstaclesList;
 
 
 /*TODO Les lignes reliées à path devraient être décommentées lorsque le problème relié à pathfinding sera réglé
@@ -97,7 +96,7 @@ public class Enemy extends Personnage{
 		this.damage = presetEnemy.getDammage();
 		this.target = presetEnemy.getTarget();
 		this.range= presetEnemy.getRange();
-		this.path = Pathfinding.FindPath(position, Game.getBoard().getNearestTargetPosition(position));
+		//this.path = Pathfinding.FindPath(position, Game.getBoard().getNearestTargetPosition(position));
 
 
 
@@ -133,8 +132,8 @@ public class Enemy extends Personnage{
 			Game.getBoard().getTile(this.position).setEnemy(this);
 			if(System.currentTimeMillis() - timeSinceLastAttack > reloadTime)
 				identifyTarget();
-			this.position = path.GetPos(System.currentTimeMillis() - lifeTime, 0.001);
-//			System.out.println((int)position.x + " " + (int)position.y);
+			this.position.x--;
+			//this.position = path.GetPos(System.currentTimeMillis() - lifeTime, 0.001);
 			if (Game.getBoard().getTile((int)position.x,(int)position.y).isTarget()){
 				Game.setLives(-1);
 				this.die();
@@ -144,23 +143,24 @@ public class Enemy extends Personnage{
 	}
 
 	public void update_paths(){
-		this.path = Pathfinding.FindPath(this.position, Game.getBoard().getNearestTargetPosition(position));
+		//this.path = Pathfinding.FindPath(this.position, Game.getBoard().getNearestTargetPosition(position));
 	}
 
 	public void identifyTarget(){
 		Position towerPos = findTower(this.position, this.range, Game.getBoard());
-		//System.out.println(towerPos);
+		System.out.println(towerPos);
 		if(towerPos != null){
-			System.out.println(Game.getBoard().getOccupier(towerPos));
-			//System.out.println((PlaceableObstacle) Game.getBoard().getOccupier(towerPos));
-			//launchAttack((PlaceableObstacle) Game.getBoard().getOccupier(towerPos));
+
+			launchAttack((PlaceableObstacle) Game.getBoard().getOccupier(towerPos));
 		}
 	}
 
 	private void launchAttack(PlaceableObstacle target) {
-//		EnemyProjectile projectile = new EnemyProjectile(this.position, target.position, this.damage, Game.getLevel(), target);
-//		MapGenerator.projectilesList.add(projectile);
-//		timeSinceLastAttack = System.currentTimeMillis();
+		if(System.currentTimeMillis() - timeSinceLastAttack > reloadTime){
+			EnemyProjectile projectile = new EnemyProjectile(this.position, target.position, this.damage, Game.getLevel(), target);
+			MapGenerator.projectilesList.add(projectile);
+			timeSinceLastAttack = System.currentTimeMillis();
+		}
 	}
 
 

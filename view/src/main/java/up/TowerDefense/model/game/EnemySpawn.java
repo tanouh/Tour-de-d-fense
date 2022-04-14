@@ -5,8 +5,6 @@ import up.TowerDefense.model.character.PresetEnemy;
 import up.TowerDefense.model.map.Board;
 import up.TowerDefense.model.object.Position;
 
-import java.util.Random;
-
 import static up.TowerDefense.model.game.Wave.waveOrder;
 import static up.TowerDefense.view.componentHandler.MapGenerator.charactersList;
 
@@ -14,6 +12,7 @@ import static up.TowerDefense.view.componentHandler.MapGenerator.charactersList;
  * le contenu des sous vagues du jeu
  */
 public class EnemySpawn {
+    public static int index =0;
     public PresetEnemy enemy;
     public int quantity;
     private boolean finishedSpawn = false;
@@ -33,9 +32,8 @@ public class EnemySpawn {
      * Retourne un point de frai aléatoire
      */
     public static Position getRandomSpawnPosition(Board board){
-        Random rand = new Random();
-        int i = rand.nextInt(board.getSpawnablePoint().size());
-        return board.getSpawnablePoint().get(i);
+        board.shuffleSpawnList();
+        return board.spawnPoint.get((index++)% board.spawnPoint.size());
     }
 
     /**

@@ -1,19 +1,19 @@
 package up.TowerDefense.model.map;
+
 import up.TowerDefense.model.game.Game;
-import up.TowerDefense.model.game.StaticFunctions;
-import up.TowerDefense.model.object.*;
 import up.TowerDefense.model.object.Obstacle;
 import up.TowerDefense.model.object.PlaceableObstacle;
 import up.TowerDefense.model.object.Position;
-
-
+import up.TowerDefense.model.object.Tower;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Board {
     private Tile[][] tiles;
     public static Board map;
     private static ArrayList<Tower> listTowers = new ArrayList<Tower>();
+    public ArrayList<Position> spawnPoint;
 
     /* Stocke les positions des cases qu'occupent la cible principale*/
     private ArrayList<Position> targetZone = new ArrayList<>();
@@ -24,6 +24,13 @@ public class Board {
 
 
 
+
+    public int worldX(){
+        return tiles[0].length;
+    }
+    public int worldY(){
+        return tiles.length;
+    }
     public int sizeX() {
         return tiles.length;
     }
@@ -51,12 +58,15 @@ public class Board {
     public Tile[][] getTiles(){ return tiles; }
 
     public Tile getTile(int x, int y) { // x = col , y = row
-        if (y < 0 || y > tiles.length || x < 0 || x > tiles[0].length) return null;
+
+        if (y < 0 || y > tiles.length || x < 0 || x > tiles[0].length){
+            return null;
+        }
 
         return tiles[y][x];
     }
     public Tile getTile(Position pos) {
-        return getTile((int)pos.y,(int)pos.x);
+        return getTile((int)pos.x,(int)pos.y);
     }
 
     public void addToListTowers(Tower tower){
@@ -64,8 +74,11 @@ public class Board {
     }
 
     public Obstacle getOccupier(Position position) {
-        return getTile(position).getOccupier();
+        return tiles[(int) position.x][(int) position.y].getOccupier();
+        //return null;
     }
+
+
 
     public void initTile(int x, int y, Tile tile, boolean isATargetZone) {
         tiles[x][y] = tile;
@@ -143,9 +156,9 @@ public class Board {
         /**
          * Vérifie s'il n'y a pas de tours plus proches que la zone cible
          */
-        if(StaticFunctions.findTower(startPos,distMin,this) != null){
+        /*if(StaticFunctions.findTower(startPos,distMin,this) != null){
             res = StaticFunctions.findTower(startPos,distMin,this);
-        }
+        }*/
         return res;
     }
 
@@ -154,31 +167,29 @@ public class Board {
     /**
      * Renvoie les points de frai
      */
-    public ArrayList<Position> getSpawnablePoint() {
-        ArrayList<Position> spawnPoint = new ArrayList<>();
+    public void setSpawnablePoint() {
+        spawnPoint = new ArrayList<>();
 
         int i =0;
-        int j;
-        for (i = 0 ; i < tiles.length; i+=tiles.length-1){
-            for (j = 0; j < tiles[i].length; j++){
+        int j = sizeY() -1;
+        for (i = 0 ; i < sizeX(); i++){
                 if (tiles[i][j].isEmpty)
-                    spawnPoint.add(tiles[i][j].getPos());
+                    spawnPoint.add(new Position (j,i));
             }
         }
 
         // todo : à modifier quand les fonctions de déplacements auront été réglées
-        for(j = 0 ; j < tiles[0].length ; j+=tiles[0].length -1){
-            for (i = 0; i < tiles.length; i++){
+        /*for(j = 0 ; j <sizeY() ; j+=1){
+            for (i = 0; i < sizeX(); i+=sizeX()-1){
                 if (tiles[i][j].isEmpty)
-                    spawnPoint.add(tiles[i][j].getPos());
+                    spawnPoint.add(new Position (j,i));
             }
-
-        }
-
-
-
-        return spawnPoint;
+        }/*
     }/*fixme : les points obtenus ne sont pas tous sur les bords*/
+
+    public void shuffleSpawnList(){
+        Collections.shuffle(spawnPoint);
+    }
 
     public static void launchAllAttacks(){
         for (Tower tower : listTowers){

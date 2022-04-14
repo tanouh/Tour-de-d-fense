@@ -1,9 +1,6 @@
 package up.TowerDefense.model.game;
 
 import up.TowerDefense.model.map.Board;
-import up.TowerDefense.model.map.Tile;
-import up.TowerDefense.model.object.Obstacle;
-import up.TowerDefense.model.object.Position;
 
 public class Game {
 

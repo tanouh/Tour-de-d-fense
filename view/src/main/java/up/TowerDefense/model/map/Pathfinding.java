@@ -7,18 +7,20 @@ public class Pathfinding {
     public static Path FindPath(Position startPos, Position targetPos) {
         Node startNode = new Node(Board.map.getTile(startPos));
         Node targetNode = new Node(Board.map.getTile(targetPos));
-        Board.map.getTile(targetPos).setTarget(true);
+
+        //Board.map.getTile(targetPos).setTarget(true);
 
         List<Node> openSet = new ArrayList<Node>();
         HashSet<Node> closedSet = new HashSet<Node>();
         openSet.add(startNode);
-        //System.out.println(startNode + " " + targetNode);
+        System.out.println(startNode + " " + targetNode);
 
         while (openSet.size() > 0) {
             //Cherchez le meilleur node dans openSet et l'ajouter à closedSet
             Node node = Node.BestNode(openSet);
             openSet.remove(node);
             closedSet.add(node);
+
 
             //Cas où node est le final
             if (node.isTarget(targetPos)){
@@ -28,7 +30,10 @@ public class Pathfinding {
             Node[] neighbours = node.Neighbours();
             for (Node neighbour : neighbours) {
                 //Annuler si le voisin est une case bloquée ou déjà traitée
-                if (!neighbour.tile.isEmpty() || closedSet.contains(neighbour)) continue;
+                if (!neighbour.tile.isEmpty() || closedSet.contains(neighbour)){
+
+                    continue;
+                }
 
                 //Calcul du coup de chaque voisin puis ajout du voisin à openSet
                 int newCostToNeighbour = node.gCost + GetDistance(node, neighbour);
@@ -41,6 +46,7 @@ public class Pathfinding {
                 }
             }
         }
+        System.out.println("null");
         return null;
     }
 
@@ -56,9 +62,9 @@ public class Pathfinding {
         Tile[] tilePath = new Tile[path.size()];
         for(int i = 0; i < tilePath.length; i++){
             tilePath[i] = path.get(tilePath.length - i - 1).tile;
-            //System.out.println(tilePath[i].pos.x + " " + tilePath[i].pos.y);
+            System.out.println(tilePath[i].pos.x + " " + tilePath[i].pos.y);
         }
-        //System.out.println();
+        System.out.println();
         return new Path(tilePath);
     }
 

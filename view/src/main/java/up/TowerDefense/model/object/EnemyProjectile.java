@@ -25,4 +25,6 @@ public class EnemyProjectile extends Projectile{
             yLoc += speed;
         }
     }
+
+
 }

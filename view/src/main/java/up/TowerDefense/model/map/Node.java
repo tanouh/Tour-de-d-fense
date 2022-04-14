@@ -22,8 +22,9 @@ public class Node {
             for (int y = -1; y <= 1; y++) {
                 if (x == 0 && y == 0)
                     continue;
-                Position neighbourPos = new Position((int)tile.getPos().x + x,  (int)tile.getPos().y + y);
+                Position neighbourPos = new Position( (int)tile.getPos().y + y,(int)tile.getPos().x + x );
                 if (neighbourPos.Legal()) {
+                    //System.out.println("                "+Board.map.getTile(neighbourPos).getOccupier());
                     neighbours.add(new Node(Board.map.getTile(neighbourPos)));
                 }
             }

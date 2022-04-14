@@ -19,7 +19,7 @@ public class Position {
         y/= norm;
     }
     public boolean Legal(){
-        return  x >= 0 && x < Board.map.sizeX()  && y >= 0 && y < Board.map.sizeY();
+        return  x >= 0 && x < Board.map.worldX()  && y >= 0 && y < Board.map.worldY();
     }
 
     public double Distance(Position pos2){
@@ -39,5 +39,13 @@ public class Position {
         toA.Normalize();
         toB.Normalize();
         return Math.acos(Dot(toA,toB));
+    }
+
+    @Override
+    public String toString() {
+        return "Position{" +
+                "x=" + x +
+                ", y=" + y +
+                '}';
     }
 }
