@@ -101,6 +101,20 @@ public class Path {
 
         //On utilise la boucle pour créer les sous path et la longueur du parcours
         subs = new SubPath[path.length- 2];
+        /**
+         * fixme : java.lang.NegativeArraySizeException: -1
+         *  at up.TowerDefense.model.map.Path.<init>(Path.java:103)
+         * 	at up.TowerDefense.model.map.Pathfinding.RetracePath(Pathfinding.java:79)
+         * 	at up.TowerDefense.model.map.Pathfinding.FindPath(Pathfinding.java:35)
+         * 	at up.TowerDefense.model.character.Enemy.update_paths(Enemy.java:149)
+         * 	at up.TowerDefense.view.componentHandler.MapGenerator.updateCharactersPaths(MapGenerator.java:281)
+         * 	at up.TowerDefense.view.componentHandler.MapGenerator.addObstacle(MapGenerator.java:269)
+         * 	at up.TowerDefense.view.componentHandler.MouseHandler.mouseClicked(MouseHandler.java:39)
+         * 	??? lorsqu'on rajoute une tour en plein jeu, ça renvoie sur cette exception ==> la tour ne se place pas
+         * 	sur la carte pourtant le cout est bien décompté
+         */
+
+
         length = 0f;
         for (int i = 0; i < path.length - 2; i++){
             double angle = path[i+1].pos.AngleRad(path[i].pos,path[i+2].pos);

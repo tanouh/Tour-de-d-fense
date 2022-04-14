@@ -1,12 +1,11 @@
 package up.TowerDefense.view.componentHandler;
 
-import up.TowerDefense.model.game.Game;
 import up.TowerDefense.view.mainComponent.ScreenPanel;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-import static up.TowerDefense.view.mainComponent.ScreenPanel.*;
+import static up.TowerDefense.view.mainComponent.ScreenPanel.tileSize;
 
 public class MouseHandler implements MouseListener {
 
@@ -37,14 +36,14 @@ public class MouseHandler implements MouseListener {
          */
 
         try {
-//            screenPanel.mapGen.addObstacle(mouseX, mouseY);
-            for (int i = 0; i < Game.getBoard().getTiles().length; i++){
+           screenPanel.mapGen.addObstacle(mouseX, mouseY);
+            /*for (int i = 0; i < Game.getBoard().getTiles().length; i++){
                 for (int j = 0; j < Game.getBoard().getTiles()[i].length; j++){
                     if (Game.getBoard().getTile(j,i).isEmpty()) System.out.print("0");
                     else System.out.print("1");
                 }
                 System.out.println();
-            }
+            }*/
         } catch (Exception ex) {
             ex.printStackTrace();
         }
