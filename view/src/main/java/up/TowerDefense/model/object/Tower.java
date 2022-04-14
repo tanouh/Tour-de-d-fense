@@ -215,7 +215,7 @@ public class Tower extends PlaceableObstacle{
     public void launchAttack(){
         for (Tile attainableTile : attainableTiles){
             if (check_Ennemy(attainableTile)){
-                //System.out.println("enemy found on : " + attainableTile.getPos().x + "-" + attainableTile.getPos().y);
+                System.out.println("enemy found on : " + attainableTile.getPos().x + "-" + attainableTile.getPos().y);
                 Position ennemyPos = attainableTile.getPos();
                 break;
             }

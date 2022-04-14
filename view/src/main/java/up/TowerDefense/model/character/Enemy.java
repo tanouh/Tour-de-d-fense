@@ -2,6 +2,7 @@ package up.TowerDefense.model.character;
 
 import up.TowerDefense.model.game.Game;
 import up.TowerDefense.model.map.Path;
+import up.TowerDefense.model.map.Pathfinding;
 import up.TowerDefense.model.object.DestructibleObstacle;
 import up.TowerDefense.model.object.EnemyProjectile;
 import up.TowerDefense.model.object.PlaceableObstacle;
@@ -96,7 +97,7 @@ public class Enemy extends Personnage{
 		this.damage = presetEnemy.getDammage();
 		this.target = presetEnemy.getTarget();
 		this.range= presetEnemy.getRange();
-		//this.path = Pathfinding.FindPath(position, Game.getBoard().getNearestTargetPosition(position));
+		this.path = Pathfinding.FindPath(position, Game.getBoard().getNearestTargetPosition(position));
 
 
 
@@ -129,11 +130,12 @@ public class Enemy extends Personnage{
 		if(System.currentTimeMillis() - travelTime > this.getSpeed()){
 			travelTime = System.currentTimeMillis();
 			Game.getBoard().getTile(this.position).setEnemy(null);
-			Game.getBoard().getTile(this.position).setEnemy(this);
+
 			if(System.currentTimeMillis() - timeSinceLastAttack > reloadTime)
 				identifyTarget();
 
 			this.position = path.GetPos(System.currentTimeMillis() - lifeTime, 0.001);
+			Game.getBoard().getTile(this.position).setEnemy(this);
 
 			if (Game.getBoard().getTile((int)position.x,(int)position.y).isTarget()){
 				Game.setLives(-1);
@@ -144,14 +146,13 @@ public class Enemy extends Personnage{
 	}
 
 	public void update_paths(){
-		//this.path = Pathfinding.FindPath(this.position, Game.getBoard().getNearestTargetPosition(position));
+		this.path = Pathfinding.FindPath(this.position, Game.getBoard().getNearestTargetPosition(position));
 	}
 
 	public void identifyTarget(){
 		Position towerPos = findTower(this.position, this.range, Game.getBoard());
-		System.out.println(towerPos);
+		System.out.println("###########Detection de tour : "+ towerPos);
 		if(towerPos != null){
-
 			launchAttack((PlaceableObstacle) Game.getBoard().getOccupier(towerPos));
 		}
 	}

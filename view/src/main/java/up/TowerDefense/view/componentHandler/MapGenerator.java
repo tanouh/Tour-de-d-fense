@@ -78,7 +78,7 @@ public class MapGenerator {
             setNumTile();
             while(col < MAX_WORLD_COL && row < MAX_WORLD_ROW){
                 while (col < MAX_WORLD_COL){
-                    Tile t = new Tile(new Position(row, col));
+                    Tile t = new Tile(new Position(col, row));
                     setUpTile(t,mapTileNum[row][col]);
                     gameBoard.initTile(row,col,t,(mapTileNum[row][col]==2)); //le dernier argument indique si la case est parmi celle
                                                                             // qui stocke la cible principale

@@ -66,7 +66,7 @@ public class Board {
         return tiles[y][x];
     }
     public Tile getTile(Position pos) {
-        return getTile((int)Math.round(pos.y),(int)Math.round(pos.x));
+        return getTile((int)Math.round(pos.x),(int)Math.round(pos.y));
     }
 
     public void addToListTowers(Tower tower){
@@ -74,7 +74,7 @@ public class Board {
     }
 
     public Obstacle getOccupier(Position position) {
-        return tiles[(int) position.x][(int) position.y].getOccupier();
+        return getTile(position).getOccupier();
         //return null;
     }
 
@@ -153,12 +153,6 @@ public class Board {
                 res = pos;
             }
         }
-        /**
-         * Vérifie s'il n'y a pas de tours plus proches que la zone cible
-         */
-        /*if(StaticFunctions.findTower(startPos,distMin,this) != null){
-            res = StaticFunctions.findTower(startPos,distMin,this);
-        }*/
         return res;
     }
 
@@ -171,21 +165,22 @@ public class Board {
         spawnPoint = new ArrayList<>();
 
         int i =0;
-        int j = sizeY() -1;
-        for (i = 0 ; i < sizeX(); i++){
+        int j = 0;
+
+        for (i = 0 ; i < sizeX(); i++){ // on parcourt les bords latéraux
+            for(j = 0; j < sizeY() ; j+=sizeY() -1){  // en hauteur
                 if (tiles[i][j].isEmpty)
                     spawnPoint.add(new Position (j,i));
             }
         }
 
-        // todo : à modifier quand les fonctions de déplacements auront été réglées
-        /*for(j = 0 ; j <sizeY() ; j+=1){
-            for (i = 0; i < sizeX(); i+=sizeX()-1){
+        for(j = 0 ; j <sizeY() ; j+=1){ // on parcourt en largeur
+            for (i = 0; i < sizeX(); i+=sizeX()-1){ // les bords haut et bas
                 if (tiles[i][j].isEmpty)
                     spawnPoint.add(new Position (j,i));
             }
-        }/*
-    }/*fixme : les points obtenus ne sont pas tous sur les bords*/
+        }
+    }
 
     public void shuffleSpawnList(){
         Collections.shuffle(spawnPoint);

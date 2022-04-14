@@ -10,18 +10,21 @@ import up.TowerDefense.view.componentHandler.MouseHandler;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
-import java.util.Timer;
 
 import static up.TowerDefense.view.componentHandler.KeyAction.Action.*;
 import static up.TowerDefense.view.componentHandler.KeyAction.*;
 
+
+/**
+ * This panel encloses the game map
+ */
 public class ScreenPanel extends JPanel implements Runnable{
     //Paramètrages de l'écran
     public static int originalTileSize = GameWindow.widthScreen*95/12000;
-    public static int scale = 2;
+    public static int scale = 1;
     public static int tileSize = originalTileSize*scale;
 
-    public static int sizeCase = 20;
+
     public static int nbCol = GameWindow.widthScreen*4/(5*originalTileSize);
     public static int nbRow = GameWindow.heightScreen*9/(10*originalTileSize);
 
@@ -29,26 +32,25 @@ public class ScreenPanel extends JPanel implements Runnable{
     public static int windowHeight = originalTileSize*nbRow;
 
     //Paramètrage du monde de jeu
-    public static final int MAX_WORLD_COL = 75;
-    public static final int MAX_WORLD_ROW= 50;
+    public static final int MAX_WORLD_COL = 100;
+    public static final int MAX_WORLD_ROW= 64;
 
     public JLabel title = new JLabel("project Covid Defense");
     protected GameWindow gameWindow;
     protected GamePanel gamePanel;
     private Thread gameThread = null;
     public boolean paused = false;
-    public MapGenerator mapGen;
+
     int FPS = 40; //Frame per second
 
 
-
+    public MapGenerator mapGen; // pour générer la carte
     public MouseHandler mouseHandler; // pour contrôler les informations reçues à partir de la souris
     public Camera camera; // pour pouvoir déplacer le champs de vision
-    public static Timer timer; // un chronomètre pour gérer le lancement des vagues d'ennemis
-    public Wave waves;
+    public Wave waves; // les vagues d'ennemis
 
-    public long TIME;
 
+    //Outils pour gérer les interactions à partir des touches
     public InputMap inputMap;
     public ActionMap actionMap;
 
@@ -57,7 +59,8 @@ public class ScreenPanel extends JPanel implements Runnable{
         this.gameWindow = gameWindow;
         this.gamePanel = gamePanel;
         KeyAction.setScreenPanel(this);
-        mapGen= new MapGenerator(this, "/map6.png"); /*A modifier : ajouter un paramètrage pour l'image*/
+
+        mapGen= new MapGenerator(this, "/map5.png"); /*A modifier : ajouter un paramètrage pour l'image*/
 
         startThread();
         this.setPreferredSize(new Dimension(windowWidth, windowHeight));
@@ -127,7 +130,7 @@ public class ScreenPanel extends JPanel implements Runnable{
         gamePanel.updateSideMenu();
         waves.run();
         mapGen.updateCharactersPositions();
-//        mapGen.updateProjectilesPos();
+        mapGen.updateProjectilesPos();
 //        System.out.println("test");
         Game.getBoard().launchAllAttacks();
         testVictory();
