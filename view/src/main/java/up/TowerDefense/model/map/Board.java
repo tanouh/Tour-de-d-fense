@@ -66,11 +66,7 @@ public class Board {
         return tiles[y][x];
     }
     public Tile getTile(Position pos) {
-<<<<<<< HEAD
-        return getTile((int)pos.x,(int)pos.y);
-=======
         return getTile((int)Math.round(pos.y),(int)Math.round(pos.x));
->>>>>>> 9374d3fd10cd259945e394883d0dea6e1dc86d88
     }
 
     public void addToListTowers(Tower tower){
