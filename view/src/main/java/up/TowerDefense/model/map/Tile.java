@@ -35,6 +35,9 @@ public class Tile {
         this.isEmpty=false;
     }
 
+    public void setEmpty (boolean empty){
+        this.isEmpty = empty;
+    }
     public void setEnemy(Enemy enemy){
         if (enemy != null) {
             this.enemy = enemy;
@@ -71,7 +74,6 @@ public class Tile {
 
     public void placeObstacle(Obstacle obs){
         setOccupier(obs);
-        isEmpty = false;
         setImageTile(obs.getImage());
     }
 

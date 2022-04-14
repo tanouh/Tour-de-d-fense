@@ -114,10 +114,17 @@ public class MapGenerator {
         switch (num){
             case 0 :
             case 5 :
-            case 4 : t.placeObstacle(VEIN); break;
-            case 2 : t.placeObstacle(SKIN); break;
+            case 4 :
+                t.placeObstacle(VEIN);
+//                System.out.println(t.getPos().x + " " + t.getPos().y);
+                break;
+            case 2 :
+                t.placeObstacle(SKIN);
+                t.setEmpty(true);
+                break;
             case 3 : t.placeObstacle(WATER); break;
             case 1 :
+
             default: t.placeRoad(); break;
         }
     }
@@ -137,7 +144,7 @@ public class MapGenerator {
                 }else if (rgb[i][j] == BLEU){
                     mapTileNum[i][j]=3; // Décor aussi
                 }else if (rgb[i][j] == VERT){
-                    mapTileNum[i][j]=0; // Décor
+                    mapTileNum[i][j]=4; // Décor
                 }else if (rgb[i][j]== BLANC){
                     mapTileNum[i][j]=1; //Routes véhiculables
                 }
