@@ -1,5 +1,6 @@
 package up.TowerDefense.model.object;
 
+import up.TowerDefense.model.game.Game;
 import up.TowerDefense.model.map.Board;
 
 public class Position {
@@ -19,7 +20,7 @@ public class Position {
         y/= norm;
     }
     public boolean Legal(){
-        return  x >= 0 && x < Board.map.sizeX()  && y >= 0 && y < Board.map.sizeY();
+        return  (x >= 0 && x < Board.map.sizeX()  && y >= 0 && y < Board.map.sizeY()) && Game.getBoard().getTile(this).isEmpty();
     }
 
     public double Distance(Position pos2){

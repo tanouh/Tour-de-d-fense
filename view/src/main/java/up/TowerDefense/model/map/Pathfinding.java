@@ -1,27 +1,31 @@
 package up.TowerDefense.model.map;
+import up.TowerDefense.model.game.Game;
 import up.TowerDefense.model.object.Position;
 import java.util.*;
 
 public class Pathfinding {
 
     public static Path FindPath(Position startPos, Position targetPos) {
-        Node startNode = new Node(Board.map.getTile(startPos));
-        Node targetNode = new Node(Board.map.getTile(targetPos));
+        Node startNode = new Node(Game.getBoard().getTile(startPos));
+        Node targetNode = new Node(Game.getBoard().getTile(targetPos));
         Board.map.getTile(targetPos).setTarget(true);
 
         List<Node> openSet = new ArrayList<Node>();
         HashSet<Node> closedSet = new HashSet<Node>();
         openSet.add(startNode);
-        if (startNode == null) System.out.println("bug start");
-        else System.out.println(startNode);
-        if (targetNode == null) System.out.println("bug end");
-        else System.out.println(targetNode);
+//        if (startNode.tile == null) System.out.println("bug tile start");
+//        else if (startNode.tile.getPos() == null) System.out.println("bug pos start");
+//        else System.out.println(startNode);
+//        if (targetNode.tile == null) System.out.println("bug tile target");
+//        else if (targetNode.tile.getPos() == null) System.out.println("bug pos target");
+//        else System.out.println(targetNode);
 
         while (openSet.size() > 0) {
             //Cherchez le meilleur node dans openSet et l'ajouter à closedSet
             Node node = Node.BestNode(openSet);
             openSet.remove(node);
             closedSet.add(node);
+//            System.out.println(node);
 
             //Cas où node est le final
             if (node.isTarget(targetPos)){
@@ -29,9 +33,11 @@ public class Pathfinding {
             }
 
             Node[] neighbours = node.Neighbours();
+//            System.out.println(neighbours.length);
             for (Node neighbour : neighbours) {
                 //Annuler si le voisin est une case bloquée ou déjà traitée
-                if (!neighbour.tile.isEmpty() || closedSet.contains(neighbour)) continue;
+//                if (!neighbour.tile.isEmpty) System.out.println("nei : " + neighbour);
+                if (!neighbour.tile.isEmpty || closedSet.contains(neighbour)) continue;
 
                 //Calcul du coup de chaque voisin puis ajout du voisin à openSet
                 int newCostToNeighbour = node.gCost + GetDistance(node, neighbour);
@@ -59,7 +65,7 @@ public class Pathfinding {
         Tile[] tilePath = new Tile[path.size()];
         for(int i = 0; i < tilePath.length; i++){
             tilePath[i] = path.get(tilePath.length - i - 1).tile;
-            //System.out.println(tilePath[i].pos.x + " " + tilePath[i].pos.y);
+//            System.out.println(tilePath[i].pos.x + " " + tilePath[i].pos.y);
         }
         System.out.println();
         return new Path(tilePath);

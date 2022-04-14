@@ -4,8 +4,8 @@ import java.util.*;
 
 public class Node {
     Tile tile;
-    public int gCost;
-    public int hCost;
+    public int gCost; // chemin parcouru
+    public int hCost; // chemin à parcourir
     public Node parent;
 
     public Node(Tile _tile){
@@ -22,7 +22,7 @@ public class Node {
             for (int y = -1; y <= 1; y++) {
                 if (x == 0 && y == 0)
                     continue;
-                Position neighbourPos = new Position((int)tile.getPos().x + x,  (int)tile.getPos().y + y);
+                Position neighbourPos = new Position((int)Math.round(tile.getPos().x) + x,  (int)Math.round(tile.getPos().y) + y);
                 if (neighbourPos.Legal()) {
                     neighbours.add(new Node(Board.map.getTile(neighbourPos)));
                 }
@@ -36,6 +36,7 @@ public class Node {
     }
 
     public boolean isTarget(Position targetPos){
+
         return (this.tile.pos.x == targetPos.x && this.tile.pos.y == targetPos.y);
     }
 

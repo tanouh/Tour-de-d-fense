@@ -72,6 +72,7 @@ public class Board {
         if (isATargetZone) {
             targetZone.add(new Position(y, x));
             tiles[x][y].isTarget = true;
+            tiles[x][y].isEmpty = true;
         }
 
     }

@@ -99,8 +99,6 @@ public class Enemy extends Personnage{
 		this.range= presetEnemy.getRange();
 		this.path = Pathfinding.FindPath(position, Game.getBoard().getNearestTargetPosition(position));
 
-
-
 		//fixme : à intégrer dans les attributs des ennemis
 		reloadTime = 2000;
 
@@ -130,10 +128,10 @@ public class Enemy extends Personnage{
 		if(System.currentTimeMillis() - travelTime > this.getSpeed()){
 			travelTime = System.currentTimeMillis();
 			Game.getBoard().getTile(this.position).setEnemy(null);
-			Game.getBoard().getTile(this.position).setEnemy(this);
 			if(System.currentTimeMillis() - timeSinceLastAttack > reloadTime)
 				identifyTarget();
 			this.position = path.GetPos(System.currentTimeMillis() - lifeTime, 0.001);
+			Game.getBoard().getTile(this.position).setEnemy(this);
 			if (Game.getBoard().getTile((int)position.x,(int)position.y).isTarget()){
 				Game.setLives(-1);
 				this.die();
@@ -148,7 +146,7 @@ public class Enemy extends Personnage{
 
 	public void identifyTarget(){
 		Position towerPos = findTower(this.position, this.range, Game.getBoard());
-		System.out.println(towerPos);
+		//System.out.println(towerPos);
 		if(towerPos != null){
 			System.out.println(Game.getBoard().getOccupier(towerPos));
 			//System.out.println((PlaceableObstacle) Game.getBoard().getOccupier(towerPos));

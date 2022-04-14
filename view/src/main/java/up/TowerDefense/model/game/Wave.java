@@ -1,7 +1,5 @@
 package up.TowerDefense.model.game;
 
-import static up.TowerDefense.model.game.Subwave.*;
-
 /**
  * la classe est utilisé en tant que gestionnaire de vagues
  */
