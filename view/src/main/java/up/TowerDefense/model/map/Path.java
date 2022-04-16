@@ -110,6 +110,7 @@ public class Path {
          * 	at up.TowerDefense.view.componentHandler.MapGenerator.updateCharactersPaths(MapGenerator.java:281)
          * 	at up.TowerDefense.view.componentHandler.MapGenerator.addObstacle(MapGenerator.java:269)
          * 	at up.TowerDefense.view.componentHandler.MouseHandler.mouseClicked(MouseHandler.java:39)
+         *
          * 	??? lorsqu'on rajoute une tour en plein jeu, ça renvoie sur cette exception ==> la tour ne se place pas
          * 	sur la carte pourtant le cout est bien décompté
          */

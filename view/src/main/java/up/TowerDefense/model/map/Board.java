@@ -165,18 +165,18 @@ public class Board {
     public void setSpawnablePoint() {
         spawnPoint = new ArrayList<>();
 
-        int i =0;
-        int j = 0;
+        int i;
+        int j;
 
         for (i = 0 ; i < sizeX(); i++){ // on parcourt les bords latéraux
-            for(j = 0; j < sizeY() ; j+=sizeY() -1){  // en hauteur
+            for(j = 1; j < sizeY() ; j+=sizeY() -1){  // en hauteur
                 if (tiles[i][j].isEmpty)
                     spawnPoint.add(new Position (j,i));
             }
         }
 
         for(j = 0 ; j <sizeY() ; j+=1){ // on parcourt en largeur
-            for (i = 0; i < sizeX(); i+=sizeX()-1){ // les bords haut et bas
+            for (i = 1; i < sizeX(); i+=sizeX()-1){ // les bords haut et bas
                 if (tiles[i][j].isEmpty)
                     spawnPoint.add(new Position (j,i));
             }
