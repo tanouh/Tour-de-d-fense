@@ -1,6 +1,8 @@
 package up.TowerDefense.model.map;
 import up.TowerDefense.model.object.Position;
 
+import java.util.ArrayList;
+
 public class Path {
     //Cercle qui permet de lisser le chemin entre 3 points, en utilisant un cercle
     abstract class SubPath{
@@ -100,7 +102,8 @@ public class Path {
         progression = 0;
 
         //On utilise la boucle pour créer les sous path et la longueur du parcours
-        subs = new SubPath[path.length- 2];
+        if (path.length < 2) subs = new SubPath[0];
+        else subs = new SubPath[path.length- 2];
         /**
          * fixme : java.lang.NegativeArraySizeException: -1
          *  at up.TowerDefense.model.map.Path.<init>(Path.java:103)

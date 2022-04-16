@@ -1,4 +1,5 @@
 package up.TowerDefense.model.map;
+import up.TowerDefense.model.game.Game;
 import up.TowerDefense.model.object.Position;
 import java.util.*;
 
@@ -14,12 +15,13 @@ public class Pathfinding {
         HashSet<Node> closedSet = new HashSet<Node>();
         openSet.add(startNode);
 
-        /*if (startNode.tile == null) System.out.println("bug tile start");
-        else if (startNode.tile.getPos() == null) System.out.println("bug pos start");
-        else System.out.println(startNode);
-        if (targetNode.tile == null) System.out.println("bug tile target");
-        else if (targetNode.tile.getPos() == null) System.out.println("bug pos target");
-        else System.out.println(targetNode);*/
+//        System.out.print("start : ");
+//        if (startNode.tile == null) System.out.println("bug tile start");
+//        else if (startNode.tile.getPos() == null) System.out.println("bug pos start");
+//        else System.out.println(startNode);
+//        if (targetNode.tile == null) System.out.println("bug tile target");
+//        else if (targetNode.tile.getPos() == null) System.out.println("bug pos target");
+//        else System.out.println(targetNode);
 
         long a = System.currentTimeMillis();
 
@@ -28,7 +30,7 @@ public class Pathfinding {
             Node node = Node.BestNode(openSet);
             openSet.remove(node);
             closedSet.add(node);
-
+//            System.out.println(node);
 
             //Cas où node est le final
             if (node.isTarget(targetPos)){
@@ -55,7 +57,11 @@ public class Pathfinding {
                         openSet.add(neighbour);
                 }
             }
-            if(System.currentTimeMillis() -a > 5000) System.out.println("               took too much time");
+            if(System.currentTimeMillis() -a > 1000) {
+                Game.getBoard().getTargetZone().remove(targetPos);
+//                System.out.println("retry");
+                return FindPath(startPos, Game.getBoard().getNearestTargetPosition(startPos));
+            }
         }
         System.out.println("########  PATH NULL ##########");
         return null;
@@ -73,9 +79,9 @@ public class Pathfinding {
         Tile[] tilePath = new Tile[path.size()];
         for(int i = 0; i < tilePath.length; i++){
             tilePath[i] = path.get(tilePath.length - i - 1).tile;
-            //System.out.println(tilePath[i].pos.x + " " + tilePath[i].pos.y);
+//            System.out.println(tilePath[i].pos.x + " " + tilePath[i].pos.y);
         }
-        //System.out.println();
+//        System.out.println();
         return new Path(tilePath);
     }
 
