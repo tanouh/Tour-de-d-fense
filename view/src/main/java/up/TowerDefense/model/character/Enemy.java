@@ -151,7 +151,7 @@ public class Enemy extends Personnage{
 
 	public void identifyTarget(){
 		Position towerPos = findTower(this.position, this.range, Game.getBoard());
-		System.out.println("###########Detection de tour : "+ towerPos);
+		//System.out.println("###########Detection de tour : "+ towerPos);
 		if(towerPos != null){
 			launchAttack((PlaceableObstacle) Game.getBoard().getOccupier(towerPos));
 		}

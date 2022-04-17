@@ -23,6 +23,8 @@ public class Pathfinding {
 
         long a = System.currentTimeMillis();
 
+        Node emptyNode = null;
+        Node closedNode = null;
         while (openSet.size() > 0) {
             //Cherchez le meilleur node dans openSet et l'ajouter à closedSet
             Node node = Node.BestNode(openSet);
@@ -42,6 +44,8 @@ public class Pathfinding {
                 //Annuler si le voisin est une case bloquée ou déjà traitée
                 if (!neighbour.tile.isEmpty() || closedSet.contains(neighbour)){
 
+                    if (!neighbour.tile.isEmpty()) emptyNode = neighbour;
+                    if (closedSet.contains(neighbour)) closedNode = neighbour;
                     continue;
                 }
 
@@ -55,7 +59,12 @@ public class Pathfinding {
                         openSet.add(neighbour);
                 }
             }
-            if(System.currentTimeMillis() -a > 5000) System.out.println("               took too much time");
+            if(System.currentTimeMillis() -a > 5000) {
+                System.out.print("  while loops take too much time");
+                if(emptyNode != null) System.out.print("           empty   "+emptyNode);
+                if (closedNode != null) System.out.print("          closed      "+closedNode);
+                System.out.println();
+            }
         }
         System.out.println("########  PATH NULL ##########");
         return null;

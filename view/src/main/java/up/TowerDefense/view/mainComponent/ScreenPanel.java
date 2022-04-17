@@ -33,7 +33,7 @@ public class ScreenPanel extends JPanel implements Runnable{
 
     //Paramètrage du monde de jeu
     public static final int MAX_WORLD_COL = 100;
-    public static final int MAX_WORLD_ROW= 64;
+    public static final int MAX_WORLD_ROW= 75;
 
     public JLabel title = new JLabel("project Covid Defense");
     protected GameWindow gameWindow;
@@ -60,7 +60,7 @@ public class ScreenPanel extends JPanel implements Runnable{
         this.gamePanel = gamePanel;
         KeyAction.setScreenPanel(this);
 
-        mapGen= new MapGenerator(this, "/map5.png"); /*A modifier : ajouter un paramètrage pour l'image*/
+        mapGen= new MapGenerator(this, "/map3_V2.png"); /*A modifier : ajouter un paramètrage pour l'image*/
 
         startThread();
         this.setPreferredSize(new Dimension(windowWidth, windowHeight));

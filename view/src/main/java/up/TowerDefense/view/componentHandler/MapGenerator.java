@@ -14,6 +14,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.ConcurrentModificationException;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import static up.TowerDefense.model.object.Obstacle.*;
@@ -276,28 +277,48 @@ public class MapGenerator {
      * Mets à jour le chemin suivi par l'enemi, cette fonction est appelée à chaque fois qu'une tour a été placée ou supprimée de la carte
      */
     private void updateCharactersPaths() {
-        for (Personnage c : new CopyOnWriteArrayList<>(charactersList)){
-            if(c instanceof Enemy){
-                ((Enemy)c).update_paths();
+        try{
+            for (Personnage c : charactersList){
+                //new CopyOnWriteArrayList<>(charactersList)
+                if(c instanceof Enemy){
+                    ((Enemy)c).update_paths();
+                }
             }
+        }catch(ConcurrentModificationException exc){
+            System.out.println("Attempt to modify characterList while iterating on it.");
+
         }
+
     }
 
     /**
      * Actualise la position de l'enemi suivant le chemin qu'il est entrain de suivre
      */
     public void updateCharactersPositions() {
-        for (Personnage c : new CopyOnWriteArrayList<>(charactersList)){
-            if(c instanceof Enemy){
-                ((Enemy)c).update_position();
+        try{
+            for (Personnage c : charactersList){
+                //new CopyOnWriteArrayList<>(charactersList)
+                if(c instanceof Enemy){
+                    ((Enemy)c).update_position();
+                }
             }
+        }catch(ConcurrentModificationException exc){
+            System.out.println("Attempt to modify characterList while iterating on it.");
+
         }
+
     }
 
     public void updateProjectilesPos(){
-        for (Projectile p :new CopyOnWriteArrayList<>(projectilesList)){
-            if(!p.hasArrived())
-                p.move();
+
+        try{
+            for (Projectile p : projectilesList){
+                //new CopyOnWriteArrayList<>(projectilesList)
+                if(!p.hasArrived())
+                    p.move();
+            }
+        }catch (ConcurrentModificationException ex){
+            System.out.println("Attempt to modify projectileList while iterating on it.");
         }
     }
 
