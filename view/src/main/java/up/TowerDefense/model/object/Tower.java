@@ -4,6 +4,9 @@ import up.TowerDefense.model.character.Enemy;
 import up.TowerDefense.model.game.Game;
 import up.TowerDefense.model.map.Tile;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import static up.TowerDefense.model.game.StaticFunctions.check_Ennemy;
@@ -20,6 +23,12 @@ public class Tower extends PlaceableObstacle{
         //type de tour
         //selon les types de tours size peut etre predefini
     }
+
+    /**
+     * Temps durant lequel l'image de la tour sera remplacée par une image temporaire qui signifierait
+     * qu'elle a été touchée par la cible d'un ennemi
+     */
+    public final long HITDELAY = 250;
 
     /**
      * Represente la porte d'attaque de la Tour.
@@ -74,14 +83,30 @@ public class Tower extends PlaceableObstacle{
     /**
      * Represente le prix la tour lors de l'achat d'une nouvelle Tour.
      */
-    private double price;
+    protected double price;
 
     /**
      * Represente l'ennemi que la tour cible actuellement
      */
-    private Enemy target;
+    protected Enemy target;
 
-    private ArrayList<Tile> attainableTiles = new ArrayList<Tile>();
+    /**
+     * Image temporaire signifiant que la tour a été touchée par la cible d'un ennemi
+     */
+    protected BufferedImage reloadImage;
+
+    /**
+     * Déclence HITDELAY
+     */
+    protected long hitStart ;
+
+    /**
+     *
+     */
+    protected boolean tookHit = false;
+
+
+    protected ArrayList<Tile> attainableTiles = new ArrayList<Tile>();
 
     /**
      * Construit une Tour de taille "size" a la position determin�e par "x" et "y".
@@ -99,7 +124,7 @@ public class Tower extends PlaceableObstacle{
      * @param image Image de la Tour qui s'affichera sur la carte
      */
     public Tower(double x, double y, int size, double buyingCost, double range, double power, int upgradeCost,
-                 double reloadTime, long lastAttackTime, Type twType, String image) {
+                 double reloadTime, long lastAttackTime, Type twType, String image, String reloadImage) {
         super(x, y, size, STARTING_HEALTH, STARTING_HEALTH, ObsType.TOWER, buyingCost,image);
         this.range=range;
         this.power=power;
@@ -107,6 +132,8 @@ public class Tower extends PlaceableObstacle{
         this.reloadTime=reloadTime;
         this.lastAttackTime = lastAttackTime;
         this.towerType=twType;
+        this.image = loadImage(image);
+        this.reloadImage = loadImage(reloadImage);
         Game.getBoard().addToListTowers(this);
         setAttainableTiles();
     }
@@ -125,6 +152,7 @@ public class Tower extends PlaceableObstacle{
     	this.reloadTime = presetTower.getReloadTime();
     	this.lastAttackTime = presetTower.getLastAttackTime();
     	this.towerType = presetTower.getTowerType();
+        this.reloadImage = loadImage(presetTower.reloadImage);
         Game.getBoard().addToListTowers(this);
         setAttainableTiles();
     }
@@ -200,6 +228,40 @@ public class Tower extends PlaceableObstacle{
 
     public Type getTowerType() {
         return towerType;
+    }
+
+    @Override
+    public BufferedImage getImage(){
+        if (tookHit && System.currentTimeMillis() - hitStart > HITDELAY){
+            return reloadImage;
+        }
+        tookHit = false;
+        return this.image;
+    }
+
+    @Override
+    public void setCurrentHealth(int currentHealth){
+        if(currentHealth < this.currentHealth){
+            this.hitStart = System.currentTimeMillis();
+            tookHit = true;
+        }
+        this.currentHealth = currentHealth;
+    }
+
+    @Override
+    public void takeDamage(double damage) {
+        System.out.println("ouch");
+        setCurrentHealth((int)(currentHealth - damage));
+    }
+
+    public BufferedImage loadImage(String image){
+        BufferedImage img = null;
+        try{
+            img = ImageIO.read(getClass().getResourceAsStream(image));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return img;
     }
 
     public void setAttainableTiles(){

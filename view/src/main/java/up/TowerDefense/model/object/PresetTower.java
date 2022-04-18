@@ -13,8 +13,11 @@ public class PresetTower {
 	 * Represente la taille d'une tour sur la carte.
 	 */
 	public static final int SIZE = 2;
-	
-	/**
+
+
+
+
+    /**
      * Represente la porte d'attaque de la Tour.
      */
     protected double range;
@@ -63,6 +66,11 @@ public class PresetTower {
      * Represente le type de la Tour.
      */
     protected Type towerType;
+
+	/**
+	 * Image signifiant que la tour a été touchée par la cible d'un ennemi
+	 */
+	protected String reloadImage;
     
     /**
      * Represente le prix la tour lors de l'achat d'une nouvelle Tour.
@@ -82,7 +90,7 @@ public class PresetTower {
      * @param image est l'image qui sera affiche dans le jeu pour cette tour.
      */
     public PresetTower(double BuyingCost, double startingRange, double startingPower, int startingUpgradeCost, double startingReloadTime, 
-    					long LastAttackTime, Type towerType, String image) {
+    					long LastAttackTime, Type towerType, String image, String reloadImage) {
     	this.price = BuyingCost;
     	this.range = startingRange;
     	this.power = startingPower;
@@ -91,6 +99,7 @@ public class PresetTower {
     	this.lastAttackTime = LastAttackTime;
     	this.towerType = towerType;
     	this.imgName = image;
+		this.reloadImage = reloadImage;
     }
     
     /**
@@ -110,7 +119,7 @@ public class PresetTower {
      */
     public static PresetTower TowerTest() {
 		return new PresetTower(100,5.00,2.00,200,
-				1000, 0, Tower.Type.TOWERTEST, "/tour.png");
+				1000, 0, Tower.Type.TOWERTEST, "/tour.png","/tour_touche.png");
 	}
     
     /**
@@ -122,7 +131,7 @@ public class PresetTower {
      */
     public static PresetTower Anti_champis() {
 		return new PresetTower(100,5.00,2.00,200,
-				1000, 0, Tower.Type.ANTI_CHAMPIS, "/Anti_Champi.png");
+				1000, 0, Tower.Type.ANTI_CHAMPIS, "/Anti_Champi.png","/Anti_Champi_Touche.png");
 	}
     
     /**
@@ -134,7 +143,7 @@ public class PresetTower {
      */
     public static PresetTower Leucocyte_T() {
 		return new PresetTower(100,5.00,2.00,200,
-				1000, 0, Tower.Type.LEUCOCYTE_T, "/LeucoT.png");
+				1000, 0, Tower.Type.LEUCOCYTE_T, "/LeucoT.png","/leuco_touche.png");
 	}
     
     /**
@@ -146,7 +155,7 @@ public class PresetTower {
      */
     public static PresetTower Anticorps() {
 		return new PresetTower(100,5.00,2.00,200,
-				1000, 0, Tower.Type.ANTICORPS, "/Anticorps.png");
+				1000, 0, Tower.Type.ANTICORPS, "/Anticorps.png","/antic-touche.png");
 	}
     
 	public int getSize() {

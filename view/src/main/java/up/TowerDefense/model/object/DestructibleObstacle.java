@@ -45,12 +45,6 @@ public class DestructibleObstacle extends Obstacle{
     }
 
     public void setCurrentHealth(int currentHealth) {
-        if(currentHealth < this.currentHealth){
-            // TODO: clignotement
-            //System.out.println("            Tower took damage");
-
-        }
-
         this.currentHealth = currentHealth;
     }
     public void takeDamage(double damage) {
