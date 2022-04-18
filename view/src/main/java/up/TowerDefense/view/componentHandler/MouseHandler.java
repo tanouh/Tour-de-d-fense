@@ -31,19 +31,13 @@ public class MouseHandler implements MouseListener {
         int x  = e.getX();
         int y = e.getY();
         update(x,y);
-        /* Ceci est encore provisoire
+
+        /*
         todo : dès qu'on clique sur une position, les possibilités de construction s'affichent sur le menu latéral
          */
 
         try {
            screenPanel.mapGen.addObstacle(mouseX, mouseY);
-            /*for (int i = 0; i < Game.getBoard().getTiles().length; i++){
-                for (int j = 0; j < Game.getBoard().getTiles()[i].length; j++){
-                    if (Game.getBoard().getTile(j,i).isEmpty()) System.out.print("0");
-                    else System.out.print("1");
-                }
-                System.out.println();
-            }*/
         } catch (Exception ex) {
             ex.printStackTrace();
         }

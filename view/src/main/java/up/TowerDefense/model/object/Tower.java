@@ -101,7 +101,7 @@ public class Tower extends PlaceableObstacle{
     protected long hitStart ;
 
     /**
-     *
+     * Signale si la tour a reçu un coup venant d'un ennemi
      */
     protected boolean tookHit = false;
 

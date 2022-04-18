@@ -22,9 +22,6 @@ public class Board {
         map = this;
     }
 
-
-
-
     public int worldX(){
         return tiles[0].length;
     }
@@ -75,7 +72,6 @@ public class Board {
 
     public Obstacle getOccupier(Position position) {
         return getTile(position).getOccupier();
-        //return null;
     }
 
 
@@ -107,12 +103,6 @@ public class Board {
      * @param posY
      */
     public boolean addObstacle(PlaceableObstacle obstacle, int posX, int posY) {
-        /*
-         fixme : voir s'il n'y a pas moyen d'éviter le switch entre posX et posY ici au cas
-          où on rencontre d'autres problèmes liés à ça après
-         */
-
-
         if (getTile(posX, posY).isEmpty
                 && legalPlacement(obstacle, posX, posY)
                 && obstacle.getBuyingCost() <= Game.getCredits()) {
@@ -169,14 +159,14 @@ public class Board {
         int j;
 
         for (i = 0 ; i < sizeX(); i++){ // on parcourt les bords latéraux
-            for(j = 1; j < sizeY() ; j+=sizeY() -1){  // en hauteur
+            for(j = 0; j < sizeY() ; j+=sizeY() -1){  // en hauteur
                 if (tiles[i][j].isEmpty)
                     spawnPoint.add(new Position (j,i));
             }
         }
 
         for(j = 0 ; j <sizeY() ; j+=1){ // on parcourt en largeur
-            for (i = 1; i < sizeX(); i+=sizeX()-1){ // les bords haut et bas
+            for (i = 0; i < sizeX(); i+=sizeX()-1){ // les bords haut et bas
                 if (tiles[i][j].isEmpty)
                     spawnPoint.add(new Position (j,i));
             }

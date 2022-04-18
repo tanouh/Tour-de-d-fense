@@ -16,7 +16,7 @@ import static up.TowerDefense.view.componentHandler.KeyAction.*;
 
 
 /**
- * This panel encloses the game map
+ * Ce composant contient la carte de jeu
  */
 public class ScreenPanel extends JPanel implements Runnable{
     //Paramètrages de l'écran
@@ -39,7 +39,7 @@ public class ScreenPanel extends JPanel implements Runnable{
     protected GameWindow gameWindow;
     protected GamePanel gamePanel;
     private Thread gameThread = null;
-    public boolean paused = false;
+    public boolean paused;
 
     int FPS = 40; //Frame per second
 

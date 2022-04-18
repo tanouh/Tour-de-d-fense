@@ -62,8 +62,6 @@ public class Subwave {
         return new Subwave(enemySpawned);
     }
 
-
-
     /**
      * The action to be performed by this timer task.
      */

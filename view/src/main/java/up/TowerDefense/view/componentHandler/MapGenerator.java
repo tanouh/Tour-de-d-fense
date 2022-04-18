@@ -29,13 +29,11 @@ import static up.TowerDefense.view.mainComponent.ScreenPanel.MAX_WORLD_ROW;
 
 public class MapGenerator {
 
-//    public static MapGenerator REF;
     public Board gameBoard;
     private final ScreenPanel screenPanel;
     private final BufferedImage mapImage;
     private final int tileSize;
     private final int [][] mapTileNum;
-    private Tile[]  tileType;
 
     private final int nbCol;
     private final int nbRow;
@@ -76,9 +74,10 @@ public class MapGenerator {
         try {
             int col = 0 ;
             int row = 0;
-            setNumTile();
+            setNumTile(); // initialise le tableau qui contient les différents types de tuiles
             while(col < MAX_WORLD_COL && row < MAX_WORLD_ROW){
                 while (col < MAX_WORLD_COL){
+                    // on crée la tuile et l'introduit dans le tableau de tuiles dans le board associé
                     Tile t = new Tile(new Position(col, row));
                     setUpTile(t,mapTileNum[row][col]);
                     gameBoard.initTile(row,col,t,(mapTileNum[row][col]==2)); //le dernier argument indique si la case est parmi celle
@@ -93,7 +92,7 @@ public class MapGenerator {
         }catch(Exception e){
             e.printStackTrace();
         }
-
+        // on initialise les positions depuis lesquelles les ennemis peuvent sortir
         Game.getBoard().setSpawnablePoint();
     }
 
@@ -242,11 +241,6 @@ public class MapGenerator {
      * ATTENTION : la position x et y est l'inverse de MouseX et MouseY
      */
     public void addObstacle(int posX, int posY) {
-
-        /*Ce qui est à retravailler :
-        * ajouter un paramètrage pour que l'obstacle à placer dépend
-        * de ce que demande l'utilisateur
-        * */
         PlaceableObstacle obstacle = null;
         switch(Game.getCurrentlyPlacing()) {
             case 0:
@@ -280,7 +274,6 @@ public class MapGenerator {
     private void updateCharactersPaths() {
         try{
             for (Personnage c : charactersList){
-                //new CopyOnWriteArrayList<>(charactersList)
                 if(c instanceof Enemy){
                     ((Enemy)c).update_paths();
                 }
@@ -298,7 +291,6 @@ public class MapGenerator {
     public void updateCharactersPositions() {
         try{
             for (Personnage c : charactersList){
-                //new CopyOnWriteArrayList<>(charactersList)
                 if(c instanceof Enemy){
                     ((Enemy)c).update_position();
                 }

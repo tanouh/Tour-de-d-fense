@@ -5,6 +5,7 @@ import up.TowerDefense.model.character.Enemy;
 public class TowerProjectile extends Projectile{
     private Enemy targetEnemy;
     private boolean freeze;
+
     public TowerProjectile(Position initPos, Position destPos, double pPower, int level, Enemy targetEnemy, boolean freeze) {
         super(initPos,destPos, pPower, level);
         this.targetEnemy = targetEnemy;

@@ -35,10 +35,11 @@ public class TileDisplayManager {
      * Accéde aux pixels d'une image
      * @return les valeurs rouge , vert et bleu
      * d'un pixel et rajoutera le canal alpha s'il y en a
+     *
+     * Ressources trouvées sur un forum sur internet
      */
 
     public static int[][] convertTo2D(BufferedImage image) {
-
         byte[] pixels = ((DataBufferByte) image.getRaster().getDataBuffer()).getData();
         int width = image.getWidth();
         int height = image.getHeight();
@@ -78,7 +79,6 @@ public class TileDisplayManager {
         }
         return result;
     }
-
 
     public static  int getCode (String image){
         int [][] t = convertTo2D(loadImage(image));

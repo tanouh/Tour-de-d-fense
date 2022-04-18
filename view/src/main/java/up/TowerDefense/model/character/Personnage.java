@@ -3,11 +3,7 @@ package up.TowerDefense.model.character;
 import up.TowerDefense.model.game.StaticFunctions;
 import up.TowerDefense.model.object.Position;
 
-import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
-
-import static up.TowerDefense.view.mainComponent.ScreenPanel.tileSize;
 
 
 public abstract class Personnage{

@@ -5,7 +5,6 @@ import up.TowerDefense.view.secondaryComponent.Button;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
-import java.util.Optional;
 
 public class HomePanel extends JPanel{
     private JLabel title = new JLabel("project Covid Defense");

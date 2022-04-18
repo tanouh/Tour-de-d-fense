@@ -52,7 +52,7 @@ public class StaticFunctions {
                if (posX+i < 0 || posY+j < 0 || posX+i > board.worldX() || posY+j > board.worldY()) continue;
                if(check_Tower(board, posX+i, posY+j)){
 
-                   //System.out.println("tower found on : " + (posY+j) + "-" + (posX+i));;
+                   //System.out.println("tower found on : " + (posY+j) + "-" + (posX+i));
                    return new Position (posX+i , posY+j);
                }
             }
@@ -73,15 +73,5 @@ public class StaticFunctions {
      */
     public static boolean check_Ennemy(Tile attainableTile){
         return  attainableTile != null && attainableTile.hasAnEnnemy();
-    }
-
-
-
-    /**************   LES FONCTIONS DE CALCULS  ****************/
-
-    public static double getDistance(Position a , Position b){
-        return Math.sqrt(
-                Math.pow(Math.abs(a.x-b.x),2) + Math.pow(Math.abs(a.y-b.y),2)
-        );
     }
 }

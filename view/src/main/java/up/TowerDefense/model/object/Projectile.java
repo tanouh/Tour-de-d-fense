@@ -16,7 +16,7 @@ public abstract class  Projectile  {
 
     protected double power;
     protected double speed = 5;
-    protected boolean arrivedAtTarget = false;
+    protected boolean arrivedAtTarget;
     protected int sourceLevel;
 
 
@@ -34,15 +34,9 @@ public abstract class  Projectile  {
 
 
         arrivedAtTarget = false;
-
         sourceLevel = level;
 
     }
-
-    public double angleOfProjectileInDegrees(){
-         return (180/Math.PI)*Math.atan2(yDest-yInit, xDest-xInit);
-    }
-
     public double angleOfProjectileInRadians(){
         return Math.atan2(yDest-yInit, xDest-xInit);
     }

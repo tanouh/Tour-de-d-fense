@@ -127,22 +127,23 @@ public class Enemy extends Personnage{
 		 * Quand l'ennemi pass aux environs d'une tour il ne s'arrête pas mais lance des projectiles tout en continuant
 		 * Quant à lui, s'il accuse une attaque sa vitesse diminue
 		 */
-		if(System.currentTimeMillis() - travelTime > this.getSpeed()){
-			travelTime = System.currentTimeMillis();
-			Game.getBoard().getTile(this.position).setEnemy(null);
+		//if(System.currentTimeMillis() - travelTime > this.getSpeed()){
 
-			if(System.currentTimeMillis() - timeSinceLastAttack > reloadTime)
-				identifyTarget();
+		travelTime = System.currentTimeMillis();
+		Game.getBoard().getTile(this.position).setEnemy(null);
 
-			this.position = path.GetPos(System.currentTimeMillis() - lifeTime, 0.001);
-			Game.getBoard().getTile(this.position).setEnemy(this);
+		if(System.currentTimeMillis() - timeSinceLastAttack > reloadTime)
+			identifyTarget();
 
-			if (Game.getBoard().getTile((int)position.x,(int)position.y).isTarget()){
-				Game.setLives(-1);
-				this.die();
-			}
+		this.position = path.GetPos(System.currentTimeMillis() - lifeTime, this.velocity);
+		Game.getBoard().getTile(this.position).setEnemy(this);
 
+		if (Game.getBoard().getTile((int)position.x,(int)position.y).isTarget()){
+			Game.setLives(-1);
+			this.die();
 		}
+
+		//}
 	}
 
 	public void update_paths(){

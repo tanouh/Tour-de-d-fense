@@ -1,10 +1,8 @@
 package up.TowerDefense.view.componentHandler;
 
 
-import up.TowerDefense.view.mainComponent.GameWindow;
 import up.TowerDefense.view.mainComponent.ScreenPanel;
 
-import java.awt.*;
 import static up.TowerDefense.view.mainComponent.ScreenPanel.*;
 
 public class Camera {
@@ -60,16 +58,5 @@ public class Camera {
                 worldX+=speed;
         }
     }
-
-    /*
-    Dessin(provisoire) pas vraiment important, mais qui aidera juste à visualiser
-    le déplacement de la caméra
-     */
-    public void draw (Graphics2D g){
-        g.setColor(GameWindow.background);
-        g.fillRect(screenX,screenY, screenPanel.tileSize, screenPanel.tileSize);
-    }
-
-
 }
 
