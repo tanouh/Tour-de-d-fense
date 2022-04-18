@@ -211,9 +211,6 @@ public class MapGenerator {
         for (Personnage perso : new CopyOnWriteArrayList<>(charactersList)){
             drawElementaryComponent(g,perso.position, perso.getImage(),perso.getSize());
         }
-        for(Projectile proj : new CopyOnWriteArrayList<>(projectilesList)){
-            drawElementaryComponent(g,proj.getPos(),proj.getImg(),0.25);
-        }
     }
 
     private void drawElementaryComponent(Graphics2D g,Position pos, BufferedImage img,double size){
@@ -317,7 +314,6 @@ public class MapGenerator {
 
         try{
             for (Projectile p : projectilesList){
-                //new CopyOnWriteArrayList<>(projectilesList)
                 if(!p.hasArrived())
                     p.move();
             }
