@@ -262,10 +262,9 @@ public class MapGenerator {
                 return;
         }
         if(gameBoard.addObstacle(obstacle, posX, posY)){
-            updateCharactersPaths();
             obstaclesList.add(obstacle);
+            updateCharactersPaths();
         }
-
     }
 
     /**
@@ -299,11 +298,9 @@ public class MapGenerator {
             System.out.println("Attempt to modify characterList while iterating on it.");
 
         }
-
     }
 
     public void updateProjectilesPos(){
-
         try{
             for (Projectile p : projectilesList){
                 if(!p.hasArrived())

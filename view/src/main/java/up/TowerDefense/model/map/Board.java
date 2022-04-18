@@ -1,5 +1,6 @@
 package up.TowerDefense.model.map;
 
+import up.TowerDefense.model.character.Enemy;
 import up.TowerDefense.model.game.Game;
 import up.TowerDefense.model.object.Obstacle;
 import up.TowerDefense.model.object.PlaceableObstacle;
@@ -13,6 +14,7 @@ public class Board {
     private Tile[][] tiles;
     public static Board map;
     private static ArrayList<Tower> listTowers = new ArrayList<Tower>();
+    private static ArrayList<Enemy> listEnemy = new ArrayList<Enemy>();
     public ArrayList<Position> spawnPoint;
 
     /* Stocke les positions des cases qu'occupent la cible principale*/
@@ -68,6 +70,18 @@ public class Board {
 
     public void addToListTowers(Tower tower){
         listTowers.add(tower);
+    }
+
+    public void addToListEnemy(Enemy enemy){
+        listEnemy.add(enemy);
+    }
+
+    public ArrayList<Tower> getListTowers(){
+        return listTowers;
+    }
+
+    public ArrayList<Enemy> getListEnemy(){
+        return listEnemy;
     }
 
     public Obstacle getOccupier(Position position) {
@@ -179,7 +193,12 @@ public class Board {
 
     public static void launchAllAttacks(){
         for (Tower tower : listTowers){
-            tower.launchAttack();
+            if(System.currentTimeMillis() - tower.getTimeSinceLastAttack() > tower.getReloadTime())
+                tower.launchAttack();
+        }
+        for (Enemy enemy : listEnemy){
+            if(System.currentTimeMillis() - enemy.getTimeSinceLastAttack() > enemy.getReloadTime())
+                enemy.identifyTarget();
         }
     }
 

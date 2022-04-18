@@ -3,6 +3,7 @@ package up.TowerDefense.model.object;
 import up.TowerDefense.model.character.Enemy;
 import up.TowerDefense.model.game.Game;
 import up.TowerDefense.model.map.Tile;
+import up.TowerDefense.view.componentHandler.MapGenerator;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -69,7 +70,12 @@ public class Tower extends PlaceableObstacle{
      * Represente le temps d'attente entre chaque attaque de la Tour.
      */
     protected double reloadTime; // temps de charge avant de pouvoir attaquer de nouveau
-    
+
+    /**
+     * Represente le temps eoule depuis la derniere attaque de la Tour.
+     */
+    protected double timeSinceLastAttack;
+
     /**
      * Represente le moment de la derniere attaque de la Tour (En fonction du temps de jeu au moments de l'attaque).
      */
@@ -228,6 +234,13 @@ public class Tower extends PlaceableObstacle{
         return towerType;
     }
 
+    public double getReloadTime() {
+        return reloadTime;
+    }
+
+    public double getTimeSinceLastAttack() {
+        return timeSinceLastAttack;
+    }
     @Override
     public BufferedImage getImage(){
 
@@ -282,9 +295,11 @@ public class Tower extends PlaceableObstacle{
     public void launchAttack(){
         for (Tile attainableTile : attainableTiles){
             if (check_Ennemy(attainableTile)){
-                //System.out.println("enemy found on : " + attainableTile.getPos().x + "-" + attainableTile.getPos().y);
-                Position ennemyPos = attainableTile.getPos();
-                break;
+                System.out.println("enemy found on : " + attainableTile.getPos().x + "-" + attainableTile.getPos().y);
+                target = attainableTile.getEnemy();
+                TowerProjectile projectile = new TowerProjectile(this.position, target.position, this.power, Game.getLevel(), target, false);
+                MapGenerator.projectilesList.add(projectile);
+                timeSinceLastAttack = System.currentTimeMillis();
             }
         }
     }

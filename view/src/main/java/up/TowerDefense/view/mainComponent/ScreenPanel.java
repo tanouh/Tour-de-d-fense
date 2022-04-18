@@ -60,7 +60,7 @@ public class ScreenPanel extends JPanel implements Runnable{
         this.gamePanel = gamePanel;
         KeyAction.setScreenPanel(this);
 
-        mapGen= new MapGenerator(this, "/map4_V2.png"); /*A modifier : ajouter un paramètrage pour l'image*/
+        mapGen= new MapGenerator(this, "/map3_V2.png"); /*A modifier : ajouter un paramètrage pour l'image*/
 
         startThread();
         this.setPreferredSize(new Dimension(windowWidth, windowHeight));
@@ -130,8 +130,8 @@ public class ScreenPanel extends JPanel implements Runnable{
         gamePanel.updateSideMenu();
         waves.run();
         mapGen.updateCharactersPositions();
-        mapGen.updateProjectilesPos();
         Game.getBoard().launchAllAttacks();
+        mapGen.updateProjectilesPos();
         testVictory();
     }
 

@@ -100,7 +100,7 @@ public class Tile {
     }
 
     public boolean hasAnEnnemy() {
-        return !isEmpty() && (enemy instanceof Enemy);
+        return (!isEmpty()) && (enemy instanceof Enemy);
     }
 }
 

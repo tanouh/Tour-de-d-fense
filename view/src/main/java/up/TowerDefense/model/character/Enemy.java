@@ -98,7 +98,7 @@ public class Enemy extends Personnage{
 		this.target = presetEnemy.getTarget();
 		this.range= presetEnemy.getRange();
 		this.path = Pathfinding.FindPath(position, Game.getBoard().getNearestTargetPosition(position));
-
+		Game.getBoard().addToListEnemy(this);
 
 
 		//fixme : à intégrer dans les attributs des ennemis
@@ -132,9 +132,6 @@ public class Enemy extends Personnage{
 		travelTime = System.currentTimeMillis();
 		Game.getBoard().getTile(this.position).setEnemy(null);
 
-		if(System.currentTimeMillis() - timeSinceLastAttack > reloadTime)
-			identifyTarget();
-
 		this.position = path.GetPos(System.currentTimeMillis() - lifeTime, this.velocity);
 		Game.getBoard().getTile(this.position).setEnemy(this);
 
@@ -142,8 +139,6 @@ public class Enemy extends Personnage{
 			Game.setLives(-1);
 			this.die();
 		}
-
-		//}
 	}
 
 	public void update_paths(){
@@ -154,6 +149,7 @@ public class Enemy extends Personnage{
 		Position towerPos = findTower(this.position, this.range, Game.getBoard());
 		//System.out.println("###########Detection de tour : "+ towerPos);
 		if(towerPos != null){
+			System.out.println("   tower found");
 			launchAttack((PlaceableObstacle) Game.getBoard().getOccupier(towerPos));
 		}
 	}
@@ -189,16 +185,27 @@ public class Enemy extends Personnage{
 
 	public void die(){
 		if(alive){
+			System.out.println("deces");
 			this.alive = false;
 			MapGenerator.charactersList.remove(this);
+			Game.setCredits(this.reward);
 		}
 	}
 
 	public void takeDamage(double power){
 		currentHealth = (int) (currentHealth - power/resistance);
+		System.out.println("             enemy took damage\n currentHealth : " + currentHealth);
 		if(currentHealth <= 0){
-			alive = false;
+			die();
 		}
+	}
+
+	public long getReloadTime() {
+		return reloadTime;
+	}
+
+	public long getTimeSinceLastAttack() {
+		return timeSinceLastAttack;
 	}
 
 	public void setFreezeDuration(long i) {

@@ -84,7 +84,8 @@ public class PresetEnemy {
 	 * @param resistance indique la resistance de l'enemy contre une tour
 	 */
 	public PresetEnemy(int maxHealth, long speed, int coins, float agressiveness_degree, float attackspeed, float dammage,
-					   boolean suicid, int size, float resistance, String imgName , DestructibleObstacle.ObsType target_obs, Enemy.Type EnemyType, int range) {
+					   boolean suicid, int size, float resistance, String imgName , DestructibleObstacle.ObsType target_obs,
+					   Enemy.Type EnemyType, int range) {
 		this.maxHealth = maxHealth;
 		this.setSpeed(speed);
 		this.setReward(coins);
@@ -118,7 +119,9 @@ public class PresetEnemy {
 	 * @return Renvoie un objet PresetEnemy contenant toute ces informations afin de creer l'enemy
 	 */
 	public static PresetEnemy Covid() {
-		return new PresetEnemy(100,1500,30,5.00f, 1.00f, 100.00f, false, 1, 1.00f, "/null.png", DestructibleObstacle.ObsType.TARGET, Enemy.Type.COVID,10);
+		return new PresetEnemy(100,1500,30,5.00f, 1.00f,
+				100.00f, false, 1, 1.00f, "/null.png",
+				DestructibleObstacle.ObsType.TARGET, Enemy.Type.COVID,10);
 	}
 
 	/**
