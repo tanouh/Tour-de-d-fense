@@ -2,14 +2,20 @@ package up.TowerDefense.model.object;
 
 import up.TowerDefense.model.game.Game;
 
+import java.awt.image.BufferedImage;
+
+import static up.TowerDefense.model.game.StaticFunctions.loadImage;
+
 public class PlaceableObstacle extends DestructibleObstacle{
     protected double buyingCost;
     protected double refundValue;
+    protected BufferedImage reloadImage;
 
-    public PlaceableObstacle(double x, double y, int size, int maxHealth, int currentHealth, ObsType obstacleType, double buyingCost, String image) {
+    public PlaceableObstacle(double x, double y, int size, int maxHealth, int currentHealth, ObsType obstacleType, double buyingCost, String image, String reloadImage) {
         super(x, y, size, maxHealth, currentHealth,obstacleType, image);
         this.buyingCost = buyingCost;
         this.refundValue = buyingCost; // augmente à chaque fois que l'obstacle augmente en niveau
+        this.reloadImage= loadImage(reloadImage);
     }
 
     /**
@@ -41,4 +47,11 @@ public class PlaceableObstacle extends DestructibleObstacle{
     }
 
 
+    public boolean tookHit() {
+        return false;
+    }
+
+    public BufferedImage getReloadImage() {
+        return reloadImage;
+    }
 }

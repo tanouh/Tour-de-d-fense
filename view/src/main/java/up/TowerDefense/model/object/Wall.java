@@ -10,7 +10,7 @@ public class Wall extends PlaceableObstacle{
 
 
     public Wall(double x, double y) {
-        super(x, y, newSize, newHealthScale, newHealthScale, ObsType.WALL, newBuyingCost,image);
+        super(x, y, newSize, newHealthScale, newHealthScale, ObsType.WALL, newBuyingCost,image,image);
     }
 
     public static double getPrice(){ return newBuyingCost; }

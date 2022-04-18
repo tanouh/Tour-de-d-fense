@@ -1,15 +1,13 @@
 package up.TowerDefense.model.object;
 
 
+import up.TowerDefense.view.componentHandler.MapGenerator;
 
 public class DestructibleObstacle extends Obstacle{
 
     protected final int maxHealth;
     protected int currentHealth;
     protected ObsType obstacleType;
-
-
-
 
     public enum ObsType {
         WALL, TARGET, TOWER
@@ -46,10 +44,14 @@ public class DestructibleObstacle extends Obstacle{
 
     public void setCurrentHealth(int currentHealth) {
         this.currentHealth = currentHealth;
+        if (this.currentHealth <=0){
+            MapGenerator.obstaclesList.remove((PlaceableObstacle)this);
+        }
     }
     public void takeDamage(double damage) {
         setCurrentHealth((int)(currentHealth - damage));
     }
+
 
     public boolean isATower(){
         return this.obstacleType == ObsType.TOWER;

@@ -14,9 +14,6 @@ public class PresetTower {
 	 */
 	public static final int SIZE = 2;
 
-
-
-
     /**
      * Represente la porte d'attaque de la Tour.
      */
@@ -50,7 +47,7 @@ public class PresetTower {
     /**
      * Represente le nombre de point de vie initiale de la Tour.
      */
-    protected final static int STARTING_HEALTH = 5 ; //à voir
+    protected final static int STARTING_HEALTH = 100 ; //à voir
     
     /**
      * Represente le temps d'attente entre chaque attaque de la Tour.

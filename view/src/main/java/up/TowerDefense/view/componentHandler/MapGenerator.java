@@ -31,14 +31,14 @@ public class MapGenerator {
 
 //    public static MapGenerator REF;
     public Board gameBoard;
-    private ScreenPanel screenPanel;
-    private BufferedImage mapImage;
-    private int tileSize;
-    private int [][] mapTileNum;
+    private final ScreenPanel screenPanel;
+    private final BufferedImage mapImage;
+    private final int tileSize;
+    private final int [][] mapTileNum;
     private Tile[]  tileType;
 
-    private int nbCol;
-    private int nbRow;
+    private final int nbCol;
+    private final int nbRow;
 
     public static ArrayList<PlaceableObstacle> obstaclesList;
     public static ArrayList<Personnage> charactersList;
@@ -63,7 +63,7 @@ public class MapGenerator {
         this.gameBoard = Game.getBoard();
         gameBoard.setTile(nbRow,nbCol);
 
-        tileSize = screenPanel.tileSize;
+        tileSize = ScreenPanel.tileSize;
 
         loadMap();
 
@@ -177,10 +177,10 @@ public class MapGenerator {
             int screenY = worldY - screenPanel.camera.worldY + screenPanel.camera.screenY;
 
 
-            if(worldX + screenPanel.tileSize > screenPanel.camera.worldX - screenPanel.camera.screenX &&
-                    worldX - screenPanel.tileSize < screenPanel.camera.worldX + screenPanel.camera.screenX &&
-                    worldY + screenPanel.tileSize > screenPanel.camera.worldY - screenPanel.camera.screenY &&
-                    worldY - screenPanel.tileSize < screenPanel.camera.worldY + screenPanel.camera.screenY
+            if(worldX + ScreenPanel.tileSize > screenPanel.camera.worldX - screenPanel.camera.screenX &&
+                    worldX - ScreenPanel.tileSize < screenPanel.camera.worldX + screenPanel.camera.screenX &&
+                    worldY + ScreenPanel.tileSize > screenPanel.camera.worldY - screenPanel.camera.screenY &&
+                    worldY - ScreenPanel.tileSize < screenPanel.camera.worldY + screenPanel.camera.screenY
             )
             {
                 Tile t = gameBoard.getTile(worldCol,worldRow);
@@ -202,7 +202,11 @@ public class MapGenerator {
      */
     public void drawComponents(Graphics2D g){
         for (PlaceableObstacle ob : new CopyOnWriteArrayList<>(obstaclesList) ){
-            drawElementaryComponent(g,ob.position,ob.getImage(),ob.getSize());
+            if (ob.tookHit()){
+                drawElementaryComponent(g,ob.position, ob.getReloadImage(),ob.getSize());
+            }else{
+                drawElementaryComponent(g,ob.position, ob.getImage(),ob.getSize());
+            }
         }
         for (Personnage perso : new CopyOnWriteArrayList<>(charactersList)){
             drawElementaryComponent(g,perso.position, perso.getImage(),perso.getSize());

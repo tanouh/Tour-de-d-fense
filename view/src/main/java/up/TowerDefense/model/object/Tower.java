@@ -125,7 +125,7 @@ public class Tower extends PlaceableObstacle{
      */
     public Tower(double x, double y, int size, double buyingCost, double range, double power, int upgradeCost,
                  double reloadTime, long lastAttackTime, Type twType, String image, String reloadImage) {
-        super(x, y, size, STARTING_HEALTH, STARTING_HEALTH, ObsType.TOWER, buyingCost,image);
+        super(x, y, size, STARTING_HEALTH, STARTING_HEALTH, ObsType.TOWER, buyingCost,image,reloadImage);
         this.range=range;
         this.power=power;
         this.upgradeCost=upgradeCost;
@@ -133,7 +133,6 @@ public class Tower extends PlaceableObstacle{
         this.lastAttackTime = lastAttackTime;
         this.towerType=twType;
         this.image = loadImage(image);
-        this.reloadImage = loadImage(reloadImage);
         Game.getBoard().addToListTowers(this);
         setAttainableTiles();
     }
@@ -145,14 +144,13 @@ public class Tower extends PlaceableObstacle{
      * @param position Definit la position de la Tour.
      */
     public Tower(PresetTower presetTower, Position position) {
-    	super(position.x, position.y, presetTower.getSize(), PresetTower.STARTING_HEALTH, PresetTower.STARTING_HEALTH, ObsType.TOWER, presetTower.price, presetTower.imgName);
+    	super(position.x, position.y, presetTower.getSize(), PresetTower.STARTING_HEALTH, PresetTower.STARTING_HEALTH, ObsType.TOWER, presetTower.price, presetTower.imgName,presetTower.reloadImage);
     	this.range = presetTower.getRange();
     	this.power = presetTower.getPower();
     	this.upgradeCost = presetTower.getUpgradeCost();
     	this.reloadTime = presetTower.getReloadTime();
     	this.lastAttackTime = presetTower.getLastAttackTime();
     	this.towerType = presetTower.getTowerType();
-        this.reloadImage = loadImage(presetTower.reloadImage);
         Game.getBoard().addToListTowers(this);
         setAttainableTiles();
     }
@@ -232,26 +230,33 @@ public class Tower extends PlaceableObstacle{
 
     @Override
     public BufferedImage getImage(){
+
         if (tookHit && System.currentTimeMillis() - hitStart > HITDELAY){
-            return reloadImage;
+            if (System.currentTimeMillis() - hitStart > HITDELAY) tookHit = false;
+
         }
-        tookHit = false;
+
         return this.image;
     }
 
     @Override
-    public void setCurrentHealth(int currentHealth){
-        if(currentHealth < this.currentHealth){
-            this.hitStart = System.currentTimeMillis();
-            tookHit = true;
-        }
-        this.currentHealth = currentHealth;
+    public void takeDamage(double damage) {
+        System.out.println("             tower took damage");
+        this.hitStart = System.currentTimeMillis();
+        tookHit = true;
+        setCurrentHealth((int)(currentHealth - damage));
     }
 
     @Override
-    public void takeDamage(double damage) {
-        System.out.println("ouch");
-        setCurrentHealth((int)(currentHealth - damage));
+    public boolean tookHit(){
+        if (tookHit){
+            if (System.currentTimeMillis() - hitStart > HITDELAY) {
+                tookHit = false;
+                hitStart = 2*System.currentTimeMillis();
+            }
+
+        }
+        return tookHit;
     }
 
     public BufferedImage loadImage(String image){
