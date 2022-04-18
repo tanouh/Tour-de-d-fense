@@ -16,14 +16,13 @@ public class Wave {
 
     public static int level = 1;
     public static long TIME_SINCE_LAST_SPAWN;
-    public static final int MAX_NB_WAVES = 5;
+    public static final int MAX_NB_WAVES = Game.getNbWavesTotal();
     public static long TIME_INTERVAL = 10000;  // Intervalle de temps entre deux séries de vagues
     public static long DELAY = 5000;
 
     public Wave() {
         resetTimeSinceLastSpawn();
-        waveOrder = 1;
-        Game.setWavesLeft(Game.getWavesLeft()-1);
+        waveOrder = 1;;
         currentWave = Subwave.subwavesInOrder();
     }
 
@@ -59,8 +58,6 @@ public class Wave {
         }
     }
 
-
-
     /**
      * Verifie si la vague a ete lancé
      */
@@ -78,55 +75,4 @@ public class Wave {
     public static void resetTimeSinceLastSpawn() {
         TIME_SINCE_LAST_SPAWN = System.currentTimeMillis();
     }
-
-
-    /**
-     * Lance la prochaine vague lorsque c'est possible
-     */
-   /* public void startNextWave() {
-        if (!finished){
-            if (currentWave == null){
-                if (waves != null && waves.size() > 0) {
-                    currentWave = waves.get(0);
-                    running = true;
-                }
-            }
-        } else {
-                int nextIndex = 1 + waves.indexOf(currentWave);
-                if (nextIndex < waves.size()) {
-                    currentWave = waves.get(1 + waves.indexOf(currentWave));
-                    running = true;
-                }else{
-                    running = false;
-                }
-            }
-    }*/
-
-
-    /**
-     * Actualise le gestionnaire de vague
-     */
-    /*public void update() {
-        if (currentWave != null) {
-            if (!running && (waves.indexOf(currentWave) == waves.size() - 1))
-                finished = true;
-            if (currentWave.enemies.isEmpty()) {
-                running = false;
-                return;
-            }
-            timeSinceLastSpawn = System.currentTimeMillis() - timeSinceLastSpawn;
-                if (timeSinceLastSpawn >= currentWave.enemies.get(0).getInterval()) {
-                    // Fait spawn le premier enemy de la liste et le supprime de la liste des enemy à spawner
-                    // puis relance le compteur de spawn
-                    EnemySpawn nextEnemySpawn = currentWave.enemies.get(0);
-                    if (nextEnemySpawn.quantity-- <= 1)
-                        EnemyList.add(currentWave.enemies.remove(0).enemy); // on ajoute dans la liste des enemy en cours
-                                                                                 // et on le retire de la sous vague en cours
-                    else
-                        EnemyList.add(nextEnemySpawn.getEnemy());
-                    timeSinceLastSpawn = System.currentTimeMillis();
-                }
-        }
-    }*/
-
 }

@@ -58,6 +58,7 @@ public class Subwave {
             default:
                 break;
         }
+        Game.setWavesLeft(Game.getWavesLeft()-1);
         Wave.waveOrder++;
         return new Subwave(enemySpawned);
     }
