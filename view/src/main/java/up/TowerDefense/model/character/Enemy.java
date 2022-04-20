@@ -28,7 +28,13 @@ public class Enemy extends Personnage{
         BOMBER
         //type d'ennemi
     }
-	
+
+	/**
+	 * Temps durant lequel l'image de l'ennemi sera remplacée par une image temporaire qui signifierait
+	 * qu'il a été touché par une attaque
+	 */
+	public final long HITDELAY = 250;
+
 	/**
 	 * Correspond au nombre de coins rapportes une fois l'enemy mort.
 	 */
@@ -70,8 +76,15 @@ public class Enemy extends Personnage{
 	 */
 	private long travelTime;
 
+	/**
+	 * Déclence HITDELAY
+	 */
+	protected long hitStart ;
 
-
+	/**
+	 * Signale si l'ennemi a reçu un coup
+	 */
+	protected boolean tookHit = false;
 
 
 	private boolean alive;
@@ -90,7 +103,8 @@ public class Enemy extends Personnage{
 	 * @param position Definit la position de l'enemy
 	 */
 	public Enemy(PresetEnemy presetEnemy, Position position) {
-		super(position, presetEnemy.getSize(), presetEnemy.getResistance(), presetEnemy.getMaxHealth(), presetEnemy.getSpeed(), presetEnemy.imgName);
+		super(position, presetEnemy.getSize(), presetEnemy.getResistance(), presetEnemy.getMaxHealth(),
+				presetEnemy.getSpeed(), presetEnemy.imgName, presetEnemy.reloadImgName);
 		this.reward = presetEnemy.getCoins();
 		this.agressiveness_degree = presetEnemy.getAgressiv_Degree();
 		this.attackspeed = presetEnemy.getAgressiv_Degree();
@@ -137,7 +151,7 @@ public class Enemy extends Personnage{
 
 		if (Game.getBoard().getTile((int)position.x,(int)position.y).isTarget()){
 			Game.setLives(-1);
-			this.die();
+			this.die(false);
 		}
 	}
 
@@ -183,21 +197,11 @@ public class Enemy extends Personnage{
 	}
 
 
-	public void die(){
-		if(alive){
-			System.out.println("deces");
-			this.alive = false;
-			MapGenerator.charactersList.remove(this);
-			Game.setCredits(this.reward);
-		}
-	}
-
-	public void takeDamage(double power){
-		currentHealth = (int) (currentHealth - power/resistance);
-		System.out.println("             enemy took damage\n currentHealth : " + currentHealth);
-		if(currentHealth <= 0){
-			die();
-		}
+	public void die(boolean killed){
+		System.out.println("deces");
+		this.alive = false;
+		MapGenerator.charactersList.remove(this);
+		if (killed) Game.setCredits(this.reward);
 	}
 
 	public long getReloadTime() {
@@ -227,5 +231,28 @@ public class Enemy extends Personnage{
 		travelTime = System.currentTimeMillis();
 	}
 
+	public boolean isAlive(){
+		return alive;
+	}
 
+	public void takeDamage(double power){
+		currentHealth = (int) Math.round(currentHealth - power/resistance);
+		System.out.println("             enemy " + this + " took damage\n currentHealth : " + currentHealth);
+		this.hitStart = System.currentTimeMillis();
+		tookHit = true;
+		if(currentHealth <= 0){
+			die(true);
+		}
+	}
+
+	@Override
+	public boolean tookHit(){
+		if (tookHit){
+			if (System.currentTimeMillis() - hitStart > HITDELAY) {
+				tookHit = false;
+				hitStart = 2*System.currentTimeMillis();
+			}
+		}
+		return tookHit;
+	}
 }

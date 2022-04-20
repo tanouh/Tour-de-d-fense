@@ -15,6 +15,10 @@ public class EnemyProjectile extends Projectile{
     @Override
     public void move() {
         //projectile has hit
+        if (target.isAlive()){
+            MapGenerator.projectilesList.remove(this);
+            return;
+        }
         if (Math.abs(xLoc - xDest) < speed || Math.abs(yLoc - yDest)< speed){
             arrivedAtTarget = true;
             target.takeDamage(power);

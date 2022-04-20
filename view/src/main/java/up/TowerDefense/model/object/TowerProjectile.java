@@ -1,6 +1,7 @@
 package up.TowerDefense.model.object;
 
 import up.TowerDefense.model.character.Enemy;
+import up.TowerDefense.view.componentHandler.MapGenerator;
 
 public class TowerProjectile extends Projectile{
     private Enemy targetEnemy;
@@ -14,6 +15,10 @@ public class TowerProjectile extends Projectile{
 
     @Override
     public void move() {
+        if (!targetEnemy.isAlive()){
+            MapGenerator.projectilesList.remove(this);
+            return;
+        }
         if (Math.abs(xLoc - xDest)< speed/2 || Math.abs(yLoc - yDest)< speed/2){
             arrivedAtTarget = true;
             targetEnemy.takeDamage(power);

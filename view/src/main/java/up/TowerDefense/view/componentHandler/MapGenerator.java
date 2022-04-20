@@ -208,7 +208,11 @@ public class MapGenerator {
             }
         }
         for (Personnage perso : new CopyOnWriteArrayList<>(charactersList)){
-            drawElementaryComponent(g,perso.position, perso.getImage(),perso.getSize());
+            if (perso.tookHit()) {
+                drawElementaryComponent(g, perso.position, perso.getReloadImage(), perso.getSize());
+            }else{
+                drawElementaryComponent(g, perso.position, perso.getImage(), perso.getSize());
+            }
         }
     }
 
@@ -291,7 +295,7 @@ public class MapGenerator {
         try{
             for (Personnage c : charactersList){
                 if(c instanceof Enemy){
-                    ((Enemy)c).update_position();
+                    if (((Enemy) c).isAlive()) ((Enemy)c).update_position();
                 }
             }
         }catch(ConcurrentModificationException exc){

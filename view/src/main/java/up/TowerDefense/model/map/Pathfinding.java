@@ -57,7 +57,7 @@ public class Pathfinding {
                         openSet.add(neighbour);
                 }
             }
-            if(System.currentTimeMillis() -a > 1000) {
+            if(System.currentTimeMillis() -a > 200) {
                 Game.getBoard().getTargetZone().remove(targetPos);
 //                System.out.println("retry");
                 return FindPath(startPos, Game.getBoard().getNearestTargetPosition(startPos));

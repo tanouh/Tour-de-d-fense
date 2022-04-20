@@ -52,6 +52,9 @@ public class DestructibleObstacle extends Obstacle{
         setCurrentHealth((int)(currentHealth - damage));
     }
 
+    public boolean isAlive(){
+        return currentHealth <= 0;
+    }
 
     public boolean isATower(){
         return this.obstacleType == ObsType.TOWER;

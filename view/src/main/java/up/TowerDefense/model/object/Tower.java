@@ -300,6 +300,7 @@ public class Tower extends PlaceableObstacle{
                 TowerProjectile projectile = new TowerProjectile(this.position, target.position, this.power, Game.getLevel(), target, false);
                 MapGenerator.projectilesList.add(projectile);
                 timeSinceLastAttack = System.currentTimeMillis();
+                break;
             }
         }
     }
