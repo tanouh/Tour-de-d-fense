@@ -28,7 +28,7 @@ public class Ally extends Personnage{
 	 * @param position definit la position de l'allie sur la carte
 	 */
 	public Ally(Position position) {
-		super(position, SIZE, 1.00f, 100, 1000, "/null.png");
+		super(position, SIZE, 1.00f, 100, 1000, "/null.png", "/null.png");
 	}
 	
 	/**

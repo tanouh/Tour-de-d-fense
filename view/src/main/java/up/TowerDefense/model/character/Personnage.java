@@ -8,6 +8,7 @@ import java.awt.image.BufferedImage;
 
 public abstract class Personnage{
 	private BufferedImage image;
+	private BufferedImage reloadImage;
 	/**
 	 * position actuelle du personnage
 	 */
@@ -53,7 +54,7 @@ public abstract class Personnage{
 	 * @param maxHealth definit la vie maximale du personnage
 	 * @param speed definit la vitesse du personnage
 	 */
-	public Personnage(Position position, int size, float resistance, int maxHealth, long speed, String imgName) {
+	public Personnage(Position position, int size, float resistance, int maxHealth, long speed, String imgName, String reloadImgName) {
 		this.position = position;
 		this.maxHealth = maxHealth;
 		this.currentHealth = this.maxHealth;
@@ -61,6 +62,7 @@ public abstract class Personnage{
 		this.size = size;
 		this.resistance = resistance;
 		image = StaticFunctions.loadImage(imgName);
+		this.reloadImage = StaticFunctions.loadImage(reloadImgName);
 	}
 
 	
@@ -70,7 +72,8 @@ public abstract class Personnage{
 	 * @param size definit la taille du personnage
 	 */
 	public Personnage(int size) {
-		this(new Position(0.00,0.00), size, 1.00f, 100, 1000, "/null.png");
+		this(new Position(0.00,0.00), size, 1.00f, 100,
+				1000, "/null.png", "/null.png");
 	}
 	
 	public Position getPosition() {
@@ -96,6 +99,13 @@ public abstract class Personnage{
 	public BufferedImage getImage() {
         return image;
     }
+	public BufferedImage getReloadImage() {
+		return reloadImage;
+	}
+
+	public boolean tookHit() {
+		return false;
+	}
 	
 	public void setSize(int newSize) {
 		this.size = newSize;

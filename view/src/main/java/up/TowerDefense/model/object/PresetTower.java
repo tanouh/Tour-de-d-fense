@@ -115,8 +115,9 @@ public class PresetTower {
      * @return Renvoie un objet PresetTower contenant toute ces informations afin de creer la Tour
      */
     public static PresetTower TowerTest() {
-		return new PresetTower(100,5.00,200,200,
-				1000, 0, Tower.Type.TOWERTEST, "/tour.png","/tour_touche.png");
+		return new PresetTower(100,10,200,200,
+				2000, 0, Tower.Type.TOWERTEST, "/tour.png",
+				"/tour_touche.png");
 	}
     
     /**
@@ -127,8 +128,9 @@ public class PresetTower {
      * @return Renvoie un objet PresetTower contenant toute ces informations afin de creer la Tour
      */
     public static PresetTower Anti_champis() {
-		return new PresetTower(100,5.00,200,200,
-				1000, 0, Tower.Type.ANTI_CHAMPIS, "/Anti_Champi.png","/Anti_Champi_Touche.png");
+		return new PresetTower(100,10,200,200,
+				2000, 0, Tower.Type.ANTI_CHAMPIS, "/Anti_Champi.png",
+				"/Anti_Champi_Touche.png");
 	}
     
     /**
@@ -139,8 +141,9 @@ public class PresetTower {
      * @return Renvoie un objet PresetTower contenant toute ces informations afin de creer la Tour
      */
     public static PresetTower Leucocyte_T() {
-		return new PresetTower(100,5.00,200,200,
-				1000, 0, Tower.Type.LEUCOCYTE_T, "/LeucoT.png","/leuco_touche.png");
+		return new PresetTower(100,10,200,200,
+				2000, 0, Tower.Type.LEUCOCYTE_T, "/LeucoT.png",
+				"/leuco_touche.png");
 	}
     
     /**
@@ -151,8 +154,9 @@ public class PresetTower {
      * @return Renvoie un objet PresetTower contenant toute ces informations afin de creer la Tour
      */
     public static PresetTower Anticorps() {
-		return new PresetTower(100,5.00,200,200,
-				1000, 0, Tower.Type.ANTICORPS, "/Anticorps.png","/antic-touche.png");
+		return new PresetTower(100,10,200,200,
+				2000, 0, Tower.Type.ANTICORPS, "/Anticorps.png",
+				"/antic-touche.png");
 	}
     
 	public int getSize() {
