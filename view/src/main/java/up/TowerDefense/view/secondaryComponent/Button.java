@@ -191,34 +191,34 @@ public class Button extends JButton {
     }
 
     public void updateSideMenuButton(int typeObstacle){
-        if (typeObstacle == Game.getCurrentlyPlacing()) {
-            this.label.setForeground(GameWindow.background);
-            this.setBackground(GameWindow.foreground);
+        double price;
+        switch (typeObstacle) {
+            case 0:
+                price = PresetTower.TowerTest().getPrice();
+                break;
+            case 1:
+                price = PresetTower.Anti_champis().getPrice();
+                break;
+            case 2:
+                price = PresetTower.Leucocyte_T().getPrice();
+                break;
+            case 3:
+                price = PresetTower.Anticorps().getPrice();
+                break;
+            case 4:
+                price = Wall.getPrice();
+                break;
+            default:
+                price = 0;
+        }
+        if (Game.getCredits() < price) {
+            this.label.setForeground(Color.LIGHT_GRAY);
+            this.setBackground(Color.GRAY);
             this.setEnabled(false);
-        }else {
-            double price;
-            switch (typeObstacle) {
-                case 0:
-                    price = PresetTower.TowerTest().getPrice();
-                    break;
-                case 1:
-                    price = PresetTower.Anti_champis().getPrice();
-                    break;
-                case 2:
-                    price = PresetTower.Leucocyte_T().getPrice();
-                    break;
-                case 3:
-                    price = PresetTower.Anticorps().getPrice();
-                    break;
-                case 4:
-                    price = Wall.getPrice();
-                    break;
-                default:
-                    price = 0;
-            }
-            if (Game.getCredits() < price) {
-                this.label.setForeground(Color.LIGHT_GRAY);
-                this.setBackground(Color.GRAY);
+        } else {
+            if (typeObstacle == Game.getCurrentlyPlacing()) {
+                this.label.setForeground(GameWindow.background);
+                this.setBackground(GameWindow.foreground);
                 this.setEnabled(false);
             } else {
                 this.label.setForeground(GameWindow.foreground);
