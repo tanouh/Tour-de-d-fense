@@ -1,7 +1,10 @@
 package up.TowerDefense.model.object;
 
 import up.TowerDefense.model.character.Enemy;
+import up.TowerDefense.model.game.StaticFunctions;
 import up.TowerDefense.view.componentHandler.MapGenerator;
+
+import java.awt.image.BufferedImage;
 
 public class TowerProjectile extends Projectile{
     private Enemy targetEnemy;
@@ -25,8 +28,8 @@ public class TowerProjectile extends Projectile{
             if(freeze){
                 targetEnemy.setFreezeDuration(4000 +(sourceLevel-1)*1000);
                 targetEnemy.freeze();
-
             }
+            MapGenerator.projectilesList.remove(this);
         }
         else{
             xLoc += speed*Math.cos(angleOfProjectileInRadians());
@@ -37,6 +40,11 @@ public class TowerProjectile extends Projectile{
 
     public enum projectileType{
         GENERIC,FREEZE,SNIPER
+    }
+
+    @Override
+    public BufferedImage getImage(){
+        return StaticFunctions.loadImage("/projectV2.png");
     }
 
 }

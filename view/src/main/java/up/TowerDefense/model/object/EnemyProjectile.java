@@ -1,7 +1,10 @@
 package up.TowerDefense.model.object;
 
 
+import up.TowerDefense.model.game.StaticFunctions;
 import up.TowerDefense.view.componentHandler.MapGenerator;
+
+import java.awt.image.BufferedImage;
 
 public class EnemyProjectile extends Projectile{
     private PlaceableObstacle target;
@@ -30,5 +33,8 @@ public class EnemyProjectile extends Projectile{
         }
     }
 
-
+    @Override
+    public BufferedImage getImage(){
+        return StaticFunctions.loadImage("/projectV1.png");
+    }
 }

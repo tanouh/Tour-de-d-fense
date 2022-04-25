@@ -214,6 +214,9 @@ public class MapGenerator {
                 drawElementaryComponent(g, perso.position, perso.getImage(), perso.getSize());
             }
         }
+        for (Projectile projectile : new CopyOnWriteArrayList<>(projectilesList)){
+            if (projectile instanceof TowerProjectile) drawElementaryComponent(g, projectile.getPos(), projectile.getImage(), projectile.getSize());
+        }
     }
 
     private void drawElementaryComponent(Graphics2D g,Position pos, BufferedImage img,double size){
