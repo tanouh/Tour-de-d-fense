@@ -215,7 +215,7 @@ public class MapGenerator {
             }
         }
         for (Projectile projectile : new CopyOnWriteArrayList<>(projectilesList)){
-            if (projectile instanceof TowerProjectile) drawElementaryComponent(g, projectile.getPos(), projectile.getImage(), projectile.getSize());
+            drawElementaryComponent(g, projectile.getPos(), projectile.getImage(), projectile.getSize());
         }
     }
 

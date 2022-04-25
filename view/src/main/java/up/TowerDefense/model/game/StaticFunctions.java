@@ -42,8 +42,8 @@ public class StaticFunctions {
      * @return
      */
     public static Position findTower(Position src, double range, Board board){
-        int posX = (int)src.x;
-        int posY = (int)src.y;
+        int posX = (int)Math.round(src.x);
+        int posY = (int)Math.round(src.y);
         int _range = (int)range;
         for (int i = - _range ; i != 0 && i < _range+1  ; i++){
 

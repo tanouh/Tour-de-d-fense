@@ -22,14 +22,14 @@ public class EnemyProjectile extends Projectile{
             MapGenerator.projectilesList.remove(this);
             return;
         }
-        if (Math.abs(xLoc - xDest) < speed || Math.abs(yLoc - yDest)< speed){
+        if (Math.abs(xLoc - xDest) < speed/2 || Math.abs(yLoc - yDest)< speed/2){
             arrivedAtTarget = true;
             target.takeDamage(power);
             MapGenerator.projectilesList.remove(this);
         }
         else{
-            xLoc += speed;
-            yLoc += speed;
+            xLoc += speed*Math.cos(angleOfProjectileInRadians());
+            yLoc += speed*Math.sin(angleOfProjectileInRadians());
         }
     }
 

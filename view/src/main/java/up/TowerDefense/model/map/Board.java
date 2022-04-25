@@ -194,11 +194,11 @@ public class Board {
     public static void launchAllAttacks(){
         for (Tower tower : listTowers){
             if(System.currentTimeMillis() - tower.getTimeSinceLastAttack() > tower.getReloadTime())
-                tower.launchAttack();
+                if (tower.isAlive()) tower.launchAttack();
         }
         for (Enemy enemy : listEnemy){
             if(System.currentTimeMillis() - enemy.getTimeSinceLastAttack() > enemy.getReloadTime())
-                enemy.identifyTarget();
+                if (enemy.isAlive()) enemy.identifyTarget();
         }
     }
 
