@@ -128,7 +128,7 @@ public class PresetTower {
      * @return Renvoie un objet PresetTower contenant toute ces informations afin de creer la Tour
      */
     public static PresetTower Anti_champis() {
-		return new PresetTower(100,7,200,200,
+		return new PresetTower(100,10,200,200,
 				2000, 0, Tower.Type.ANTI_CHAMPIS, "/Anti_Champi.png",
 				"/Anti_Champi_Touche.png");
 	}

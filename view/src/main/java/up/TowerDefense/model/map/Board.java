@@ -58,7 +58,7 @@ public class Board {
 
     public Tile getTile(int x, int y) { // x = col , y = row
 
-        if (y < 0 || y > tiles.length || x < 0 || x > tiles[0].length){
+        if (y < 0 || y >= tiles.length || x < 0 || x >= tiles[0].length){
             return null;
         }
 
@@ -192,13 +192,13 @@ public class Board {
     }
 
     public static void launchAllAttacks(){
-        for (Tower tower : listTowers){
-            if(System.currentTimeMillis() - tower.getTimeSinceLastAttack() > tower.getReloadTime())
-                if (tower.isAlive()) tower.launchAttack();
-        }
         for (Enemy enemy : listEnemy){
             if(System.currentTimeMillis() - enemy.getTimeSinceLastAttack() > enemy.getReloadTime())
                 if (enemy.isAlive()) enemy.identifyTarget();
+        }
+        for (Tower tower : listTowers){
+            if(System.currentTimeMillis() - tower.getTimeSinceLastAttack() > tower.getReloadTime())
+                if (tower.isAlive()) tower.launchAttack();
         }
     }
 

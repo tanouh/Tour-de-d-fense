@@ -149,7 +149,7 @@ public class Enemy extends Personnage{
 		this.position = path.GetPos(System.currentTimeMillis() - lifeTime, this.velocity);
 		Game.getBoard().getTile(this.position).setEnemy(this);
 
-		if (Game.getBoard().getTile((int)position.x,(int)position.y).isTarget()){
+		if (Game.getBoard().getTile((int)Math.round(position.x),(int)Math.round(position.y)).isTarget()){
 			Game.setLives(-1);
 			this.die(false);
 		}
@@ -169,11 +169,9 @@ public class Enemy extends Personnage{
 	}
 
 	private void launchAttack(PlaceableObstacle target) {
-		if(System.currentTimeMillis() - timeSinceLastAttack > reloadTime){
-			EnemyProjectile projectile = new EnemyProjectile(this.position, target.position, this.damage, Game.getLevel(), target);
-			MapGenerator.projectilesList.add(projectile);
-			timeSinceLastAttack = System.currentTimeMillis();
-		}
+		EnemyProjectile projectile = new EnemyProjectile(this.position, target.position, this.damage, Game.getLevel(), target);
+		MapGenerator.enemyProjectilesList.add(projectile);
+		timeSinceLastAttack = System.currentTimeMillis();
 	}
 
 

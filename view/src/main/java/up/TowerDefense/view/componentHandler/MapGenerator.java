@@ -40,14 +40,16 @@ public class MapGenerator {
 
     public static ArrayList<PlaceableObstacle> obstaclesList;
     public static ArrayList<Personnage> charactersList;
-    public static ArrayList<Projectile> projectilesList;
+    public static ArrayList<Projectile> towerProjectilesList;
+    public static ArrayList<Projectile> enemyProjectilesList;
 
 
 
     public MapGenerator(ScreenPanel screenPanel, String imagePath){
         obstaclesList = new ArrayList<>();
         charactersList = new ArrayList<>();
-        projectilesList = new ArrayList<>();
+        towerProjectilesList = new ArrayList<>();
+        enemyProjectilesList = new ArrayList<>();
 
         this.screenPanel = screenPanel;
 
@@ -214,8 +216,11 @@ public class MapGenerator {
                 drawElementaryComponent(g, perso.position, perso.getImage(), perso.getSize());
             }
         }
-        for (Projectile projectile : new CopyOnWriteArrayList<>(projectilesList)){
-            drawElementaryComponent(g, projectile.getPos(), projectile.getImage(), projectile.getSize());
+        for (Projectile towerProj : new CopyOnWriteArrayList<>(towerProjectilesList)){
+            drawElementaryComponent(g, towerProj.getPos(), towerProj.getImage(), towerProj.getSize());
+        }
+        for (Projectile enemyProj : new CopyOnWriteArrayList<>(enemyProjectilesList)){
+            drawElementaryComponent(g, enemyProj.getPos(), enemyProj.getImage(), enemyProj.getSize());
         }
     }
 
@@ -309,7 +314,11 @@ public class MapGenerator {
 
     public void updateProjectilesPos(){
         try{
-            for (Projectile p : projectilesList){
+            for (Projectile p : enemyProjectilesList){
+                if(!p.hasArrived())
+                    p.move();
+            }
+            for (Projectile p : towerProjectilesList){
                 if(!p.hasArrived())
                     p.move();
             }
