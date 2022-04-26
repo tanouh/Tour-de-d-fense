@@ -71,7 +71,7 @@ public class GamePanel extends JPanel {
         level = Label.addHeaderLabel(header, "Niveau " + Game.getLevel());
         wavesLeft = Label.addHeaderLabel(header,"Vague "+ (Game.getNbWavesTotal()-Game.getWavesLeft())
                 + "/" + Game.getNbWavesTotal());
-        enemyLeft = Label.addHeaderLabel(header, "Ennemis restants : " + Game.getNbEnemyLeft());
+        enemyLeft = Label.addHeaderLabel(header, "Ennemis restants : " + Game.getBoard().getListEnemy().size());
         creditsLeft = Label.addHeaderLabel(header,"Argent : " + Game.getCredits());
         lifesLeft = Label.addHeaderLabel(header, "Vies : " + Game.getLives());
     }
@@ -115,7 +115,7 @@ public class GamePanel extends JPanel {
     public void updateHeader(){
         wavesLeft.setText("Vague " + (Game.getNbWavesTotal()-Game.getWavesLeft())
                 + "/" + Game.getNbWavesTotal());
-        enemyLeft.setText("Ennemis restants : ");
+        enemyLeft.setText("Ennemis restants : " + Game.getBoard().getListEnemy().size());
         creditsLeft.setText("Argent : " + Game.getCredits());
         lifesLeft.setText("Vies : " + Game.getLives());
     }

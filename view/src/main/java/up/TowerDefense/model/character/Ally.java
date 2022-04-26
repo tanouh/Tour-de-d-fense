@@ -6,7 +6,7 @@ import up.TowerDefense.model.object.Position;
 public class Ally extends Personnage{
 	
 	/**
-	 * Definit la taille constante de chaque allie a la moitier d'une case (0.50)
+	 * Definit la taille constante de chaque allie a la moitie d'une case (0.50)
 	 */
 	private static final int SIZE = 1;
 	
@@ -28,7 +28,7 @@ public class Ally extends Personnage{
 	 * @param position definit la position de l'allie sur la carte
 	 */
 	public Ally(Position position) {
-		super(position, SIZE, 1.00f, 100, 1000, "/null.png", "/null.png");
+		super(position, SIZE, 1.00f, 100, 1000, "/noir.png", "/noir.png");
 	}
 	
 	/**

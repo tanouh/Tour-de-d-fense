@@ -94,9 +94,11 @@ public class Enemy extends Personnage{
 
 
 	private boolean alive;
+	private boolean killed = false;
 	private boolean frozen;
 	private long freezeStartTime;
 	private long freezeDuration;
+	private long totalFreezeDuration = 0;
 
 	private long reloadTime;
 	private long timeSinceLastAttack;
@@ -142,7 +144,8 @@ public class Enemy extends Personnage{
 	public void update_position(){
 		if(frozen && System.currentTimeMillis() - freezeStartTime > freezeDuration){
 			unfreeze();
-		}
+			totalFreezeDuration += System.currentTimeMillis()-freezeStartTime;
+		}else if (frozen) return;
 
 		/**
 		 * Quand l'ennemi pass aux environs d'une tour il ne s'arrête pas mais lance des projectiles tout en continuant
@@ -153,12 +156,12 @@ public class Enemy extends Personnage{
 		travelTime = System.currentTimeMillis();
 		Game.getBoard().getTile(this.position).setEnemy(null);
 
-		this.position = path.GetPos(System.currentTimeMillis() - lifeTime, this.velocity);
+		this.position = path.GetPos(travelTime - lifeTime - totalFreezeDuration, this.velocity);
 		Game.getBoard().getTile(this.position).setEnemy(this);
 
-		if (Game.getBoard().getTile((int)position.x,(int)position.y).isTarget()){
+		if (Game.getBoard().getTile((int)Math.round(position.x),(int)Math.round(position.y)).isTarget()){
 			Game.setLives(-1);
-			this.die(false);
+			this.alive = false;
 		}
 	}
 
@@ -176,11 +179,9 @@ public class Enemy extends Personnage{
 	}
 
 	private void launchAttack(PlaceableObstacle target) {
-		if(System.currentTimeMillis() - timeSinceLastAttack > reloadTime){
-			EnemyProjectile projectile = new EnemyProjectile(this.position, target.position, this.damage, Game.getLevel(), target);
-			MapGenerator.projectilesList.add(projectile);
-			timeSinceLastAttack = System.currentTimeMillis();
-		}
+		EnemyProjectile projectile = new EnemyProjectile(this.position, target.position, this.damage, Game.getLevel(), target);
+		MapGenerator.enemyProjectilesList.add(projectile);
+		timeSinceLastAttack = System.currentTimeMillis();
 	}
 
 
@@ -204,10 +205,10 @@ public class Enemy extends Personnage{
 	}
 
 
-	public void die(boolean killed){
+	public void die(){
 		System.out.println("deces");
 		this.alive = false;
-		MapGenerator.charactersList.remove(this);
+		Game.getBoard().getTile(this.position).setEnemy(null);
 		if (killed) Game.setCredits(this.reward);
 	}
 
@@ -224,11 +225,10 @@ public class Enemy extends Personnage{
 	}
 	public void freeze() {
 		this.frozen = true;
-		freezeDuration = System.currentTimeMillis();
+		freezeStartTime = System.currentTimeMillis();
 	}
 	public void unfreeze(){
 		this.frozen = false;
-		freezeStartTime = -10000;
 	}
 
 	public void live(){
@@ -248,7 +248,9 @@ public class Enemy extends Personnage{
 		this.hitStart = System.currentTimeMillis();
 		tookHit = true;
 		if(currentHealth <= 0){
-			die(true);
+			alive = false;
+			killed = true;
+
 		}
 	}
 

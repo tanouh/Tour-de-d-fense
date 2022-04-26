@@ -154,7 +154,7 @@ public class ScreenPanel extends JPanel implements Runnable{
         actionMap= this.getActionMap();
 
         //Equivalent à keyPressed
-        inputMap.put(KeyStroke.getKeyStroke( KeyEvent.VK_UP,0,false),UP);
+        inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_UP,0,false),UP);
         inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_DOWN,0,false),DOWN);
         inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_LEFT,0,false),LEFT);
         inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_RIGHT,0,false),RIGHT);

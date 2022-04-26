@@ -8,7 +8,7 @@ public class Game {
     private final static int STARTING_LIVES = 20;
     private static double credits = STARTING_CREDITS;
     private static int lives = STARTING_LIVES;
-    private static Board board = new Board();
+    private static Board board;
     private static int numberWavesTotal;
     private static int level;
     private static int wavesLeft;
@@ -27,6 +27,7 @@ public class Game {
     };
 
     public Game(int numberWaves, int backgroundMusic, int gameSound, int speed, int lvl){
+        board = new Board();
         numberWavesTotal = numberWaves;
         wavesLeft = numberWaves;
         bgMusic = backgroundMusic;
@@ -74,10 +75,10 @@ public class Game {
     }
 
     public static boolean gameWon(){
-        return (wavesLeft == 0 && nbEnemyLeft == 0 && lives > 0);
+        return (wavesLeft == 0 && board.getListEnemy().size() == 0 && lives > 0);
     }
 
     public static boolean gameLost(){
-        return ((wavesLeft > 0 || nbEnemyLeft > 0) && lives == 0);
+        return ((wavesLeft > 0 || nbEnemyLeft > 0) && lives <= 0);
     }
 }

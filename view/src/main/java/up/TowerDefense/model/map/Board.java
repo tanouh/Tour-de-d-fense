@@ -13,14 +13,20 @@ import java.util.Collections;
 public class Board {
     private Tile[][] tiles;
     public static Board map;
-    private static ArrayList<Tower> listTowers = new ArrayList<Tower>();
-    private static ArrayList<Enemy> listEnemy = new ArrayList<Enemy>();
+    private static ArrayList<Tower> listTowers;
+    private static ArrayList<Enemy> listEnemy;
+    private static ArrayList<Tower> toRemoveTowerList;
+    private static ArrayList<Enemy> toRemoveEnemyList;
     public ArrayList<Position> spawnPoint;
 
     /* Stocke les positions des cases qu'occupent la cible principale*/
     private ArrayList<Position> targetZone = new ArrayList<>();
 
     public Board() {
+        listTowers = new ArrayList<Tower>();
+        listEnemy = new ArrayList<Enemy>();
+        toRemoveTowerList = new ArrayList<Tower>();
+        toRemoveEnemyList = new ArrayList<Enemy>();
         map = this;
     }
 
@@ -58,7 +64,7 @@ public class Board {
 
     public Tile getTile(int x, int y) { // x = col , y = row
 
-        if (y < 0 || y > tiles.length || x < 0 || x > tiles[0].length){
+        if (y < 0 || y >= tiles.length || x < 0 || x >= tiles[0].length){
             return null;
         }
 
@@ -192,14 +198,21 @@ public class Board {
     }
 
     public static void launchAllAttacks(){
-        for (Tower tower : listTowers){
-            if(System.currentTimeMillis() - tower.getTimeSinceLastAttack() > tower.getReloadTime())
-                tower.launchAttack();
-        }
         for (Enemy enemy : listEnemy){
             if(System.currentTimeMillis() - enemy.getTimeSinceLastAttack() > enemy.getReloadTime())
-                enemy.identifyTarget();
+                if (enemy.isAlive()) enemy.identifyTarget();
+                else toRemoveEnemyList.add(enemy);
         }
+        for (Tower tower : listTowers){
+            if(System.currentTimeMillis() - tower.getTimeSinceLastAttack() > tower.getReloadTime())
+                if (tower.isAlive()) tower.launchAttack();
+                else toRemoveTowerList.add(tower);
+        }
+        listEnemy.removeAll(toRemoveEnemyList);
+        listTowers.removeAll(toRemoveTowerList);
+        toRemoveTowerList = new ArrayList<>();
+        toRemoveEnemyList = new ArrayList<>();
+
     }
 
 

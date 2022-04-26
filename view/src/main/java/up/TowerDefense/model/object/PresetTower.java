@@ -74,6 +74,11 @@ public class PresetTower {
      */
     protected double price;
 
+	/**
+	 * Détermine si les attaques de la tour freeze les ennemis ou pas
+	 */
+	protected boolean freezingAttack;
+
     /**
      * Construit le preset d'une tour
      * 
@@ -87,12 +92,13 @@ public class PresetTower {
      * @param image est l'image qui sera affiche dans le jeu pour cette tour.
      */
     public PresetTower(double BuyingCost, double startingRange, double startingPower, int startingUpgradeCost, double startingReloadTime, 
-    					long LastAttackTime, Type towerType, String image, String reloadImage) {
+    					boolean freezing, long LastAttackTime, Type towerType, String image, String reloadImage) {
     	this.price = BuyingCost;
     	this.range = startingRange;
     	this.power = startingPower;
     	this.upgradeCost = startingUpgradeCost;
     	this.reloadTime = startingReloadTime;
+		this.freezingAttack = freezing;
     	this.lastAttackTime = LastAttackTime;
     	this.towerType = towerType;
     	this.imgName = image;
@@ -116,7 +122,7 @@ public class PresetTower {
      */
     public static PresetTower TowerTest() {
 		return new PresetTower(100,10,200,200,
-				2000, 0, Tower.Type.TOWERTEST, "/tour.png",
+				2000, false, 0, Tower.Type.TOWERTEST, "/tour.png",
 				"/tour_touche.png");
 	}
     
@@ -129,7 +135,7 @@ public class PresetTower {
      */
     public static PresetTower Anti_champis() {
 		return new PresetTower(100,10,200,200,
-				2000, 0, Tower.Type.ANTI_CHAMPIS, "/Anti_Champi.png",
+				2000, false, 0, Tower.Type.ANTI_CHAMPIS, "/Anti_Champi.png",
 				"/Anti_Champi_Touche.png");
 	}
     
@@ -142,7 +148,7 @@ public class PresetTower {
      */
     public static PresetTower Leucocyte_T() {
 		return new PresetTower(100,10,200,200,
-				2000, 0, Tower.Type.LEUCOCYTE_T, "/LeucoT.png",
+				2000, false, 0, Tower.Type.LEUCOCYTE_T, "/LeucoT.png",
 				"/leuco_touche.png");
 	}
     
@@ -154,8 +160,8 @@ public class PresetTower {
      * @return Renvoie un objet PresetTower contenant toute ces informations afin de creer la Tour
      */
     public static PresetTower Anticorps() {
-		return new PresetTower(100,10,200,200,
-				2000, 0, Tower.Type.ANTICORPS, "/Anticorps.png",
+		return new PresetTower(100,10,50,200,
+				2000, true, 0, Tower.Type.ANTICORPS, "/Anticorps.png",
 				"/antic-touche.png");
 	}
     
@@ -179,6 +185,10 @@ public class PresetTower {
 
 	public double getReloadTime() {
 		return this.reloadTime;
+	}
+
+	public boolean isFreezingAttack() {
+		return freezingAttack;
 	}
 
 	public long getLastAttackTime() {

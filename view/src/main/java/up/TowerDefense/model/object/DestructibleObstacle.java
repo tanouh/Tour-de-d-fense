@@ -53,7 +53,7 @@ public class DestructibleObstacle extends Obstacle{
     }
 
     public boolean isAlive(){
-        return currentHealth <= 0;
+        return currentHealth >= 0;
     }
 
     public boolean isATower(){

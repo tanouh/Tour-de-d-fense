@@ -1,6 +1,10 @@
 package up.TowerDefense.model.object;
 
 
+import up.TowerDefense.model.game.StaticFunctions;
+
+import java.awt.image.BufferedImage;
+
 public abstract class  Projectile  {
     //current coordinates
     protected double xLoc;
@@ -15,9 +19,11 @@ public abstract class  Projectile  {
     protected double yInit;
 
     protected double power;
-    protected double speed = 5;
+    protected double size = 0.8;
+    protected double speed = 0.2;
     protected boolean arrivedAtTarget;
     protected int sourceLevel;
+    protected String image = "/projectV1.png";
 
 
     public Projectile(Position initPos, Position destPos , double pPower, int level){
@@ -31,7 +37,6 @@ public abstract class  Projectile  {
 
         xLoc = xInit;
         yLoc = yInit;
-
 
         arrivedAtTarget = false;
         sourceLevel = level;
@@ -61,4 +66,15 @@ public abstract class  Projectile  {
         return new Position(xLoc,yLoc);
     }
 
+    public BufferedImage getImage(){
+        return StaticFunctions.loadImage(image);
+    }
+
+    public double getSize(){
+        return size;
+    }
+
+    public String toString(){
+        return "projectile " + " : " + this.getPos().x + " - " + this.getPos().y;
+    }
 }

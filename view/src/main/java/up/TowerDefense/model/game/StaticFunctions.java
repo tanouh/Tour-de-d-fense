@@ -42,15 +42,15 @@ public class StaticFunctions {
      * @return
      */
     public static Position findTower(Position src, double range, Board board){
-        int posX = (int)src.x;
-        int posY = (int)src.y;
-        int _range = (int)range;
-        for (int i = - _range ; i != 0 && i < _range+1  ; i++){
+        int posX = (int)Math.round(src.x);
+        int posY = (int)Math.round(src.y);
+        int _range = (int)Math.round(range);
+        for (int i = -_range ;i < _range+1  ; i++){
 
-           for (int j = -_range ; j !=0 && j < _range +1 ; j++){
-
-               if (posX+i < 0 || posY+j < 0 || posX+i > board.worldX() || posY+j > board.worldY()) continue;
-               if(check_Tower(board, posX+i, posY+j)){
+           for (int j = -_range ;j < _range +1 ; j++){
+               if ((i == 0 && j == 0) ||
+                (posX+i < 0 || posY+j < 0 || posX+i >= board.worldX() || posY+j >= board.worldY())) continue;
+               if (check_Tower(board, posX+i, posY+j)){
 
                    //System.out.println("tower found on : " + (posY+j) + "-" + (posX+i));
                    return new Position (posX+i , posY+j);

@@ -34,6 +34,7 @@ public class Pathfinding {
 
             //Cas où node est le final
             if (node.isTarget(targetPos)){
+                System.out.println("temps de calcul du path : " + (System.currentTimeMillis()-a));
                 return RetracePath(startNode,node);
             }
 
@@ -42,10 +43,7 @@ public class Pathfinding {
             //System.out.println(neighbours.length);
             for (Node neighbour : neighbours) {
                 //Annuler si le voisin est une case bloquée ou déjà traitée
-                if (!neighbour.tile.isEmpty() || closedSet.contains(neighbour)){
-
-                    continue;
-                }
+                if (!neighbour.tile.isEmpty() || closedSet.contains(neighbour)) continue;
 
                 //Calcul du coup de chaque voisin puis ajout du voisin à openSet
                 int newCostToNeighbour = node.gCost + GetDistance(node, neighbour);
@@ -53,6 +51,10 @@ public class Pathfinding {
                     neighbour.gCost = newCostToNeighbour;
                     neighbour.hCost = GetDistance(neighbour, targetNode);
                     neighbour.parent = node;
+                    if (neighbour.tile.isTarget){
+                        closedSet.add(neighbour);
+                        return RetracePath(startNode, neighbour);
+                    }
                     if (!openSet.contains(neighbour))
                         openSet.add(neighbour);
                 }
@@ -87,8 +89,8 @@ public class Pathfinding {
 
     //La distance est particulière et considère qu'un déplacement vertical à un coup de 14
     private static int GetDistance(Node nodeA, Node nodeB) {
-        int dstX = (int)Math.abs(nodeA.tile.getPos().x - nodeB.tile.getPos().x);
-        int dstY = (int)Math.abs(nodeA.tile.getPos().y - nodeB.tile.getPos().y);
+        int dstX = (int)Math.round(Math.abs(nodeA.tile.getPos().x - nodeB.tile.getPos().x));
+        int dstY = (int)Math.round(Math.abs(nodeA.tile.getPos().y - nodeB.tile.getPos().y));
 
         if (dstX > dstY)
             return 14*dstY + 10* (dstX-dstY);

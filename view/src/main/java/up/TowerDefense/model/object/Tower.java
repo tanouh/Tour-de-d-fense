@@ -111,6 +111,10 @@ public class Tower extends PlaceableObstacle{
      */
     protected boolean tookHit = false;
 
+    /**
+     * Détermine si les attaques de la tour freeze les ennemis ou pas
+     */
+    protected boolean freezingAttack;
 
     protected ArrayList<Tile> attainableTiles = new ArrayList<Tile>();
 
@@ -129,8 +133,9 @@ public class Tower extends PlaceableObstacle{
      * @param twType Type de la Tour
      * @param image Image de la Tour qui s'affichera sur la carte
      */
-    public Tower(double x, double y, int size, double buyingCost, double range, double power, int upgradeCost,
-                 double reloadTime, long lastAttackTime, Type twType, String image, String reloadImage) {
+    public Tower(double x, double y, int size, double buyingCost, double range, double power, boolean freezing,
+                 int upgradeCost, double reloadTime, long lastAttackTime, Type twType, String image,
+                 String reloadImage) {
         super(x, y, size, STARTING_HEALTH, STARTING_HEALTH, ObsType.TOWER, buyingCost,image,reloadImage);
         this.range=range;
         this.power=power;
@@ -139,6 +144,7 @@ public class Tower extends PlaceableObstacle{
         this.lastAttackTime = lastAttackTime;
         this.towerType=twType;
         this.image = loadImage(image);
+        this.freezingAttack = freezing;
         Game.getBoard().addToListTowers(this);
         setAttainableTiles();
     }
@@ -150,13 +156,15 @@ public class Tower extends PlaceableObstacle{
      * @param position Definit la position de la Tour.
      */
     public Tower(PresetTower presetTower, Position position) {
-    	super(position.x, position.y, presetTower.getSize(), PresetTower.STARTING_HEALTH, PresetTower.STARTING_HEALTH, ObsType.TOWER, presetTower.price, presetTower.imgName,presetTower.reloadImage);
+    	super(position.x, position.y, presetTower.getSize(), PresetTower.STARTING_HEALTH, PresetTower.STARTING_HEALTH,
+                ObsType.TOWER, presetTower.price, presetTower.imgName,presetTower.reloadImage);
     	this.range = presetTower.getRange();
     	this.power = presetTower.getPower();
     	this.upgradeCost = presetTower.getUpgradeCost();
     	this.reloadTime = presetTower.getReloadTime();
     	this.lastAttackTime = presetTower.getLastAttackTime();
     	this.towerType = presetTower.getTowerType();
+        this.freezingAttack = presetTower.isFreezingAttack();
         Game.getBoard().addToListTowers(this);
         setAttainableTiles();
     }
@@ -283,13 +291,16 @@ public class Tower extends PlaceableObstacle{
     }
 
     public void setAttainableTiles(){
-        for (int i = -(int)range ; i != 0 && i < range+1  ; i++) {
-            for (int j = -(int)range; j != 0 && j < range + 1; j++) {
-                attainableTiles.add(Game.getBoard().getTile((int)position.x +i, (int)position.y + j));
+        System.out.println((-(int)range) + " -- " + range);
+        for (int i = (int)-range ; i < (int)range+1 ; i++) {
+            for (int j = (int)-range; j < (int)range+1; j++) {
+//                System.out.println("case : " + ((int)Math.round(position.x) +i) + " " + ((int)Math.round(position.y) + j));
+                attainableTiles.add(Game.getBoard().getTile((int)Math.round(position.x) +i, (int)Math.round(position.y) + j));
                 //System.out.println(Game.getBoard().getTile((int)position.x + i, (int)position.y + j).getPos().x+" "
                 //        +Game.getBoard().getTile((int)position.x + i, (int)position.y + j).getPos().y);
             }
         }
+        System.out.println("nb cases atteignables : " + attainableTiles.size());
     }
 
     public void launchAttack(){
@@ -297,8 +308,9 @@ public class Tower extends PlaceableObstacle{
             if (check_Ennemy(attainableTile)){
                 System.out.println("enemy found on : " + attainableTile.getPos().x + "-" + attainableTile.getPos().y);
                 target = attainableTile.getEnemy();
-                TowerProjectile projectile = new TowerProjectile(this.position, target.position, this.power, Game.getLevel(), target, false);
-                MapGenerator.projectilesList.add(projectile);
+                TowerProjectile projectile = new TowerProjectile(this.position, target.position, this.power,
+                        Game.getLevel(), target, freezingAttack);
+                MapGenerator.towerProjectilesList.add(projectile);
                 timeSinceLastAttack = System.currentTimeMillis();
                 break;
             }
