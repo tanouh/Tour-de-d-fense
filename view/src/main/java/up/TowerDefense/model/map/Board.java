@@ -13,16 +13,20 @@ import java.util.Collections;
 public class Board {
     private Tile[][] tiles;
     public static Board map;
-    private static ArrayList<Tower> listTowers = new ArrayList<Tower>();
-    private static ArrayList<Enemy> listEnemy = new ArrayList<Enemy>();
-    private static ArrayList<Tower> toRemoveTowerList = new ArrayList<Tower>();
-    private static ArrayList<Enemy> toRemoveEnemyList = new ArrayList<Enemy>();
+    private static ArrayList<Tower> listTowers;
+    private static ArrayList<Enemy> listEnemy;
+    private static ArrayList<Tower> toRemoveTowerList;
+    private static ArrayList<Enemy> toRemoveEnemyList;
     public ArrayList<Position> spawnPoint;
 
     /* Stocke les positions des cases qu'occupent la cible principale*/
     private ArrayList<Position> targetZone = new ArrayList<>();
 
     public Board() {
+        listTowers = new ArrayList<Tower>();
+        listEnemy = new ArrayList<Enemy>();
+        toRemoveTowerList = new ArrayList<Tower>();
+        toRemoveEnemyList = new ArrayList<Enemy>();
         map = this;
     }
 

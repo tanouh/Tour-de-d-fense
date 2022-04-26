@@ -38,17 +38,25 @@ public class MapGenerator {
     private final int nbCol;
     private final int nbRow;
 
-    public static ArrayList<PlaceableObstacle> obstaclesList = new ArrayList<>();
-    public static ArrayList<Personnage> charactersList = new ArrayList<>();
-    public static ArrayList<Personnage> toRemoveCharacters = new ArrayList<>();
-    public static ArrayList<Projectile> towerProjectilesList = new ArrayList<>();
-    public static ArrayList<Projectile> enemyProjectilesList = new ArrayList<>();
-    public static ArrayList<Projectile> toRemoveEnemyProjectiles = new ArrayList<>();
-    public static ArrayList<Projectile> toRemoveTowerProjectiles = new ArrayList<>();
+    public static ArrayList<PlaceableObstacle> obstaclesList;
+    public static ArrayList<Personnage> charactersList;
+    public static ArrayList<Personnage> toRemoveCharacters;
+    public static ArrayList<Projectile> towerProjectilesList;
+    public static ArrayList<Projectile> enemyProjectilesList;
+    public static ArrayList<Projectile> toRemoveEnemyProjectiles;
+    public static ArrayList<Projectile> toRemoveTowerProjectiles;
 
 
 
     public MapGenerator(ScreenPanel screenPanel, String imagePath){
+        obstaclesList = new ArrayList<>();
+        charactersList = new ArrayList<>();
+        toRemoveCharacters = new ArrayList<>();
+        towerProjectilesList = new ArrayList<>();
+        enemyProjectilesList = new ArrayList<>();
+        toRemoveEnemyProjectiles = new ArrayList<>();
+        toRemoveTowerProjectiles = new ArrayList<>();
+
         this.screenPanel = screenPanel;
 
         mapImage = this.loadImage(imagePath);
