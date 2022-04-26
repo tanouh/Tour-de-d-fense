@@ -44,15 +44,16 @@ public class Subwave {
                 break;
             case 3:
                 enemySpawned.add(getBacterium());
-                enemySpawned.add(getFungus());
+                //enemySpawned.add(getFungus());
 
                 break;
             case 4:
-                enemySpawned.add(getParasite());
+                //enemySpawned.add(getParasite());
                 enemySpawned.add(getBacterium());
                 break;
             case 5:
-                enemySpawned.add(getCovid());
+                //enemySpawned.add(getCovid());
+                enemySpawned.add(getBacterium());
                 break;
 
             default:

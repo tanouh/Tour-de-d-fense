@@ -44,6 +44,7 @@ public class Path {
         public double Distance(){
             return  startDis + radius * angle + endDis;
         }
+
         public Position GetPos(double dis){
             //On clamp dis entre 0 et Distance()
             dis = Math.max(0, Math.min(Distance(), dis));
@@ -115,6 +116,8 @@ public class Path {
             length += subs[i].Distance();
         }
     }
+
+
     //Récupère la position à une distance dis du début du chemin
     public Position GetPos(double dis){
         //On retourne simplement la position du cercle concerné à la distance relative dis
@@ -127,5 +130,13 @@ public class Path {
     //On peut aussi utiliser la même fonction avec un temps et une vitesse
     public Position GetPos(double t, double spd){
         return GetPos(t*spd);
+    }
+
+    public Position GetPos(Position startPos, Position currentPos){
+        return GetPos(getCartesianDistance(startPos,currentPos));
+    }
+
+    private double getCartesianDistance(Position startPos, Position currentPos){
+        return Math.sqrt(Math.pow(currentPos.x-startPos.x, 2.0) + Math.pow(currentPos.y-startPos.y,2.0));
     }
 }

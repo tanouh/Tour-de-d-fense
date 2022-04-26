@@ -87,6 +87,12 @@ public class Enemy extends Personnage{
 	protected boolean tookHit = false;
 
 
+	/**
+	 * Position de départ
+	 */
+	protected Position startingPos;
+
+
 	private boolean alive;
 	private boolean frozen;
 	private long freezeStartTime;
@@ -111,6 +117,7 @@ public class Enemy extends Personnage{
 		this.damage = presetEnemy.getDammage();
 		this.target = presetEnemy.getTarget();
 		this.range= presetEnemy.getRange();
+		this.startingPos = position;
 		this.path = Pathfinding.FindPath(position, Game.getBoard().getNearestTargetPosition(position));
 		Game.getBoard().addToListEnemy(this);
 
