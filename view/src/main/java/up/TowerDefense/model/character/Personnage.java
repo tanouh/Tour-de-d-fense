@@ -73,7 +73,7 @@ public abstract class Personnage{
 	 */
 	public Personnage(int size) {
 		this(new Position(0.00,0.00), size, 1.00f, 100,
-				1000, "/null.png", "/null.png");
+				1000, "/noir.png", "/noir.png");
 	}
 	
 	public Position getPosition() {

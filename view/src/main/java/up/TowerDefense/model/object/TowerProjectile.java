@@ -19,7 +19,8 @@ public class TowerProjectile extends Projectile{
     @Override
     public void move() {
         if (!targetEnemy.isAlive()){
-            MapGenerator.towerProjectilesList.remove(this);
+            this.arrivedAtTarget = true;
+//            MapGenerator.towerProjectilesList.remove(this);
             return;
         }
         if (Math.abs(xLoc - xDest)< speed/2 || Math.abs(yLoc - yDest)< speed/2){
@@ -29,11 +30,10 @@ public class TowerProjectile extends Projectile{
                 targetEnemy.setFreezeDuration(4000 +(sourceLevel-1)*1000);
                 targetEnemy.freeze();
             }
-            MapGenerator.towerProjectilesList.remove(this);
+//            MapGenerator.towerProjectilesList.remove(this);
         }
         else{
             xLoc += speed*Math.cos(angleOfProjectileInRadians());
-
             yLoc += speed*Math.sin(angleOfProjectileInRadians());
         }
     }

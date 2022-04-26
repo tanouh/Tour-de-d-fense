@@ -88,6 +88,7 @@ public class Enemy extends Personnage{
 
 
 	private boolean alive;
+	private boolean killed = false;
 	private boolean frozen;
 	private long freezeStartTime;
 	private long freezeDuration;
@@ -151,7 +152,7 @@ public class Enemy extends Personnage{
 
 		if (Game.getBoard().getTile((int)Math.round(position.x),(int)Math.round(position.y)).isTarget()){
 			Game.setLives(-1);
-			this.die(false);
+			this.alive = false;
 		}
 	}
 
@@ -195,10 +196,10 @@ public class Enemy extends Personnage{
 	}
 
 
-	public void die(boolean killed){
+	public void die(){
 		System.out.println("deces");
 		this.alive = false;
-		MapGenerator.charactersList.remove(this);
+		Game.getBoard().getTile(this.position).setEnemy(null);
 		if (killed) Game.setCredits(this.reward);
 	}
 
@@ -239,7 +240,9 @@ public class Enemy extends Personnage{
 		this.hitStart = System.currentTimeMillis();
 		tookHit = true;
 		if(currentHealth <= 0){
-			die(true);
+			alive = false;
+			killed = true;
+
 		}
 	}
 

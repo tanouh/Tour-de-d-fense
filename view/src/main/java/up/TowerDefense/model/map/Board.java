@@ -15,6 +15,8 @@ public class Board {
     public static Board map;
     private static ArrayList<Tower> listTowers = new ArrayList<Tower>();
     private static ArrayList<Enemy> listEnemy = new ArrayList<Enemy>();
+    private static ArrayList<Tower> toRemoveTowerList = new ArrayList<Tower>();
+    private static ArrayList<Enemy> toRemoveEnemyList = new ArrayList<Enemy>();
     public ArrayList<Position> spawnPoint;
 
     /* Stocke les positions des cases qu'occupent la cible principale*/
@@ -195,11 +197,18 @@ public class Board {
         for (Enemy enemy : listEnemy){
             if(System.currentTimeMillis() - enemy.getTimeSinceLastAttack() > enemy.getReloadTime())
                 if (enemy.isAlive()) enemy.identifyTarget();
+                else toRemoveEnemyList.add(enemy);
         }
         for (Tower tower : listTowers){
             if(System.currentTimeMillis() - tower.getTimeSinceLastAttack() > tower.getReloadTime())
                 if (tower.isAlive()) tower.launchAttack();
+                else toRemoveTowerList.add(tower);
         }
+        listEnemy.removeAll(toRemoveEnemyList);
+        listTowers.removeAll(toRemoveTowerList);
+        toRemoveTowerList = new ArrayList<>();
+        toRemoveEnemyList = new ArrayList<>();
+
     }
 
 

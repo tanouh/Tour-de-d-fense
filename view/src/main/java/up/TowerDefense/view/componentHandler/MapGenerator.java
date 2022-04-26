@@ -38,19 +38,17 @@ public class MapGenerator {
     private final int nbCol;
     private final int nbRow;
 
-    public static ArrayList<PlaceableObstacle> obstaclesList;
-    public static ArrayList<Personnage> charactersList;
-    public static ArrayList<Projectile> towerProjectilesList;
-    public static ArrayList<Projectile> enemyProjectilesList;
+    public static ArrayList<PlaceableObstacle> obstaclesList = new ArrayList<>();
+    public static ArrayList<Personnage> charactersList = new ArrayList<>();
+    public static ArrayList<Personnage> toRemoveCharacters = new ArrayList<>();
+    public static ArrayList<Projectile> towerProjectilesList = new ArrayList<>();
+    public static ArrayList<Projectile> enemyProjectilesList = new ArrayList<>();
+    public static ArrayList<Projectile> toRemoveEnemyProjectiles = new ArrayList<>();
+    public static ArrayList<Projectile> toRemoveTowerProjectiles = new ArrayList<>();
 
 
 
     public MapGenerator(ScreenPanel screenPanel, String imagePath){
-        obstaclesList = new ArrayList<>();
-        charactersList = new ArrayList<>();
-        towerProjectilesList = new ArrayList<>();
-        enemyProjectilesList = new ArrayList<>();
-
         this.screenPanel = screenPanel;
 
         mapImage = this.loadImage(imagePath);
@@ -286,7 +284,11 @@ public class MapGenerator {
         try{
             for (Personnage c : charactersList){
                 if(c instanceof Enemy){
-                    ((Enemy)c).update_paths();
+                    if (((Enemy) c).isAlive()) ((Enemy)c).update_paths();
+                    else {
+                        toRemoveCharacters.add(c);
+                        ((Enemy) c).die();
+                    }
                 }
             }
         }catch(ConcurrentModificationException exc){
@@ -304,8 +306,13 @@ public class MapGenerator {
             for (Personnage c : charactersList){
                 if(c instanceof Enemy){
                     if (((Enemy) c).isAlive()) ((Enemy)c).update_position();
+                    else{
+                        toRemoveCharacters.add(c);
+                        ((Enemy) c).die();
+                    }
                 }
             }
+            charactersList.removeAll(toRemoveCharacters);
         }catch(ConcurrentModificationException exc){
             System.out.println("Attempt to modify characterList while iterating on it.");
 
@@ -315,13 +322,15 @@ public class MapGenerator {
     public void updateProjectilesPos(){
         try{
             for (Projectile p : enemyProjectilesList){
-                if(!p.hasArrived())
-                    p.move();
+                if(p.hasArrived()) toRemoveEnemyProjectiles.add(p);
+                else p.move();
             }
             for (Projectile p : towerProjectilesList){
-                if(!p.hasArrived())
-                    p.move();
+                if(p.hasArrived()) toRemoveTowerProjectiles.add(p);
+                else p.move();
             }
+            enemyProjectilesList.removeAll(toRemoveEnemyProjectiles);
+            towerProjectilesList.removeAll(toRemoveTowerProjectiles);
         }catch (ConcurrentModificationException ex){
             System.out.println("Attempt to modify projectileList while iterating on it.");
         }

@@ -78,6 +78,6 @@ public class Game {
     }
 
     public static boolean gameLost(){
-        return ((wavesLeft > 0 || nbEnemyLeft > 0) && lives == 0);
+        return ((wavesLeft > 0 || nbEnemyLeft > 0) && lives <= 0);
     }
 }

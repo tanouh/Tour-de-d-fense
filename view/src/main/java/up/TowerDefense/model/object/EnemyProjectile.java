@@ -19,13 +19,14 @@ public class EnemyProjectile extends Projectile{
     public void move() {
         //projectile has hit
         if (!target.isAlive()){
-            MapGenerator.enemyProjectilesList.remove(this);
+            arrivedAtTarget = true;
+//            MapGenerator.enemyProjectilesList.remove(this);
             return;
         }
         if (Math.abs(xLoc - xDest) < speed/2 || Math.abs(yLoc - yDest)< speed/2){
             arrivedAtTarget = true;
             target.takeDamage(power);
-            MapGenerator.enemyProjectilesList.remove(this);
+//            MapGenerator.enemyProjectilesList.remove(this);
         }
         else{
             xLoc += speed*Math.cos(angleOfProjectileInRadians());

@@ -72,6 +72,6 @@ public class StaticFunctions {
      * Vérifie s'il y a un ennemi dans la case
      */
     public static boolean check_Ennemy(Tile attainableTile){
-        return  attainableTile.hasAnEnnemy();
+        return  attainableTile != null && attainableTile.hasAnEnnemy();
     }
 }
