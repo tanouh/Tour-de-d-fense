@@ -27,7 +27,7 @@ public class TowerProjectile extends Projectile{
             arrivedAtTarget = true;
             targetEnemy.takeDamage(power);
             if(freeze){
-                targetEnemy.setFreezeDuration(4000 +(sourceLevel-1)*1000);
+                targetEnemy.setFreezeDuration(4000 + (sourceLevel-1)*1000);
                 targetEnemy.freeze();
             }
 //            MapGenerator.towerProjectilesList.remove(this);

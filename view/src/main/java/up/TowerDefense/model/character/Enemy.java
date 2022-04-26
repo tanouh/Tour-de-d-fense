@@ -92,6 +92,7 @@ public class Enemy extends Personnage{
 	private boolean frozen;
 	private long freezeStartTime;
 	private long freezeDuration;
+	private long totalFreezeDuration = 0;
 
 	private long reloadTime;
 	private long timeSinceLastAttack;
@@ -136,7 +137,8 @@ public class Enemy extends Personnage{
 	public void update_position(){
 		if(frozen && System.currentTimeMillis() - freezeStartTime > freezeDuration){
 			unfreeze();
-		}
+			totalFreezeDuration += System.currentTimeMillis()-freezeStartTime;
+		}else if (frozen) return;
 
 		/**
 		 * Quand l'ennemi pass aux environs d'une tour il ne s'arrête pas mais lance des projectiles tout en continuant
@@ -147,7 +149,7 @@ public class Enemy extends Personnage{
 		travelTime = System.currentTimeMillis();
 		Game.getBoard().getTile(this.position).setEnemy(null);
 
-		this.position = path.GetPos(System.currentTimeMillis() - lifeTime, this.velocity);
+		this.position = path.GetPos(travelTime - lifeTime - totalFreezeDuration, this.velocity);
 		Game.getBoard().getTile(this.position).setEnemy(this);
 
 		if (Game.getBoard().getTile((int)Math.round(position.x),(int)Math.round(position.y)).isTarget()){
@@ -216,11 +218,10 @@ public class Enemy extends Personnage{
 	}
 	public void freeze() {
 		this.frozen = true;
-		freezeDuration = System.currentTimeMillis();
+		freezeStartTime = System.currentTimeMillis();
 	}
 	public void unfreeze(){
 		this.frozen = false;
-		freezeStartTime = -10000;
 	}
 
 	public void live(){

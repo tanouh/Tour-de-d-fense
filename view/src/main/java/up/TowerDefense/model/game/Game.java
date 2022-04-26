@@ -75,7 +75,7 @@ public class Game {
     }
 
     public static boolean gameWon(){
-        return (wavesLeft == 0 && nbEnemyLeft == 0 && lives > 0);
+        return (wavesLeft == 0 && board.getListEnemy().size() == 0 && lives > 0);
     }
 
     public static boolean gameLost(){
