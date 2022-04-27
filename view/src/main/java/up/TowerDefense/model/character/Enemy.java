@@ -93,6 +93,7 @@ public class Enemy extends Personnage{
 	private long freezeStartTime;
 	private long freezeDuration;
 	private long totalFreezeDuration = 0;
+	private long totalTimePaused = 0;
 
 	private boolean gotNewPath;
 
@@ -153,9 +154,9 @@ public class Enemy extends Personnage{
 			rebootEnemyTime();
 		}
 		Game.getBoard().getTile(this.position).setEnemy(null);
-		travelTime = System.currentTimeMillis();
+		travelTime = System.currentTimeMillis() - lifeTime - totalFreezeDuration - totalTimePaused;
 
-		this.position = path.GetPos(travelTime - lifeTime - totalFreezeDuration, this.velocity);
+		this.position = path.GetPos(travelTime, this.velocity);
 		Game.getBoard().getTile(this.position).setEnemy(this);
 
 
@@ -224,8 +225,13 @@ public class Enemy extends Personnage{
 		this.freezeDuration = i;
 	}
 
+	public void addToTotalTimePaused(long timePaused){
+		totalTimePaused += timePaused;
+	}
+
 	public void rebootEnemyTime() {
 		this.totalFreezeDuration = 0;
+		this.totalTimePaused = 0;
 		this.lifeTime = System.currentTimeMillis();
 		this.gotNewPath = false;
 	}
