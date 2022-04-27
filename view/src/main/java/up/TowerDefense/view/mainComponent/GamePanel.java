@@ -28,7 +28,7 @@ public class GamePanel extends JPanel {
 
     //Button du sideMenu :
     private Button[] towerTypes = new Button[5];
-    //0 : Tour test
+    //0 : Attaque directe
     //1 : Tour Anti_Champi
     //2 : Leucocyte T
     //3 : Anticorps
@@ -85,7 +85,7 @@ public class GamePanel extends JPanel {
         sideMenu.setBorder(new LineBorder(GameWindow.foreground, 5));
         sideMenu.setPreferredSize(new Dimension(gameWindow.getWidth()/6, gameWindow.getHeight()/5));
 
-        JLabel title = new JLabel("Construction Tour");
+        JLabel title = new JLabel("Construction\\Attaque");
         title.setFont(new Font(GameWindow.font ,Font.BOLD, 20));
         title.setBorder(new LineBorder(GameWindow.foreground, 2));
         title.setForeground(GameWindow.foreground);

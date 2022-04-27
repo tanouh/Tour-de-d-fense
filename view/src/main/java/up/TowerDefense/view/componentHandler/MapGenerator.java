@@ -191,7 +191,9 @@ public class MapGenerator {
             )
             {
                 Tile t = gameBoard.getTile(worldCol,worldRow);
-                g.drawImage(t.getImageTile(),screenX,screenY,tileSize,tileSize,null);
+                BufferedImage image = null;
+
+                g.drawImage(gameBoard.getTile(worldCol, worldRow).getImageTile(),screenX,screenY,tileSize,tileSize,null);
             }
             worldCol ++;
             if(worldCol == MAX_WORLD_COL){
@@ -258,11 +260,11 @@ public class MapGenerator {
      * (x,y) , (x,y+1), (x+1,y) , (x+1,y)
      * ATTENTION : la position x et y est l'inverse de MouseX et MouseY
      */
-    public void addObstacle(int posX, int posY) {
+    public void action(int posX, int posY) {
         PlaceableObstacle obstacle = null;
         switch(Game.getCurrentlyPlacing()) {
             case 0:
-                obstacle = new TowerTest(posX, posY);
+                gameBoard.directAttack(posX, posY);
                 break;
             case 1 :
                 obstacle = new Tower(PresetTower.Anti_champis(), new Position(posX, posY));
@@ -278,10 +280,11 @@ public class MapGenerator {
                 break;
             default :
                 return;
-        }
-        if(gameBoard.addObstacle(obstacle, posX, posY)){
-            obstaclesList.add(obstacle);
-            updateCharactersPaths();
+        }if (obstacle != null) {
+            if (gameBoard.addObstacle(obstacle, posX, posY)) {
+                obstaclesList.add(obstacle);
+                updateCharactersPaths();
+            }
         }
     }
 

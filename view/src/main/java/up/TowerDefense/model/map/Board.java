@@ -19,6 +19,9 @@ public class Board {
     private static ArrayList<Enemy> toRemoveEnemyList;
     public ArrayList<Position> spawnPoint;
 
+    private int directAttackRange = 2;
+    private double directAttackPower = 200;
+
     /* Stocke les positions des cases qu'occupent la cible principale*/
     private ArrayList<Position> targetZone = new ArrayList<>();
 
@@ -215,5 +218,16 @@ public class Board {
 
     }
 
+    public void directAttack(int posX, int posY){
+        for (int i = posX - directAttackRange; i <= posX + directAttackRange; i++){
+            for (int j = posY - directAttackRange; j <= posY + directAttackRange; j++){
+                if (j < 0 || j >= tiles.length || i < 0 || i >= tiles[0].length) continue;
+                tiles[j][i].isAttacked();
+                if (tiles[j][i].getEnemy() != null){
+                    tiles[j][i].getEnemy().takeDamage(directAttackPower);
+                }
+            }
+        }
+    }
 
 }

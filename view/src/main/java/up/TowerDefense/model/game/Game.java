@@ -19,7 +19,7 @@ public class Game {
     private static int currentlyPlacing = 4; //Type d'obstacle sélectionné (Mur par défaut)
 
     private static String[] listTowerTypes = {
-            "TourTest",
+            "Injection temporaire",
             "Tour anti-champi",
             "Tour Leucocyte T",
             "Anticorps",
