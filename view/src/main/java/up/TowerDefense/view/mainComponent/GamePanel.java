@@ -16,7 +16,8 @@ public class GamePanel extends JPanel {
     //Mettre les contenus de label dans une classe "partie"
     private JPanel header = new JPanel(new GridLayout(1,4));
     private JPanel sideMenu = new JPanel(new BorderLayout());
-    private JPanel listTower = new JPanel(new GridLayout(5,1));
+    private JPanel listTower = new JPanel(new GridLayout(Game.getListOptions().length,1));
+    private JPanel choiceUpdate = new JPanel(new GridLayout(2,1));
     private JPanel body = new JPanel();
 
     //JLabel du header :
@@ -27,12 +28,13 @@ public class GamePanel extends JPanel {
     private JLabel lifesLeft;
 
     //Button du sideMenu :
-    private Button[] towerTypes = new Button[5];
-    //0 : Tour test
-    //1 : Tour Anti_Champi
-    //2 : Leucocyte T
-    //3 : Anticorps
-    //4 : Mur
+    private Button[] towerTypes = new Button[6];
+    //0 : Attaque directe
+    //1 : Amelioration
+    //2 : Tour Anti_Champi
+    //3 : Leucocyte T
+    //4 : Anticorps
+    //5 : Mur
 
     public GamePanel(GameWindow gameWindow, int numberWaves, int backgroundMusic,
                      int gameSound, int gameSpeed, int level){
@@ -80,26 +82,48 @@ public class GamePanel extends JPanel {
      * Cree un menu qui prend 1/5 de la largeur de l'ecran
      * Ajoute des boutons correspondants aux tours que le joueur peut creer
      */
-    public void setSideMenu(){
+    public void setSideMenu() {
+        sideMenu.removeAll();
         sideMenu.setBackground(GameWindow.background);
         sideMenu.setBorder(new LineBorder(GameWindow.foreground, 5));
-        sideMenu.setPreferredSize(new Dimension(gameWindow.getWidth()/6, gameWindow.getHeight()/5));
+        sideMenu.setPreferredSize(new Dimension(gameWindow.getWidth() / 6, gameWindow.getHeight() / 5));
 
-        JLabel title = new JLabel("Construction Tour");
-        title.setFont(new Font(GameWindow.font ,Font.BOLD, 20));
+        JLabel title = new JLabel("Construction\\Attaque");
+        title.setFont(new Font(GameWindow.font, Font.BOLD, 20));
         title.setBorder(new LineBorder(GameWindow.foreground, 2));
         title.setForeground(GameWindow.foreground);
         title.setHorizontalAlignment(JLabel.CENTER);
         title.setVerticalAlignment(JLabel.CENTER);
         sideMenu.add(title, BorderLayout.NORTH);
 
-        for (int i = 0; i < towerTypes.length; i++){
+        listTower.removeAll();
+        for (int i = 0; i < towerTypes.length; i++) {
             towerTypes[i] = new Button();
-            towerTypes[i].sideMenuButton(i);
+            towerTypes[i].sideMenuButton(i, this);
             listTower.add(towerTypes[i]);
         }
         sideMenu.add(listTower, BorderLayout.CENTER);
 
+        if (Game.isCurrentlyUpdating()) {
+            sideMenu.remove(listTower);
+            choiceUpdate.removeAll();
+            choiceUpdate.setBackground(GameWindow.background);
+
+            JLabel choix = new JLabel("Choix de la tour :");
+            choix.setFont(new Font(GameWindow.font ,Font.BOLD, 20));
+            choix.setBorder(new LineBorder(GameWindow.foreground, 2));
+            choix.setForeground(GameWindow.foreground);
+            choix.setHorizontalAlignment(JLabel.CENTER);
+            choix.setVerticalAlignment(JLabel.CENTER);
+            Button retour = new Button();
+            retour.returnButton(sideMenu, choiceUpdate, listTower);
+
+            choiceUpdate.add(choix);
+            choiceUpdate.add(retour);
+            sideMenu.add(choiceUpdate, BorderLayout.CENTER);
+            sideMenu.revalidate();
+            sideMenu.repaint();
+        }
         Button optionMenu = new Button();
         optionMenu.optionButton(gameWindow, null, this, this);
         JPanel footerSideMenu = new JPanel(new BorderLayout());
@@ -107,6 +131,7 @@ public class GamePanel extends JPanel {
         footerSideMenu.setBorder(new LineBorder(GameWindow.foreground, 2));
         footerSideMenu.add(optionMenu, BorderLayout.EAST);
         sideMenu.add(footerSideMenu, BorderLayout.SOUTH);
+
     }
 
     /**
@@ -121,8 +146,10 @@ public class GamePanel extends JPanel {
     }
 
     public void updateSideMenu(){
-        for (int i = 0; i < towerTypes.length; i++){
-            towerTypes[i].updateSideMenuButton(i);
+        if (!Game.isCurrentlyUpdating()) {
+            for (int i = 0; i < towerTypes.length; i++) {
+                towerTypes[i].updateSideMenuButton(i);
+            }
         }
     }
 

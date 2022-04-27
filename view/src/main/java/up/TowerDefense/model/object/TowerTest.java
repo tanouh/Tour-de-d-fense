@@ -8,7 +8,7 @@ public class TowerTest extends Tower{
     private static double newBuyingCost=100;
     private static double startingRange = 5.0;
     private static double startingPower = 2.0;
-    private static int startingUpgradeCost = 200;
+    private static int startingUpgradeCost = 100;
     private static double startingReloadTime = 1000;
     private static long newLastAttackTime = 0;
     private static Type towerType = Tower.Type.TOWERTEST;

@@ -1,5 +1,6 @@
 package up.TowerDefense.view.mainComponent;
 
+import up.TowerDefense.model.character.Enemy;
 import up.TowerDefense.model.game.Game;
 import up.TowerDefense.model.game.Wave;
 import up.TowerDefense.view.componentHandler.Camera;
@@ -40,6 +41,7 @@ public class ScreenPanel extends JPanel implements Runnable{
     protected GamePanel gamePanel;
     private Thread gameThread = null;
     public boolean paused;
+    private long startPause;
 
     int FPS = 40; //Frame per second
 
@@ -91,6 +93,13 @@ public class ScreenPanel extends JPanel implements Runnable{
      */
     public void setPaused(boolean paused){
         this.paused = paused;
+        if (paused){
+            startPause = System.currentTimeMillis();
+        }else{
+            for (Enemy en : Game.getBoard().getListEnemy()){
+                en.addToTotalTimePaused(System.currentTimeMillis() - startPause);
+            }
+        }
     }
 
     public boolean isPaused(){ return paused;}

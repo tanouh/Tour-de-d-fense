@@ -37,7 +37,7 @@ public class MouseHandler implements MouseListener {
          */
 
         try {
-           screenPanel.mapGen.addObstacle(mouseX, mouseY);
+           screenPanel.mapGen.action(mouseX, mouseY);
         } catch (Exception ex) {
             ex.printStackTrace();
         }

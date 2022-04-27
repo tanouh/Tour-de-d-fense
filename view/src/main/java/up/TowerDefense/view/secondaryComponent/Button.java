@@ -176,16 +176,20 @@ public class Button extends JButton {
      * Cree un bouton pour un certain type d'obstacle qui
      * permet de placer un obstacle de cette sorte
      */
-    public void sideMenuButton(int typeObstacle){
-        label = new JLabel(Game.getListTowerTypes()[typeObstacle]);
+    public void sideMenuButton(int typeObstacle, GamePanel gamePanel){
+        label = new JLabel(Game.getListOptions()[typeObstacle]);
         label.setFont(new Font(GameWindow.font, Font.PLAIN, GameWindow.widthScreen/70));
         label.setHorizontalAlignment(JLabel.CENTER);
-        label.setForeground(GameWindow.foreground);
-        this.setBackground(GameWindow.background);
-        this.setBorder(new LineBorder(GameWindow.foreground, 2));
+        label.setForeground(GameWindow.background);
+        this.setBackground(GameWindow.foreground);
+        this.setBorder(new LineBorder(GameWindow.background, 2));
         this.setHorizontalAlignment(JButton.CENTER);
         this.centerText(label);
         this.addActionListener(event -> {
+            if (typeObstacle == 1) {
+                Game.setCurrentlyUpdating(true);
+                gamePanel.setSideMenu();
+            }
             Game.setCurrentlyPlacing(typeObstacle);
         });
     }
@@ -194,38 +198,60 @@ public class Button extends JButton {
         double price;
         switch (typeObstacle) {
             case 0:
-                price = PresetTower.TowerTest().getPrice();
-                break;
-            case 1:
-                price = PresetTower.Anti_champis().getPrice();
+                price = Game.getBoard().getDirectAttackPrice();
                 break;
             case 2:
-                price = PresetTower.Leucocyte_T().getPrice();
+                price = PresetTower.TowerTest().getPrice();
                 break;
             case 3:
-                price = PresetTower.Anticorps().getPrice();
+                price = PresetTower.Anti_champis().getPrice();
                 break;
             case 4:
+                price = PresetTower.Leucocyte_T().getPrice();
+                break;
+            case 5:
+                price = PresetTower.Anticorps().getPrice();
+                break;
+            case 6:
                 price = Wall.getPrice();
                 break;
-            default:
+            default :
                 price = 0;
+                break;
         }
-        if (Game.getCredits() < price) {
+        if  (Game.getCredits() < price) {
             this.label.setForeground(Color.LIGHT_GRAY);
             this.setBackground(Color.GRAY);
             this.setEnabled(false);
         } else {
             if (typeObstacle == Game.getCurrentlyPlacing()) {
-                this.label.setForeground(GameWindow.background);
-                this.setBackground(GameWindow.foreground);
-                this.setEnabled(false);
-            } else {
                 this.label.setForeground(GameWindow.foreground);
                 this.setBackground(GameWindow.background);
+                this.setEnabled(false);
+            } else {
+                this.label.setForeground(GameWindow.background);
+                this.setBackground(GameWindow.foreground);
                 this.setEnabled(true);
             }
         }
+    }
+
+    public void returnButton(JPanel sideMenu, JPanel choiceUpdate, JPanel listTower){
+        label = new JLabel("Retour");
+        label.setFont(new Font(GameWindow.font, Font.PLAIN, GameWindow.widthScreen/70));
+        label.setHorizontalAlignment(JLabel.CENTER);
+        label.setForeground(GameWindow.background);
+        this.setBackground(GameWindow.foreground);
+        this.setBorder(new LineBorder(GameWindow.background, 2));
+        this.setHorizontalAlignment(JButton.CENTER);
+        this.centerText(label);
+        addActionListener(event -> {
+            Game.setCurrentlyUpdating(false);
+            sideMenu.remove(choiceUpdate);
+            sideMenu.add(listTower);
+            sideMenu.repaint();
+            sideMenu.revalidate();
+        });
     }
 
     public void tryAgainButton(boolean hasWon, GameWindow gameWindow){

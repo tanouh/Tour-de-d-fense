@@ -15,8 +15,13 @@ public class Tile {
     protected Obstacle obstacle;
     protected Enemy enemy;
     protected BufferedImage imageTile;
+    protected BufferedImage imageTileAttacked;
     protected Position pos;
     protected boolean isTarget = false;
+    protected boolean isAttacked = false;
+    protected long startAttack;
+    protected long durationAttack = 300;
+
 
 
     public Tile(Position _pos){
@@ -28,6 +33,11 @@ public class Tile {
         this.isEmpty = true;
         this.obstacle= null;
         this.imageTile=null;
+        try{
+            imageTileAttacked = ImageIO.read(getClass().getResourceAsStream("/imageTileAttacked.png"));
+        }catch(IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void setOccupier(Obstacle occupier) {
@@ -90,9 +100,16 @@ public class Tile {
     }
 
     public BufferedImage getImageTile() {
+        if (isAttacked){
+            if (System.currentTimeMillis() - startAttack < durationAttack){
+                return imageTileAttacked;
+            }
+            isAttacked = false;
+        }
         return imageTile;
     }
     public Position getPos(){return pos;}
+
     public Enemy getEnemy(){ return enemy;}
 
     public boolean hasATower() {
@@ -101,6 +118,12 @@ public class Tile {
 
     public boolean hasAnEnnemy() {
         return (!isEmpty()) && (enemy instanceof Enemy);
+    }
+
+    public void isAttacked(){
+        if (obstacle != null) return;
+        isAttacked = true;
+        startAttack = System.currentTimeMillis();
     }
 }
 

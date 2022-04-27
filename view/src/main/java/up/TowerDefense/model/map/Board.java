@@ -19,6 +19,10 @@ public class Board {
     private static ArrayList<Enemy> toRemoveEnemyList;
     public ArrayList<Position> spawnPoint;
 
+    private int directAttackRange = 2;
+    private double directAttackPower = 200;
+    private double directAttackPrice = 100;
+
     /* Stocke les positions des cases qu'occupent la cible principale*/
     private ArrayList<Position> targetZone = new ArrayList<>();
 
@@ -94,7 +98,9 @@ public class Board {
         return getTile(position).getOccupier();
     }
 
-
+    public double getDirectAttackPrice() {
+        return directAttackPrice;
+    }
 
     public void initTile(int x, int y, Tile tile, boolean isATargetZone) {
         tiles[x][y] = tile;
@@ -215,5 +221,28 @@ public class Board {
 
     }
 
+    public void directAttack(int posX, int posY){
+        boolean useful = false;
+        for (int i = posX - directAttackRange; i <= posX + directAttackRange; i++){
+            for (int j = posY - directAttackRange; j <= posY + directAttackRange; j++){
+                if (j < 0 || j >= tiles.length || i < 0 || i >= tiles[0].length) continue;
+                useful = true;
+                Tile tile = getTile(i, j);
+                tile.isAttacked();
+                if (tile.getEnemy() != null){
+                    tile.getEnemy().takeDamage(directAttackPower);
+                }
+            }
+        }if (useful){
+            Game.setCredits(-directAttackPrice);
+        }
+    }
+
+    public void upgradeTower(int posX, int posY){
+        Tile tile = getTile(posX, posY);
+        if (tile.obstacle != null && tile.obstacle instanceof Tower){
+            ((Tower)tile.obstacle).upgrade();
+        }
+    }
 
 }

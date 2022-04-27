@@ -1,6 +1,8 @@
 package up.TowerDefense.model.object;
 
 
+import up.TowerDefense.model.game.Game;
+import up.TowerDefense.model.map.Tile;
 import up.TowerDefense.view.componentHandler.MapGenerator;
 
 public class DestructibleObstacle extends Obstacle{
@@ -46,6 +48,16 @@ public class DestructibleObstacle extends Obstacle{
         this.currentHealth = currentHealth;
         if (this.currentHealth <=0){
             MapGenerator.obstaclesList.remove((PlaceableObstacle)this);
+            for (int i = 0; i < Game.getBoard().sizeX(); i++){
+                for (int j = 0; j < Game.getBoard().sizeY(); j++){
+                    Tile tile = Game.getBoard().getTile(j,i);
+                    if (!tile.isEmpty()){
+                        if (tile.getOccupier() == this){
+                            tile.setOccupier(null);
+                        }
+                    }
+                }
+            }
         }
     }
     public void takeDamage(double damage) {

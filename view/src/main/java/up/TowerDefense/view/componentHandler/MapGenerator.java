@@ -191,7 +191,9 @@ public class MapGenerator {
             )
             {
                 Tile t = gameBoard.getTile(worldCol,worldRow);
-                g.drawImage(t.getImageTile(),screenX,screenY,tileSize,tileSize,null);
+                BufferedImage image = null;
+
+                g.drawImage(gameBoard.getTile(worldCol, worldRow).getImageTile(),screenX,screenY,tileSize,tileSize,null);
             }
             worldCol ++;
             if(worldCol == MAX_WORLD_COL){
@@ -258,30 +260,34 @@ public class MapGenerator {
      * (x,y) , (x,y+1), (x+1,y) , (x+1,y)
      * ATTENTION : la position x et y est l'inverse de MouseX et MouseY
      */
-    public void addObstacle(int posX, int posY) {
+    public void action(int posX, int posY) {
         PlaceableObstacle obstacle = null;
         switch(Game.getCurrentlyPlacing()) {
             case 0:
-                obstacle = new TowerTest(posX, posY);
+                gameBoard.directAttack(posX, posY);
                 break;
-            case 1 :
-                obstacle = new Tower(PresetTower.Anti_champis(), new Position(posX, posY));
+            case 1:
+                gameBoard.upgradeTower(posX, posY);
                 break;
             case 2 :
-                obstacle = new Tower(PresetTower.Leucocyte_T(), new Position(posX, posY));
+                obstacle = new Tower(PresetTower.Anti_champis(), new Position(posX, posY));
                 break;
             case 3 :
+                obstacle = new Tower(PresetTower.Leucocyte_T(), new Position(posX, posY));
+                break;
+            case 4 :
                 obstacle = new Tower(PresetTower.Anticorps(), new Position(posX, posY));
                 break;
-            case 4:
+            case 5:
                 obstacle = new Wall(posX, posY);
                 break;
             default :
                 return;
-        }
-        if(gameBoard.addObstacle(obstacle, posX, posY)){
-            obstaclesList.add(obstacle);
-            updateCharactersPaths();
+        }if (obstacle != null) {
+            if (gameBoard.addObstacle(obstacle, posX, posY)) {
+                obstaclesList.add(obstacle);
+                updateCharactersPaths();
+            }
         }
     }
 
@@ -299,6 +305,10 @@ public class MapGenerator {
                     }
                 }
             }
+            for (Enemy en : gameBoard.getListEnemy()){
+                en.setGotNewPath(true);
+            }
+            charactersList.removeAll(toRemoveCharacters);
         }catch(ConcurrentModificationException exc){
             System.out.println("Attempt to modify characterList while iterating on it.");
 
