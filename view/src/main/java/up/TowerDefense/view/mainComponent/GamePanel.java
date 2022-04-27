@@ -46,11 +46,9 @@ public class GamePanel extends JPanel {
         this.setHeader();
         this.setSideMenu();
         this.add(header, BorderLayout.NORTH);
-        body.add(new ScreenPanel(gameWindow, this));
+        body.add(new ScreenPanel(gameWindow, this, level));
         this.add(body, BorderLayout.CENTER);
         this.add(sideMenu, BorderLayout.EAST);
-
-
     }
 
     /**

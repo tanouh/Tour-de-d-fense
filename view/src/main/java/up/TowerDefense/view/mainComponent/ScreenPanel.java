@@ -57,12 +57,12 @@ public class ScreenPanel extends JPanel implements Runnable{
     public ActionMap actionMap;
 
 
-    public ScreenPanel(GameWindow gameWindow, GamePanel gamePanel){
+    public ScreenPanel(GameWindow gameWindow, GamePanel gamePanel, int level){
         this.gameWindow = gameWindow;
         this.gamePanel = gamePanel;
         KeyAction.setScreenPanel(this);
 
-        mapGen= new MapGenerator(this, "/map3_V2.png"); /*A modifier : ajouter un paramètrage pour l'image*/
+        mapGen= new MapGenerator(this, loadMap_(level)); /*A modifier : ajouter un paramètrage pour l'image*/
 
         startThread();
         this.setPreferredSize(new Dimension(windowWidth, windowHeight));
@@ -78,6 +78,20 @@ public class ScreenPanel extends JPanel implements Runnable{
 
         this.setFocusable(true);
         paused = false;
+    }
+
+    /**
+     * Choix des maps par niveau
+     * @param level
+     * @return
+     */
+    private String loadMap_(int level) {
+        switch(level){
+            case 1 : return "/mapL1V1.png";
+            case 2 : return "/mapL1V1.png";
+            case 3 : return "/map3_V2.png";
+            default: return "/map4_V2.png";
+        }
     }
 
     /**
