@@ -18,7 +18,6 @@ import static up.TowerDefense.model.game.StaticFunctions.findTower;
 public class Enemy extends Personnage{
 
 
-
 	public enum Type{
 		COVID,
         BACTERIUM,
@@ -127,8 +126,6 @@ public class Enemy extends Personnage{
 		Game.getBoard().addToListEnemy(this);
 
 		this.gotNewPath = false;
-
-		//fixme : à intégrer dans les attributs des ennemis
 		reloadTime = 2000;
 
 
@@ -138,12 +135,6 @@ public class Enemy extends Personnage{
 	 * Fonction de mise a jour de la position de l'ennemi
 	 * a chaque fois que l'interface graphique se met a jour cette fonction est appelee
 	 */
-
-	/*
-	* FIXME : problème potentiel : un autre personnage pourrait être situé sur une position
-	*  sur laquelle le personnage doit aller pour une raison lamda , il faudrait mettre des tests
-	**/
-
 
 	public void update_position(){
 		if(frozen && System.currentTimeMillis() - freezeStartTime > freezeDuration){
@@ -173,10 +164,16 @@ public class Enemy extends Personnage{
 		}
 	}
 
+	/**
+	 * Mise à jour de la trajectoire à chaque fois qu'un obstacle est placé
+	 */
 	public void update_paths(){
 		this.path = Pathfinding.FindPath(this.position, Game.getBoard().getNearestTargetPosition(position));
 	}
 
+	/**
+	 * Cible la tour
+	 */
 	public void identifyTarget(){
 		Position towerPos = findTower(this.position, this.range, Game.getBoard());
 		//System.out.println("###########Detection de tour : "+ towerPos);
@@ -192,6 +189,20 @@ public class Enemy extends Personnage{
 		timeSinceLastAttack = System.currentTimeMillis();
 	}
 
+	/**
+	 * Fonction d'upgrade selon le niveau du jeu
+	 * @param level
+	 */
+	public void upgrade(int level) {
+		if(level > 1){
+			System.out.println("ENEMY UPGRADES");
+			reward *= level;
+			agressiveness_degree += (level/2);
+			attackspeed += level;
+			damage += (damage*level/2);
+			range+= level;
+		}
+	}
 
 
 	/**
@@ -220,22 +231,10 @@ public class Enemy extends Personnage{
 		if (killed) Game.setCredits(this.reward);
 	}
 
-	public long getReloadTime() {
-		return reloadTime;
-	}
 
-	public long getTimeSinceLastAttack() {
-		return timeSinceLastAttack;
-	}
-
-	public void setFreezeDuration(long i) {
-		this.freezeDuration = i;
-	}
-
-	public void addToTotalTimePaused(long timePaused){
-		totalTimePaused += timePaused;
-	}
-
+	/**
+	 * Réinitialise tous les chronomètres reliés à un ennemi
+	 */
 	public void rebootEnemyTime() {
 		this.totalFreezeDuration = 0;
 		this.totalTimePaused = 0;
@@ -287,5 +286,40 @@ public class Enemy extends Personnage{
 			}
 		}
 		return tookHit;
+	}
+
+	public long getReloadTime() {
+		return reloadTime;
+	}
+
+	public long getTimeSinceLastAttack() {
+		return timeSinceLastAttack;
+	}
+
+	public void setFreezeDuration(long i) {
+		this.freezeDuration = i;
+	}
+
+	public void addToTotalTimePaused(long timePaused){
+		totalTimePaused += timePaused;
+	}
+
+	public float getAgressiveness_degree() {
+		return agressiveness_degree;
+	}
+
+
+	@Override
+	public String toString() {
+		return "Enemy{" +
+				"reward=" + reward +
+				", agressiveness_degree=" + agressiveness_degree +
+				", attackspeed=" + attackspeed +
+				", damage=" + damage +
+				", range=" + range +
+				", speed=" + speed +
+				", velocity=" + velocity +
+				", resistance=" + resistance +
+				'}';
 	}
 }

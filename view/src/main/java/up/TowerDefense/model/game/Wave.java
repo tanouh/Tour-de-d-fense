@@ -14,7 +14,6 @@ public class Wave {
 
     public static int waveOrder ;
 
-    public static int level = 1;
     public static long TIME_SINCE_LAST_SPAWN;
     public static final int MAX_NB_WAVES = Game.getNbWavesTotal();
     public static long TIME_INTERVAL = 10000;  // Intervalle de temps entre deux séries de vagues
@@ -22,7 +21,7 @@ public class Wave {
 
     public Wave() {
         resetTimeSinceLastSpawn();
-        waveOrder = 1;;
+        waveOrder = 1;
         currentWave = Subwave.subwavesInOrder();
     }
 
@@ -49,12 +48,6 @@ public class Wave {
                     }
                 }
             }
-        }
-    }
-
-    private void upgrade(){
-        for (int i = 1 ; i < level ; i++){
-            currentWave.upgrade();
         }
     }
 

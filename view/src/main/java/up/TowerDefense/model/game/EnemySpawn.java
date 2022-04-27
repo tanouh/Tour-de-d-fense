@@ -14,7 +14,6 @@ import static up.TowerDefense.view.componentHandler.MapGenerator.charactersList;
  * le contenu des sous vagues du jeu
  */
 public class EnemySpawn {
-    public static int index =0;
     public PresetEnemy enemy;
     public int quantity;
     private boolean finishedSpawn = false;
@@ -30,12 +29,11 @@ public class EnemySpawn {
         this.spawnX = spawnPoint.x;
         this.spawnY =  spawnPoint.y;
     }
+
     /**
      * Retourne un point de frai aléatoire
      */
     public static Position getRandomSpawnPosition(Board board){
-        /*board.shuffleSpawnList();
-        return board.spawnPoint.get((index++)%board.spawnPoint.size());*/
         Random rand = new Random();
         int i = rand.nextInt(board.spawnPoint.size());
         Position spawnPos = board.spawnPoint.get(i);
@@ -48,14 +46,20 @@ public class EnemySpawn {
     public void spawnEnemies(){
         Enemy e = new Enemy(this.enemy, new Position(spawnX, spawnY));
         e.live();
+        e.upgrade(Game.getLevel());
+        System.out.println("\t\t\t\tStats :"+e);
         charactersList.add(e);
         count++;
         if(count == quantity){
             finishedSpawn = true;
-        }}
+        }
+    }
+
     public boolean isFinished(){
         return finishedSpawn;
     }
+
+
 
     /*
     La quantité augmente en fonction de l'ordre de la vague
@@ -77,6 +81,7 @@ public class EnemySpawn {
     public static EnemySpawn getParasite(){
         return new EnemySpawn(PresetEnemy.Parasite(), 5*waveOrder,getRandomSpawnPosition(Game.getBoard()));
     }
+
 
 
 }
