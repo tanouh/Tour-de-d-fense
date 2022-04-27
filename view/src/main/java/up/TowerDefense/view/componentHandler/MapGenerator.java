@@ -299,6 +299,10 @@ public class MapGenerator {
                     }
                 }
             }
+            for (Enemy en : gameBoard.getListEnemy()){
+                en.setGotNewPath(true);
+            }
+            charactersList.removeAll(toRemoveCharacters);
         }catch(ConcurrentModificationException exc){
             System.out.println("Attempt to modify characterList while iterating on it.");
 

@@ -94,6 +94,8 @@ public class Enemy extends Personnage{
 	private long freezeDuration;
 	private long totalFreezeDuration = 0;
 
+	private boolean gotNewPath;
+
 	private long reloadTime;
 	private long timeSinceLastAttack;
 
@@ -116,6 +118,7 @@ public class Enemy extends Personnage{
 		this.path = Pathfinding.FindPath(position, Game.getBoard().getNearestTargetPosition(position));
 		Game.getBoard().addToListEnemy(this);
 
+		this.gotNewPath = false;
 
 		//fixme : à intégrer dans les attributs des ennemis
 		reloadTime = 2000;
@@ -146,11 +149,15 @@ public class Enemy extends Personnage{
 		 */
 		//if(System.currentTimeMillis() - travelTime > this.getSpeed()){
 
-		travelTime = System.currentTimeMillis();
+		if (gotNewPath){
+			rebootEnemyTime();
+		}
 		Game.getBoard().getTile(this.position).setEnemy(null);
+		travelTime = System.currentTimeMillis();
 
 		this.position = path.GetPos(travelTime - lifeTime - totalFreezeDuration, this.velocity);
 		Game.getBoard().getTile(this.position).setEnemy(this);
+
 
 		if (Game.getBoard().getTile((int)Math.round(position.x),(int)Math.round(position.y)).isTarget()){
 			Game.setLives(-1);
@@ -216,12 +223,23 @@ public class Enemy extends Personnage{
 	public void setFreezeDuration(long i) {
 		this.freezeDuration = i;
 	}
+
+	public void rebootEnemyTime() {
+		this.totalFreezeDuration = 0;
+		this.lifeTime = System.currentTimeMillis();
+		this.gotNewPath = false;
+	}
+
 	public void freeze() {
 		this.frozen = true;
 		freezeStartTime = System.currentTimeMillis();
 	}
 	public void unfreeze(){
 		this.frozen = false;
+	}
+
+	public void setGotNewPath(boolean gotNew){
+		this.gotNewPath = gotNew;
 	}
 
 	public void live(){

@@ -76,7 +76,7 @@ public class Pathfinding {
         while (currentNode != startNode) {
             path.add(currentNode);
             currentNode = currentNode.parent;
-        }
+        }path.add(startNode);
         //Inverser la suite pour obtenir une liste de tuiles du début à la fin
         Tile[] tilePath = new Tile[path.size()];
         for(int i = 0; i < tilePath.length; i++){
