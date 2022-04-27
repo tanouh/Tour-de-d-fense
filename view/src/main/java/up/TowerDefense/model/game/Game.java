@@ -16,10 +16,12 @@ public class Game {
     private static int bgMusic;
     private static int soundLevel;
     private static int gameSpeed;
-    private static int currentlyPlacing = 4; //Type d'obstacle sélectionné (Mur par défaut)
+    private static int currentlyPlacing = 6; //Type d'obstacle sélectionné (Mur par défaut)
+    private static boolean currentlyUpdating = false;
 
-    private static String[] listTowerTypes = {
+    private static String[] listOptions = {
             "Injection temporaire",
+            "Amelioration",
             "Tour anti-champi",
             "Tour Leucocyte T",
             "Anticorps",
@@ -46,12 +48,20 @@ public class Game {
     public static int getWavesLeft(){ return wavesLeft;}
     public static int getNbWavesTotal(){ return numberWavesTotal; }
     public static int getNbEnemyLeft(){ return nbEnemyLeft;}
-    public static String[] getListTowerTypes(){ return listTowerTypes; }
+    public static String[] getListOptions(){ return listOptions; }
     public static int getCurrentlyPlacing(){ return currentlyPlacing; }
 
     public static void reset(){
         credits=STARTING_CREDITS;
         lives=STARTING_LIVES;
+    }
+
+    public static boolean isCurrentlyUpdating() {
+        return currentlyUpdating;
+    }
+
+    public static void setCurrentlyUpdating(boolean currentlyUpdating) {
+        Game.currentlyUpdating = currentlyUpdating;
     }
 
     public static void setCredits(double deltaCredits) {

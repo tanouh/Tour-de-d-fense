@@ -266,16 +266,19 @@ public class MapGenerator {
             case 0:
                 gameBoard.directAttack(posX, posY);
                 break;
-            case 1 :
-                obstacle = new Tower(PresetTower.Anti_champis(), new Position(posX, posY));
+            case 1:
+                gameBoard.upgradeTower(posX, posY);
                 break;
             case 2 :
-                obstacle = new Tower(PresetTower.Leucocyte_T(), new Position(posX, posY));
+                obstacle = new Tower(PresetTower.Anti_champis(), new Position(posX, posY));
                 break;
             case 3 :
+                obstacle = new Tower(PresetTower.Leucocyte_T(), new Position(posX, posY));
+                break;
+            case 4 :
                 obstacle = new Tower(PresetTower.Anticorps(), new Position(posX, posY));
                 break;
-            case 4:
+            case 5:
                 obstacle = new Wall(posX, posY);
                 break;
             default :

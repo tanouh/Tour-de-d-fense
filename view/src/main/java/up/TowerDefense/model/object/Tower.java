@@ -175,13 +175,13 @@ public class Tower extends PlaceableObstacle{
      * @return true if the tower upgraded successfully
      */
     public boolean upgrade(){
-        if (level < MAX_LEVEL){
+        if (level < MAX_LEVEL && Game.getCredits() > upgradeCost){
             //augmentation de la taille ?
             level++;
             power*=getModifier();
             range*=getModifier();
-            upgradeCost*=getModifier();
-            setRefundValue(upgradeCost);
+            upgradeCost+=100;
+            setRefundValue(upgradeCost/2);
             Game.setCredits(-1*upgradeCost);
             return true;
         }
