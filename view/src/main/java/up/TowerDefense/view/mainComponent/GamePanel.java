@@ -27,6 +27,7 @@ public class GamePanel extends JPanel {
     private JLabel creditsLeft;
     private JLabel lifesLeft;
 
+    private ScreenPanel screenPanel;
     //Button du sideMenu :
     private Button[] towerTypes = new Button[6];
     //0 : Attaque directe
@@ -46,7 +47,8 @@ public class GamePanel extends JPanel {
         this.setHeader();
         this.setSideMenu();
         this.add(header, BorderLayout.NORTH);
-        body.add(new ScreenPanel(gameWindow, this, level));
+        screenPanel = new ScreenPanel(gameWindow, this, level);
+        body.add(screenPanel);
         this.add(body, BorderLayout.CENTER);
         this.add(sideMenu, BorderLayout.EAST);
     }
@@ -123,7 +125,7 @@ public class GamePanel extends JPanel {
             sideMenu.repaint();
         }
         Button optionMenu = new Button();
-        optionMenu.optionButton(gameWindow, null, this, this);
+        optionMenu.optionButton(gameWindow, null, this);
         JPanel footerSideMenu = new JPanel(new BorderLayout());
         footerSideMenu.setBackground(GameWindow.background);
         footerSideMenu.setBorder(new LineBorder(GameWindow.foreground, 2));
@@ -152,4 +154,8 @@ public class GamePanel extends JPanel {
     }
 
     public Game getGame(){ return this.game; }
+
+    public ScreenPanel getScreenPanel() {
+        return screenPanel;
+    }
 }

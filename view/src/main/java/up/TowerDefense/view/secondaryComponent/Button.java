@@ -64,14 +64,14 @@ public class Button extends JButton {
     /**
      * Cree un bouton Options qui envoie vers un OptionPanel
      */
-    public void optionButton(GameWindow gameWindow, HomePanel homePanel, GamePanel gamePanel, JPanel returnPanel){
+    public void optionButton(GameWindow gameWindow, HomePanel homePanel, GamePanel gamePanel){
         label = new JLabel("Options", JLabel.CENTER);
         label.setForeground(GameWindow.background);
         label.setFont(new Font(GameWindow.font,Font.PLAIN, GameWindow.widthScreen/70));
         this.centerText(label);
         this.setBackground(GameWindow.foreground);
         this.addActionListener(event -> {
-            OptionPanel optionPanel = new OptionPanel(gameWindow, homePanel, gamePanel, returnPanel);
+            OptionPanel optionPanel = new OptionPanel(gameWindow, homePanel, gamePanel);
             gameWindow.getContentPane().removeAll();
             gameWindow.getContentPane().add(optionPanel);
             gameWindow.getContentPane().revalidate();
@@ -147,6 +147,7 @@ public class Button extends JButton {
             int gameSound = optionPanel.getGameSound().getValue();
             int gameSpeed = optionPanel.getGameSpeed().getValue();
             gamePanel.getGame().applyOptions(backgroundMusic, gameSound, gameSpeed);
+            gamePanel.getScreenPanel().setPaused(false);
             gameWindow.getContentPane().removeAll();
             gameWindow.getContentPane().add(gamePanel);
             gameWindow.getContentPane().revalidate();

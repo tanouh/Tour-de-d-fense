@@ -19,7 +19,7 @@ public class OptionPanel extends JPanel {
      * Cree un Panel avec des sliders permettant de seletionner des options de jeu
      * Ajoute un bouton pour abandonner la partie si ce Panel est appele depuis un GamePanel
      */
-    public OptionPanel(GameWindow gameWindow, HomePanel homePanel, GamePanel gamePanel, JPanel returnPanel){
+    public OptionPanel(GameWindow gameWindow, HomePanel homePanel, GamePanel gamePanel){
         this.setLayout(new BorderLayout());
         this.add(title, BorderLayout.NORTH);
         this.add(body, BorderLayout.CENTER);
@@ -39,6 +39,7 @@ public class OptionPanel extends JPanel {
         if (homePanel != null) {
             applyOptions.applyButtonInHome(gameWindow, this, homePanel);
         }else{
+            gamePanel.getScreenPanel().setPaused(true);
             applyOptions.applyButtonInGame(gameWindow, this, gamePanel);
         }
         body.setLayout(new BoxLayout(body, BoxLayout.Y_AXIS));
