@@ -60,12 +60,13 @@ public class DestructibleObstacle extends Obstacle{
             }
         }
     }
+
     public void takeDamage(double damage) {
         setCurrentHealth((int)(currentHealth - damage));
     }
 
     public boolean isAlive(){
-        return currentHealth >= 0;
+        return currentHealth > 0;
     }
 
     public boolean isATower(){

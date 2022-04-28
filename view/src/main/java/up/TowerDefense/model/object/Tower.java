@@ -312,13 +312,13 @@ public class Tower extends PlaceableObstacle{
                 //        +Game.getBoard().getTile((int)position.x + i, (int)position.y + j).getPos().y);
             }
         }
-        System.out.println("nb cases atteignables : " + attainableTiles.size());
+//        System.out.println("nb cases atteignables : " + attainableTiles.size());
     }
 
     public void launchAttack(){
         for (Tile attainableTile : attainableTiles){
             if (check_Ennemy(attainableTile)){
-                System.out.println("enemy found on : " + attainableTile.getPos().x + "-" + attainableTile.getPos().y);
+//                System.out.println("enemy found on : " + attainableTile.getPos().x + "-" + attainableTile.getPos().y);
                 target = attainableTile.getEnemy();
                 TowerProjectile projectile = new TowerProjectile(this.position, target.position, this.power,
                         Game.getLevel(), target, freezingAttack);
