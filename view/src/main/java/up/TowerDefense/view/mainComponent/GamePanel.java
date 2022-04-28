@@ -19,7 +19,7 @@ public class GamePanel extends JPanel {
     private JPanel header = new JPanel(new GridLayout(1,4));
     private JPanel sideMenu = new JPanel(new BorderLayout());
     private JPanel listTower = new JPanel(new GridLayout(Game.getListOptions().length,1));
-    private JPanel choiceUpdate = new JPanel(new GridLayout(2,1));
+    private JPanel choiceUpdate = new JPanel(new GridLayout(3,1));
     private JPanel body = new JPanel();
 
     //JLabel du header :
@@ -37,6 +37,10 @@ public class GamePanel extends JPanel {
     //3 : Leucocyte T
     //4 : Anticorps
     //5 : Mur
+
+    //Jlabel du menu Amelioration :
+    private JLabel choix = new JLabel("Choix de la tour :");;
+    private JLabel upgradeMsg = new JLabel("(cliquez sur une tour)");
 
     public GamePanel(GameWindow gameWindow, int numberWaves, int backgroundMusic,
                      int gameSound, int gameSpeed, int level){
@@ -111,16 +115,23 @@ public class GamePanel extends JPanel {
             choiceUpdate.removeAll();
             choiceUpdate.setBackground(GameWindow.background);
 
-            JLabel choix = new JLabel("Choix de la tour :");
             choix.setFont(new Font(GameWindow.font ,Font.BOLD, 20));
             choix.setBorder(new LineBorder(GameWindow.foreground, 2));
             choix.setForeground(GameWindow.foreground);
             choix.setHorizontalAlignment(JLabel.CENTER);
             choix.setVerticalAlignment(JLabel.CENTER);
+
+            upgradeMsg.setFont(new Font(GameWindow.font ,Font.BOLD, 20));
+            upgradeMsg.setBorder(new LineBorder(GameWindow.foreground, 2));
+            upgradeMsg.setForeground(GameWindow.foreground);
+            upgradeMsg.setHorizontalAlignment(JLabel.CENTER);
+            upgradeMsg.setVerticalAlignment(JLabel.CENTER);
+
             Button retour = new Button();
             retour.returnButton(sideMenu, choiceUpdate, listTower);
 
             choiceUpdate.add(choix);
+            choiceUpdate.add(upgradeMsg);
             choiceUpdate.add(retour);
             sideMenu.add(choiceUpdate, BorderLayout.CENTER);
             sideMenu.revalidate();
@@ -153,6 +164,11 @@ public class GamePanel extends JPanel {
                 towerTypes[i].updateSideMenuButton(i);
             }
         }
+    }
+
+    public void setUpgradeText(boolean upgradeApplied){
+        if (upgradeApplied) upgradeMsg.setText("(cliquez sur une tour)");
+        else upgradeMsg.setText("Choix invalide");
     }
 
     public Game getGame(){ return this.game; }

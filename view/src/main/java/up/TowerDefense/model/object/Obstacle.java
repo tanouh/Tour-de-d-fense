@@ -15,7 +15,7 @@ public class Obstacle {
     public Obstacle(double posX , double posY, int size, String imgName){
         this.position  = new Position( posX, posY );
         this.size = size;
-        image = loadImage(imgName);
+        image = loadImage(imgName + ".png");
     }
     public Obstacle(Position pos, int size){
         this.position  = pos;
@@ -33,10 +33,10 @@ public class Obstacle {
     /*
     * Des instances statiques pour le décor
     * */
-    public static Obstacle FOREST = new Obstacle(0,0,1, "/tree.png");
-    public static Obstacle WATER = new Obstacle(0,0,1, "/water01.png");
-    public static Obstacle WALL = new Obstacle(0,0,1, "/wall.png");
-    public static Obstacle SKIN = new Obstacle(0,0,1, "/sol_V2.png");
-    public static Obstacle VEIN = new Obstacle(0,0,1, "/veine.png");
+    public static Obstacle FOREST = new Obstacle(0,0,1, "/tree");
+    public static Obstacle WATER = new Obstacle(0,0,1, "/water01");
+    public static Obstacle WALL = new Obstacle(0,0,1, "/wall");
+    public static Obstacle SKIN = new Obstacle(0,0,1, "/sol_V2");
+    public static Obstacle VEIN = new Obstacle(0,0,1, "/veine");
 
 }

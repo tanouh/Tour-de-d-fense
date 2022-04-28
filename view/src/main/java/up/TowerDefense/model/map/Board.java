@@ -234,6 +234,7 @@ public class Board {
     public void directAttack(int posX, int posY){
         if (System.currentTimeMillis() - lastDirectAttackTime < directAttackDelay) return;
         boolean useful = false;
+        boolean enemyPresent = false;
         for (int i = posX - directAttackRange; i <= posX + directAttackRange; i++){
             for (int j = posY - directAttackRange; j <= posY + directAttackRange; j++){
                 if (j < 0 || j >= tiles.length || i < 0 || i >= tiles[0].length) continue;
@@ -241,6 +242,7 @@ public class Board {
                 Tile tile = getTile(i, j);
                 tile.isAttacked();
                 if (tile.getEnemy() != null){
+                    enemyPresent = true;
                     tile.getEnemy().takeDamage(directAttackPower);
                 }
             }
@@ -250,11 +252,11 @@ public class Board {
         }
     }
 
-    public void upgradeTower(int posX, int posY){
+    public boolean upgradeTower(int posX, int posY){
         Tile tile = getTile(posX, posY);
         if (tile.obstacle != null && tile.obstacle instanceof Tower){
-            ((Tower)tile.obstacle).upgrade();
-        }
+            return ((Tower)tile.obstacle).upgrade();
+        }return false;
     }
 
 }

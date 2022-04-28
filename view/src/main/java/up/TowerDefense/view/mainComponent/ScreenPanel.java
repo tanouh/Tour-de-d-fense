@@ -80,6 +80,10 @@ public class ScreenPanel extends JPanel implements Runnable{
         paused = false;
     }
 
+    public GamePanel getGamePanel() {
+        return gamePanel;
+    }
+
     /**
      * Choix des maps par niveau
      * @param level

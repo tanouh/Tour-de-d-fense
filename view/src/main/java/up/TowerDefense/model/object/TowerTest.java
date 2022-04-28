@@ -12,8 +12,8 @@ public class TowerTest extends Tower{
     private static double startingReloadTime = 1000;
     private static long newLastAttackTime = 0;
     private static Type towerType = Tower.Type.TOWERTEST;
-    private static String image = "/tour.png";
-    private static String reloadImage = "/tour_touche.png";
+    private static String image = "/tour";
+    private static String reloadImage = "/tour_touche";
 
     public TowerTest(double x, double y) {
         super(x, y, newSize, newBuyingCost,startingRange, startingPower, false, startingUpgradeCost,

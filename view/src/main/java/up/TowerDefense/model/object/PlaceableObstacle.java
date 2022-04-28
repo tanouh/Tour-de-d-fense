@@ -15,7 +15,7 @@ public class PlaceableObstacle extends DestructibleObstacle{
         super(x, y, size, maxHealth, currentHealth,obstacleType, image);
         this.buyingCost = buyingCost;
         this.refundValue = buyingCost; // augmente à chaque fois que l'obstacle augmente en niveau
-        this.reloadImage= loadImage(reloadImage);
+        this.reloadImage= loadImage(reloadImage+".png");
     }
 
     /**
@@ -54,4 +54,5 @@ public class PlaceableObstacle extends DestructibleObstacle{
     public BufferedImage getReloadImage() {
         return reloadImage;
     }
+    public void setReloadImage(BufferedImage img){ reloadImage = img;}
 }

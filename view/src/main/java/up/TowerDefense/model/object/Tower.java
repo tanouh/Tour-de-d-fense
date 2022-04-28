@@ -54,7 +54,7 @@ public class Tower extends PlaceableObstacle{
     /**
      * Represente le niveau maximal de la Tour.
      */
-    protected final static int MAX_LEVEL = 5 ; //à déterminer
+    protected final static int MAX_LEVEL = 4 ; //à déterminer
     
     /**
      * Represente le cout de l'amelioration.
@@ -100,6 +100,16 @@ public class Tower extends PlaceableObstacle{
      * Image temporaire signifiant que la tour a été touchée par la cible d'un ennemi
      */
     protected BufferedImage reloadImage;
+
+    /**
+     * Chemin vers l'image de la tour
+     */
+    protected String imgName;
+
+    /**
+     * Chemin vers l'image de la tour touchée par la cible d'un ennemi
+     */
+    protected String reloadImgName;
 
     /**
      * Déclence HITDELAY
@@ -165,6 +175,8 @@ public class Tower extends PlaceableObstacle{
     	this.lastAttackTime = presetTower.getLastAttackTime();
     	this.towerType = presetTower.getTowerType();
         this.freezingAttack = presetTower.isFreezingAttack();
+        this.imgName = presetTower.imgName;
+        this.reloadImgName = presetTower.reloadImage;
         Game.getBoard().addToListTowers(this);
         setAttainableTiles();
     }
@@ -179,6 +191,9 @@ public class Tower extends PlaceableObstacle{
             //augmentation de la taille ?
             Game.setCredits(-1*upgradeCost);
             level++;
+            image = loadImage(imgName +"_n"+level+".png");
+            reloadImage = loadImage(reloadImgName+"_n"+level+".png");
+            this.setReloadImage(reloadImage);
             power*=getModifier();
             range*=getModifier();
             upgradeCost+=100;
@@ -251,12 +266,9 @@ public class Tower extends PlaceableObstacle{
     }
     @Override
     public BufferedImage getImage(){
-
         if (tookHit && System.currentTimeMillis() - hitStart > HITDELAY){
             if (System.currentTimeMillis() - hitStart > HITDELAY) tookHit = false;
-
         }
-
         return this.image;
     }
 

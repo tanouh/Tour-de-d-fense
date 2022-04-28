@@ -262,12 +262,14 @@ public class MapGenerator {
      */
     public void action(int posX, int posY) {
         PlaceableObstacle obstacle = null;
+        boolean upgradeApplied = false;
         switch(Game.getCurrentlyPlacing()) {
             case 0:
                 gameBoard.directAttack(posX, posY);
                 break;
             case 1:
-                gameBoard.upgradeTower(posX, posY);
+                upgradeApplied = gameBoard.upgradeTower(posX, posY);
+                screenPanel.getGamePanel().setUpgradeText(upgradeApplied);
                 break;
             case 2 :
                 obstacle = new Tower(PresetTower.Anti_champis(), new Position(posX, posY));
