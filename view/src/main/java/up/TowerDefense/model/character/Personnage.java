@@ -1,5 +1,6 @@
 package up.TowerDefense.model.character;
 
+import up.TowerDefense.model.game.Game;
 import up.TowerDefense.model.game.StaticFunctions;
 import up.TowerDefense.model.object.Position;
 
@@ -27,7 +28,7 @@ public abstract class Personnage{
 	/**
 	 *  Le nombre de secondes pour effectuer un pas
 	 */
-	protected long speed;
+	protected double speed;
 
 	/**
 	 * vitesse du personnage
@@ -54,7 +55,7 @@ public abstract class Personnage{
 	 * @param maxHealth definit la vie maximale du personnage
 	 * @param speed definit la vitesse du personnage
 	 */
-	public Personnage(Position position, int size, float resistance, int maxHealth, long speed, String imgName, String reloadImgName) {
+	public Personnage(Position position, int size, float resistance, int maxHealth, double speed, String imgName, String reloadImgName) {
 		this.position = position;
 		this.maxHealth = maxHealth;
 		this.currentHealth = this.maxHealth;
@@ -84,8 +85,8 @@ public abstract class Personnage{
 		return this.resistance;
 	}
 	
-	public long getSpeed() {
-		return this.speed;
+	public double getSpeed() {
+		return this.speed*Game.getGameSpeed();
 	}
 	
 	public int getSize() {
@@ -115,8 +116,8 @@ public abstract class Personnage{
 		this.currentHealth = newlifePoint;
 	}
 	
-	public void setSpeed(long newSpeed) {
-		this.speed = newSpeed;
+	public void setSpeed(double newSpeed) {
+		this.speed = newSpeed*Game.getGameSpeed();
 	}
 	
 	public void setResistance(float newResistance) {

@@ -11,9 +11,9 @@ public abstract class  Projectile  {
     protected double yLoc;
 
 
-
     protected double xDest;
     protected double yDest;
+
     //starting coordinates
     protected double xInit;
     protected double yInit;
@@ -26,8 +26,7 @@ public abstract class  Projectile  {
     protected String image = "/projectV1.png";
 
 
-    public Projectile(Position initPos, Position destPos , double pPower, int level){
-
+    public Projectile(Position initPos, Position destPos, double pPower, int level){
 
         xInit = initPos.x;
         xDest = destPos.x;
@@ -77,4 +76,11 @@ public abstract class  Projectile  {
     public String toString(){
         return "projectile " + " : " + this.getPos().x + " - " + this.getPos().y;
     }
+
+    public void setTargetPos(Position pos){
+        xDest = pos.x;
+        yDest = pos.y;
+    }
+
+
 }

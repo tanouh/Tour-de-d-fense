@@ -19,7 +19,7 @@ public class HomePanel extends JPanel{
     private static int  numberWaves = 5;
     private static int backgroundMusic = 5;
     private static int gameSound = 5;
-    private static int gameSpeed = 2;
+    private static int gameSpeed = 1;
     //...
 
     public HomePanel(GameWindow gameWindow){

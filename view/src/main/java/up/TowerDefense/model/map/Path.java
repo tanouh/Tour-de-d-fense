@@ -127,6 +127,7 @@ public class Path {
         }
         return path[path.length - 1].pos;
     }
+
     //On peut aussi utiliser la même fonction avec un temps et une vitesse
     public Position GetPos(double t, double spd){
         return GetPos(t*spd);
@@ -136,7 +137,7 @@ public class Path {
         return GetPos(getCartesianDistance(startPos,currentPos));
     }
 
-    private double getCartesianDistance(Position startPos, Position currentPos){
+    public static double getCartesianDistance(Position startPos, Position currentPos){
         return Math.sqrt(Math.pow(currentPos.x-startPos.x, 2.0) + Math.pow(currentPos.y-startPos.y,2.0));
     }
 }

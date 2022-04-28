@@ -62,7 +62,7 @@ public class DestructibleObstacle extends Obstacle{
     }
 
     public void takeDamage(double damage) {
-        setCurrentHealth((int)(currentHealth - damage));
+        setCurrentHealth((int)Math.round(currentHealth - damage));
     }
 
     public boolean isAlive(){

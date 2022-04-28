@@ -30,7 +30,7 @@ public class Wave {
      */
     public void run() {
         if (endOfLevel) return;
-        if (!running &&  System.currentTimeMillis() - TIME_SINCE_LAST_SPAWN > DELAY){
+        if (!running &&  System.currentTimeMillis() - TIME_SINCE_LAST_SPAWN > DELAY/Game.getGameSpeed()){
             TIME_SINCE_LAST_SPAWN = System.currentTimeMillis();
             running = true;
         }

@@ -146,6 +146,7 @@ public class Button extends JButton {
             int backgroundMusic = optionPanel.getBackgroundMusic().getValue();
             int gameSound = optionPanel.getGameSound().getValue();
             int gameSpeed = optionPanel.getGameSpeed().getValue();
+            System.out.println("Game speed " + gameSpeed);
             gamePanel.getGame().applyOptions(backgroundMusic, gameSound, gameSpeed);
             gamePanel.getScreenPanel().setPaused(false);
             gameWindow.getContentPane().removeAll();
@@ -221,15 +222,17 @@ public class Button extends JButton {
                 break;
         }
         if  (Game.getCredits() < price || (typeObstacle == 0 &&
-                System.currentTimeMillis() - Game.getBoard().getLastDirectAttackTime() < Game.getBoard().getDirectAttackDelay())) {
+                System.currentTimeMillis() - Game.getBoard().getLastDirectAttackTime()
+                        < Game.getBoard().getDirectAttackDelay()/Game.getGameSpeed())) {
             this.label.setForeground(Color.LIGHT_GRAY);
             this.setBackground(Color.GRAY);
             this.setEnabled(false);
-            if (typeObstacle == 0){
+            if (typeObstacle == 0 &&
+                    System.currentTimeMillis() - Game.getBoard().getLastDirectAttackTime()
+                            < Game.getBoard().getDirectAttackDelay()/Game.getGameSpeed()){
                 label.setText("Injection rapide (" +
-                        ((Game.getBoard().getDirectAttackDelay() - Math.round(System.currentTimeMillis() -
-                                Game.getBoard().getLastDirectAttackTime()))/1000) +
-                        "s)");
+                        ((Game.getBoard().getDirectAttackDelay()/Game.getGameSpeed() - Math.round(System.currentTimeMillis() -
+                                Game.getBoard().getLastDirectAttackTime()))/1000) + "s)");
             }
         } else {
             if (typeObstacle == 0) label.setText("Injection Rapide");

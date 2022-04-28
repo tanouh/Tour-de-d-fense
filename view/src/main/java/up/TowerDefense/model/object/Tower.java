@@ -266,8 +266,8 @@ public class Tower extends PlaceableObstacle{
     }
     @Override
     public BufferedImage getImage(){
-        if (tookHit && System.currentTimeMillis() - hitStart > HITDELAY){
-            if (System.currentTimeMillis() - hitStart > HITDELAY) tookHit = false;
+        if (tookHit && System.currentTimeMillis() - hitStart > HITDELAY/Game.getGameSpeed()){
+            if (System.currentTimeMillis() - hitStart > HITDELAY/Game.getGameSpeed()) tookHit = false;
         }
         return this.image;
     }
@@ -283,7 +283,7 @@ public class Tower extends PlaceableObstacle{
     @Override
     public boolean tookHit(){
         if (tookHit){
-            if (System.currentTimeMillis() - hitStart > HITDELAY) {
+            if (System.currentTimeMillis() - hitStart > HITDELAY/Game.getGameSpeed()) {
                 tookHit = false;
                 hitStart = 2*System.currentTimeMillis();
             }

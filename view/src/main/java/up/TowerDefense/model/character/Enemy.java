@@ -154,7 +154,7 @@ public class Enemy extends Personnage{
 		Game.getBoard().getTile(this.position).setEnemy(null);
 		travelTime = System.currentTimeMillis() - lifeTime - totalFreezeDuration - totalTimePaused;
 
-		this.position = path.GetPos(travelTime, this.velocity);
+		this.position = path.GetPos(travelTime, this.speed*Game.getGameSpeed());
 		Game.getBoard().getTile(this.position).setEnemy(this);
 
 
@@ -280,7 +280,7 @@ public class Enemy extends Personnage{
 	@Override
 	public boolean tookHit(){
 		if (tookHit){
-			if (System.currentTimeMillis() - hitStart > HITDELAY) {
+			if (System.currentTimeMillis() - hitStart > HITDELAY/Game.getGameSpeed()) {
 				tookHit = false;
 				hitStart = 2*System.currentTimeMillis();
 			}
@@ -296,6 +296,10 @@ public class Enemy extends Personnage{
 		return timeSinceLastAttack;
 	}
 
+	public long getTravelTime() {
+		return travelTime;
+	}
+
 	public void setFreezeDuration(long i) {
 		this.freezeDuration = i;
 	}
@@ -308,6 +312,8 @@ public class Enemy extends Personnage{
 		return agressiveness_degree;
 	}
 
+	public Path getPath(){ return path;}
+
 
 	@Override
 	public String toString() {
@@ -317,7 +323,7 @@ public class Enemy extends Personnage{
 				", attackspeed=" + attackspeed +
 				", damage=" + damage +
 				", range=" + range +
-				", speed=" + speed +
+				", speed=" + speed*Game.getGameSpeed() +
 				", velocity=" + velocity +
 				", resistance=" + resistance +
 				'}';

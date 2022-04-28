@@ -51,6 +51,7 @@ public class Game {
     public static int getWavesLeft(){ return wavesLeft;}
     public static int getNbWavesTotal(){ return numberWavesTotal; }
     public static int getNbEnemyLeft(){ return nbEnemyLeft;}
+    public static int getGameSpeed(){ return gameSpeed;}
     public static String[] getListOptions(){ return listOptions; }
     public static int getCurrentlyPlacing(){ return currentlyPlacing; }
 

@@ -232,7 +232,7 @@ public class Board {
     }
 
     public void directAttack(int posX, int posY){
-        if (System.currentTimeMillis() - lastDirectAttackTime < directAttackDelay) return;
+        if (System.currentTimeMillis() - lastDirectAttackTime < directAttackDelay/Game.getGameSpeed()) return;
         boolean useful = false;
         boolean enemyPresent = false;
         for (int i = posX - directAttackRange; i <= posX + directAttackRange; i++){

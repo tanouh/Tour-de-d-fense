@@ -1,6 +1,7 @@
 package up.TowerDefense.model.object;
 
 
+import up.TowerDefense.model.game.Game;
 import up.TowerDefense.model.game.StaticFunctions;
 import up.TowerDefense.view.componentHandler.MapGenerator;
 
@@ -20,17 +21,15 @@ public class EnemyProjectile extends Projectile{
         //projectile has hit
         if (!target.isAlive()){
             arrivedAtTarget = true;
-//            MapGenerator.enemyProjectilesList.remove(this);
             return;
         }
-        if (Math.abs(xLoc - xDest) < speed/2 || Math.abs(yLoc - yDest)< speed/2){
+        if (Math.abs(xLoc - xDest) < speed* Game.getGameSpeed()/2 || Math.abs(yLoc - yDest)< speed*Game.getGameSpeed()/2){
             arrivedAtTarget = true;
             target.takeDamage(power);
-//            MapGenerator.enemyProjectilesList.remove(this);
         }
         else{
-            xLoc += speed*Math.cos(angleOfProjectileInRadians());
-            yLoc += speed*Math.sin(angleOfProjectileInRadians());
+            xLoc += speed*Game.getGameSpeed()*Math.cos(angleOfProjectileInRadians());
+            yLoc += speed*Game.getGameSpeed()*Math.sin(angleOfProjectileInRadians());
         }
     }
 
