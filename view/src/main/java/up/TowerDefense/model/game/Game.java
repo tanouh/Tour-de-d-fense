@@ -6,8 +6,8 @@ public class Game {
 
     private final static double STARTING_CREDITS= 1000;
     private final static int STARTING_LIVES = 20;
-    private static double credits = STARTING_CREDITS;
-    private static int lives = STARTING_LIVES;
+    private static double credits;
+    private static int lives;
     private static Board board;
     private static int numberWavesTotal;
     private static int level;
@@ -16,7 +16,7 @@ public class Game {
     private static int bgMusic;
     private static int soundLevel;
     private static int gameSpeed;
-    private static int currentlyPlacing = 6; //Type d'obstacle sélectionné (Mur par défaut)
+    private static int currentlyPlacing; //Type d'obstacle sélectionné (Mur par défaut)
     private static boolean currentlyUpdating = false;
 
     private static String[] listOptions = {
@@ -30,12 +30,15 @@ public class Game {
 
     public Game(int numberWaves, int backgroundMusic, int gameSound, int speed, int lvl){
         board = new Board();
+        credits = STARTING_CREDITS;
+        lives = STARTING_LIVES;
         numberWavesTotal = numberWaves;
         wavesLeft = numberWaves;
         bgMusic = backgroundMusic;
         soundLevel = gameSound;
         gameSpeed = speed;
         level = lvl;
+        currentlyPlacing = 6;
         reset();
     }
 
@@ -52,8 +55,7 @@ public class Game {
     public static int getCurrentlyPlacing(){ return currentlyPlacing; }
 
     public static void reset(){
-        credits=STARTING_CREDITS;
-        lives=STARTING_LIVES;
+
     }
 
     public static boolean isCurrentlyUpdating() {

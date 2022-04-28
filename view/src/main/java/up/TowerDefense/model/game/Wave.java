@@ -5,7 +5,7 @@ package up.TowerDefense.model.game;
  * la classe est utilisé en tant que gestionnaire de vagues
  */
 public class Wave {
-    public static boolean endOfLevel = false; // Annonce la fin de la vague
+    public static boolean endOfLevel; // Annonce la fin de la vague
 
     private Subwave currentWave ;
     private boolean running = false; // si une vague est en cours actuellement
@@ -63,6 +63,10 @@ public class Wave {
      */
     public boolean isRunning() {
         return running;
+    }
+
+    public static void resetWave(){
+        endOfLevel = false;
     }
 
     public static void resetTimeSinceLastSpawn() {

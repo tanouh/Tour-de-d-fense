@@ -1,6 +1,7 @@
 package up.TowerDefense.view.mainComponent;
 
 import up.TowerDefense.model.game.Game;
+import up.TowerDefense.model.game.Wave;
 import up.TowerDefense.view.secondaryComponent.Button;
 import up.TowerDefense.view.secondaryComponent.Label;
 
@@ -12,6 +13,7 @@ import java.awt.*;
 public class GamePanel extends JPanel {
     private GameWindow gameWindow;
     private Game game;
+    private ScreenPanel screenPanel;
 
     //Mettre les contenus de label dans une classe "partie"
     private JPanel header = new JPanel(new GridLayout(1,4));
@@ -27,7 +29,6 @@ public class GamePanel extends JPanel {
     private JLabel creditsLeft;
     private JLabel lifesLeft;
 
-    private ScreenPanel screenPanel;
     //Button du sideMenu :
     private Button[] towerTypes = new Button[6];
     //0 : Attaque directe
@@ -41,6 +42,7 @@ public class GamePanel extends JPanel {
                      int gameSound, int gameSpeed, int level){
         this.gameWindow = gameWindow;
         this.game = new Game(numberWaves, backgroundMusic, gameSound, gameSpeed, level);
+        Wave.resetWave();
 
         this.setLayout(new BorderLayout());
 
