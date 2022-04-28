@@ -22,6 +22,8 @@ public class Board {
     private int directAttackRange = 2;
     private double directAttackPower = 200;
     private double directAttackPrice = 100;
+    private int directAttackDelay = 10000;
+    private long lastDirectAttackTime = System.currentTimeMillis();
 
     /* Stocke les positions des cases qu'occupent la cible principale*/
     private ArrayList<Position> targetZone = new ArrayList<>();
@@ -100,6 +102,14 @@ public class Board {
 
     public double getDirectAttackPrice() {
         return directAttackPrice;
+    }
+
+    public int getDirectAttackDelay() {
+        return directAttackDelay;
+    }
+
+    public long getLastDirectAttackTime() {
+        return lastDirectAttackTime;
     }
 
     public void initTile(int x, int y, Tile tile, boolean isATargetZone) {
@@ -222,6 +232,7 @@ public class Board {
     }
 
     public void directAttack(int posX, int posY){
+        if (System.currentTimeMillis() - lastDirectAttackTime < directAttackDelay) return;
         boolean useful = false;
         for (int i = posX - directAttackRange; i <= posX + directAttackRange; i++){
             for (int j = posY - directAttackRange; j <= posY + directAttackRange; j++){
@@ -235,6 +246,7 @@ public class Board {
             }
         }if (useful){
             Game.setCredits(-directAttackPrice);
+            lastDirectAttackTime = System.currentTimeMillis();
         }
     }
 

@@ -220,11 +220,19 @@ public class Button extends JButton {
                 price = 0;
                 break;
         }
-        if  (Game.getCredits() < price) {
+        if  (Game.getCredits() < price || (typeObstacle == 0 &&
+                System.currentTimeMillis() - Game.getBoard().getLastDirectAttackTime() < Game.getBoard().getDirectAttackDelay())) {
             this.label.setForeground(Color.LIGHT_GRAY);
             this.setBackground(Color.GRAY);
             this.setEnabled(false);
+            if (typeObstacle == 0){
+                label.setText("Injection rapide (" +
+                        ((Game.getBoard().getDirectAttackDelay() - Math.round(System.currentTimeMillis() -
+                                Game.getBoard().getLastDirectAttackTime()))/1000) +
+                        "s)");
+            }
         } else {
+            if (typeObstacle == 0) label.setText("Injection Rapide");
             if (typeObstacle == Game.getCurrentlyPlacing()) {
                 this.label.setForeground(GameWindow.foreground);
                 this.setBackground(GameWindow.background);
