@@ -24,22 +24,32 @@ public class Button extends JButton {
      * -affiche un WaitingScreen s'il est appele depuis un HomePanel
      * -affiche un GamePanel s'il est appele depuis un WaitingScreen
      */
-    public void startButton(GameWindow gameWindow, JPanel callPanel, int numberWaves, int backgroundMusic,
-                            int gameSound, int gameSpeed){
+    public void startButton(GameWindow gameWindow, JPanel callPanel){
         label = new JLabel("Demarrer", JLabel.CENTER);
         label.setForeground(GameWindow.background);
         label.setFont(new Font(GameWindow.font,Font.PLAIN, GameWindow.widthScreen/70));
         this.centerText(label);
         this.setBackground(GameWindow.foreground);
-        this.setPreferredSize(new Dimension(200, gameWindow.getHeight()/10));
+        this.setPreferredSize(new Dimension(200, GameWindow.heightScreen/10));
         this.addActionListener(event -> {
             JPanel nextScreen;
-            if (callPanel instanceof HomePanel){
-                nextScreen = new WaitingPanel(gameWindow, numberWaves,
-                        backgroundMusic, gameSound, gameSpeed);
+            if (callPanel instanceof HomePanel) {
+                nextScreen = new WaitingPanel(gameWindow,
+                        HomePanel.getOptions()[0],
+                        HomePanel.getOptions()[1],
+                        HomePanel.getOptions()[2],
+                        HomePanel.getOptions()[3],
+                        HomePanel.getOptions()[4]
+                );
             }
             else {
-                nextScreen = new GamePanel(gameWindow, numberWaves, backgroundMusic, gameSound, gameSpeed, 1);
+                nextScreen = new GamePanel(gameWindow,
+                        HomePanel.getOptions()[0],
+                        HomePanel.getOptions()[1],
+                        HomePanel.getOptions()[2],
+                        HomePanel.getOptions()[3],
+                        HomePanel.getOptions()[4],
+                        1);
             }
             gameWindow.getContentPane().removeAll();
             gameWindow.getContentPane().add(nextScreen);
@@ -51,13 +61,13 @@ public class Button extends JButton {
     /**
      * Ajoute un bouton Quitter qui arrete le programme et ferme la fenetre
      */
-    public void leaveButton(int gameWindowWidth, int gameWindowHeight){
+    public void leaveButton(GameWindow gameWindow){
         label = new JLabel("Quitter", JLabel.CENTER);
         label.setFont(new Font(GameWindow.font,Font.PLAIN, GameWindow.widthScreen/70));
         label.setForeground(GameWindow.background);
         this.centerText(label);
         this.setBackground(GameWindow.foreground);
-        this.setPreferredSize(new Dimension(gameWindowWidth,gameWindowHeight/10));
+        this.setPreferredSize(new Dimension(GameWindow.widthScreen/10,GameWindow.heightScreen/10));
         this.addActionListener(event -> System.exit(0));
     }
 
@@ -120,11 +130,12 @@ public class Button extends JButton {
         label.setFont(new Font(GameWindow.font, Font.PLAIN, GameWindow.widthScreen/70));
         this.centerText(label);
         this.addActionListener(event -> {
+            int nbLevel = optionPanel.getNbLevel().getValue();
             int numberWaves = optionPanel.getNumberWaves().getValue();
             int backgroundMusic = optionPanel.getBackgroundMusic().getValue();
             int gameSound = optionPanel.getGameSound().getValue();
             int gameSpeed = optionPanel.getGameSpeed().getValue();
-            homePanel.applyOptions(numberWaves, backgroundMusic, gameSound, gameSpeed);
+            homePanel.applyOptions(nbLevel, numberWaves, backgroundMusic, gameSound, gameSpeed);
             gameWindow.getContentPane().removeAll();
             gameWindow.getContentPane().add(homePanel);
             gameWindow.getContentPane().revalidate();
@@ -146,7 +157,6 @@ public class Button extends JButton {
             int backgroundMusic = optionPanel.getBackgroundMusic().getValue();
             int gameSound = optionPanel.getGameSound().getValue();
             int gameSpeed = optionPanel.getGameSpeed().getValue();
-            System.out.println("Game speed " + gameSpeed);
             gamePanel.getGame().applyOptions(backgroundMusic, gameSound, gameSpeed);
             gamePanel.getScreenPanel().setPaused(false);
             gameWindow.getContentPane().removeAll();
@@ -287,6 +297,7 @@ public class Button extends JButton {
                         HomePanel.getOptions()[1],
                         HomePanel.getOptions()[2],
                         HomePanel.getOptions()[3],
+                        HomePanel.getOptions()[4],
                         Game.getLevel()+1);
             }else{
                 nextPanel = new GamePanel(gameWindow,
@@ -294,6 +305,7 @@ public class Button extends JButton {
                         HomePanel.getOptions()[1],
                         HomePanel.getOptions()[2],
                         HomePanel.getOptions()[3],
+                        HomePanel.getOptions()[4],
                         Game.getLevel());
             }
             gameWindow.getContentPane().removeAll();

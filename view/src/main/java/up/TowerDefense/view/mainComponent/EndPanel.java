@@ -26,7 +26,10 @@ public class EndPanel extends JPanel {
 
         JLabel endMessage;
         if (victoire){
-            endMessage = new JLabel("Vous avez battu le niveau " + Game.getLevel() + " !");
+            if (Game.getLevel() == Game.getNbLevelTotal())
+                endMessage = new JLabel("Vous avez battu tous les niveaux !");
+            else
+                endMessage = new JLabel("Vous avez battu le niveau " + Game.getLevel() + " !");
         }else{
             endMessage = new JLabel("Vous avez perdu... Voulez-vous retenter le niveau " + Game.getLevel() + " ?");
         }
@@ -34,14 +37,23 @@ public class EndPanel extends JPanel {
         endMessage.setForeground(GameWindow.foreground);
         endMessage.setHorizontalTextPosition(JLabel.CENTER);
 
-        Button tryAgain = new Button();
-        tryAgain.tryAgainButton(victoire, gameWindow);
-        tryAgain.setPreferredSize(new Dimension(GameWindow.widthScreen/2, GameWindow.heightScreen/8));
         body.add(endMessage);
         body.add(Box.createVerticalGlue());
         body.add(endMessage);
         body.add(Box.createVerticalGlue());
-        body.add(tryAgain);
+
+        if (victoire && Game.getLevel() == Game.getNbLevelTotal()){
+            Button quitter = new Button();
+            quitter.leaveButton(gameWindow);
+            quitter.setPreferredSize(new Dimension(GameWindow.widthScreen / 2, GameWindow.heightScreen / 8));
+            body.add(quitter);
+        }else{
+            Button tryAgain = new Button();
+            tryAgain.tryAgainButton(victoire, gameWindow);
+            tryAgain.setPreferredSize(new Dimension(GameWindow.widthScreen / 2, GameWindow.heightScreen / 8));
+            body.add(tryAgain);
+        }
+
         body.add(Box.createVerticalGlue());
         this.add(body, BorderLayout.CENTER);
     }

@@ -18,22 +18,24 @@ public class WaitingPanel extends JPanel{
     private int currentInfo = 1;
     private int totalInfo;
 
+    private int nbLevel;
     private int numberWaves;
     private int backgroundMusic;
     private int gameSound;
     private int gameSpeed;
 
-    public WaitingPanel(GameWindow gameWindow, int numberWaves,
+    public WaitingPanel(GameWindow gameWindow, int nbLevel, int numberWaves,
                          int backgroundMusic, int gameSound, int gameSpeed){
 
         this.setLayout(new BorderLayout());
         this.gameWindow = gameWindow;
+        this.nbLevel = nbLevel;
         this.numberWaves = numberWaves;
         this.backgroundMusic = backgroundMusic;
         this.gameSound = gameSound;
         this.gameSpeed = gameSpeed;
 
-        startGame.startButton(gameWindow, this, numberWaves, backgroundMusic, gameSound, gameSpeed);
+        startGame.startButton(gameWindow, this);
         this.setTotalInfo();
         this.refreshInfo();
         this.add(startGame, BorderLayout.SOUTH);

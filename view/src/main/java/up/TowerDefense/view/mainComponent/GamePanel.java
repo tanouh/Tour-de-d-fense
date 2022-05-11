@@ -42,10 +42,10 @@ public class GamePanel extends JPanel {
     private JLabel choix = new JLabel("Choix de la tour :");;
     private JLabel upgradeMsg = new JLabel("(cliquez sur une tour)");
 
-    public GamePanel(GameWindow gameWindow, int numberWaves, int backgroundMusic,
+    public GamePanel(GameWindow gameWindow, int nbLevel, int numberWaves, int backgroundMusic,
                      int gameSound, int gameSpeed, int level){
         this.gameWindow = gameWindow;
-        this.game = new Game(numberWaves, backgroundMusic, gameSound, gameSpeed, level);
+        this.game = new Game(nbLevel, numberWaves, backgroundMusic, gameSound, gameSpeed, level);
         Wave.resetWave();
 
         this.setLayout(new BorderLayout());
@@ -76,7 +76,8 @@ public class GamePanel extends JPanel {
         title.setBorder(new LineBorder(GameWindow.foreground, 2));
         header.add(title);
 
-        level = Label.addHeaderLabel(header, "Niveau " + Game.getLevel());
+        level = Label.addHeaderLabel(header, "Niveau " + Game.getLevel()
+                + "/" + Game.getNbLevelTotal());
         wavesLeft = Label.addHeaderLabel(header,"Vague "+ (Game.getNbWavesTotal()-Game.getWavesLeft())
                 + "/" + Game.getNbWavesTotal());
         enemyLeft = Label.addHeaderLabel(header, "Ennemis restants : " + Game.getBoard().getListEnemy().size());

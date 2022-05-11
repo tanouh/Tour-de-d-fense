@@ -35,12 +35,13 @@ public class MouseHandler implements MouseListener {
         /*
         todo : dès qu'on clique sur une position, les possibilités de construction s'affichent sur le menu latéral
          */
-
+        screenPanel.setPaused(true);
         try {
            screenPanel.mapGen.action(mouseX, mouseY);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
+        screenPanel.setPaused(false);
     }
 
 

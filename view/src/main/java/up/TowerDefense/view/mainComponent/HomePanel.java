@@ -15,18 +15,22 @@ public class HomePanel extends JPanel{
     private Button leaveGame = new Button();
     private Button options = new Button();
 
+    private GameWindow gameWindow;
+
     //stockage des options choisies (stockage dans une List ?) :
-    private static int  numberWaves = 5;
+    private static int nbLevel = 5;
+    private static int numberWaves = 5;
     private static int backgroundMusic = 5;
     private static int gameSound = 5;
     private static int gameSpeed = 1;
     //...
 
     public HomePanel(GameWindow gameWindow){
+        this.gameWindow = gameWindow;
         gameWindow.setTitle("project Covid Defense");
 
-        startGame.startButton(gameWindow, this, numberWaves, backgroundMusic, gameSound, gameSpeed);
-        leaveGame.leaveButton(gameWindow.getWidth(), gameWindow.getHeight());
+        startGame.startButton(gameWindow, this);
+        leaveGame.leaveButton(gameWindow);
         options.optionButton(gameWindow, this, null);
 
         this.setLayout(new BorderLayout());
@@ -63,8 +67,9 @@ public class HomePanel extends JPanel{
      *Modifie les parametres de jeu en fonction
      * des choix faits dans le OptionPanel
      */
-    public void applyOptions(int numberWaves, int backgroundMusic, int gameSound, int gameSpeed){
+    public void applyOptions(int nbLevel, int numberWaves, int backgroundMusic, int gameSound, int gameSpeed){
         if (numberWaves != 0){
+            this.nbLevel = nbLevel;
             this.numberWaves = numberWaves;
         }
         this.backgroundMusic = backgroundMusic;
@@ -73,6 +78,6 @@ public class HomePanel extends JPanel{
     }
 
     public static int[] getOptions(){
-        return new int[]{numberWaves, backgroundMusic, gameSound, gameSpeed};
+        return new int[]{nbLevel, numberWaves, backgroundMusic, gameSound, gameSpeed};
     }
 }

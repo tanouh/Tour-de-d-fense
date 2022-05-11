@@ -10,6 +10,7 @@ public class OptionPanel extends JPanel {
     private JLabel title = new JLabel("project Covid Defense");
     private JPanel body = new JPanel();
     private JPanel footer = new JPanel(new GridLayout(1,2));
+    private Slider nbLevel = null;
     private Slider numberWaves = null;
     private Slider backgroundMusic = null;
     private Slider gameSound = null;
@@ -45,15 +46,17 @@ public class OptionPanel extends JPanel {
         body.setLayout(new BoxLayout(body, BoxLayout.Y_AXIS));
         body.add(Box.createVerticalGlue());
         if (homePanel != null) {
-            numberWaves = new Slider(body, "Nombre de vagues", 1, 5);
-            numberWaves.setValue(HomePanel.getOptions()[0]);
+            nbLevel = new Slider(body, "Nombre de niveaux", 1, 5);
+            nbLevel.setValue(HomePanel.getOptions()[0]);
+            numberWaves = new Slider(body, "Nombre de vagues", 3, 5);
+            numberWaves.setValue(HomePanel.getOptions()[1]);
         }
         backgroundMusic = new Slider(body, "Musique", 0, 10);
         gameSound = new Slider(body, "Son du jeu", 0,10);
-        gameSpeed = new Slider(body, "Vitesse de jeu", 1,3);
-        backgroundMusic.setValue(HomePanel.getOptions()[1]);
-        gameSound.setValue(HomePanel.getOptions()[2]);
-        gameSpeed.setValue(HomePanel.getOptions()[3]);
+        gameSpeed = new Slider(body, "Vitesse de jeu", 1,2);
+        backgroundMusic.setValue(HomePanel.getOptions()[2]);
+        gameSound.setValue(HomePanel.getOptions()[3]);
+        gameSpeed.setValue(HomePanel.getOptions()[4]);
         footer.add(applyOptions);
         if (gamePanel != null){
             Button abandonButton = new Button();
@@ -63,6 +66,7 @@ public class OptionPanel extends JPanel {
         body.add(Box.createVerticalGlue());
     }
 
+    public Slider getNbLevel(){ return nbLevel; }
     public Slider getNumberWaves(){ return numberWaves; }
     public Slider getBackgroundMusic(){ return backgroundMusic; }
     public Slider getGameSound(){ return gameSound; }

@@ -9,6 +9,7 @@ public class Game {
     private static double credits;
     private static int lives;
     private static Board board;
+    private static int nbLevelTotal;
     private static int numberWavesTotal;
     private static int level;
     private static int wavesLeft;
@@ -28,10 +29,11 @@ public class Game {
             "Mur"
     };
 
-    public Game(int numberWaves, int backgroundMusic, int gameSound, int speed, int lvl){
+    public Game(int nbLevel, int numberWaves, int backgroundMusic, int gameSound, int speed, int lvl){
         board = new Board();
         credits = STARTING_CREDITS;
         lives = STARTING_LIVES;
+        nbLevelTotal = nbLevel;
         numberWavesTotal = numberWaves;
         wavesLeft = numberWaves;
         bgMusic = backgroundMusic;
@@ -49,6 +51,7 @@ public class Game {
     public static Board getBoard(){ return board; }
     public static int getLevel(){ return level; }
     public static int getWavesLeft(){ return wavesLeft;}
+    public static int getNbLevelTotal(){ return nbLevelTotal; }
     public static int getNbWavesTotal(){ return numberWavesTotal; }
     public static int getNbEnemyLeft(){ return nbEnemyLeft;}
     public static int getGameSpeed(){ return gameSpeed;}
