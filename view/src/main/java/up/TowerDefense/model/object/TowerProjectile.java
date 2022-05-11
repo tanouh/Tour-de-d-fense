@@ -19,7 +19,7 @@ public class TowerProjectile extends Projectile{
         this.freeze=freeze;
         this.initPos = initPos;
         this.destPos = destPos;
-        setTargetPos(getFutureTargetPosition());
+//        setTargetPos(getFutureTargetPosition());
     }
 
     @Override
