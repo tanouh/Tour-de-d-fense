@@ -28,11 +28,7 @@ public class PresetEnemy {
 	 * Correspond aux degats de l'enemy
 	 */
 	private float damage;
-	
-	/**
-	 * Determine si l'enemy est suicidaire ou non (s'il meurt des sa premiere attaque ou pas).
-	 */
-	private boolean suicidal;
+
 		
 	/** 
 	 * nombre de point de vie maximum du personnage
@@ -87,19 +83,17 @@ public class PresetEnemy {
 	 * @param agressiveness_degree agressivite d'un enemy
 	 * @param attackspeed vitesse d'attaque d'un enemy
 	 * @param damage degat d'un enemy
-	 * @param suicid indique si l'enemy est suicidaire, si la premiere attaque le tuera ou non
 	 * @param size indique la taille de l'enemy par rapport a une case
 	 * @param resistance indique la resistance de l'enemy contre une tour
 	 */
 	public PresetEnemy(int maxHealth, double speed, int coins, float agressiveness_degree, float attackspeed, float damage,
-					   boolean suicid, int size, float resistance, String imgName, String reloadImgName , DestructibleObstacle.ObsType target_obs,
+					    int size, float resistance, String imgName, String reloadImgName , DestructibleObstacle.ObsType target_obs,
 					   Enemy.Type EnemyType, int range, long reloadTime) {
 		this.maxHealth = maxHealth;
 		this.setSpeed(speed);
 		this.setReward(coins);
 		this.attackspeed = attackspeed;
 		this.damage = damage;
-		this.suicidal = suicid;
 		this.agressiveness_degree = agressiveness_degree;
 		this.size = size;
 		this.currentHealth = maxHealth;
@@ -116,21 +110,19 @@ public class PresetEnemy {
 	 * Definit l'enemy Covid. 
 	 * Cette enemy aura :
 	 * 
-	 * -100 points de vie maximale 
-	 * -Une vitesse 1.25 fois sup�rieur a la normale
-	 * -Il raportera 30 coins une fois tue
-	 * -Une agressivite 5 fois superieur a la normale
-	 * -Une vitesse d'attaque normale
-	 * -Il fera 100 points de degats a chaque attaque
-	 * -Il ne sera pas suicidaire
-	 * -Sa taille corespondra a 0.5 fois une case
-	 * -Sa resistance sera normale
+	 * 100 points de vie maximale
+	 * Une vitesse 0.5 fois sup�rieur a la normale
+	 * Il raportera 30 coins une fois tue
+	 * Une agressivite 5 fois superieur a la normale
+	 * Une vitesse d'attaque normale
+	 * Il fera 100 points de degats a chaque attaque
+	 * Sa resistance sera très grande
 	 * 
 	 * @return Renvoie un objet PresetEnemy contenant toute ces informations afin de creer l'enemy
 	 */
 	public static PresetEnemy Covid() {
-		return new PresetEnemy(100,0.001,30,5.00f, 1.00f,
-				100.00f, false, 1, 1.00f, "/noir.png", "/noir_touche.png",
+		return new PresetEnemy(100,0.0009,30,5.00f, 1.00f,
+				100.00f, 1, 2.00f, "/noir.png", "/noir_touche.png",
 				DestructibleObstacle.ObsType.TARGET, Enemy.Type.COVID,5, 2000);
 	}
 
@@ -138,21 +130,19 @@ public class PresetEnemy {
 	 * Definit l'enemy Bacterium. 
 	 * Cette enemy aura :
 	 * 
-	 * -100 points de vie maximale 
-	 * -Une vitesse 1.25 fois sup�rieur a la normale
-	 * -Il raportera 15 coins une fois tue
-	 * -Une agressivite normale
-	 * -Une vitesse d'attaque normale
-	 * -Il fera 10 points de degats a chaque attaque
-	 * -Il ne sera pas suicidaire
-	 * -Sa taille corespondra a 0.5 fois une case
-	 * -Sa resistance sera normale
+	 * 100 points de vie maximale
+	 * Une vitesse 1.25 fois superieur a la normale
+	 * Il raportera 15 coins une fois tue
+	 * Une agressivite normale
+	 * Une vitesse d'attaque normale
+	 * Il fera 10 points de degats a chaque attaque
+	 * Sa resistance sera normale
 	 * 
 	 * @return Renvoie un objet PresetEnemy contenant toute ces informations afin de creer l'enemy
 	 */
 	public static PresetEnemy Bacterium() {
 		return new PresetEnemy(100, 0.001, 15, 1.00f, 1.00f,
-				10.00f, false, 1, 1.00f, "/bacterium.png", "/bacterium_touche.png",
+				10.00f,  1, 1.00f, "/bacterium.png", "/bacterium_touche.png",
 				DestructibleObstacle.ObsType.TARGET, Enemy.Type.BACTERIUM,5,2000);
 	}
 	
@@ -160,21 +150,20 @@ public class PresetEnemy {
 	 * Definit l'enemy Virus. 
 	 * Cette enemy aura :
 	 * 
-	 * -100 points de vie maximale 
-	 * -Une vitesse normale
-	 * -Il raportera 20 coins une fois tue
-	 * -Une agressivite 1.5 fois superieur a la normale
-	 * -Une vitesse d'attaque normale
-	 * -Il fera 15 points de degats a chaque attaque
-	 * -Il ne sera pas suicidaire
-	 * -Sa taille corespondra a 0.5 fois une case
-	 * -Sa resistance sera 1.25 fois superieur a la normale
+	 * 100 points de vie maximale
+	 * Une vitesse très rapide
+	 * Il raportera 20 coins une fois tue
+	 * Une agressivite 1.5 fois superieur a la normale
+	 * Une vitesse d'attaque normale
+	 * Il fera 15 points de degats a chaque attaque
+	 * Sa taille corespondra a 0.5 fois une case
+	 * Sa resistance sera 1.25 fois superieur a la normale
 	 * 
 	 * @return Renvoie un objet PresetEnemy contenant toute ces informations afin de creer l'enemy
 	 */
 	public static PresetEnemy Virus() {
-		return new PresetEnemy(100, 0.001, 20, 1.50f, 1.00f,
-				15.00f, false, 1, 1.25f, "/icontest.png", "/icontest_touche.png",
+		return new PresetEnemy(100, 0.075, 20, 1.50f, 1.00f,
+				15.00f,  1, 1.25f, "/icontest.png", "/icontest_touche.png",
 				DestructibleObstacle.ObsType.TARGET, Enemy.Type.VIRUS,5,2000);
 	}
 
@@ -182,21 +171,20 @@ public class PresetEnemy {
 	 * Definit l'enemy Fungus. 
 	 * Cette enemy aura :
 	 * 
-	 * -100 points de vie maximale 
-	 * -Une vitesse 2 fois plus petite que la normale
-	 * -Il raportera 5 coins une fois tue
-	 * -Une agressivite 1.75 fois superieur a la normale
-	 * -Une vitesse d'attaque normale
-	 * -Il fera 5 points de degats a chaque attaque
-	 * -Il ne sera pas suicidaire
-	 * -Sa taille corespondra a 0.75 fois une case
-	 * -Sa resistance sera 1.75 fois superieur a la normale
+	 * 100 points de vie maximale
+	 * Une vitesse 2 fois plus petite que la normale
+	 * Il raportera 5 coins une fois tue
+	 * Une agressivite 1.75 fois superieur a la normale
+	 * Une vitesse d'attaque normale
+	 * Il fera 5 points de degats a chaque attaque
+	 * Sa taille corespondra a 0.75 fois une case
+	 * Sa resistance sera 1.75 fois superieur a la normale
 	 * 
 	 * @return Renvoie un objet PresetEnemy contenant toute ces informations afin de creer l'enemy
 	 */
 	public static PresetEnemy Fungus() {
-		return new PresetEnemy(100, 0.001, 5, 1.75f, 1.00f,
-				5.00f, false, 1, 1.75f, "/fungus.png", "/fungus_touche.png",
+		return new PresetEnemy(100, 0.00075, 5, 1.75f, 1.00f,
+				5.00f,  1, 2.0f, "/fungus.png", "/fungus_touche.png",
 				DestructibleObstacle.ObsType.TOWER, Enemy.Type.FUNGUS,2,1000);
 	}
 	
@@ -204,21 +192,20 @@ public class PresetEnemy {
 	 * Definit l'enemy Parasite. 
 	 * Cette enemy aura :
 	 * 
-	 * -100 points de vie maximale 
-	 * -Une vitesse 1.5 fois sup�rieur a la normale
-	 * -Il raportera 40 coins une fois tue
-	 * -Une agressivite 1.25 fois superieur a la normale
-	 * -Une vitesse d'attaque normale
-	 * -Il fera 20 points de degats a chaque attaque
-	 * -Il ne sera pas suicidaire
-	 * -Sa taille corespondra a 0.5 fois une case
-	 * -Sa resistance sera 0.75 fois superieur a la normale
+	 * 100 points de vie maximale
+	 * Une vitesse 1.5 fois superieur a la normale
+	 * Il raportera 40 coins une fois tue
+	 * Une agressivite 1.25 fois superieur a la normale
+	 * Une vitesse d'attaque normale
+	 * Il fera 20 points de degats a chaque attaque
+	 * Sa taille corespondra a 0.5 fois une case
+	 * Sa resistance sera 0.75 fois superieur a la normale
 	 * 
 	 * @return Renvoie un objet PresetEnemy contenant toute ces informations afin de creer l'enemy
 	 */
 	public static PresetEnemy Parasite() {
 		return new PresetEnemy(100, 0.001, 40, 1.25f, 1.00f,
-				20.00f, false, 1, 0.75f, "/noir.png", "/noir_touche.png",
+				50.00f,  1, 1.75f, "/noir.png", "/noir_touche.png",
 				DestructibleObstacle.ObsType.TOWER, Enemy.Type.PARASITE,5,2000);
 	}
 	
@@ -260,10 +247,6 @@ public class PresetEnemy {
 
 	public float getDamage() {
 		return damage;
-	}
-
-	public boolean isSuicidal() {
-		return suicidal;
 	}
 
 	public int getCurrentHealth() {
