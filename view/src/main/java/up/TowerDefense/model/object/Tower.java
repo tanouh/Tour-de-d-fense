@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import static up.TowerDefense.model.game.StaticFunctions.check_Ennemy;
+import static up.TowerDefense.model.game.StaticFunctions.check_Fungus;
 
 public class Tower extends PlaceableObstacle{
 
@@ -126,6 +127,11 @@ public class Tower extends PlaceableObstacle{
      */
     protected boolean freezingAttack;
 
+    /**
+     * Determine si les attaques de la tour detruisent les depots de fungus ou pas
+     */
+    protected boolean fungusAttack;
+
     protected ArrayList<Tile> attainableTiles = new ArrayList<Tile>();
 
     /**
@@ -144,8 +150,8 @@ public class Tower extends PlaceableObstacle{
      * @param image Image de la Tour qui s'affichera sur la carte
      */
     public Tower(double x, double y, int size, double buyingCost, double range, double power, boolean freezing,
-                 int upgradeCost, double reloadTime, long lastAttackTime, Type twType, String image,
-                 String reloadImage) {
+                 boolean fungus, int upgradeCost, double reloadTime, long lastAttackTime, Type twType,
+                 String image, String reloadImage) {
         super(x, y, size, STARTING_HEALTH, STARTING_HEALTH, ObsType.TOWER, buyingCost,image,reloadImage);
         this.range=range;
         this.power=power;
@@ -154,6 +160,7 @@ public class Tower extends PlaceableObstacle{
         this.lastAttackTime = lastAttackTime;
         this.towerType=twType;
         this.image = loadImage(image);
+        this.fungusAttack = fungus;
         this.freezingAttack = freezing;
         Game.getBoard().addToListTowers(this);
         setAttainableTiles();
@@ -174,6 +181,7 @@ public class Tower extends PlaceableObstacle{
     	this.reloadTime = presetTower.getReloadTime();
     	this.lastAttackTime = presetTower.getLastAttackTime();
     	this.towerType = presetTower.getTowerType();
+        this.fungusAttack = presetTower.isFungusAttack();
         this.freezingAttack = presetTower.isFreezingAttack();
         this.imgName = presetTower.imgName;
         this.reloadImgName = presetTower.reloadImage;
@@ -310,6 +318,17 @@ public class Tower extends PlaceableObstacle{
     }
 
     public void launchAttack(){
+        for (Tile attainableTile : attainableTiles){
+            if (fungusAttack){
+                if (check_Fungus(attainableTile)){
+                    FungusProjectile projectile = new FungusProjectile(this.position, attainableTile.getPos(), this.power,
+                            Game.getLevel(), attainableTile);
+                    MapGenerator.towerProjectilesList.add(projectile);
+                    timeSinceLastAttack = System.currentTimeMillis();
+                    return;
+                }
+            }
+        }
         for (Tile attainableTile : attainableTiles){
             if (check_Ennemy(attainableTile)){
                 target = attainableTile.getEnemy();

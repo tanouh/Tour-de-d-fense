@@ -49,7 +49,8 @@ public class TowerProjectile extends Projectile{
 
     @Override
     public BufferedImage getImage(){
-        return StaticFunctions.loadImage("/projectV2.png");
+        if (freeze) return StaticFunctions.loadImage("/freezingBall.png");
+        return StaticFunctions.loadImage("/towerBall.png");
     }
 
 

@@ -72,4 +72,11 @@ public class StaticFunctions {
     public static boolean check_Ennemy(Tile attainableTile){
         return  attainableTile != null && attainableTile.hasAnEnnemy();
     }
+
+    /**
+     * Verifie s'il y a un depot de fungus dans la case
+     */
+    public static boolean check_Fungus(Tile attainableTile){
+        return attainableTile != null && attainableTile.isBooster();
+    }
 }

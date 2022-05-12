@@ -23,7 +23,7 @@ public abstract class  Projectile  {
     protected double speed = 0.2;
     protected boolean arrivedAtTarget;
     protected int sourceLevel;
-    protected String image = "/projectV1.png";
+    protected String image = "/enemyBall.png";
 
 
     public Projectile(Position initPos, Position destPos, double pPower, int level){

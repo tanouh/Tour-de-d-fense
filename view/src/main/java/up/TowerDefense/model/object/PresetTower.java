@@ -79,6 +79,11 @@ public class PresetTower {
 	 */
 	protected boolean freezingAttack;
 
+	/**
+	 * Determine si les attaques de la tour detruisent les depots de fungus ou pas
+	 */
+	protected boolean fungusAttack;
+
     /**
      * Construit le preset d'une tour
      * 
@@ -92,12 +97,13 @@ public class PresetTower {
      * @param image est l'image qui sera affiche dans le jeu pour cette tour.
      */
     public PresetTower(double BuyingCost, double startingRange, double startingPower, int startingUpgradeCost, double startingReloadTime, 
-    					boolean freezing, long LastAttackTime, Type towerType, String image, String reloadImage) {
+    					boolean freezing, boolean fungus, long LastAttackTime, Type towerType, String image, String reloadImage) {
     	this.price = BuyingCost;
     	this.range = startingRange;
     	this.power = startingPower;
     	this.upgradeCost = startingUpgradeCost;
     	this.reloadTime = startingReloadTime;
+		this.fungusAttack = fungus;
 		this.freezingAttack = freezing;
     	this.lastAttackTime = LastAttackTime;
     	this.towerType = towerType;
@@ -122,7 +128,7 @@ public class PresetTower {
      */
     public static PresetTower TowerTest() {
 		return new PresetTower(100,10,200,100,
-				2000, false, 0, Tower.Type.TOWERTEST, "/tour",
+				2000, false, false, 0, Tower.Type.TOWERTEST, "/tour",
 				"/tour_touche");
 	}
     
@@ -135,7 +141,7 @@ public class PresetTower {
      */
     public static PresetTower Anti_champis() {
 		return new PresetTower(100,10,200,100,
-				2000, false, 0, Tower.Type.ANTI_CHAMPIS, "/Anti_Champi",
+				2000, false, true, 0, Tower.Type.ANTI_CHAMPIS, "/Anti_Champi",
 				"/Anti_Champi_Touche");
 	}
     
@@ -148,7 +154,7 @@ public class PresetTower {
      */
     public static PresetTower Leucocyte_T() {
 		return new PresetTower(100,10,200,100,
-				2000, false, 0, Tower.Type.LEUCOCYTE_T, "/LeucoT",
+				2000, false, false, 0, Tower.Type.LEUCOCYTE_T, "/LeucoT",
 				"/LeucoT_Touche");
 	}
     
@@ -161,7 +167,7 @@ public class PresetTower {
      */
     public static PresetTower Anticorps() {
 		return new PresetTower(100,10,50,100,
-				2000, true, 0, Tower.Type.ANTICORPS, "/Anticorps",
+				2000, true, false, 0, Tower.Type.ANTICORPS, "/Anticorps",
 				"/Anticorps_Touche");
 	}
     
@@ -189,6 +195,10 @@ public class PresetTower {
 
 	public boolean isFreezingAttack() {
 		return freezingAttack;
+	}
+
+	public boolean isFungusAttack(){
+		return fungusAttack;
 	}
 
 	public long getLastAttackTime() {

@@ -1,6 +1,7 @@
 package up.TowerDefense.model.map;
 
 import up.TowerDefense.model.character.Enemy;
+import up.TowerDefense.model.game.Game;
 import up.TowerDefense.model.object.DestructibleObstacle;
 import up.TowerDefense.model.object.Obstacle;
 import up.TowerDefense.model.object.PlaceableObstacle;
@@ -149,6 +150,17 @@ public class Tile {
 
     public boolean isBooster() {
         return booster;
+    }
+
+    public void destroySurrounding(int attackRange){
+        for (int i = -attackRange; i < attackRange; i++){
+            for (int j = -attackRange; j < attackRange; j++){
+                Tile inRange = Game.getBoard().getTile((int)(pos.x + i) , (int)(pos.y + j));
+                if (inRange != null && inRange.isBooster()){
+                    inRange.setBooster(false);
+                }
+            }
+        }
     }
 }
 
