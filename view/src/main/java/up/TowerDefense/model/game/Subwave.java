@@ -49,7 +49,7 @@ public class Subwave {
                 break;
             case 5:
                 enemySpawned.add(getCovid());
-                //enemySpawned.add(getBacterium());
+                enemySpawned.add(getBacterium());
                 break;
 
             default:
@@ -73,7 +73,6 @@ public class Subwave {
             if(System.currentTimeMillis() - TIME_SINCE_LAST_SPAWN > BREAK_TIME) {
                 finishedSubwave = (count++ == enemies.size());
                 if(index+1 < enemies.size()){
-                    System.out.println("fin3");
                     currentSpawn = enemies.get(++index);
                     Wave.resetTimeSinceLastSpawn();
                 }

@@ -14,14 +14,13 @@ import static up.TowerDefense.model.game.StaticFunctions.findTower;
 
 public class Enemy extends Personnage{
 
-
+	//type d'ennemi
 	public enum Type{
 		COVID,
         BACTERIUM,
         VIRUS,
         FUNGUS,
         PARASITE
-        //type d'ennemi
     }
 
 	/**
@@ -41,16 +40,27 @@ public class Enemy extends Personnage{
 	private float agressiveness_degree;
 	
 	/**
-	 * Correspond a la vitesse d'attaque de l'enemy
+	 * Correspond a la vitesse d'attaque de l'ennemi
 	 */
 	private float attackspeed;
 	
 	/**
-	 * Correspond aux degats de l'enemy
+	 * Correspond aux degats de l'ennemi
 	 */
 	private float damage;
 
+	/**
+	 * Désigne la portée d'attaque de l'ennemi
+	 */
 	private int range;
+	/**
+	 * Temps de repos avant le prochain attaque
+	 */
+	private long reloadTime;
+	/**
+	 * Temps du dernier attaque
+	 */
+	private long timeSinceLastAttack;
 	/**
 	 * Determine le type d'obstacle ciblee par l'ennemi
 	 */
@@ -92,19 +102,24 @@ public class Enemy extends Personnage{
 	 */
 	protected Position startingPos;
 
-
 	private boolean alive;
+	/**
+	 * Pour distinguer si l'ennemi meurt suite à une attaque ou à l'atteinte de la zone cible
+	 */
 	private boolean killed = false;
+	/**
+	 * Lorsque l'ennemi gèle
+	 */
 	private boolean frozen;
 	private long freezeStartTime;
 	private long freezeDuration;
 	private long totalFreezeDuration = 0;
 	private long totalTimePaused = 0;
-
+	/**
+	 * Signale quand le chemin de l'ennemi est modifié
+	 */
 	private boolean gotNewPath;
 
-	private long reloadTime;
-	private long timeSinceLastAttack;
 	/**
 	 * Pour signifier que l'ennemi est passé une fois sur une case Booster
 	 */
@@ -172,6 +187,9 @@ public class Enemy extends Personnage{
 		}
 	}
 
+	/**
+	 * Lorsque l'ennemi passe sur une case booster
+	 */
 	private void speedUp() {
 		if(!speedUp){
 			this.speed *= 1.05;
@@ -201,13 +219,19 @@ public class Enemy extends Personnage{
 		}
 	}
 
-
+	/**
+	 * Envoie les projectiles
+	 * @param target la tour cible
+	 */
 	private void launchAttack(PlaceableObstacle target) {
 		EnemyProjectile projectile = new EnemyProjectile(this.position, target.position, this.damage, Game.getLevel(), target);
 		MapGenerator.enemyProjectilesList.add(projectile);
 		timeSinceLastAttack = System.currentTimeMillis();
 	}
 
+	/**
+	 * L'expansion des cases booster par les champignons
+	 */
 	private void fungusAttack(){
 		for(int i = -range; i < range ; i++){
 			for(int j = -range ; j < range ; j++){
@@ -236,8 +260,10 @@ public class Enemy extends Personnage{
 	}
 
 
+	/**
+	 * Signale la mort de l'ennemi
+	 */
 	public void die(){
-		System.out.println("deces");
 		this.alive = false;
 		Game.getBoard().getTile(this.position).setEnemy(null);
 		if (killed) Game.setCredits(this.reward);
@@ -254,6 +280,9 @@ public class Enemy extends Personnage{
 		this.gotNewPath = false;
 	}
 
+	/**
+	 * Lorsque l'ennemi gèle suite à l'attaque d'une tour de type Anticorps
+	 */
 	public void freeze() {
 		this.frozen = true;
 		freezeStartTime = System.currentTimeMillis();
@@ -279,7 +308,6 @@ public class Enemy extends Personnage{
 
 	public void takeDamage(double power){
 		currentHealth = (int) Math.round(currentHealth - power/resistance);
-		System.out.println("             enemy " + this + " took damage\n currentHealth : " + currentHealth);
 		this.hitStart = System.currentTimeMillis();
 		tookHit = true;
 		if(currentHealth <= 0){

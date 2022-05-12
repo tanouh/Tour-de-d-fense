@@ -2,6 +2,9 @@ package up.TowerDefense.model.map;
 import up.TowerDefense.model.object.Position;
 import java.util.*;
 
+/**
+ * Cette classe modelise les noeuds qui constituent le chemin des ennemis
+ */
 public class Node {
     Tile tile;
     public int gCost; // chemin parcouru

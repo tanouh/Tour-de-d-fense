@@ -51,8 +51,6 @@ public class StaticFunctions {
                if ((i == 0 && j == 0) ||
                 (posX+i < 0 || posY+j < 0 || posX+i >= board.worldX() || posY+j >= board.worldY())) continue;
                if (check_Tower(board, posX+i, posY+j)){
-
-                   //System.out.println("tower found on : " + (posY+j) + "-" + (posX+i));
                    return new Position (posX+i , posY+j);
                }
             }

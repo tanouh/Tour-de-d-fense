@@ -274,7 +274,6 @@ public class Tower extends PlaceableObstacle{
 
     @Override
     public void takeDamage(double damage) {
-        System.out.println("             tower took damage");
         this.hitStart = System.currentTimeMillis();
         tookHit = true;
         setCurrentHealth((int)(currentHealth - damage));
@@ -303,22 +302,16 @@ public class Tower extends PlaceableObstacle{
     }
 
     public void setAttainableTiles(){
-        System.out.println((-(int)range) + " -- " + range);
         for (int i = (int)-range ; i < (int)range+1 ; i++) {
             for (int j = (int)-range; j < (int)range+1; j++) {
-//                System.out.println("case : " + ((int)Math.round(position.x) +i) + " " + ((int)Math.round(position.y) + j));
                 attainableTiles.add(Game.getBoard().getTile((int)Math.round(position.x) +i, (int)Math.round(position.y) + j));
-                //System.out.println(Game.getBoard().getTile((int)position.x + i, (int)position.y + j).getPos().x+" "
-                //        +Game.getBoard().getTile((int)position.x + i, (int)position.y + j).getPos().y);
             }
         }
-//        System.out.println("nb cases atteignables : " + attainableTiles.size());
     }
 
     public void launchAttack(){
         for (Tile attainableTile : attainableTiles){
             if (check_Ennemy(attainableTile)){
-//                System.out.println("enemy found on : " + attainableTile.getPos().x + "-" + attainableTile.getPos().y);
                 target = attainableTile.getEnemy();
                 TowerProjectile projectile = new TowerProjectile(this.position, target.position, this.power,
                         Game.getLevel(), target, freezingAttack);

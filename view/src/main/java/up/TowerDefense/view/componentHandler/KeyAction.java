@@ -9,7 +9,7 @@ import java.awt.event.ActionEvent;
  * Cette classe traite la réception des actions effectuées par l'utilisateur à partir du clavier
  */
 
-public class KeyAction extends AbstractAction {
+public class  KeyAction extends AbstractAction {
 
     public static String UP = "MOVE UP";
     public static String DOWN = "MOVE DOWN";
