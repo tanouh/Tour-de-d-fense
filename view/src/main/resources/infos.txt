@@ -16,7 +16,7 @@ text-align : center;
 <h2> Les touches interactives : </h2>
 <ul>
 <li> <h3>Pause / Play :</h3>
-<p> Cliquer sur la touche <b>P</b> pour pauser/reprendre le jeu</p>
+<p> Cliquer sur la touche <b>P</b> pour mettre en pause/reprendre le jeu</p>
 </li> 
 <li><h3> Camera :</h3> 
 <p> La manipulation de la camera se fait a partir des fleches directionnelles  </p>
@@ -39,10 +39,10 @@ text-align : center;
 </style>
 </head>
 <h1> Defenses </h1>
-<p>Pour venir a bout des ennemis, le joueur pourra lancer deux types d'offensifs.</p>
+<p>Pour venir a bout des ennemis, le joueur pourra lancer deux types d'offensives.</p>
 <h2>Les Injections temporaires</h2> :
    <d> ce sont des attaques directes, elles produisent des degats de zone autour de leur position d'appel.
-   Les attaques ne sont possibles qu'apres un certain delai apres le dernier. </d>
+   Les attaques sont espacees d'un certain délai. </d>
 <h2>Les tours de defenses</h2>:
 <d>Suivant son type, une tour peut avoir une cible specifique ou generale.</d>
 
@@ -75,22 +75,22 @@ width : 1000;
 </tr>
 <tr>
 <td><b>Tours anti-Champis</b></td>
-<td>Contre-carrent l'action des champignons, notamment en annulant caractere <b>Booster</b> des cases modifiees par les champignons.
+<td>Contre-carrent l'action des champignons, notamment en annulant le caractere <b>Booster</b> des cases modifiees par les champignons.
 </td>
 </tr>
 
 <tr>
 <td><b>Tours Anticorps</b></td>
-<td>Agit comme un freezer, ie ralentis les ennemis.</td>
+<td>Agit comme un freezer, i.e. ralentis les ennemis.</td>
 </tr>
 <tr>
 <td><b>Tours LeucoT</b></tr>
-<td>Tours a cibles generales ie attaquent tous types d'ennemis</td>
+<td>Tours a cibles generales i.e. attaquent tous types d'ennemis</td>
 </tr>
 
 <tr>
 <td><b>Murs</b></td>
-<td>Innofensifs mais devient le chemin des ennemis.</td>
+<td>Inofensifs mais devient le chemin des ennemis.</td>
 </tr>
 </table>
 
@@ -132,7 +132,7 @@ width : 1000;
 <td>Petite</td>
 <td>Grande</td>
 <td>Lente</td>
-<td>Octroient aux cases auxquelles ils passent d'une capacite a augmenter la vitesse des ennemis qui passent dessus</td>
+<td>Posent sur les cases qu'ils traversent des depots qui augmentent la vitesse des ennemis qui passent dessus</td>
 </tr>
 <tr>
 <td><b>Virus</b></td>

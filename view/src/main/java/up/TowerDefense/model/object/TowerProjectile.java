@@ -43,10 +43,6 @@ public class TowerProjectile extends Projectile{
         }
     }
 
-    public enum projectileType{
-        GENERIC,FREEZE,SNIPER
-    }
-
     @Override
     public BufferedImage getImage(){
         if (freeze) return StaticFunctions.loadImage("/freezingBall.png");
