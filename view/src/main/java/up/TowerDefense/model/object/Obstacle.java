@@ -9,7 +9,7 @@ import static up.TowerDefense.model.game.StaticFunctions.*;
 public class Obstacle {
 
     public Position position;
-    private int size; // supposé carré ?
+    private int size;
     public BufferedImage image;
 
     public Obstacle(double posX , double posY, int size, String imgName){

@@ -36,7 +36,7 @@ public abstract class Personnage{
 	protected double velocity = 0.001;
 	
 	/**
-	 * taille du personnage par rapport � une case (coefficient multiplicatif)
+	 * taille du personnage par rapport à une case (coefficient multiplicatif)
 	 * */
 	protected int size;
 	

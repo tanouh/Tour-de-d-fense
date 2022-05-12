@@ -10,6 +10,9 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
+/**
+ * Cette classe représente les tuiles du plateau
+ */
 public class Tile {
     protected boolean isEmpty = true;
     protected Obstacle obstacle;
@@ -19,12 +22,17 @@ public class Tile {
     protected BufferedImage boosterImage;
     protected Position pos;
     protected boolean isTarget = false;
+    /**
+     * Liés aux attaques de zone du joueur
+     */
     protected boolean isAttacked = false;
     protected long startAttack;
     protected long durationAttack = 300;
+    /**
+     * Liés aux attaques des champignons
+     */
     protected boolean booster = false;
     public long boostingStartTime;
-    public long boostingDelay = 5000;
 
 
 

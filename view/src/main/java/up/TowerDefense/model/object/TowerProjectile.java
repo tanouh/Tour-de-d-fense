@@ -55,8 +55,6 @@ public class TowerProjectile extends Projectile{
 
     public Position getFutureTargetPosition(){
         double distance = Path.getCartesianDistance(initPos, destPos);
-//        System.out.println("distance : " + distance);
-//        System.out.println("temps : " + targetEnemy.getTravelTime() + " " + distance/(speed*Game.getGameSpeed()));
         return targetEnemy.getPath().GetPos(targetEnemy.getTravelTime() + (distance/(speed*Game.getGameSpeed())),
                 targetEnemy.getSpeed());
     }

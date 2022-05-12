@@ -49,7 +49,7 @@ public class Subwave {
                 break;
             case 5:
                 enemySpawned.add(getCovid());
-                //enemySpawned.add(getBacterium());
+                enemySpawned.add(getBacterium());
                 break;
 
             default:

@@ -62,7 +62,6 @@ public class Game {
     public static int getCurrentlyPlacing(){ return currentlyPlacing; }
 
     public static void reset(){
-
     }
 
     public static boolean isCurrentlyUpdating() {

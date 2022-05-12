@@ -18,6 +18,9 @@ public class Board {
     private static ArrayList<Enemy> toRemoveEnemyList;
     public ArrayList<Position> spawnPoint;
 
+    /**
+     * Les statistiques d'un attaque de zone
+     */
     private int directAttackRange = 2;
     private double directAttackPower = 200;
     private double directAttackPrice = 100;
@@ -182,8 +185,6 @@ public class Board {
         return res;
     }
 
-
-
     /**
      * Renvoie les points de frai
      */
@@ -208,6 +209,9 @@ public class Board {
         }
     }
 
+    /**
+     * Lance les attaques perpétuées par les tours et les ennemis
+     */
     public static void launchAllAttacks(){
         for (Enemy enemy : listEnemy){
             if(System.currentTimeMillis() - enemy.getTimeSinceLastAttack() > enemy.getReloadTime())
@@ -223,9 +227,13 @@ public class Board {
         listTowers.removeAll(toRemoveTowerList);
         toRemoveTowerList = new ArrayList<>();
         toRemoveEnemyList = new ArrayList<>();
-
     }
 
+    /**
+     * Exécute une attaque de zone, directement à partir de l'interface graphique
+     * @param posX
+     * @param posY
+     */
     public void directAttack(int posX, int posY){
         if (System.currentTimeMillis() - lastDirectAttackTime < directAttackDelay/Game.getGameSpeed()) return;
         boolean useful = false;
@@ -247,6 +255,12 @@ public class Board {
         }
     }
 
+    /**
+     * Améliore les statistiques des tours
+     * @param posX
+     * @param posY
+     * @return Vrai si la position donnée renvoie bien sur une tour
+     */
     public boolean upgradeTower(int posX, int posY){
         Tile tile = getTile(posX, posY);
         if (tile.obstacle != null && tile.obstacle instanceof Tower){
