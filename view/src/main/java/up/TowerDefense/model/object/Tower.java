@@ -65,7 +65,7 @@ public class Tower extends PlaceableObstacle{
     /**
      * Represente le nombre de point de vie initiale de la Tour.
      */
-    protected final static int STARTING_HEALTH = 5 ; //à voir
+    protected final static int STARTING_HEALTH = 10 ; //à voir
     
     /**
      * Represente le temps d'attente entre chaque attaque de la Tour.
@@ -149,10 +149,10 @@ public class Tower extends PlaceableObstacle{
      * @param twType Type de la Tour
      * @param image Image de la Tour qui s'affichera sur la carte
      */
-    public Tower(double x, double y, int size, double buyingCost, double range, double power, boolean freezing,
+    public Tower(double x, double y, int size, double buyingCost, int startingHealth, double range, double power, boolean freezing,
                  boolean fungus, int upgradeCost, double reloadTime, long lastAttackTime, Type twType,
                  String image, String reloadImage) {
-        super(x, y, size, STARTING_HEALTH, STARTING_HEALTH, ObsType.TOWER, buyingCost,image,reloadImage);
+        super(x, y, size, startingHealth, startingHealth, ObsType.TOWER, buyingCost,image,reloadImage);
         this.range=range;
         this.power=power;
         this.upgradeCost=upgradeCost;
@@ -167,13 +167,13 @@ public class Tower extends PlaceableObstacle{
     }
 
     /**
-     * onstruit une Tour a la position "position" a partir des informations d'un PresetTower
+     * Construit une Tour a la position "position" a partir des informations d'un PresetTower
      * 
      * @param presetTower Contient toute les informations concernant la Tour notament son prix et les degats qu'elle fait.
      * @param position Definit la position de la Tour.
      */
     public Tower(PresetTower presetTower, Position position) {
-    	super(position.x, position.y, presetTower.getSize(), PresetTower.STARTING_HEALTH, PresetTower.STARTING_HEALTH,
+    	super(position.x, position.y, presetTower.getSize(), presetTower.startingHealth, presetTower.startingHealth,
                 ObsType.TOWER, presetTower.price, presetTower.imgName,presetTower.reloadImage);
     	this.range = presetTower.getRange();
     	this.power = presetTower.getPower();

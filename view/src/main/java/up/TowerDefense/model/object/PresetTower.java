@@ -3,7 +3,7 @@ package up.TowerDefense.model.object;
 import up.TowerDefense.model.object.Tower.Type;
 
 public class PresetTower {
-	
+
 	/**
 	 * Correspond a la localisation de l'image de la tour par rapport au repertoire courant
 	 */
@@ -47,7 +47,7 @@ public class PresetTower {
     /**
      * Represente le nombre de point de vie initiale de la Tour.
      */
-    protected final static int STARTING_HEALTH = 100 ; //à voir
+    protected int startingHealth; //à voir
     
     /**
      * Represente le temps d'attente entre chaque attaque de la Tour.
@@ -96,10 +96,11 @@ public class PresetTower {
      * @param towerType represente le type de la Tour (TOWERTEST, ANTI_CHAMPIS, LEUCOCYTE_T, ANTICORPS)
      * @param image est l'image qui sera affiche dans le jeu pour cette tour.
      */
-    public PresetTower(double BuyingCost, double startingRange, double startingPower, int startingUpgradeCost, double startingReloadTime, 
+    public PresetTower(double BuyingCost, double startingRange,int startingHealth, double startingPower, int startingUpgradeCost, double startingReloadTime,
     					boolean freezing, boolean fungus, long LastAttackTime, Type towerType, String image, String reloadImage) {
     	this.price = BuyingCost;
     	this.range = startingRange;
+		this.startingHealth = startingHealth;
     	this.power = startingPower;
     	this.upgradeCost = startingUpgradeCost;
     	this.reloadTime = startingReloadTime;
@@ -127,7 +128,7 @@ public class PresetTower {
      * @return Renvoie un objet PresetTower contenant toute ces informations afin de creer la Tour
      */
     public static PresetTower TowerTest() {
-		return new PresetTower(100,10,200,100,
+		return new PresetTower(100,10,100,200,100,
 				2000, false, false, 0, Tower.Type.TOWERTEST, "/tour",
 				"/tour_touche");
 	}
@@ -140,7 +141,7 @@ public class PresetTower {
      * @return Renvoie un objet PresetTower contenant toute ces informations afin de creer la Tour
      */
     public static PresetTower Anti_champis() {
-		return new PresetTower(100,10,200,100,
+		return new PresetTower(150,10,300,200,100,
 				2000, false, true, 0, Tower.Type.ANTI_CHAMPIS, "/Anti_Champi",
 				"/Anti_Champi_Touche");
 	}
@@ -153,7 +154,7 @@ public class PresetTower {
      * @return Renvoie un objet PresetTower contenant toute ces informations afin de creer la Tour
      */
     public static PresetTower Leucocyte_T() {
-		return new PresetTower(100,10,200,100,
+		return new PresetTower(100,10,200,200,100,
 				2000, false, false, 0, Tower.Type.LEUCOCYTE_T, "/LeucoT",
 				"/LeucoT_Touche");
 	}
@@ -166,7 +167,7 @@ public class PresetTower {
      * @return Renvoie un objet PresetTower contenant toute ces informations afin de creer la Tour
      */
     public static PresetTower Anticorps() {
-		return new PresetTower(100,10,50,100,
+		return new PresetTower(150,10,200,50,100,
 				2000, true, false, 0, Tower.Type.ANTICORPS, "/Anticorps",
 				"/Anticorps_Touche");
 	}

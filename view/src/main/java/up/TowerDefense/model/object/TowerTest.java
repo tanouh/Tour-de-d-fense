@@ -16,7 +16,7 @@ public class TowerTest extends Tower{
     private static String reloadImage = "/tour_touche";
 
     public TowerTest(double x, double y) {
-        super(x, y, newSize, newBuyingCost,startingRange, startingPower, false, false, startingUpgradeCost,
+        super(x, y, newSize, newBuyingCost,100,startingRange, startingPower, false, false, startingUpgradeCost,
                 startingReloadTime,  newLastAttackTime, towerType,image,reloadImage);
     }
 

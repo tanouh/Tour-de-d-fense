@@ -14,7 +14,7 @@ public class Wave {
     public static int waveOrder ;
     public static long TIME_SINCE_LAST_SPAWN;
     public static final int MAX_NB_WAVES = Game.getNbWavesTotal();
-    public static long TIME_INTERVAL = 20000;  // Intervalle de temps entre deux séries de vagues
+    public static long TIME_INTERVAL = 10000;  // Intervalle de temps entre deux séries de vagues
     public static long DELAY = 5000;
 
     public Wave() {
