@@ -27,7 +27,7 @@ public class PresetEnemy {
 	/**
 	 * Correspond aux degats de l'enemy
 	 */
-	private float dammage;
+	private float damage;
 	
 	/**
 	 * Determine si l'enemy est suicidaire ou non (s'il meurt des sa premiere attaque ou pas).
@@ -86,19 +86,19 @@ public class PresetEnemy {
 	 * @param coins argent raporter par un enemy
 	 * @param agressiveness_degree agressivite d'un enemy
 	 * @param attackspeed vitesse d'attaque d'un enemy
-	 * @param dammage degat d'un enemy
+	 * @param damage degat d'un enemy
 	 * @param suicid indique si l'enemy est suicidaire, si la premiere attaque le tuera ou non
 	 * @param size indique la taille de l'enemy par rapport a une case
 	 * @param resistance indique la resistance de l'enemy contre une tour
 	 */
-	public PresetEnemy(int maxHealth, double speed, int coins, float agressiveness_degree, float attackspeed, float dammage,
+	public PresetEnemy(int maxHealth, double speed, int coins, float agressiveness_degree, float attackspeed, float damage,
 					   boolean suicid, int size, float resistance, String imgName, String reloadImgName , DestructibleObstacle.ObsType target_obs,
 					   Enemy.Type EnemyType, int range, long reloadTime) {
 		this.maxHealth = maxHealth;
 		this.setSpeed(speed);
 		this.setReward(coins);
 		this.attackspeed = attackspeed;
-		this.dammage = dammage;
+		this.damage = damage;
 		this.suicidal = suicid;
 		this.agressiveness_degree = agressiveness_degree;
 		this.size = size;
@@ -196,7 +196,7 @@ public class PresetEnemy {
 	 */
 	public static PresetEnemy Fungus() {
 		return new PresetEnemy(100, 0.001, 5, 1.75f, 1.00f,
-				5.00f, false, 1, 1.75f, "/noir.png", "/noir_touche.png",
+				5.00f, false, 1, 1.75f, "/fungus.png", "/fungus_touche.png",
 				DestructibleObstacle.ObsType.TOWER, Enemy.Type.FUNGUS,2,1000);
 	}
 	
@@ -258,8 +258,8 @@ public class PresetEnemy {
 		return attackspeed;
 	}
 
-	public float getDammage() {
-		return dammage;
+	public float getDamage() {
+		return damage;
 	}
 
 	public boolean isSuicidal() {

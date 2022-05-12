@@ -16,6 +16,7 @@ public class Tile {
     protected Enemy enemy;
     protected BufferedImage imageTile;
     protected BufferedImage imageTileAttacked;
+    protected BufferedImage boosterImage;
     protected Position pos;
     protected boolean isTarget = false;
     protected boolean isAttacked = false;
@@ -38,6 +39,7 @@ public class Tile {
         this.imageTile=null;
         try{
             imageTileAttacked = ImageIO.read(getClass().getResourceAsStream("/imageTileAttacked.png"));
+            boosterImage = ImageIO.read(getClass().getResourceAsStream("/depot_champi.png"));
         }catch(IOException e) {
             e.printStackTrace();
         }
@@ -103,7 +105,8 @@ public class Tile {
     }
 
     public BufferedImage getImageTile() {
-        if (isAttacked){
+        if (booster) return boosterImage;
+        else if (isAttacked){
             if (System.currentTimeMillis() - startAttack < durationAttack){
                 return imageTileAttacked;
             }
@@ -137,16 +140,6 @@ public class Tile {
 
     public boolean isBooster() {
         return booster;
-    }
-
-    public BufferedImage getBoosterImage(){
-        BufferedImage img = null;
-        try{
-            img = ImageIO.read(getClass().getResourceAsStream("/depot_champi.png"));
-        }catch (IOException e) {
-            e.printStackTrace();
-        }
-        return img;
     }
 }
 

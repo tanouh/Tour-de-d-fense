@@ -122,7 +122,7 @@ public class Enemy extends Personnage{
 		this.reward = presetEnemy.getCoins();
 		this.agressiveness_degree = presetEnemy.getAgressiv_Degree();
 		this.attackspeed = presetEnemy.getAgressiv_Degree();
-		this.damage = presetEnemy.getDammage();
+		this.damage = presetEnemy.getDamage();
 		this.target = presetEnemy.getTarget();
 		this.range= presetEnemy.getRange();
 		this.startingPos = position;
@@ -191,13 +191,10 @@ public class Enemy extends Personnage{
 	 * Cible la tour
 	 */
 	public void identifyTarget(){
-		Position towerPos = findTower(this.position, this.range, Game.getBoard());
-
 		if(this.ennemyType == FUNGUS ){
-			if(towerPos == null){
-				fungusAttack();
-			}
+			fungusAttack();
 		}else{
+		Position towerPos = findTower(this.position, this.range, Game.getBoard());
 			if(towerPos != null){
 				launchAttack((PlaceableObstacle) Game.getBoard().getOccupier(towerPos));
 			}

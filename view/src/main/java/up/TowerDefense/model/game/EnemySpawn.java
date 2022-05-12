@@ -45,6 +45,7 @@ public class EnemySpawn {
      */
     public void spawnEnemies(){
         Enemy e = new Enemy(this.enemy, new Position(spawnX, spawnY));
+        System.out.println("spawn " + e);
         e.live();
         e.upgrade(Game.getLevel());
         System.out.println("\t\t\t\tStats :"+e);

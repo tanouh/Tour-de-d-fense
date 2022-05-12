@@ -192,12 +192,7 @@ public class MapGenerator {
             )
             {
                 Tile t = gameBoard.getTile(worldCol,worldRow);
-                BufferedImage image = null;
-                if(t.isBooster()){
-                    image = gameBoard.getTile(worldCol, worldRow).getBoosterImage();
-                } else {
-                    image = gameBoard.getTile(worldCol, worldRow).getImageTile();
-                }
+                BufferedImage image = gameBoard.getTile(worldCol, worldRow).getImageTile();
                 g.drawImage(image,screenX,screenY,tileSize,tileSize,null);
             }
             worldCol ++;
