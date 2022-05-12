@@ -2,6 +2,7 @@
 <head>
 <style>
 body{
+width:1000;
 font-family : verdana;
 padding : 23px 5px 23px 5px
 
@@ -26,7 +27,7 @@ text-align : center;
 <head>
 <style>
 body{
-width : 500;
+width : 1000;
 font-family : verdana;
 padding : 23px 5px 23px 5px
 
@@ -58,7 +59,7 @@ h1{
 text-align : center;
 }
 table{
-width : 500;
+width : 1000;
 }
 
 </style>
@@ -104,8 +105,48 @@ padding : 23px 5px 23px 5px
 h1{
 text-align : center;
 }
-
+table{
+width : 1000;
+}
 </style>
 </head>
-<h1>Information sur les Anticorps</h1>
+<h1>Ennemis</h1>
+<p>Il existe cinq types d'ennemis.</p>
+
+<table>
+<tr>
+<td><b>Denomination</b></td>
+<td><b>Puissance</b></td>
+<td><b>Resistance</b></td>
+<td><b>Vitesse</b></td>
+<td><b>Particularite</b></td>
+</tr>
+<tr>
+<td><b>Bacterium</b></td>
+<td>Moyenne</td>
+<td>Moyenne</td>
+<td>Moyenne</td>
+</tr>
+<tr>
+<td><b>Champis</b></td>
+<td>Petite</td>
+<td>Grande</td>
+<td>Lente</td>
+<td>Octroient aux cases auxquelles ils passent d'une capacite a augmenter la vitesse des ennemis qui passent dessus</td>
+</tr>
+<tr>
+<td><b>Virus</b></td>
+<td>Moyenne</td>
+<td>Moyenne</td>
+<td>Tres rapide</td>
+</tr>
+<tr>
+<td><b>Covid</b></tr>
+<td>Grande</td>
+<td>Grande</td>
+<td>Tres lente</td>
+</tr>
+
+</table>
+
 
