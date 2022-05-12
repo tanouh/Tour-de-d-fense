@@ -64,10 +64,10 @@ public class EnemySpawn {
     La quantité augmente en fonction de l'ordre de la vague
      */
     public static EnemySpawn getBacterium(){
-        return new EnemySpawn(PresetEnemy.Bacterium(), waveOrder,getRandomSpawnPosition(Game.getBoard()));
+        return new EnemySpawn(PresetEnemy.Bacterium(), 5*waveOrder,getRandomSpawnPosition(Game.getBoard()));
     }
     public static EnemySpawn getVirus(){
-        return new EnemySpawn(PresetEnemy.Virus(), waveOrder,getRandomSpawnPosition(Game.getBoard()));
+        return new EnemySpawn(PresetEnemy.Virus(), 3*waveOrder,getRandomSpawnPosition(Game.getBoard()));
     }
     public static EnemySpawn getCovid(){
         return new EnemySpawn(PresetEnemy.Covid(), waveOrder,getRandomSpawnPosition(Game.getBoard()));
@@ -76,7 +76,7 @@ public class EnemySpawn {
         return new EnemySpawn(PresetEnemy.Fungus(), 1,getRandomSpawnPosition(Game.getBoard()));
     }
     public static EnemySpawn getParasite(){
-        return new EnemySpawn(PresetEnemy.Parasite(), waveOrder,getRandomSpawnPosition(Game.getBoard()));
+        return new EnemySpawn(PresetEnemy.Parasite(), 3*waveOrder,getRandomSpawnPosition(Game.getBoard()));
     }
 
 

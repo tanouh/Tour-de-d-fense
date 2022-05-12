@@ -36,21 +36,25 @@ public class Subwave {
         ArrayList<EnemySpawn> enemySpawned = new ArrayList<>();
         switch (Wave.waveOrder){
             case 1: case 3:
+                enemySpawned.add(getFungus());
                 enemySpawned.add(getVirus());
-                //enemySpawned.add(getFungus());
-                //enemySpawned.add(getFungus());
+                enemySpawned.add(getFungus());
+
                 break;
             case 2:
                 enemySpawned.add(getBacterium());
-                //enemySpawned.add(getParasite());
+                enemySpawned.add(getParasite());
+                enemySpawned.add(getFungus());
                 break;
             case 4:
                 enemySpawned.add(getVirus());
-                //enemySpawned.add(getParasite());
+                enemySpawned.add(getParasite());
+                enemySpawned.add(getFungus());
+                enemySpawned.add(getBacterium());
+
                 break;
             case 5:
-                //enemySpawned.add(getCovid());
-                enemySpawned.add(getBacterium());
+                enemySpawned.add(getCovid());
                 break;
 
             default:
