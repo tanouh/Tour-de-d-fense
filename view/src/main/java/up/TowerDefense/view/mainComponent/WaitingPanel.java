@@ -20,16 +20,18 @@ public class WaitingPanel extends JPanel{
 
     private int nbLevel;
     private int numberWaves;
+    private int zoom;
     private int backgroundMusic;
     private int gameSound;
     private int gameSpeed;
 
-    public WaitingPanel(GameWindow gameWindow, int nbLevel, int numberWaves,
+    public WaitingPanel(GameWindow gameWindow, int nbLevel, int numberWaves, int zoom,
                          int backgroundMusic, int gameSound, int gameSpeed){
 
         this.setLayout(new BorderLayout());
         this.gameWindow = gameWindow;
         this.nbLevel = nbLevel;
+        this.zoom = zoom;
         this.numberWaves = numberWaves;
         this.backgroundMusic = backgroundMusic;
         this.gameSound = gameSound;

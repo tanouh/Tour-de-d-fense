@@ -42,8 +42,8 @@ public class GamePanel extends JPanel {
     private JLabel choix = new JLabel("Choix de la tour :");;
     private JLabel upgradeMsg = new JLabel("(cliquez sur une tour)");
 
-    public GamePanel(GameWindow gameWindow, int nbLevel, int numberWaves, int backgroundMusic,
-                     int gameSound, int gameSpeed, int level){
+    public GamePanel(GameWindow gameWindow, int nbLevel, int numberWaves, int zoom,
+                     int backgroundMusic, int gameSound, int gameSpeed, int level){
         this.gameWindow = gameWindow;
         this.game = new Game(nbLevel, numberWaves, backgroundMusic, gameSound, gameSpeed, level);
         Wave.resetWave();
@@ -53,7 +53,7 @@ public class GamePanel extends JPanel {
         this.setHeader();
         this.setSideMenu();
         this.add(header, BorderLayout.NORTH);
-        screenPanel = new ScreenPanel(gameWindow, this, level);
+        screenPanel = new ScreenPanel(gameWindow, this, level, zoom);
         body.add(screenPanel);
         this.add(body, BorderLayout.CENTER);
         this.add(sideMenu, BorderLayout.EAST);

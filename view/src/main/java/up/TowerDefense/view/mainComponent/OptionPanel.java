@@ -12,6 +12,7 @@ public class OptionPanel extends JPanel {
     private JPanel footer = new JPanel(new GridLayout(1,2));
     private Slider nbLevel = null;
     private Slider numberWaves = null;
+    private Slider zoom = null;
     private Slider backgroundMusic = null;
     private Slider gameSound = null;
     private Slider gameSpeed = null;
@@ -50,13 +51,15 @@ public class OptionPanel extends JPanel {
             nbLevel.setValue(HomePanel.getOptions()[0]);
             numberWaves = new Slider(body, "Nombre de vagues", 3, 5);
             numberWaves.setValue(HomePanel.getOptions()[1]);
+            zoom = new Slider(body, "Zoom", 1, 2);
+            zoom.setValue(HomePanel.getOptions()[2]);
         }
         backgroundMusic = new Slider(body, "Musique", 0, 10);
         gameSound = new Slider(body, "Son du jeu", 0,10);
         gameSpeed = new Slider(body, "Vitesse de jeu", 1,2);
-        backgroundMusic.setValue(HomePanel.getOptions()[2]);
-        gameSound.setValue(HomePanel.getOptions()[3]);
-        gameSpeed.setValue(HomePanel.getOptions()[4]);
+        backgroundMusic.setValue(HomePanel.getOptions()[3]);
+        gameSound.setValue(HomePanel.getOptions()[4]);
+        gameSpeed.setValue(HomePanel.getOptions()[5]);
         footer.add(applyOptions);
         if (gamePanel != null){
             Button abandonButton = new Button();
@@ -68,6 +71,7 @@ public class OptionPanel extends JPanel {
 
     public Slider getNbLevel(){ return nbLevel; }
     public Slider getNumberWaves(){ return numberWaves; }
+    public Slider getZoom(){ return zoom;}
     public Slider getBackgroundMusic(){ return backgroundMusic; }
     public Slider getGameSound(){ return gameSound; }
     public Slider getGameSpeed(){ return gameSpeed; }

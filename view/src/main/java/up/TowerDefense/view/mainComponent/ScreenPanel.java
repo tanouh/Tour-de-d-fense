@@ -22,15 +22,15 @@ import static up.TowerDefense.view.componentHandler.KeyAction.*;
 public class ScreenPanel extends JPanel implements Runnable{
     //Paramètrages de l'écran
     public static int originalTileSize = GameWindow.widthScreen*95/12000;
-    public static int scale = 1;
-    public static int tileSize = originalTileSize*scale;
+    public static int scale;
+    public static int tileSize;
 
 
-    public static int nbCol = GameWindow.widthScreen*4/(5*originalTileSize);
-    public static int nbRow = GameWindow.heightScreen*9/(10*originalTileSize);
+    public static int nbCol;
+    public static int nbRow;
 
-    public static int windowWidth = originalTileSize*nbCol;
-    public static int windowHeight = originalTileSize*nbRow;
+    public static int windowWidth;
+    public static int windowHeight;
 
     //Paramètrage du monde de jeu
     public static final int MAX_WORLD_COL = 100;
@@ -57,10 +57,16 @@ public class ScreenPanel extends JPanel implements Runnable{
     public ActionMap actionMap;
 
 
-    public ScreenPanel(GameWindow gameWindow, GamePanel gamePanel, int level){
+    public ScreenPanel(GameWindow gameWindow, GamePanel gamePanel, int level, int zoom){
         this.gameWindow = gameWindow;
         this.gamePanel = gamePanel;
         KeyAction.setScreenPanel(this);
+        scale = zoom;
+        tileSize = originalTileSize*scale;
+        nbCol = GameWindow.widthScreen*4/(5*originalTileSize);
+        nbRow = GameWindow.heightScreen*9/(10*originalTileSize);
+        windowWidth = originalTileSize*nbCol;
+        windowHeight = originalTileSize*nbRow;
 
         mapGen= new MapGenerator(this, loadMap_(level)); /*A modifier : ajouter un paramètrage pour l'image*/
 

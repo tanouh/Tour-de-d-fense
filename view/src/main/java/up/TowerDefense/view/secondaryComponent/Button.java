@@ -39,7 +39,8 @@ public class Button extends JButton {
                         HomePanel.getOptions()[1],
                         HomePanel.getOptions()[2],
                         HomePanel.getOptions()[3],
-                        HomePanel.getOptions()[4]
+                        HomePanel.getOptions()[4],
+                        HomePanel.getOptions()[5]
                 );
             }
             else {
@@ -49,6 +50,7 @@ public class Button extends JButton {
                         HomePanel.getOptions()[2],
                         HomePanel.getOptions()[3],
                         HomePanel.getOptions()[4],
+                        HomePanel.getOptions()[5],
                         1);
             }
             gameWindow.getContentPane().removeAll();
@@ -132,10 +134,11 @@ public class Button extends JButton {
         this.addActionListener(event -> {
             int nbLevel = optionPanel.getNbLevel().getValue();
             int numberWaves = optionPanel.getNumberWaves().getValue();
+            int zoom = optionPanel.getZoom().getValue();
             int backgroundMusic = optionPanel.getBackgroundMusic().getValue();
             int gameSound = optionPanel.getGameSound().getValue();
             int gameSpeed = optionPanel.getGameSpeed().getValue();
-            homePanel.applyOptions(nbLevel, numberWaves, backgroundMusic, gameSound, gameSpeed);
+            homePanel.applyOptions(nbLevel, numberWaves, zoom, backgroundMusic, gameSound, gameSpeed);
             gameWindow.getContentPane().removeAll();
             gameWindow.getContentPane().add(homePanel);
             gameWindow.getContentPane().revalidate();
@@ -298,6 +301,7 @@ public class Button extends JButton {
                         HomePanel.getOptions()[2],
                         HomePanel.getOptions()[3],
                         HomePanel.getOptions()[4],
+                        HomePanel.getOptions()[5],
                         Game.getLevel()+1);
             }else{
                 nextPanel = new GamePanel(gameWindow,
@@ -306,6 +310,7 @@ public class Button extends JButton {
                         HomePanel.getOptions()[2],
                         HomePanel.getOptions()[3],
                         HomePanel.getOptions()[4],
+                        HomePanel.getOptions()[5],
                         Game.getLevel());
             }
             gameWindow.getContentPane().removeAll();

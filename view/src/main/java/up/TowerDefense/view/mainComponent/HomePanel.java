@@ -20,6 +20,7 @@ public class HomePanel extends JPanel{
     //stockage des options choisies (stockage dans une List ?) :
     private static int nbLevel = 5;
     private static int numberWaves = 5;
+    private static int zoom = 1;
     private static int backgroundMusic = 5;
     private static int gameSound = 5;
     private static int gameSpeed = 1;
@@ -67,10 +68,11 @@ public class HomePanel extends JPanel{
      *Modifie les parametres de jeu en fonction
      * des choix faits dans le OptionPanel
      */
-    public void applyOptions(int nbLevel, int numberWaves, int backgroundMusic, int gameSound, int gameSpeed){
+    public void applyOptions(int nbLevel, int numberWaves, int zoom, int backgroundMusic, int gameSound, int gameSpeed){
         if (numberWaves != 0){
             this.nbLevel = nbLevel;
             this.numberWaves = numberWaves;
+            this.zoom = zoom;
         }
         this.backgroundMusic = backgroundMusic;
         this.gameSound = gameSound;
@@ -78,6 +80,6 @@ public class HomePanel extends JPanel{
     }
 
     public static int[] getOptions(){
-        return new int[]{nbLevel, numberWaves, backgroundMusic, gameSound, gameSpeed};
+        return new int[]{nbLevel, numberWaves, zoom, backgroundMusic, gameSound, gameSpeed};
     }
 }
