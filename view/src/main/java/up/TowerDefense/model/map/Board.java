@@ -8,7 +8,6 @@ import up.TowerDefense.model.object.Position;
 import up.TowerDefense.model.object.Tower;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 public class Board {
     private Tile[][] tiles;
@@ -207,10 +206,6 @@ public class Board {
                     spawnPoint.add(new Position (j,i));
             }
         }
-    }
-
-    public void shuffleSpawnList(){
-        Collections.shuffle(spawnPoint);
     }
 
     public static void launchAllAttacks(){

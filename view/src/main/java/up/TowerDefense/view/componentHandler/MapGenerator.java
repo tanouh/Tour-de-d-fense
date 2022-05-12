@@ -45,6 +45,8 @@ public class MapGenerator {
     public static ArrayList<Projectile> enemyProjectilesList;
     public static ArrayList<Projectile> toRemoveEnemyProjectiles;
     public static ArrayList<Projectile> toRemoveTowerProjectiles;
+    public static ArrayList<Tile> boosterCase;
+    public static ArrayList<Tile> toRemoveBoosterCase;
 
 
 
@@ -56,6 +58,8 @@ public class MapGenerator {
         enemyProjectilesList = new ArrayList<>();
         toRemoveEnemyProjectiles = new ArrayList<>();
         toRemoveTowerProjectiles = new ArrayList<>();
+        boosterCase = new ArrayList<>();
+        toRemoveBoosterCase = new ArrayList<>();
 
         this.screenPanel = screenPanel;
 
@@ -204,6 +208,12 @@ public class MapGenerator {
 
     }
 
+    public void drawBoosterCase(Graphics2D g){
+        for( Tile booster : new CopyOnWriteArrayList<>(boosterCase)){
+            drawElementaryComponent(g, booster.getPos(), booster.getBoosterImage(), 1);
+        }
+    }
+
 
     /**
      * Dessine les objets sur la carte au fur et à mesure où ils sont créés
@@ -230,6 +240,7 @@ public class MapGenerator {
         for (Projectile enemyProj : new CopyOnWriteArrayList<>(enemyProjectilesList)){
             drawElementaryComponent(g, enemyProj.getPos(), enemyProj.getImage(), enemyProj.getSize());
         }
+
     }
 
     private void drawElementaryComponent(Graphics2D g,Position pos, BufferedImage img,double size){
@@ -353,6 +364,20 @@ public class MapGenerator {
             towerProjectilesList.removeAll(toRemoveTowerProjectiles);
         }catch (ConcurrentModificationException ex){
             System.out.println("Attempt to modify projectileList while iterating on it.");
+        }
+    }
+
+    public void updateBoosterCase(){
+        try{
+            for (Tile booster : boosterCase){
+                if(System.currentTimeMillis() - booster.boostingStartTime > booster.boostingDelay){
+                    toRemoveBoosterCase.add(booster);
+                    booster.setBooster(false);
+                }
+            }
+            boosterCase.removeAll(toRemoveBoosterCase);
+        }catch(ConcurrentModificationException ex){
+            System.out.println("Attempt to modify boosterCase while iterating on it.");
         }
     }
 

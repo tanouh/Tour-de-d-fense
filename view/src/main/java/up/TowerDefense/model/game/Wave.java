@@ -1,6 +1,5 @@
 package up.TowerDefense.model.game;
 
-
 /**
  * la classe est utilisé en tant que gestionnaire de vagues
  */

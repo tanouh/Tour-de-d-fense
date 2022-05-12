@@ -15,14 +15,6 @@ public class Pathfinding {
         HashSet<Node> closedSet = new HashSet<Node>();
         openSet.add(startNode);
 
-//        System.out.print("start : ");
-//        if (startNode.tile == null) System.out.println("bug tile start");
-//        else if (startNode.tile.getPos() == null) System.out.println("bug pos start");
-//        else System.out.println(startNode);
-//        if (targetNode.tile == null) System.out.println("bug tile target");
-//        else if (targetNode.tile.getPos() == null) System.out.println("bug pos target");
-//        else System.out.println(targetNode);
-
         long a = System.currentTimeMillis();
 
         while (openSet.size() > 0) {
@@ -30,11 +22,9 @@ public class Pathfinding {
             Node node = Node.BestNode(openSet);
             openSet.remove(node);
             closedSet.add(node);
-//            System.out.println(node);
 
             //Cas où node est le final
             if (node.isTarget(targetPos)){
-                System.out.println("temps de calcul du path : " + (System.currentTimeMillis()-a));
                 return RetracePath(startNode,node);
             }
 
@@ -61,11 +51,9 @@ public class Pathfinding {
             }
             if(System.currentTimeMillis() -a > 200) {
                 Game.getBoard().getTargetZone().remove(targetPos);
-//                System.out.println("retry");
                 return FindPath(startPos, Game.getBoard().getNearestTargetPosition(startPos));
             }
         }
-        System.out.println("########  PATH NULL ##########");
         return null;
     }
 

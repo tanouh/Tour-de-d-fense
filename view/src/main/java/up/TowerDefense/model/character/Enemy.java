@@ -9,11 +9,8 @@ import up.TowerDefense.model.object.PlaceableObstacle;
 import up.TowerDefense.model.object.Position;
 import up.TowerDefense.view.componentHandler.MapGenerator;
 
+import static up.TowerDefense.model.character.Enemy.Type.FUNGUS;
 import static up.TowerDefense.model.game.StaticFunctions.findTower;
-
-
-/*TODO Les lignes reliées à path devraient être décommentées lorsque le problème relié à pathfinding sera réglé
- */
 
 public class Enemy extends Personnage{
 
@@ -23,8 +20,7 @@ public class Enemy extends Personnage{
         BACTERIUM,
         VIRUS,
         FUNGUS,
-        PARASITE,
-        BOMBER
+        PARASITE
         //type d'ennemi
     }
 
@@ -59,6 +55,11 @@ public class Enemy extends Personnage{
 	 * Determine le type d'obstacle ciblee par l'ennemi
 	 */
 	private DestructibleObstacle.ObsType target;
+
+	/**
+	 * Détermine le type de l'ennemi
+	 */
+	private Enemy.Type ennemyType;
 
 	/**
 	 * Chemin suivi par l'enemi
@@ -125,8 +126,9 @@ public class Enemy extends Personnage{
 		this.path = Pathfinding.FindPath(position, Game.getBoard().getNearestTargetPosition(position));
 		Game.getBoard().addToListEnemy(this);
 
+		this.ennemyType = presetEnemy.EnemyType;
 		this.gotNewPath = false;
-		reloadTime = 2000;
+		reloadTime = presetEnemy.getReloadTime();
 
 
 	}
@@ -143,10 +145,9 @@ public class Enemy extends Personnage{
 		}else if (frozen) return;
 
 		/**
-		 * Quand l'ennemi pass aux environs d'une tour il ne s'arrête pas mais lance des projectiles tout en continuant
+		 * Quand l'ennemi passe aux environs d'une tour il ne s'arrête pas mais lance des projectiles tout en continuant
 		 * Quant à lui, s'il accuse une attaque sa vitesse diminue
 		 */
-		//if(System.currentTimeMillis() - travelTime > this.getSpeed()){
 
 		if (gotNewPath){
 			rebootEnemyTime();
@@ -157,11 +158,18 @@ public class Enemy extends Personnage{
 		this.position = path.GetPos(travelTime, this.speed*Game.getGameSpeed());
 		Game.getBoard().getTile(this.position).setEnemy(this);
 
-
+		if(Game.getBoard().getTile(this.position).isBooster()){
+			if(this.ennemyType != FUNGUS)
+				this.speedUp();
+		}
 		if (Game.getBoard().getTile((int)Math.round(position.x),(int)Math.round(position.y)).isTarget()){
 			Game.setLives(-1);
 			this.alive = false;
 		}
+	}
+
+	private void speedUp() {
+		this.speed *= 1.1;
 	}
 
 	/**
@@ -176,16 +184,34 @@ public class Enemy extends Personnage{
 	 */
 	public void identifyTarget(){
 		Position towerPos = findTower(this.position, this.range, Game.getBoard());
-		//System.out.println("###########Detection de tour : "+ towerPos);
-		if(towerPos != null){
-			System.out.println("   tower found");
-			launchAttack((PlaceableObstacle) Game.getBoard().getOccupier(towerPos));
+
+		if(this.ennemyType == FUNGUS ){
+			if(towerPos == null){
+				fungusAttack();
+			}
+		}else{
+			if(towerPos != null){
+				launchAttack((PlaceableObstacle) Game.getBoard().getOccupier(towerPos));
+			}
 		}
 	}
+
 
 	private void launchAttack(PlaceableObstacle target) {
 		EnemyProjectile projectile = new EnemyProjectile(this.position, target.position, this.damage, Game.getLevel(), target);
 		MapGenerator.enemyProjectilesList.add(projectile);
+		timeSinceLastAttack = System.currentTimeMillis();
+	}
+
+	private void fungusAttack(){
+		for(int i = -range; i < range ; i++){
+			for(int j = -range ; j < range ; j++){
+				if(Game.getBoard().getTile((int)(position.x + i) , (int)(position.y + j)) != null ){
+					MapGenerator.boosterCase.add( Game.getBoard().getTile((int)(position.x + i) , (int)(position.y + j)) );
+					Game.getBoard().getTile((int)(position.x + i) , (int)(position.y + j)).setBooster(true);
+				}
+			}
+		}
 		timeSinceLastAttack = System.currentTimeMillis();
 	}
 
@@ -195,32 +221,12 @@ public class Enemy extends Personnage{
 	 */
 	public void upgrade(int level) {
 		if(level > 1){
-			System.out.println("ENEMY UPGRADES");
 			reward *= level;
 			agressiveness_degree += (level/2);
 			attackspeed += level;
 			damage += (damage*level/2);
 			range+= level;
 		}
-	}
-
-
-	/**
-	 * L'ennemi attaque un allie "target".
-	 *
-	 * @param target Represente l'allie cible de l'ennemi
-	 */
-	public void attackAlly(Ally target) {
-		target.setCurrentHealth(target.getCurrentHealth()-(int)(this.damage/target.getResistance()));
-	}
-
-
-	/**
-	 * L'enemy soigne un autre enemy "target".
-	 * @param target Represente l'enemy soigne par l'enemy courant.
-	 */
-	private void heal(Enemy target) {
-		target.setCurrentHealth(target.getCurrentHealth()+2);
 	}
 
 

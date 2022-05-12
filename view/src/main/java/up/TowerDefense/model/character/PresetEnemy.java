@@ -59,7 +59,14 @@ public class PresetEnemy {
 	 */
 	private float resistance;
 
+	/**
+	 * portée d'attaque de l'ennemi
+	 */
 	private int range;
+	/**
+	 * Temps de pause avant le prochain attaque
+	 */
+	private long reloadTime;
 
 	/**
 	 * type de cible
@@ -86,7 +93,7 @@ public class PresetEnemy {
 	 */
 	public PresetEnemy(int maxHealth, double speed, int coins, float agressiveness_degree, float attackspeed, float dammage,
 					   boolean suicid, int size, float resistance, String imgName, String reloadImgName , DestructibleObstacle.ObsType target_obs,
-					   Enemy.Type EnemyType, int range) {
+					   Enemy.Type EnemyType, int range, long reloadTime) {
 		this.maxHealth = maxHealth;
 		this.setSpeed(speed);
 		this.setReward(coins);
@@ -102,6 +109,7 @@ public class PresetEnemy {
 		this.target = target_obs;
 		this.EnemyType = EnemyType;
 		this.range=range;
+		this.reloadTime = reloadTime;
 	}
 	
 	/**
@@ -123,7 +131,7 @@ public class PresetEnemy {
 	public static PresetEnemy Covid() {
 		return new PresetEnemy(100,0.001,30,5.00f, 1.00f,
 				100.00f, false, 1, 1.00f, "/noir.png", "/noir_touche.png",
-				DestructibleObstacle.ObsType.TARGET, Enemy.Type.COVID,5);
+				DestructibleObstacle.ObsType.TARGET, Enemy.Type.COVID,5, 2000);
 	}
 
 	/**
@@ -145,7 +153,7 @@ public class PresetEnemy {
 	public static PresetEnemy Bacterium() {
 		return new PresetEnemy(100, 0.001, 15, 1.00f, 1.00f,
 				10.00f, false, 1, 1.00f, "/bacterium.png", "/bacterium_touche.png",
-				DestructibleObstacle.ObsType.TARGET, Enemy.Type.BACTERIUM,5);
+				DestructibleObstacle.ObsType.TARGET, Enemy.Type.BACTERIUM,5,2000);
 	}
 	
 	/**
@@ -167,7 +175,7 @@ public class PresetEnemy {
 	public static PresetEnemy Virus() {
 		return new PresetEnemy(100, 0.001, 20, 1.50f, 1.00f,
 				15.00f, false, 1, 1.25f, "/icontest.png", "/icontest_touche.png",
-				DestructibleObstacle.ObsType.TARGET, Enemy.Type.VIRUS,5);
+				DestructibleObstacle.ObsType.TARGET, Enemy.Type.VIRUS,5,2000);
 	}
 
 	/**
@@ -189,7 +197,7 @@ public class PresetEnemy {
 	public static PresetEnemy Fungus() {
 		return new PresetEnemy(100, 0.001, 5, 1.75f, 1.00f,
 				5.00f, false, 1, 1.75f, "/noir.png", "/noir_touche.png",
-				DestructibleObstacle.ObsType.TOWER, Enemy.Type.FUNGUS,5);
+				DestructibleObstacle.ObsType.TOWER, Enemy.Type.FUNGUS,2,5000);
 	}
 	
 	/**
@@ -211,7 +219,7 @@ public class PresetEnemy {
 	public static PresetEnemy Parasite() {
 		return new PresetEnemy(100, 0.001, 40, 1.25f, 1.00f,
 				20.00f, false, 1, 0.75f, "/noir.png", "/noir_touche.png",
-				DestructibleObstacle.ObsType.TOWER, Enemy.Type.PARASITE,5);
+				DestructibleObstacle.ObsType.TOWER, Enemy.Type.PARASITE,5,2000);
 	}
 	
 	public int getSize() {
@@ -267,5 +275,9 @@ public class PresetEnemy {
 	}
 
 	public int getRange() { return range;
+	}
+
+	public long getReloadTime() {
+		return reloadTime;
 	}
 }

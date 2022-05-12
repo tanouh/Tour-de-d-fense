@@ -21,6 +21,9 @@ public class Tile {
     protected boolean isAttacked = false;
     protected long startAttack;
     protected long durationAttack = 300;
+    protected boolean booster = false;
+    public long boostingStartTime;
+    public long boostingDelay = 5000;
 
 
 
@@ -124,6 +127,26 @@ public class Tile {
         if (obstacle != null) return;
         isAttacked = true;
         startAttack = System.currentTimeMillis();
+    }
+
+
+    public void setBooster(boolean b) {
+        this.booster = b ;
+        boostingStartTime = System.currentTimeMillis();
+    }
+
+    public boolean isBooster() {
+        return booster;
+    }
+
+    public BufferedImage getBoosterImage(){
+        BufferedImage img = null;
+        try{
+            img = ImageIO.read(getClass().getResourceAsStream("/depot_champi.png"));
+        }catch (IOException e) {
+            e.printStackTrace();
+        }
+        return img;
     }
 }
 
