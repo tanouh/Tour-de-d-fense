@@ -46,7 +46,6 @@ public class MapGenerator {
     public static ArrayList<Projectile> toRemoveEnemyProjectiles;
     public static ArrayList<Projectile> toRemoveTowerProjectiles;
     public static ArrayList<Tile> boosterCase;
-    public static ArrayList<Tile> toRemoveBoosterCase;
 
 
 
@@ -59,7 +58,6 @@ public class MapGenerator {
         toRemoveEnemyProjectiles = new ArrayList<>();
         toRemoveTowerProjectiles = new ArrayList<>();
         boosterCase = new ArrayList<>();
-        toRemoveBoosterCase = new ArrayList<>();
 
         this.screenPanel = screenPanel;
 
@@ -128,7 +126,6 @@ public class MapGenerator {
             case 5 :
             case 4 :
                 t.placeObstacle(VEIN);
-//                System.out.println(t.getPos().x + " " + t.getPos().y);
                 break;
             case 2 :
                 t.placeObstacle(SKIN);
@@ -196,21 +193,18 @@ public class MapGenerator {
             {
                 Tile t = gameBoard.getTile(worldCol,worldRow);
                 BufferedImage image = null;
-
-                g.drawImage(gameBoard.getTile(worldCol, worldRow).getImageTile(),screenX,screenY,tileSize,tileSize,null);
+                if(t.isBooster()){
+                    image = gameBoard.getTile(worldCol, worldRow).getBoosterImage();
+                } else {
+                    image = gameBoard.getTile(worldCol, worldRow).getImageTile();
+                }
+                g.drawImage(image,screenX,screenY,tileSize,tileSize,null);
             }
             worldCol ++;
             if(worldCol == MAX_WORLD_COL){
                 worldCol = 0;
                 worldRow++;
             }
-        }
-
-    }
-
-    public void drawBoosterCase(Graphics2D g){
-        for( Tile booster : new CopyOnWriteArrayList<>(boosterCase)){
-            drawElementaryComponent(g, booster.getPos(), booster.getBoosterImage(), 1);
         }
     }
 
@@ -366,20 +360,5 @@ public class MapGenerator {
             System.out.println("Attempt to modify projectileList while iterating on it.");
         }
     }
-
-    public void updateBoosterCase(){
-        try{
-            for (Tile booster : boosterCase){
-                if(System.currentTimeMillis() - booster.boostingStartTime > booster.boostingDelay){
-                    toRemoveBoosterCase.add(booster);
-                    booster.setBooster(false);
-                }
-            }
-            boosterCase.removeAll(toRemoveBoosterCase);
-        }catch(ConcurrentModificationException ex){
-            System.out.println("Attempt to modify boosterCase while iterating on it.");
-        }
-    }
-
 }
 

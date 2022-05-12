@@ -105,7 +105,10 @@ public class Enemy extends Personnage{
 
 	private long reloadTime;
 	private long timeSinceLastAttack;
-
+	/**
+	 * Pour signifier que l'ennemi est passé une fois sur une case Booster
+	 */
+	private boolean speedUp = false;
 
 	/**
 	 * Construit un enemy a la position "position" a partir des informations d'un PresetEnemy
@@ -129,6 +132,7 @@ public class Enemy extends Personnage{
 		this.ennemyType = presetEnemy.EnemyType;
 		this.gotNewPath = false;
 		reloadTime = presetEnemy.getReloadTime();
+
 
 
 	}
@@ -169,7 +173,11 @@ public class Enemy extends Personnage{
 	}
 
 	private void speedUp() {
-		this.speed *= 1.1;
+		if(!speedUp){
+			this.speed *= 1.05;
+			speedUp = true;
+		}
+
 	}
 
 	/**
@@ -225,7 +233,8 @@ public class Enemy extends Personnage{
 			agressiveness_degree += (level/2);
 			attackspeed += level;
 			damage += (damage*level/2);
-			range+= level;
+			if(this.ennemyType != FUNGUS)
+				range+= level;
 		}
 	}
 

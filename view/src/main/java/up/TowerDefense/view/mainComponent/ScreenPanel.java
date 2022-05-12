@@ -165,7 +165,6 @@ public class ScreenPanel extends JPanel implements Runnable{
         mapGen.updateCharactersPositions();
         Game.getBoard().launchAllAttacks();
         mapGen.updateProjectilesPos();
-        //mapGen.updateBoosterCase();
         testVictory();
     }
 
@@ -176,7 +175,6 @@ public class ScreenPanel extends JPanel implements Runnable{
         super.paintComponent(g);
         Graphics2D g2D = (Graphics2D)g;
         mapGen.draw(g2D);
-        mapGen.drawBoosterCase(g2D);
         mapGen.drawComponents(g2D);
 
         g2D.dispose();

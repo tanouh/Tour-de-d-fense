@@ -197,7 +197,7 @@ public class PresetEnemy {
 	public static PresetEnemy Fungus() {
 		return new PresetEnemy(100, 0.001, 5, 1.75f, 1.00f,
 				5.00f, false, 1, 1.75f, "/noir.png", "/noir_touche.png",
-				DestructibleObstacle.ObsType.TOWER, Enemy.Type.FUNGUS,2,5000);
+				DestructibleObstacle.ObsType.TOWER, Enemy.Type.FUNGUS,2,1000);
 	}
 	
 	/**
