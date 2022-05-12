@@ -98,8 +98,8 @@ public class ScreenPanel extends JPanel implements Runnable{
     private String loadMap_(int level) {
         switch(level){
             case 1 : return "/mapL1V1.png";
-            case 2 : return "/mapL1V1.png";
-            case 3 : return "/map3_V2.png";
+            case 2 : return "/mapL2V3.png";
+            case 3 : return "/mapL3V1.png";
             default: return "/map4_V2.png";
         }
     }
