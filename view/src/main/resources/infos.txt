@@ -126,6 +126,7 @@ width : 1000;
 <td>Moyenne</td>
 <td>Moyenne</td>
 <td>Moyenne</td>
+<td>Attaquent en masse</td>
 </tr>
 <tr>
 <td><b>Champis</b></td>

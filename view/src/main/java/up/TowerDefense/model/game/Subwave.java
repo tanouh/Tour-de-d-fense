@@ -55,6 +55,8 @@ public class Subwave {
                 break;
             case 5:
                 enemySpawned.add(getCovid());
+                enemySpawned.add(getCovid());
+                enemySpawned.add(getCovid());
                 break;
 
             default:
