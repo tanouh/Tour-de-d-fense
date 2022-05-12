@@ -42,7 +42,7 @@ text-align : center;
 <p>Pour venir a bout des ennemis, le joueur pourra lancer deux types d'offensives.</p>
 <h2>Les Injections temporaires</h2> :
    <d> ce sont des attaques directes, elles produisent des degats de zone autour de leur position d'appel.
-   Les attaques sont espacees d'un certain délai. </d>
+   Les attaques sont espacees d'un certain delai. </d>
 <h2>Les tours de defenses</h2>:
 <d>Suivant son type, une tour peut avoir une cible specifique ou generale.</d>
 
