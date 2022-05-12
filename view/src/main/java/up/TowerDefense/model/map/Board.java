@@ -140,19 +140,10 @@ public class Board {
      * @param posX
      * @param posY
      */
-    public boolean addObstacle(PlaceableObstacle obstacle, int posX, int posY) {
-        if (getTile(posX, posY).isEmpty
+    public boolean canAddObstacle(PlaceableObstacle obstacle, int posX, int posY) {
+        return (getTile(posX, posY).isEmpty
                 && legalPlacement(obstacle, posX, posY)
-                && obstacle.getBuyingCost() <= Game.getCredits()) {
-
-            setOccupier(obstacle, posX, posY);
-            Game.setCredits(-obstacle.getBuyingCost());
-            return true;
-        } else {
-            Exception e = new Exception("Action denied");
-            e.printStackTrace();
-            return false;
-        }
+                && obstacle.getBuyingCost() <= Game.getCredits());
     }
 
     /**

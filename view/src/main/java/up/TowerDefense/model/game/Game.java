@@ -101,7 +101,7 @@ public class Game {
     }
 
     public static boolean gameWon(){
-        return (wavesLeft == 0 && board.getListEnemy().size() == 0 && lives > 0);
+        return (wavesLeft == 0 && board.getListEnemy().size() == 0 && lives > 0 && Wave.isEndOfLevel());
     }
 
     public static boolean gameLost(){

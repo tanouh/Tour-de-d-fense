@@ -18,6 +18,7 @@ public class Wave {
     public static long DELAY = 5000;
 
     public Wave() {
+        endOfLevel = false;
         resetTimeSinceLastSpawn();
         waveOrder = 1;
         currentWave = Subwave.subwavesInOrder();
@@ -33,14 +34,17 @@ public class Wave {
             running = true;
         }
         if(running){
-            if(waveOrder > MAX_NB_WAVES){
-                endOfLevel = true;
-                running = false;
-            }else {
-                if (!currentWave.isFinished()) {
-                    currentWave.run();
-                } else {
+            if (!currentWave.isFinished()) {
+                currentWave.run();
+            }
+            else {
+                if(waveOrder+1 > MAX_NB_WAVES){
+                    endOfLevel = true;
+                    running = false;
+                }
+                else {
                     if(System.currentTimeMillis() - TIME_SINCE_LAST_SPAWN > TIME_INTERVAL){
+                        waveOrder++;
                         currentWave = Subwave.subwavesInOrder();
                         resetTimeSinceLastSpawn();
                     }
@@ -65,6 +69,10 @@ public class Wave {
 
     public static void resetWave(){
         endOfLevel = false;
+    }
+
+    public static boolean isEndOfLevel(){
+        return endOfLevel;
     }
 
     public static void resetTimeSinceLastSpawn() {

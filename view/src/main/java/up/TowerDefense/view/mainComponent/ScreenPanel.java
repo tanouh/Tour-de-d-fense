@@ -221,6 +221,8 @@ public class ScreenPanel extends JPanel implements Runnable{
 
     public void testVictory(){
         if (Game.gameWon()){
+            gameThread.interrupt();
+            gameThread = null;
             gameWindow.getContentPane().removeAll();
             gameWindow.getContentPane().add(new EndPanel(true, gameWindow));
             gameWindow.getContentPane().revalidate();

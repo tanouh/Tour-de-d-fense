@@ -110,8 +110,8 @@ public class PresetEnemy {
 	 * Definit l'enemy Covid. 
 	 * Cette enemy aura :
 	 * 
-	 * 100 points de vie maximale
-	 * Une vitesse 0.5 fois sup�rieur a la normale
+	 * 400 points de vie maximale
+	 * Une vitesse 0.5 fois superieure a la normale
 	 * Il raportera 30 coins une fois tue
 	 * Une agressivite 5 fois superieur a la normale
 	 * Une vitesse d'attaque normale
@@ -121,8 +121,8 @@ public class PresetEnemy {
 	 * @return Renvoie un objet PresetEnemy contenant toute ces informations afin de creer l'enemy
 	 */
 	public static PresetEnemy Covid() {
-		return new PresetEnemy(100,0.0009,100,5.00f, 1.00f,
-				100.00f, 1, 2.00f, "/noir.png", "/noir_touche.png",
+		return new PresetEnemy(400,0.0005,100,5.00f, 1.00f,
+				100.00f, 2, 2.00f, "/noir.png", "/noir_touche.png",
 				DestructibleObstacle.ObsType.TARGET, Enemy.Type.COVID,5, 2000);
 	}
 
@@ -163,7 +163,7 @@ public class PresetEnemy {
 	 */
 	public static PresetEnemy Virus() {
 		return new PresetEnemy(100, 0.002, 30, 1.50f, 1.00f,
-				15.00f,  1, 1.25f, "/icontest.png", "/icontest_touche.png",
+				15.00f,  1, 1.25f, "/virus.png", "/virus_touche.png",
 				DestructibleObstacle.ObsType.TARGET, Enemy.Type.VIRUS,5,2000);
 	}
 
@@ -185,7 +185,7 @@ public class PresetEnemy {
 	public static PresetEnemy Fungus() {
 		return new PresetEnemy(100, 0.00075, 60, 1.75f, 1.00f,
 				5.00f,  1, 2.0f, "/fungus.png", "/fungus_touche.png",
-				DestructibleObstacle.ObsType.TOWER, Enemy.Type.FUNGUS,2,1000);
+				DestructibleObstacle.ObsType.TOWER, Enemy.Type.FUNGUS,3,1000);
 	}
 	
 	/**

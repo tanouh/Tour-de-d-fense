@@ -10,7 +10,7 @@ import static up.TowerDefense.model.game.Wave.*;
  */
 public class Subwave {
     public static final long SPAWN_INTERVAL = 1000; // temps entre l'apparition des enemy
-    public static final long BREAK_TIME = 10000; // pause entre deux sous-vagues d'enemySpawn
+    public static final long BREAK_TIME = 7000; // pause entre deux sous-vagues d'enemySpawn
 
 
     private int index;
@@ -63,7 +63,6 @@ public class Subwave {
                 break;
         }
         Game.setWavesLeft(Game.getWavesLeft()-1);
-        Wave.waveOrder++;
         return new Subwave(enemySpawned);
     }
 

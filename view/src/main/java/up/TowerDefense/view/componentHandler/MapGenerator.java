@@ -286,10 +286,12 @@ public class MapGenerator {
             default :
                 return;
         }if (obstacle != null) {
-            if (gameBoard.addObstacle(obstacle, posX, posY)) {
+            if (gameBoard.canAddObstacle(obstacle, posX, posY)) {
                 obstaclesList.add(obstacle);
+                gameBoard.setOccupier(obstacle, posX, posY);
+                Game.setCredits(-obstacle.getBuyingCost());
                 updateCharactersPaths();
-            }
+            }else gameBoard.getListTowers().remove(obstacle);
         }
     }
 
