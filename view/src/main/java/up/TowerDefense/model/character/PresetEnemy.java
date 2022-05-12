@@ -162,7 +162,7 @@ public class PresetEnemy {
 	 * @return Renvoie un objet PresetEnemy contenant toute ces informations afin de creer l'enemy
 	 */
 	public static PresetEnemy Virus() {
-		return new PresetEnemy(100, 0.075, 20, 1.50f, 1.00f,
+		return new PresetEnemy(100, 0.002, 20, 1.50f, 1.00f,
 				15.00f,  1, 1.25f, "/icontest.png", "/icontest_touche.png",
 				DestructibleObstacle.ObsType.TARGET, Enemy.Type.VIRUS,5,2000);
 	}
