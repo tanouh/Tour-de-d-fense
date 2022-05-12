@@ -98,13 +98,13 @@ public class Enemy extends Personnage{
 	private boolean frozen;
 	private long freezeStartTime;
 	private long freezeDuration;
-	private long totalFreezeDuration = 0;
-	private long totalTimePaused = 0;
+	private long totalTimeDelay = 0;
 
 	private boolean gotNewPath;
 
 	private long reloadTime;
 	private long timeSinceLastAttack;
+
 	/**
 	 * Pour signifier que l'ennemi est passé une fois sur une case Booster
 	 */
@@ -145,8 +145,11 @@ public class Enemy extends Personnage{
 	public void update_position(){
 		if(frozen && System.currentTimeMillis() - freezeStartTime > freezeDuration){
 			unfreeze();
-			totalFreezeDuration += System.currentTimeMillis()-freezeStartTime;
+			this.addToTotalTimeDelay(System.currentTimeMillis() - freezeStartTime);
 		}else if (frozen) return;
+		if (speedUp && !Game.getBoard().getTile(this.position).isBooster()){
+			speedDown();
+		}
 
 		/**
 		 * Quand l'ennemi passe aux environs d'une tour il ne s'arrête pas mais lance des projectiles tout en continuant
@@ -157,7 +160,7 @@ public class Enemy extends Personnage{
 			rebootEnemyTime();
 		}
 		Game.getBoard().getTile(this.position).setEnemy(null);
-		travelTime = System.currentTimeMillis() - lifeTime - totalFreezeDuration - totalTimePaused;
+		travelTime = System.currentTimeMillis() - lifeTime - totalTimeDelay;
 
 		this.position = path.GetPos(travelTime, this.speed*Game.getGameSpeed());
 		Game.getBoard().getTile(this.position).setEnemy(this);
@@ -174,10 +177,20 @@ public class Enemy extends Personnage{
 
 	private void speedUp() {
 		if(!speedUp){
-			this.speed *= 1.05;
+			this.update_paths();
+			this.setGotNewPath(true);
+			this.speed *= 2;
 			speedUp = true;
 		}
+	}
 
+	private void speedDown() {
+		if(speedUp){
+			this.update_paths();
+			this.setGotNewPath(true);
+			this.speed /= 2;
+			speedUp = false;
+		}
 	}
 
 	/**
@@ -248,8 +261,7 @@ public class Enemy extends Personnage{
 	 * Réinitialise tous les chronomètres reliés à un ennemi
 	 */
 	public void rebootEnemyTime() {
-		this.totalFreezeDuration = 0;
-		this.totalTimePaused = 0;
+		this.totalTimeDelay = 0;
 		this.lifeTime = System.currentTimeMillis();
 		this.gotNewPath = false;
 	}
@@ -316,8 +328,8 @@ public class Enemy extends Personnage{
 		this.freezeDuration = i;
 	}
 
-	public void addToTotalTimePaused(long timePaused){
-		totalTimePaused += timePaused;
+	public void addToTotalTimeDelay(long timeDelay){
+		totalTimeDelay += timeDelay;
 	}
 
 	public float getAgressiveness_degree() {

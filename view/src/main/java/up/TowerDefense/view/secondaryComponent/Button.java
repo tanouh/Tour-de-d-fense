@@ -161,6 +161,9 @@ public class Button extends JButton {
             int gameSound = optionPanel.getGameSound().getValue();
             int gameSpeed = optionPanel.getGameSpeed().getValue();
             gamePanel.getGame().applyOptions(backgroundMusic, gameSound, gameSpeed);
+            if (gameSpeed != Game.getOldGameSpeed()){
+                gamePanel.getScreenPanel().changedSpeed(gameSpeed);
+            }
             gamePanel.getScreenPanel().setPaused(false);
             gameWindow.getContentPane().removeAll();
             gameWindow.getContentPane().add(gamePanel);

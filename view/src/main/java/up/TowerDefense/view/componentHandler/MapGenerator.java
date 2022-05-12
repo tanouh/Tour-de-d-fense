@@ -296,7 +296,7 @@ public class MapGenerator {
     /**
      * Mets à jour le chemin suivi par l'enemi, cette fonction est appelée à chaque fois qu'une tour a été placée ou supprimée de la carte
      */
-    private void updateCharactersPaths() {
+    public void updateCharactersPaths() {
         try{
             for (Personnage c : charactersList){
                 if(c instanceof Enemy){

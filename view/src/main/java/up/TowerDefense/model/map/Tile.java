@@ -134,6 +134,7 @@ public class Tile {
 
 
     public void setBooster(boolean b) {
+        if (this.isTarget || obstacle != null) return;
         this.booster = b ;
         boostingStartTime = System.currentTimeMillis();
     }

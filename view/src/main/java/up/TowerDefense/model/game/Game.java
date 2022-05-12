@@ -16,6 +16,7 @@ public class Game {
     private static int nbEnemyLeft = 0;
     private static int bgMusic;
     private static int soundLevel;
+    private static int oldGameSpeed;
     private static int gameSpeed;
     private static int currentlyPlacing; //Type d'obstacle sélectionné (Mur par défaut)
     private static boolean currentlyUpdating = false;
@@ -39,6 +40,7 @@ public class Game {
         bgMusic = backgroundMusic;
         soundLevel = gameSound;
         gameSpeed = speed;
+        oldGameSpeed = speed;
         level = lvl;
         currentlyPlacing = 6;
         reset();
@@ -55,6 +57,7 @@ public class Game {
     public static int getNbWavesTotal(){ return numberWavesTotal; }
     public static int getNbEnemyLeft(){ return nbEnemyLeft;}
     public static int getGameSpeed(){ return gameSpeed;}
+    public static int getOldGameSpeed(){ return oldGameSpeed; }
     public static String[] getListOptions(){ return listOptions; }
     public static int getCurrentlyPlacing(){ return currentlyPlacing; }
 
@@ -84,10 +87,18 @@ public class Game {
         currentlyPlacing = typeObstacle;
     }
 
+    public static void setOldGameSpeed(int gameSpeed){
+        oldGameSpeed = gameSpeed;
+    }
+
     public void applyOptions(int backgroundMusic, int gameSound, int speed){
         bgMusic = backgroundMusic;
         soundLevel = gameSound;
         gameSpeed = speed;
+    }
+
+    public static int[] getOptions(){
+        return new int[]{bgMusic, soundLevel, gameSpeed};
     }
 
     public static boolean gameWon(){
@@ -95,6 +106,6 @@ public class Game {
     }
 
     public static boolean gameLost(){
-        return ((wavesLeft > 0 || nbEnemyLeft > 0) && lives <= 0);
+        return lives <= 0;
     }
 }

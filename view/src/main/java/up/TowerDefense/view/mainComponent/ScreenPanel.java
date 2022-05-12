@@ -121,12 +121,19 @@ public class ScreenPanel extends JPanel implements Runnable{
             startPause = System.currentTimeMillis();
         }else{
             for (Enemy en : Game.getBoard().getListEnemy()){
-                en.addToTotalTimePaused(System.currentTimeMillis() - startPause);
+                en.addToTotalTimeDelay(System.currentTimeMillis() - startPause);
             }
         }
     }
 
     public boolean isPaused(){ return paused;}
+
+    public void changedSpeed(int gameSpeed){
+        if (Game.getOldGameSpeed() != gameSpeed){
+            Game.setOldGameSpeed(gameSpeed);
+            mapGen.updateCharactersPaths();
+        }
+    }
 
     /**
      * Definit l'intervalle entre deux update du jeu

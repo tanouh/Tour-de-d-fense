@@ -1,5 +1,6 @@
 package up.TowerDefense.view.mainComponent;
 
+import up.TowerDefense.model.game.Game;
 import up.TowerDefense.view.secondaryComponent.Button;
 import up.TowerDefense.view.secondaryComponent.Slider;
 
@@ -53,13 +54,20 @@ public class OptionPanel extends JPanel {
             numberWaves.setValue(HomePanel.getOptions()[1]);
             zoom = new Slider(body, "Zoom", 1, 2);
             zoom.setValue(HomePanel.getOptions()[2]);
+            backgroundMusic = new Slider(body, "Musique", 0, 10);
+            gameSound = new Slider(body, "Son du jeu", 0,10);
+            gameSpeed = new Slider(body, "Vitesse de jeu", 1,2);
+            backgroundMusic.setValue(HomePanel.getOptions()[3]);
+            gameSound.setValue(HomePanel.getOptions()[4]);
+            gameSpeed.setValue(HomePanel.getOptions()[5]);
+        }else {
+            backgroundMusic = new Slider(body, "Musique", 0, 10);
+            gameSound = new Slider(body, "Son du jeu", 0, 10);
+            gameSpeed = new Slider(body, "Vitesse de jeu", 1, 2);
+            backgroundMusic.setValue(Game.getOptions()[0]);
+            gameSound.setValue(Game.getOptions()[1]);
+            gameSpeed.setValue(Game.getOptions()[2]);
         }
-        backgroundMusic = new Slider(body, "Musique", 0, 10);
-        gameSound = new Slider(body, "Son du jeu", 0,10);
-        gameSpeed = new Slider(body, "Vitesse de jeu", 1,2);
-        backgroundMusic.setValue(HomePanel.getOptions()[3]);
-        gameSound.setValue(HomePanel.getOptions()[4]);
-        gameSpeed.setValue(HomePanel.getOptions()[5]);
         footer.add(applyOptions);
         if (gamePanel != null){
             Button abandonButton = new Button();
