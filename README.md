@@ -38,4 +38,4 @@ Currently, it can be run through gradle too:
 
 
 Find the source code in : **./view/src/main/java/up/TowerDefense/**
-
+Find the final report in : **./Doc
