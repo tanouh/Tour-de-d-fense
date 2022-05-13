@@ -122,7 +122,7 @@ public class PresetEnemy {
 	 */
 	public static PresetEnemy Covid() {
 		return new PresetEnemy(400,0.0005,100,5.00f, 1.00f,
-				100.00f, 2, 2.00f, "/noir.png", "/noir_touche.png",
+				100.00f, 2, 2.00f, "/covid.png", "/covid_touche.png",
 				DestructibleObstacle.ObsType.TARGET, Enemy.Type.COVID,5, 2000);
 	}
 
@@ -205,7 +205,7 @@ public class PresetEnemy {
 	 */
 	public static PresetEnemy Parasite() {
 		return new PresetEnemy(100, 0.001, 50, 1.25f, 1.00f,
-				50.00f,  1, 1.75f, "/noir.png", "/noir_touche.png",
+				50.00f,  1, 1.75f, "/parasite.png", "/parasite_touche.png",
 				DestructibleObstacle.ObsType.TOWER, Enemy.Type.PARASITE,5,2000);
 	}
 	
