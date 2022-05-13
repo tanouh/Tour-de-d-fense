@@ -125,6 +125,8 @@ public class Enemy extends Personnage{
 	 */
 	private boolean speedUp = false;
 
+	private boolean isCurrentlyUpdatingPath = false;
+
 	/**
 	 * Construit un enemy a la position "position" a partir des informations d'un PresetEnemy
 	 * 
@@ -215,7 +217,10 @@ public class Enemy extends Personnage{
 	 * Mise à jour de la trajectoire à chaque fois qu'un obstacle est placé
 	 */
 	public void update_paths(){
+		if (isCurrentlyUpdatingPath) return;
+		isCurrentlyUpdatingPath = true;
 		this.path = Pathfinding.FindPath(this.position, Game.getBoard().getNearestTargetPosition(position));
+		isCurrentlyUpdatingPath = false;
 	}
 
 	/**

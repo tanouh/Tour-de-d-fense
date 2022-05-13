@@ -299,6 +299,16 @@ public class Tower extends PlaceableObstacle{
         return tookHit;
     }
 
+    public void remove(){
+        for (int i = 0; i < this.getSize(); i++) {
+            for (int j = 0; j < this.getSize(); j++) {
+                Tile t = Game.getBoard().getTile((int)Math.round(this.position.x)+i,
+                        (int)Math.round(this.position.y)+j);
+                t.setEmpty(true);
+            }
+        }
+    }
+
     public BufferedImage loadImage(String image){
         BufferedImage img = null;
         try{

@@ -291,7 +291,9 @@ public class MapGenerator {
                 gameBoard.setOccupier(obstacle, posX, posY);
                 Game.setCredits(-obstacle.getBuyingCost());
                 updateCharactersPaths();
-            }else gameBoard.getListTowers().remove(obstacle);
+            }else{
+                gameBoard.getListTowers().remove(obstacle);
+            }
         }
     }
 

@@ -61,6 +61,7 @@ public class Tile {
 
     public void setEmpty (boolean empty){
         this.isEmpty = empty;
+        this.obstacle = null;
     }
     public void setEnemy(Enemy enemy){
         if (enemy != null) {

@@ -56,14 +56,14 @@ public class OptionPanel extends JPanel {
             zoom.setValue(HomePanel.getOptions()[2]);
             backgroundMusic = new Slider(body, "Musique", 0, 10);
             gameSound = new Slider(body, "Son du jeu", 0,10);
-            gameSpeed = new Slider(body, "Vitesse de jeu", 1,2);
+            gameSpeed = new Slider(body, "Vitesse de jeu", 1,3);
             backgroundMusic.setValue(HomePanel.getOptions()[3]);
             gameSound.setValue(HomePanel.getOptions()[4]);
             gameSpeed.setValue(HomePanel.getOptions()[5]);
         }else {
             backgroundMusic = new Slider(body, "Musique", 0, 10);
             gameSound = new Slider(body, "Son du jeu", 0, 10);
-            gameSpeed = new Slider(body, "Vitesse de jeu", 1, 2);
+            gameSpeed = new Slider(body, "Vitesse de jeu", 1, 3);
             backgroundMusic.setValue(Game.getOptions()[0]);
             gameSound.setValue(Game.getOptions()[1]);
             gameSpeed.setValue(Game.getOptions()[2]);

@@ -8,6 +8,7 @@ import up.TowerDefense.model.object.Position;
 import up.TowerDefense.model.object.Tower;
 
 import java.util.ArrayList;
+import java.util.ConcurrentModificationException;
 
 public class Board {
     private Tile[][] tiles;
@@ -28,7 +29,7 @@ public class Board {
     private long lastDirectAttackTime = System.currentTimeMillis();
 
     /* Stocke les positions des cases qu'occupent la cible principale*/
-    private ArrayList<Position> targetZone = new ArrayList<>();
+    private ArrayList<Position> targetZone;
 
     public Board() {
         listTowers = new ArrayList<Tower>();
@@ -36,6 +37,7 @@ public class Board {
         toRemoveTowerList = new ArrayList<Tower>();
         toRemoveEnemyList = new ArrayList<Enemy>();
         map = this;
+        targetZone = new ArrayList<Position>();
     }
 
     public int worldX(){
@@ -202,18 +204,25 @@ public class Board {
      * Lance les attaques perpétuées par les tours et les ennemis
      */
     public static void launchAllAttacks(){
-        for (Enemy enemy : listEnemy){
-            if(System.currentTimeMillis() - enemy.getTimeSinceLastAttack() > enemy.getReloadTime())
-                if (enemy.isAlive()) enemy.identifyTarget();
-                else toRemoveEnemyList.add(enemy);
-        }
-        for (Tower tower : listTowers){
-            if(System.currentTimeMillis() - tower.getTimeSinceLastAttack() > tower.getReloadTime())
-                if (tower.isAlive()) tower.launchAttack();
-                else toRemoveTowerList.add(tower);
+        try {
+            for (Enemy enemy : listEnemy) {
+                if (System.currentTimeMillis() - enemy.getTimeSinceLastAttack() > enemy.getReloadTime())
+                    if (enemy.isAlive()) enemy.identifyTarget();
+                    else toRemoveEnemyList.add(enemy);
+            }
+            for (Tower tower : listTowers) {
+                if (System.currentTimeMillis() - tower.getTimeSinceLastAttack() > tower.getReloadTime())
+                    if (tower.isAlive()) tower.launchAttack();
+                    else toRemoveTowerList.add(tower);
+            }
+        }catch (ConcurrentModificationException e){
+            e.printStackTrace();
         }
         listEnemy.removeAll(toRemoveEnemyList);
         listTowers.removeAll(toRemoveTowerList);
+        for(Tower tower : toRemoveTowerList){
+            tower.remove();
+        }
         toRemoveTowerList = new ArrayList<>();
         toRemoveEnemyList = new ArrayList<>();
     }

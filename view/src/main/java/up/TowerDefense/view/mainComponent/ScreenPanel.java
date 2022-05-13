@@ -68,6 +68,7 @@ public class ScreenPanel extends JPanel implements Runnable{
         windowWidth = originalTileSize*nbCol;
         windowHeight = originalTileSize*nbRow;
 
+        paused = false;
         mapGen= new MapGenerator(this, loadMap_(level)); /*A modifier : ajouter un paramètrage pour l'image*/
 
         startThread();
@@ -227,13 +228,11 @@ public class ScreenPanel extends JPanel implements Runnable{
             gameWindow.getContentPane().add(new EndPanel(true, gameWindow));
             gameWindow.getContentPane().revalidate();
             gameWindow.getContentPane().repaint();
-            paused = true;
         }else if (Game.gameLost()){
             gameWindow.getContentPane().removeAll();
             gameWindow.getContentPane().add(new EndPanel(false, gameWindow));
             gameWindow.getContentPane().revalidate();
             gameWindow.getContentPane().repaint();
-            paused = true;
         }
     }
 

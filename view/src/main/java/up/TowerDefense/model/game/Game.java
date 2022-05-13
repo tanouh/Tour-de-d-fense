@@ -13,7 +13,7 @@ public class Game {
     private static int numberWavesTotal;
     private static int level;
     private static int wavesLeft;
-    private static int nbEnemyLeft = 0;
+    private static int nbEnemyLeft;
     private static int bgMusic;
     private static int soundLevel;
     private static int oldGameSpeed;
@@ -37,6 +37,7 @@ public class Game {
         nbLevelTotal = nbLevel;
         numberWavesTotal = numberWaves;
         wavesLeft = numberWaves;
+        nbEnemyLeft = 0;
         bgMusic = backgroundMusic;
         soundLevel = gameSound;
         gameSpeed = speed;
