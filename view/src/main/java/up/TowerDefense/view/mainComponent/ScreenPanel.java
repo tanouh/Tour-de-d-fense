@@ -69,7 +69,7 @@ public class ScreenPanel extends JPanel implements Runnable{
         windowHeight = originalTileSize*nbRow;
 
         paused = false;
-        mapGen= new MapGenerator(this, loadMap_(level)); /*A modifier : ajouter un paramètrage pour l'image*/
+        mapGen= new MapGenerator(this, loadMap_(level));
 
         startThread();
         this.setPreferredSize(new Dimension(windowWidth, windowHeight));
@@ -84,7 +84,6 @@ public class ScreenPanel extends JPanel implements Runnable{
         waves = new Wave();
 
         this.setFocusable(true);
-        paused = false;
     }
 
     public GamePanel getGamePanel() {
